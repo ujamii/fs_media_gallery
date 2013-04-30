@@ -1,0 +1,30 @@
+plugin.tx_fsmediagallery {
+	view {
+		templateRootPath = {$plugin.tx_fsmediagallery.view.templateRootPath}
+		partialRootPath = {$plugin.tx_fsmediagallery.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_fsmediagallery.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_fsmediagallery.persistence.storagePid}
+	}
+	features {
+		rewrittenPropertyMapper = 1
+	}
+
+	#galleryView.albumThum.description.crop = 
+}
+
+ # Module configuration
+module.tx_fsmediagallery {
+	persistence {
+		storagePid = {$module.tx_fsmediagallery.persistence.storagePid}
+	}
+	view {
+		templateRootPath = {$module.tx_fsmediagallery.view.templateRootPath}
+		partialRootPath = {$module.tx_fsmediagallery.view.partialRootPath}
+		layoutRootPath = {$module.tx_fsmediagallery.view.layoutRootPath}
+	}
+}
+
+ # Include MediaGallery default styles
+page.includeCSS.tx-fs-media-gallery = EXT:fs_media_gallery/Resources/Public/Css/MediaGallery.css

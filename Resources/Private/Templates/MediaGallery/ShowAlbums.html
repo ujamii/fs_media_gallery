@@ -1,0 +1,29 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+
+<f:flashMessages />
+
+<div class="gallery">
+	
+	<h1>{mediaGallery.title}</h1>
+	<div class="description"><f:format.html>{mediaGallery.description}</f:format.html></div>
+
+	<div class="albums">
+		<f:for each="{mediaGallery.mediaGalleryAlbums}" as="mediaAlbum">
+			<f:render partial="MediaAlbum/Thumb" arguments="{mediaGallery:mediaGallery,mediaAlbum:mediaAlbum}" />
+		</f:for>
+	</div>
+	 
+	<f:if condition="{noBackLink}">
+		<f:then>
+					
+		</f:then>
+		<f:else>
+			<div class="navigation">
+				<f:link.action action="list">Back to list</f:link.action>
+			</div>
+		</f:else>
+	</f:if>
+</div>	
+</f:section>

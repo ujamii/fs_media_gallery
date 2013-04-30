@@ -1,0 +1,29 @@
+plugin.tx_fsmediagallery {
+	view {
+		# cat=plugin.tx_fsmediagallery/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:fs_media_gallery/Resources/Private/Templates/
+		# cat=plugin.tx_fsmediagallery/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:fs_media_gallery/Resources/Private/Partials/
+		# cat=plugin.tx_fsmediagallery/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:fs_media_gallery/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_fsmediagallery//a; type=string; label=Default storage PID
+		storagePid =
+	}
+}
+
+module.tx_fsmediagallery {
+	view {
+		# cat=module.tx_fsmediagallery/file; type=string; label=Path to template root (BE)
+		templateRootPath = EXT:fs_media_gallery/Resources/Private/Backend/Templates/
+		# cat=module.tx_fsmediagallery/file; type=string; label=Path to template partials (BE)
+		partialRootPath = EXT:fs_media_gallery/Resources/Private/Backend/Partials/
+		# cat=module.tx_fsmediagallery/file; type=string; label=Path to template layouts (BE)
+		layoutRootPath = EXT:fs_media_gallery/Resources/Private/Backend/Layouts/
+	}
+	persistence {
+		# cat=module.tx_fsmediagallery//a; type=string; label=Default storage PID
+		storagePid =
+	}
+}

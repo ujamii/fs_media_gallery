@@ -1,0 +1,7 @@
+<div class="thumb" style="width:{settings.album.thumb.maxWidth}px;height:{settings.album.thumb.maxHeight}px">
+	<f:link.action action="show" controller="MediaAlbum" arguments="{mediaGallery : mediaGallery, mediaAlbum : mediaAlbum}">
+		{mediaAlbum.uid}
+		<div class="name">{mediaAlbum.title}</div>
+		<div class="description"><f:format.crop maxCharacters="17" append="&nbsp;...">{mediaAlbum.webdescription}</f:format.crop></div>	
+	</f:link.action>
+</div>

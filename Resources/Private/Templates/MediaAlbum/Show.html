@@ -1,0 +1,32 @@
+<f:layout name="Default" />
+
+
+<f:section name="main">
+	
+	<f:flashMessages />
+
+	<div class="album">
+		<h1>{mediaAlbum.title}</h1>
+		<div class="description"><f:format.html>{mediaAlbum.description}</f:format.html></div>
+
+
+		
+			
+				<div class="thumbs">		
+					<f:for each="{fileCollection.items}" as="albumItem">
+						<f:render partial="MediaItem/Thumb" arguments="{mediaGallery:mediaGallery,mediaAlbum:mediaAlbum,mediaItem:albumItem}" />
+					</f:for>
+				</div>
+
+		
+
+			
+
+
+		<div class="navigation">
+			<f:link.action action="showAlbums" controller="MediaGallery" arguments="{mediaGallery:mediaGallery}">Back to gallery</f:link.action>
+		</div>
+
+	</div>
+	
+</f:section>

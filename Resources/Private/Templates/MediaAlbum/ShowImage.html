@@ -1,0 +1,15 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+
+<f:flashMessages />
+
+	<div class="item">
+		<h1>{mediaItem.title}</h1>
+		<div class="description"><f:format.html>{mediaItem.property.description}</f:format.html></div>
+		<div class="mediaitem {mediaItem.type}">
+			<f:render partial="MediaItem/Image" arguments="{mediaItem:mediaItem,width:settings.image.maxWidth,heigth:settings.image.maxHeigth}" />
+		</div>
+	</div>
+
+</f:section>
