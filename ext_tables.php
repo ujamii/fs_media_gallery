@@ -30,13 +30,19 @@ if (TYPO3_MODE === 'BE') {
 		array(
 			'MediaGallery' => 'list, new, create, update, edit, delete',
 			'MediaAlbum' => 'list, new, create, update, edit, delete',
-			
+
 		),
 		array(
 			'access' => 'user,group',
 			'icon'   => 'EXT:' . $_EXTKEY . '/ext_icon.gif',
 			'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_mediagallery.xlf',
 		)
+	);
+
+	// Adding click menu item:
+	$GLOBALS['TBE_MODULES_EXT']['xMOD_alt_clickmenu']['extendCMclasses'][] = array(
+		'name' => 'MiniFranske\\FsMediaGallery\\Service\\ClickMenuOptions',
+		'path' => t3lib_extMgm::extPath($_EXTKEY).'Classes/Service/ClickMenuOptions.php'
 	);
 
 }
