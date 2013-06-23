@@ -12,7 +12,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Media Gallery',
-	'description' => 'A media gallery based on the media/fal extention of TYPO3.
+	'description' => 'A media gallery based on the FAL integration of TYPO3.
 Show your images from your local or remote storage as a gallery of albums.',
 	'category' => 'plugin',
 	'author' => 'Frans Saris',
@@ -31,9 +31,9 @@ Show your images from your local or remote storage as a gallery of albums.',
 	'version' => '',
 	'constraints' => array(
 		'depends' => array(
-			'extbase' => '1.3',
-			'fluid' => '1.3',
-			'typo3' => '4.5',
+			'extbase' => '6.1.0',
+			'fluid' => '6.1.0',
+			'typo3' => '6.1.0',
 		),
 		'conflicts' => array(
 		),

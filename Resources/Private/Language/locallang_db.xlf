@@ -10,55 +10,6 @@
 			<trans-unit id="tx_fsmediagallery_domain_model_mediagalleries">
 				<source>Media Galleries</source>
 			</trans-unit>
-
-			<trans-unit id="tx_fsmediagallery_plugin_tab_general">
-				<source>General</source>
-			</trans-unit>
-			<trans-unit id="tx_fsmediagallery_plugin_tab_gallery">
-				<source>Gallery settings</source>
-			</trans-unit>
-			<trans-unit id="tx_fsmediagallery_plugin_tab_album">
-				<source>Album settings</source>
-			</trans-unit>
-			<trans-unit id="tx_fsmediagallery_plugin_tab_image">
-				<source>Single image settings</source>
-			</trans-unit>
-			<trans-unit id="tx_fsmediagallery_plugin_mediagalleries">
-				<source>Media Galleries (leave empty for all)</source>
-			</trans-unit>
-			<trans-unit id="tx_fsmediagallery_plugin_detailsInLightbox">
-				<source>Open LightBox/Colorbox instead of detail-page</source>
-			</trans-unit>
-			<trans-unit id="tx_fsmediagallery_plugin_gallery_thumb_limit">
-				<source>Max. thumbs to show</source>
-			</trans-unit>
-			<trans-unit id="tx_fsmediagallery_plugin_gallery_thumb_maxWidth">
-				<source>Max. thumb width</source>
-			</trans-unit>
-			<trans-unit id="tx_fsmediagallery_plugin_gallery_thumb_maxHeight">
-				<source>Max. thumb height</source>
-			</trans-unit>
-			<trans-unit id="tx_fsmediagallery_plugin_album_thumb_limit">
-				<source>Max. thumbs to show</source>
-			</trans-unit>
-			<trans-unit id="tx_fsmediagallery_plugin_album_thumb_maxWidth">
-				<source>Max. thumb width</source>
-			</trans-unit>
-			<trans-unit id="tx_fsmediagallery_plugin_album_thumb_maxHeight">
-				<source>Max. thumb height</source>
-			</trans-unit>
-			<trans-unit id="tx_fsmediagallery_plugin_image_thumb_maxWidth">
-				<source>Max. thumb width</source>
-			</trans-unit>
-			<trans-unit id="tx_fsmediagallery_plugin_image_thumb_maxHeight">
-				<source>Max. thumb height</source>
-			</trans-unit>
-			<trans-unit id="tx_fsmediagallery_plugin_image_maxWidth">
-				<source>Max. image width</source>
-			</trans-unit>
-			<trans-unit id="tx_fsmediagallery_plugin_image_maxHeight">
-				<source>Max. image height</source>
-			</trans-unit>
 			<trans-unit id="tx_fsmediagallery_domain_model_mediagallery.name">
 				<source>Name</source>
 			</trans-unit>
@@ -75,11 +26,11 @@
 			<trans-unit id="tx_fsmediagallery_domain_model_mediaalbum.webdescription">
 				<source>Album description</source>
 			</trans-unit>
-			
+
 			<trans-unit id="sys_file_collection.tx_extbase_type.Tx_FsMediaGallery_MediaAlbum">
 				<source>Media Gallery MediaAlbum</source>
 			</trans-unit>
-			
+
 		</body>
 	</file>
 </xliff>

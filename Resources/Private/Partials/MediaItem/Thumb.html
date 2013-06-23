@@ -1,16 +1,14 @@
 <div class="thumb" style="width:{settings.image.thumb.maxWidth}px;height:{settings.image.thumb.maxHeight}px">
-	{mediaItem.uid}
 	<f:if condition="{settings.enableLightbox}">
 		<f:then>
 			<f:link.action action="showImage" arguments="{mediaGallery:mediaGallery,mediaAlbum:mediaAlbum,mediaItemUid:mediaItem.uid}">
-				<f:render partial="MediaItem/Image" arguments="{mediaItem:mediaItem,width:settings.image.thumb.maxWidth,heigth:settings.image.thumb.maxHeigth}" />
+				<f:render partial="MediaItem/Image" arguments="{alt:mediaItem.alternative,title:mediaItem.title,mediaItem:mediaItem,width:settings.image.thumb.maxWidth,heigth:settings.image.thumb.maxHeigth}" />
 			</f:link.action>
 		</f:then>
 		<f:else>
 			<f:link.action action="showImage" arguments="{mediaGallery:mediaGallery,mediaAlbum:mediaAlbum,mediaItemUid:mediaItem.uid}">
-				<f:render partial="MediaItem/Image" arguments="{mediaItem:mediaItem,width:settings.image.thumb.maxWidth,heigth:settings.image.thumb.maxHeigth}" />
+				<f:render partial="MediaItem/Image" arguments="{alt:mediaItem.alternative,title:mediaItem.title,mediaItem:mediaItem,width:settings.image.thumb.maxWidth,heigth:settings.image.thumb.maxHeigth}" />
 			</f:link.action>
 		</f:else>
 	</f:if>
-
 </div>

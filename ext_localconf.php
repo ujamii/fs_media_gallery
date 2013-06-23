@@ -7,9 +7,9 @@ if (!defined('TYPO3_MODE')) {
 	'MiniFranske.' . $_EXTKEY,
 	'Mediagallery',
 	array(
-		'MediaGallery' => 'list, showAlbums',
+		'MediaGallery' => 'list, random, showAlbums',
 		'MediaAlbum' => 'show, showImage',
-		
+
 	),
 	// non-cacheable actions
 	array(

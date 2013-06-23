@@ -5,7 +5,7 @@ namespace MiniFranske\FsMediaGallery\Domain\Model;
  *  Copyright notice
  *
  *  (c) 2013 Frans Saris <franssaris@gmail.com>
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -158,5 +158,12 @@ class MediaGallery extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		$this->mediaGalleryAlbums = $mediaGalleryAlbums;
 	}
 
+	/**
+	 * @return \TYPO3\CMS\Core\Resource\File
+	 */
+	public function getRandomAsset() {
+		$albums = $this->mediaGalleryAlbums->toArray();
+		return $albums[array_rand($albums,1)]->getRandomAsset();
+	}
 }
 ?>

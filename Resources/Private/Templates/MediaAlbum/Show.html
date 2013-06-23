@@ -1,8 +1,10 @@
+{namespace mfmg=MiniFranske\FsMediaGallery\ViewHelpers}
+
 <f:layout name="Default" />
 
 
 <f:section name="main">
-	
+
 	<f:flashMessages />
 
 	<div class="album">
@@ -10,17 +12,24 @@
 		<div class="description"><f:format.html>{mediaAlbum.description}</f:format.html></div>
 
 
-		
-			
-				<div class="thumbs">		
-					<f:for each="{fileCollection.items}" as="albumItem">
-						<f:render partial="MediaItem/Thumb" arguments="{mediaGallery:mediaGallery,mediaAlbum:mediaAlbum,mediaItem:albumItem}" />
-					</f:for>
-				</div>
+		<mfmg:widget.paginate objects="{mediaAlbum.assets}" as="paginatedAssets" configuration="{itemsPerPage: settings.album.itemsPerPage, insertAbove: 0, insertBelow: 1, maximumNumberOfLinks: 20, pagesBefore: 4, pagesAfter:4}">
 
-		
+			<f:if condition="{paginatedAssets}">
+				<f:then>
+					<div class="thumbs">
+						<f:for each="{paginatedAssets}" as="albumItem">
+							<f:render partial="MediaItem/Thumb" arguments="{mediaGallery:mediaGallery,mediaAlbum:mediaAlbum,mediaItem:albumItem}" />
+						</f:for>
+					</div>
+				</f:then>
+				<f:else>
+					<div class="alert alert-info">
+						<p><f:translate key="tx_fsmediagallery_no_assets">No items found</f:translate></p>
+					</div>
+				</f:else>
+			</f:if>
 
-			
+		</mfmg:widget.paginate>
 
 
 		<div class="navigation">
@@ -28,5 +37,5 @@
 		</div>
 
 	</div>
-	
+
 </f:section>

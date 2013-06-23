@@ -5,7 +5,7 @@ namespace MiniFranske\FsMediaGallery\Domain\Model;
  *  Copyright notice
  *
  *  (c) 2013 Frans Saris <franssaris@gmail.com>
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -34,7 +34,21 @@ namespace MiniFranske\FsMediaGallery\Domain\Model;
  */
 class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
-	
+
+	/**
+	 * fileCollectionRepository
+	 *
+	 * @var \TYPO3\CMS\Core\Resource\FileCollectionRepository
+	 * @inject
+	 * @lazy
+	 */
+	protected $fileCollectionRepository;
+
+	/**
+	 * @var array
+	 */
+	protected $assets;
+
 	/**
 	 * Title
 	 *
@@ -87,5 +101,25 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		$this->webdescription = $webdescription;
 	}
 
+	/**
+	 * @return array<\TYPO3\CMS\Core\Resource\File>
+	 */
+	public function getAssets() {
+		if($this->assets === NULL) {
+			/** @var $fileCollection \TYPO3\CMS\Core\Resource\Collection\AbstractFileCollection */
+			$fileCollection = $this->fileCollectionRepository->findByUid($this->getUid());
+			$fileCollection->loadContents();
+			$this->assets = $fileCollection->getItems();
+		}
+
+		return $this->assets;
+	}
+
+	/**
+	 * @return \TYPO3\CMS\Core\Resource\File
+	 */
+	public function getRandomAsset() {
+		return $this->getAssets()[rand(0,count($this->getAssets()))];
+	}
 }
 ?>

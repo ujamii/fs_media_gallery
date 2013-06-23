@@ -1,20 +1,28 @@
+{namespace mfmg=MiniFranske\FsMediaGallery\ViewHelpers}
 <f:layout name="Default" />
 
 <f:section name="main">
+
 	<f:flashMessages />
-	
+
 	<div class="gallery">
-		
-	
-	<f:if condition="<f:count subject='{mediaGalleries}' /> == 0">
-		<div class="notice">
-			<f:translate key="tx_fsmediagallery_domain_model_mediagallery.no_galleries_found" />
-		</div>
-	</f:if>
-	
-	<f:for each="{mediaGalleries}" as="mediaGallery">
-		<f:render partial="MediaGallery/Thumb" arguments="{mediaGallery:mediaGallery}" />
-	</f:for>
+
+		<mfmg:widget.paginate objects="{mediaGalleries}" as="paginatedGalleries" configuration="{itemsPerPage: settings.gallery.itemsPerPage, insertAbove: 0, insertBelow: 1, maximumNumberOfLinks: 20, pagesBefore: 4, pagesAfter:4}">
+
+			<f:if condition="{paginatedGalleries}">
+				<f:then>
+					<f:for each="{paginatedGalleries}" as="mediaGallery">
+						<f:render partial="MediaGallery/Thumb" arguments="{mediaGallery:mediaGallery}" />
+					</f:for>
+				</f:then>
+				<f:else>
+					<div class="alert alert-info">
+						<p><f:translate key="tx_fsmediagallery_domain_model_mediagallery.no_galleries_found">No items found</f:translate></p>
+					</div>
+				</f:else>
+			</f:if>
+
+		</mfmg:widget.paginate>
 
 	</div>
 

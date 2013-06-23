@@ -1,1 +1,8 @@
-<f:image src="{mediaItem.publicUrl}" alt="{mediaItem.alternative}" title="{mediaItem.title}" maxHeight="{height}" maxWidth="{width}" />
+<f:if condition="{mediaItem}">
+	<f:then>
+		<f:image src="{mediaItem.publicUrl}" alt="{alt}" title="{title}" maxHeight="{height}" maxWidth="{width}" />
+	</f:then>
+	<f:else>
+		<i class="noimage" style="width:{width}px;height:{height}px;">No image</i>
+	</f:else>
+</f:if>

@@ -25,6 +25,7 @@ class ClickMenuOptions {
 //		print_r($menuItems);
 //		print_r($parentObject);
 
+//		http://typo3.org/api/typo3cms/_click_menu_8php_source.html
 		$menuItems[] = 'spacer';
 		$menuItems['sys_file_collections'] = array(0 => '', 1 => $table.'::'.$uid);
 

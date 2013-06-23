@@ -5,7 +5,7 @@ namespace MiniFranske\FsMediaGallery\Controller;
  *  Copyright notice
  *
  *  (c) 2013 Frans Saris <franssaris@gmail.com>
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -48,6 +48,7 @@ class MediaGalleryController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 * @return void
 	 */
 	public function listAction() {
+		// @todo remove pid restriction
 		$mediaGalleries = $this->mediaGalleryRepository->findAll();
 		$this->view->assign('mediaGalleries', $mediaGalleries);
 	}
@@ -59,66 +60,20 @@ class MediaGalleryController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 * @return void
 	 */
 	public function showAlbumsAction(\MiniFranske\FsMediaGallery\Domain\Model\MediaGallery $mediaGallery) {
-		
+
 		$this->view->assign('mediaGallery', $mediaGallery);
 	}
 
 	/**
-	 * action new
+	 * Show random image
 	 *
-	 * @param \MiniFranske\FsMediaGallery\Domain\Model\MediaGallery $newMediaGallery
-	 * @dontvalidate $newMediaGallery
 	 * @return void
 	 */
-	public function newAction(\MiniFranske\FsMediaGallery\Domain\Model\MediaGallery $newMediaGallery = NULL) {
-		$this->view->assign('newMediaGallery', $newMediaGallery);
+	public function randomImageAction() {
+
+		return 'RANDOM';
 	}
 
-	/**
-	 * action create
-	 *
-	 * @param \MiniFranske\FsMediaGallery\Domain\Model\MediaGallery $newMediaGallery
-	 * @return void
-	 */
-	public function createAction(\MiniFranske\FsMediaGallery\Domain\Model\MediaGallery $newMediaGallery) {
-		$this->mediaGalleryRepository->add($newMediaGallery);
-		$this->flashMessageContainer->add('Your new MediaGallery was created.');
-		$this->redirect('list');
-	}
-
-	/**
-	 * action edit
-	 *
-	 * @param \MiniFranske\FsMediaGallery\Domain\Model\MediaGallery $mediaGallery
-	 * @return void
-	 */
-	public function editAction(\MiniFranske\FsMediaGallery\Domain\Model\MediaGallery $mediaGallery) {
-		$this->view->assign('mediaGallery', $mediaGallery);
-	}
-
-	/**
-	 * action update
-	 *
-	 * @param \MiniFranske\FsMediaGallery\Domain\Model\MediaGallery $mediaGallery
-	 * @return void
-	 */
-	public function updateAction(\MiniFranske\FsMediaGallery\Domain\Model\MediaGallery $mediaGallery) {
-		$this->mediaGalleryRepository->update($mediaGallery);
-		$this->flashMessageContainer->add('Your MediaGallery was updated.');
-		$this->redirect('list');
-	}
-
-	/**
-	 * action delete
-	 *
-	 * @param \MiniFranske\FsMediaGallery\Domain\Model\MediaGallery $mediaGallery
-	 * @return void
-	 */
-	public function deleteAction(\MiniFranske\FsMediaGallery\Domain\Model\MediaGallery $mediaGallery) {
-		$this->mediaGalleryRepository->remove($mediaGallery);
-		$this->flashMessageContainer->add('Your MediaGallery was removed.');
-		$this->redirect('list');
-	}
 
 }
 ?>
