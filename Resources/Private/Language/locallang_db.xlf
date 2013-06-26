@@ -10,21 +10,15 @@
 			<trans-unit id="tx_fsmediagallery_domain_model_mediagalleries">
 				<source>Media Galleries</source>
 			</trans-unit>
-			<trans-unit id="tx_fsmediagallery_domain_model_mediagallery.name">
-				<source>Name</source>
-			</trans-unit>
-			<trans-unit id="tx_fsmediagallery_domain_model_mediagallery.description">
-				<source>Description</source>
-			</trans-unit>
-			<trans-unit id="tx_fsmediagallery_domain_model_mediagallery.media_gallery_albums">
-				<source>Media Gallery Albums</source>
-			</trans-unit>
 
 			<trans-unit id="tx_fsmediagallery_domain_model_mediaalbum">
 				<source>Media Album</source>
 			</trans-unit>
 			<trans-unit id="tx_fsmediagallery_domain_model_mediaalbum.webdescription">
 				<source>Album description</source>
+			</trans-unit>
+			<trans-unit id="tx_fsmediagallery_domain_model_mediaalbum.parentalbum">
+				<source>Parent album</source>
 			</trans-unit>
 
 			<trans-unit id="sys_file_collection.tx_extbase_type.Tx_FsMediaGallery_MediaAlbum">

@@ -6,9 +6,6 @@
 			<trans-unit id="mediagallery_plugin_tab_general">
 				<source>General</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_tab_gallery">
-				<source>Gallery settings</source>
-			</trans-unit>
 			<trans-unit id="mediagallery_plugin_tab_album">
 				<source>Album settings</source>
 			</trans-unit>
@@ -22,25 +19,16 @@
 				<source>Display</source>
 			</trans-unit>
 			<trans-unit id="mediagallery_plugin_display.0">
-				<source>Gallery</source>
+				<source>Album view</source>
 			</trans-unit>
 			<trans-unit id="mediagallery_plugin_display.1">
 				<source>Random image</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_mediagalleries">
-				<source>Media Galleries (leave empty for all)</source>
+			<trans-unit id="mediagallery_plugin_mediaalbums">
+				<source>Album selection</source>
 			</trans-unit>
 			<trans-unit id="mediagallery_plugin_detailsInLightbox">
 				<source>Open LightBox/Colorbox instead of detail-page</source>
-			</trans-unit>
-			<trans-unit id="mediagallery_plugin_gallery_thumb_limit">
-				<source>Max. thumbs to show</source>
-			</trans-unit>
-			<trans-unit id="mediagallery_plugin_gallery_thumb_maxWidth">
-				<source>Max. thumb width</source>
-			</trans-unit>
-			<trans-unit id="mediagallery_plugin_gallery_thumb_maxHeight">
-				<source>Max. thumb height</source>
 			</trans-unit>
 			<trans-unit id="mediagallery_plugin_album_thumb_limit">
 				<source>Max. thumbs to show</source>

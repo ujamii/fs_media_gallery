@@ -1,5 +1,5 @@
 <div class="thumb" style="width:{settings.album.thumb.maxWidth}px;height:{settings.album.thumb.maxHeight}px">
-	<f:link.action action="show" controller="MediaAlbum" arguments="{mediaGallery : mediaGallery, mediaAlbum : mediaAlbum}">
+	<f:link.action action="show" controller="MediaAlbum" arguments="{mediaAlbum : mediaAlbum}">
 		<f:render partial="MediaItem/Image" arguments="{alt:mediaAlbum.title,title:mediaAlbum.title,mediaItem:mediaAlbum.randomAsset,width:settings.album.thumb.maxHeight,height:settings.album.thumb.maxWidth}" />
 		<div class="name">{mediaAlbum.title}</div>
 		<div class="description"><f:format.crop maxCharacters="17" append="&nbsp;...">{mediaAlbum.webdescription}</f:format.crop></div>

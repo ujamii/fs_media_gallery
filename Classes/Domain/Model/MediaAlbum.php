@@ -64,6 +64,12 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $webdescription;
 
 	/**
+	 * @var \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum
+	 * @lazy
+	 */
+	protected $parentalbum;
+
+	/**
 	 * Returns the title
 	 *
 	 * @return \string $title
@@ -99,6 +105,24 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setWebdescription($webdescription) {
 		$this->webdescription = $webdescription;
+	}
+
+	/**
+	 * Set parentalbum
+	 *
+	 * @param \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum $parentalbum
+	 */
+	public function setParentalbum(\MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum $parentalbum) {
+		$this->parentalbum = $parentalbum;
+	}
+
+	/**
+	 * Get parentalbum
+	 *
+	 * @return \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum
+	 */
+	public function getParentalbum() {
+		return $this->parentalbum;
 	}
 
 	/**

@@ -33,7 +33,14 @@
 
 
 		<div class="navigation">
-			<f:link.action action="showAlbums" controller="MediaGallery" arguments="{mediaGallery:mediaGallery}">Back to gallery</f:link.action>
+			<f:if condition="{mediaAlbum.parentalbum}">
+				<f:then>
+					<f:link.action action="show" controller="MediaAlbum" arguments="{mediaAlbum:mediaAlbum.parentalbum}">Back to album</f:link.action>
+				</f:then>
+				<f:else>
+					<f:link.action action="list" controller="MediaAlbum">Back to album</f:link.action>
+				</f:else>
+			</f:if>
 		</div>
 
 	</div>

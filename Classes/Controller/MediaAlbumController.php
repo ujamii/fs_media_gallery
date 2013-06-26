@@ -45,36 +45,52 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	/**
 	 * AssetRepository
 	 *
-	 * @var TYPO3\CMS\Media\Domain\Repository\AssetRepository
+	 * @var \TYPO3\CMS\Core\Resource\FileRepository
 	 * @inject
 	 */
 	protected $assetRepository;
 
 	/**
+	 * action list
+	 *
+	 * @return void
+	 */
+	public function listAction() {
+		$mediaAlbums = $this->mediaAlbumRepository->findAll();
+		$this->view->assign('mediaAlbums', $mediaAlbums);
+	}
+
+	/**
 	 * action show
 	 *
-	 * @param \MiniFranske\FsMediaGallery\Domain\Model\MediaGallery $mediaGallery
 	 * @param \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum $mediaAlbum
 	 * @param int $page the page number
 	 * @return void
 	 */
-	public function showAction(\MiniFranske\FsMediaGallery\Domain\Model\MediaGallery $mediaGallery, \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum $mediaAlbum, $page = 1) {
-		$this->view->assign('mediaGallery', $mediaGallery);
+	public function showAction(\MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum $mediaAlbum) {
+
 		$this->view->assign('mediaAlbum', $mediaAlbum);
 	}
 
 	/**
 	 * Show single image from album
 	 *
-	 * @param \MiniFranske\FsMediaGallery\Domain\Model\MediaGallery $mediaGallery
 	 * @param \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum $mediaAlbum
 	 * @param int $mediaItemUid
 	 */
-	public function showImageAction(\MiniFranske\FsMediaGallery\Domain\Model\MediaGallery $mediaGallery, \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum $mediaAlbum, $mediaItemUid) {
-		$this->view->assign('mediaGallery', $mediaGallery);
+	public function showImageAction(\MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum $mediaAlbum, $mediaItemUid) {
 		$this->view->assign('mediaAlbum', $mediaAlbum);
-
 		$this->view->assign('mediaItem', $this->assetRepository->findByUid($mediaItemUid));
+	}
+
+	/**
+	 * Show random image
+	 *
+	 * @return void
+	 */
+	public function randomImageAction() {
+
+		return 'RANDOM<pre>'.print_r($this->settings,1).'</pre>';
 	}
 }
 ?>
