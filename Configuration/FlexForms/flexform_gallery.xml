@@ -7,23 +7,23 @@
 
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_bemediagallery.xlf:mediagallery_plugin_tab_general</sheetTitle>
+					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_tab_general</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<switchableControllerActions>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_bemediagallery.xlf:mediagallery_plugin_display</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_display</label>
 							<onChange>reload</onChange>
 							<config>
 								<type>select</type>
 								<items type="array">
 									<numIndex index="0">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_bemediagallery.xlf:mediagallery_plugin_display.0</numIndex>
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_display.0</numIndex>
 										<numIndex index="1">MediaAlbum->list;MediaAlbum->show;MediaAlbum->showImage</numIndex>
 									</numIndex>
 									<numIndex index="1">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_bemediagallery.xlf:mediagallery_plugin_display.1</numIndex>
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_display.1</numIndex>
 										<numIndex index="1">MediaAlbum->randomImage</numIndex>
 									</numIndex>
 								</items>
@@ -34,7 +34,7 @@
 					</switchableControllerActions>
 					<settings.mediagalleries>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_bemediagallery.xlf:mediagallery_plugin_mediaalbums</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_mediaalbums</label>
 							<config>
 								<type>select</type>
 								<renderMode>tree</renderMode>
@@ -46,7 +46,7 @@
 									</appearance>
 								</treeConfig>
 								<internal_type>db</internal_type>
-								<size>10</size>
+								<size>20</size>
 								<maxitems>1000</maxitems>
 								<minitems>0</minitems>
 								<!-- itemsProcFunc>MiniFranske\FsMediaGallery\Controller\MediaAlbumController->flexformOptions</itemsProcFunc -->
@@ -81,14 +81,14 @@
 		<album>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_bemediagallery.xlf:mediagallery_plugin_tab_album</sheetTitle>
+					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_tab_album</sheetTitle>
 					<displayCond>FIELD:general.switchableControllerActions:=:MediaAlbum->list;MediaAlbum->show;MediaAlbum->showImage</displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<settings.album.itemsPerPage>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_bemediagallery.xlf:mediagallery_plugin_album_thumb_limit</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_album_thumb_limit</label>
 							<config>
 								<type>input</type>
 								<eval>int</eval>
@@ -97,13 +97,13 @@
 									<max>200</max>
 								</range>
 								<size>4</size>
-								<default>32</default>
+								<default>12</default>
 							</config>
 						</TCEforms>
 					</settings.album.itemsPerPage>
 					<settings.album.thumb.maxWidth>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_bemediagallery.xlf:mediagallery_plugin_album_thumb_maxWidth</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_album_thumb_maxWidth</label>
 							<config>
 								<type>input</type>
 								<eval>int</eval>
@@ -118,7 +118,7 @@
 					</settings.album.thumb.maxWidth>
 					<settings.album.thumb.maxHeight>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_bemediagallery.xlf:mediagallery_plugin_album_thumb_maxHeight</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_album_thumb_maxHeight</label>
 							<config>
 								<type>input</type>
 								<eval>int</eval>
@@ -138,14 +138,29 @@
 		<image>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_bemediagallery.xlf:mediagallery_plugin_tab_image</sheetTitle>
+					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_tab_image</sheetTitle>
 					<displayCond>FIELD:general.switchableControllerActions:=:MediaAlbum->list;MediaAlbum->show;MediaAlbum->showImage</displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>
+					<settings.image.itemsPerPage>
+						<TCEforms>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_image_thumb_limit</label>
+							<config>
+								<type>input</type>
+								<eval>int</eval>
+								<range>
+									<min>1</min>
+									<max>200</max>
+								</range>
+								<size>4</size>
+								<default>32</default>
+							</config>
+						</TCEforms>
+					</settings.image.itemsPerPage>
 					<settings.image.thumb.maxWidth>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_bemediagallery.xlf:mediagallery_plugin_image_thumb_maxWidth</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_image_thumb_maxWidth</label>
 							<config>
 								<type>input</type>
 								<eval>int</eval>
@@ -160,7 +175,7 @@
 					</settings.image.thumb.maxWidth>
 					<settings.image.thumb.maxHeight>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_bemediagallery.xlf:mediagallery_plugin_image_thumb_maxHeight</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_image_thumb_maxHeight</label>
 							<config>
 								<type>input</type>
 								<eval>int</eval>
@@ -175,7 +190,7 @@
 					</settings.image.thumb.maxHeight>
 					<settings.enableLightbox>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_bemediagallery.xlf:mediagallery_plugin_detailsInLightbox</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_detailsInLightbox</label>
 							<config>
 								<type>check</type>
 								<default>1</default>
@@ -184,7 +199,7 @@
 					</settings.enableLightbox>
 					<settings.image.maxWidth>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_bemediagallery.xlf:mediagallery_plugin_image_maxWidth</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_image_maxWidth</label>
 							<config>
 								<type>input</type>
 								<eval>int</eval>
@@ -199,7 +214,7 @@
 					</settings.image.maxWidth>
 					<settings.image.maxHeight>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_bemediagallery.xlf:mediagallery_plugin_image_maxHeight</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_image_maxHeight</label>
 							<config>
 								<type>input</type>
 								<eval>int</eval>
@@ -219,14 +234,14 @@
 		<random>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_bemediagallery.xlf:mediagallery_plugin_tab_random</sheetTitle>
+					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_tab_random</sheetTitle>
 					<displayCond>FIELD:general.switchableControllerActions:=:MediaAlbum->randomImage</displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<settings.galleryPid>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_bemediagallery.xlf:mediagallery_gallery_page</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_gallery_page</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -245,7 +260,7 @@
 					</settings.galleryPid>
 					<settings.random.thumb.maxWidth>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_bemediagallery.xlf:mediagallery_plugin_random_thumb_maxWidth</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_random_thumb_maxWidth</label>
 							<config>
 								<type>input</type>
 								<eval>int</eval>
@@ -260,7 +275,7 @@
 					</settings.random.thumb.maxWidth>
 					<settings.random.thumb.maxHeight>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_bemediagallery.xlf:mediagallery_plugin_random_thumb_maxHeight</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_random_thumb_maxHeight</label>
 							<config>
 								<type>input</type>
 								<eval>int</eval>

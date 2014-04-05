@@ -14,18 +14,22 @@ class FileCollectionRepository extends \TYPO3\CMS\Core\Resource\FileCollectionRe
 	 *
 	 * @param integer $storageUid
 	 * @param string $folder
-	 * @param integer $pid
+	 * @param NULL|array|integer $pids
 	 * @return NULL|\TYPO3\CMS\Core\Collection\AbstractRecordCollection[]
 	 */
-	public function findByStorageAndFolder($storageUid, $folder, $pid = NULL) {
+	public function findByStorageAndFolder($storageUid, $folder, $pids = NULL) {
 		$conditions = array(
-			'`storage`=' . $this->getDatabase()->fullQuoteStr($storageUid, $this->table),
-			'`folder`=' . $this->getDatabase()->fullQuoteStr($folder, $this->table),
-			'`type`=' . $this->getDatabase()->fullQuoteStr('folder', $this->table),
+			'`storage`=' . $this->getDatabaseConnection()->fullQuoteStr($storageUid, $this->table),
+			'`folder`=' . $this->getDatabaseConnection()->fullQuoteStr($folder, $this->table),
+			'`type`=' . $this->getDatabaseConnection()->fullQuoteStr('folder', $this->table),
 		);
 
-		if ($pid !== NULL) {
-			$conditions[] = 'pid='.intval($pid);
+		if (is_int($pids)) {
+			$conditions[] = 'pid='.intval($pids);
+		} elseif (is_array($pids)) {
+			foreach ($pids as $pid) {
+				$conditions[] = 'pid IN ('.implode(',', $pids).') ';
+			}
 		}
 
 		return $this->queryMultipleRecords($conditions);

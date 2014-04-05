@@ -39,6 +39,9 @@
 			<trans-unit id="mediagallery_plugin_album_thumb_maxHeight">
 				<source>Max. thumb height</source>
 			</trans-unit>
+			<trans-unit id="mediagallery_plugin_image_thumb_limit">
+				<source>Max. thumbs to show</source>
+			</trans-unit>
 			<trans-unit id="mediagallery_plugin_image_thumb_maxWidth">
 				<source>Max. thumb width</source>
 			</trans-unit>
@@ -59,6 +62,18 @@
 			</trans-unit>
 			<trans-unit id="mediagallery_plugin_random_thumb_maxHeight">
 				<source>Max. thumb height</source>
+			</trans-unit>
+			<trans-unit id="firstCreateStorageFolder">
+				<source>First create a MediaGalleries StorageFolder!</source>
+			</trans-unit>
+			<trans-unit id="createAlbum">
+				<source>Create album</source>
+			</trans-unit>
+			<trans-unit id="createAlbumIn">
+				<source>Create new album in "%s"</source>
+			</trans-unit>
+			<trans-unit id="editAlbum">
+				<source>Edit album "%s"</source>
 			</trans-unit>
 		</body>
 	</file>

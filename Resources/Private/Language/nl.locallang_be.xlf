@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-01-27T20:37:07Z" product-name="fs_media_gallery">
+		<header/>
+		<body>
+			<trans-unit id="mediagallery_plugin_tab_general">
+				<source>General</source>
+				<target>Algemeen</target>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_tab_album">
+				<source>Album settings</source>
+				<target>Album instellingen</target>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_tab_image">
+				<source>Single image settings</source>
+				<target>Detail weergave instellingen</target>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_tab_random">
+				<source>Random image settings</source>
+				<target>Willekeurige afbeelding instellingen</target>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_display">
+				<source>Display</source>
+				<target>Toon</target>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_display.0">
+				<source>Album view</source>
+				<target>Album weergave</target>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_display.1">
+				<source>Random image</source>
+				<target>Willekeurige afbeelding</target>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_mediaalbums">
+				<source>Album selection</source>
+				<target>Album selecteren</target>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_detailsInLightbox">
+				<source>Open LightBox/Colorbox instead of detail-page</source>
+				<target>Toon afbeelding in LightBox/Colorbox ipv een detail weergave</target>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_album_thumb_limit">
+				<source>Max. thumbs to show</source>
+				<target>Max. aantal to tonen thumbnails</target>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_album_thumb_maxWidth">
+				<source>Max. thumb width</source>
+				<target>Max. breedte thumbnails</target>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_album_thumb_maxHeight">
+				<source>Max. thumb height</source>
+				<target>Max. hoogte thumbnail</target>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_image_thumb_limit">
+				<source>Max. thumbs to show</source>
+				<target>Max. aantal to tonen thumbnails</target>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_image_thumb_maxWidth">
+				<source>Max. thumb width</source>
+				<target>Max. breedte thumbnails</target>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_image_thumb_maxHeight">
+				<source>Max. thumb height</source>
+				<target>Max. hoogte thumbnail</target>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_image_maxWidth">
+				<source>Max. image width</source>
+				<target>Max. breedte afbeelding</target>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_image_maxHeight">
+				<source>Max. image height</source>
+				<target>Max. hoogte afbeelding</target>
+			</trans-unit>
+			<trans-unit id="mediagallery_gallery_page">
+				<source>Gallery page</source>
+				<target>Gallerij pagina</target>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_random_thumb_maxWidth">
+				<source>Max. thumb width</source>
+				<target>Max. breedte thumbnails</target>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_random_thumb_maxHeight">
+				<source>Max. thumb height</source>
+				<target>Max. hoogte thumbnail</target>
+			</trans-unit>
+			<trans-unit id="firstCreateStorageFolder">
+				<source>First create a MediaGalleries StorageFolder!</source>
+				<target>Maak eerst een MediaGalleries Map in je pagina boom! Bevat plugin: MediaGalleries</target>
+			</trans-unit>
+			<trans-unit id="createAlbum">
+				<source>Create album</source>
+				<target>Album aanmaken</target>
+			</trans-unit>
+			<trans-unit id="createAlbumIn">
+				<source>Create new album in "%s"</source>
+				<target>Nieuw album aanmaken in "%s"</target>
+			</trans-unit>
+			<trans-unit id="editAlbum">
+				<source>Edit album "%s"</source>
+				<target>Album "%s" bewerken</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

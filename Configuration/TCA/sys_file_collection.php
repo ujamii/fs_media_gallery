@@ -3,11 +3,7 @@ if (!defined('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-$tca = array();
-$tca['interface']['showRecordFieldList'] = $GLOBALS['TCA']['sys_file_collection']['feInterface']['showRecordFieldList'].',sorting';
-$tca['feInterface'] = $GLOBALS['TCA']['sys_file_collection']['feInterface'];
-$tca['columns'] = array(
-
+$additionalColumns = array(
 	'sorting' => array(
 		'label' => 'sorting',
 		'config' => array(
@@ -62,9 +58,10 @@ $tca['columns'] = array(
 );
 
 foreach ($GLOBALS['TCA']['sys_file_collection']['types'] as $type => $tmp) {
-	$GLOBALS['TCA']['sys_file_collection']['types'][$type]['showitem'] .= ',--div--;LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_db.xlf:tx_fsmediagallery_domain_model_mediaalbum,';
-	$GLOBALS['TCA']['sys_file_collection']['types'][$type]['showitem'] .= 'parentalbum,webdescription';
+	$GLOBALS['TCA']['sys_file_collection']['types'][$type]['showitem'] .= ',--div--;LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_db.xlf:tx_fsmediagallery_domain_model_mediaalbum';
+	$GLOBALS['TCA']['sys_file_collection']['types'][$type]['showitem'] .= ',parentalbum,webdescription';
 }
 
-return \TYPO3\CMS\Core\Utility\GeneralUtility::array_merge_recursive_overrule($GLOBALS['TCA']['sys_file_collection'], $tca);
-?>
+\TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule($GLOBALS['TCA']['sys_file_collection']['columns'], $additionalColumns);
+
+return $GLOBALS['TCA']['sys_file_collection'];

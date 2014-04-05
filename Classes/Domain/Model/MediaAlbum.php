@@ -4,7 +4,7 @@ namespace MiniFranske\FsMediaGallery\Domain\Model;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Frans Saris <franssaris@gmail.com>
+ *  (c) 2014 Frans Saris <franssaris@gmail.com>
  *
  *  All rights reserved
  *
@@ -26,14 +26,9 @@ namespace MiniFranske\FsMediaGallery\Domain\Model;
  ***************************************************************/
 
 /**
- *
- *
- * @package fs_media_gallery
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
+ * Media album
  */
 class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
-
 
 	/**
 	 * fileCollectionRepository
@@ -45,9 +40,17 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $fileCollectionRepository;
 
 	/**
+	 * mediaAlbumRepository
+	 *
+	 * @var \MiniFranske\FsMediaGallery\Domain\Repository\MediaAlbumRepository
+	 * @inject
+	 */
+	protected $mediaAlbumRepository;
+
+	/**
 	 * @var array
 	 */
-	protected $assets;
+	protected $assetCache;
 
 	/**
 	 * Title
@@ -64,10 +67,18 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $webdescription;
 
 	/**
-	 * @var \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum
+	 * @var \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum|NULL
 	 * @lazy
 	 */
 	protected $parentalbum;
+
+	/**
+	 * Child albums
+	 *
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum>
+	 * @lazy
+	 */
+	protected $albumCache;
 
 	/**
 	 * Returns the title
@@ -129,21 +140,60 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return array<\TYPO3\CMS\Core\Resource\File>
 	 */
 	public function getAssets() {
-		if($this->assets === NULL) {
+		if($this->assetCache === NULL) {
 			/** @var $fileCollection \TYPO3\CMS\Core\Resource\Collection\AbstractFileCollection */
 			$fileCollection = $this->fileCollectionRepository->findByUid($this->getUid());
 			$fileCollection->loadContents();
-			$this->assets = $fileCollection->getItems();
+			$this->assetCache = $fileCollection->getItems();
 		}
+		return $this->assetCache;
+	}
 
-		return $this->assets;
+	/**
+	 * Get child albums
+	 *
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum>>
+	 */
+	public function getAlbums() {
+		if($this->albumCache === NULL) {
+			$this->albumCache = $this->mediaAlbumRepository->findByParentalbum($this);
+		}
+		return $this->albumCache;
+	}
+
+	/**
+	 * Get random child album
+	 *
+	 * @return MediaAlbum
+	 */
+	public function getRandomAlbum() {
+
+		// if albums are loaded use these
+		if($this->albumCache !== NULL) {
+			return $this->getAlbums()[rand(0,count($this->getAlbums())-1)];
+
+		// else fetch random item from repository
+		} else {
+			return $this->mediaAlbumRepository->findRandom($this);
+		}
 	}
 
 	/**
 	 * @return \TYPO3\CMS\Core\Resource\File
 	 */
 	public function getRandomAsset() {
-		return $this->getAssets()[rand(0,count($this->getAssets()))];
+
+		// check if we need to fetch it from child album
+		$randomAlbum = $this->getRandomAlbum();
+		if ($randomAlbum) {
+			return $randomAlbum->getRandomAsset();
+		}
+
+		if (count($this->getAssets())) {
+			return $this->getAssets()[rand(1,count($this->getAssets()))-1];
+		} else {
+			return NULL;
+		}
 	}
 }
 ?>

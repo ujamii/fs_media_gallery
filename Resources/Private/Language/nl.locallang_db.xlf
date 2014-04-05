@@ -6,12 +6,15 @@
 
 			<trans-unit id="tx_fsmediagallery_domain_model_mediaalbum">
 				<source>Media Album</source>
+				<target>Media album</target>
 			</trans-unit>
 			<trans-unit id="tx_fsmediagallery_domain_model_mediaalbum.webdescription">
 				<source>Album description</source>
+				<target>Album beschrijving</target>
 			</trans-unit>
 			<trans-unit id="tx_fsmediagallery_domain_model_mediaalbum.parentalbum">
 				<source>Parent album</source>
+				<target>Hoofd album</target>
 			</trans-unit>
 
 		</body>

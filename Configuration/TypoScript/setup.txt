@@ -7,24 +7,35 @@ plugin.tx_fsmediagallery {
 	persistence {
 		storagePid = {$plugin.tx_fsmediagallery.persistence.storagePid}
 	}
-	features {
-		rewrittenPropertyMapper = 1
-	}
 
-	#galleryView.albumThum.description.crop = 
+	settings {
+		galleryPid =
+		enableLightbox = 1
+		album {
+			itemsPerPage = 12
+			thumb {
+				maxWidth = 120
+				maxHeight = 100
+			}
+		}
+		image {
+			itemsPerPage = 32
+			maxWidth = 600
+			maxHeight = 800
+			thumb {
+				maxWidth = 120
+				maxHeight = 100
+			}
+		}
+		random {
+			thumb {
+				maxWidth = 200
+				maxHeight = 160
+			}
+		}
+	}
 }
 
- # Module configuration
-module.tx_fsmediagallery {
-	persistence {
-		storagePid = {$module.tx_fsmediagallery.persistence.storagePid}
-	}
-	view {
-		templateRootPath = {$module.tx_fsmediagallery.view.templateRootPath}
-		partialRootPath = {$module.tx_fsmediagallery.view.partialRootPath}
-		layoutRootPath = {$module.tx_fsmediagallery.view.layoutRootPath}
-	}
-}
 
- # Include MediaGallery default styles
+# Include MediaGallery default styles
 page.includeCSS.tx-fs-media-gallery = EXT:fs_media_gallery/Resources/Public/Css/MediaGallery.css

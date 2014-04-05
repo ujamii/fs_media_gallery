@@ -1,7 +1,0 @@
-<div class="thumb" style="width:{settings.gallery.thumb.maxWidth}px;height:{settings.gallery.thumb.maxHeight}px">
-	<f:link.action action="showAlbums" arguments="{mediaGallery : mediaGallery}">
-		<f:render partial="MediaItem/Image" arguments="{alt:mediaGallery.title,title:mediaGallery.title,mediaItem:mediaGallery.randomAsset,width:settings.gallery.thumb.maxHeight,height:settings.gallery.thumb.maxWidth}" />
-		<div class="name">{mediaGallery.title}</div>
-		<div class="description"><f:format.crop maxCharacters="17" append="&nbsp;...">{mediaGallery.description}</f:format.crop></div>
-	</f:link.action>
-</div>

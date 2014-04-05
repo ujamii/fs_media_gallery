@@ -4,8 +4,8 @@ namespace MiniFranske\FsMediaGallery\Domain\Repository;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Frans Saris <franssaris@gmail.com>
- *  
+ *  (c) 2014 Frans Saris <franssaris@gmail.com>
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -26,13 +26,46 @@ namespace MiniFranske\FsMediaGallery\Domain\Repository;
  ***************************************************************/
 
 /**
- *
- *
- * @package fs_media_gallery
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
+ * MediaAlbumRepository
  */
 class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
+	/**
+	 * @var array default ordering
+	 */
+	protected $defaultOrderings = array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING);
+
+	/**
+	 * Initialize object
+	 */
+	public function initializeObject() {
+		/** @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
+		$querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+		// don't add the pid constraint
+		$querySettings->setRespectStoragePage(FALSE);
+		$this->setDefaultQuerySettings($querySettings);
+	}
+
+	/**
+	 * Get random sub album
+	 *
+	 * @param \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum $parent
+	 * @return \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum
+	 */
+	public function findRandom($parent) {
+
+		/** @var \TYPO3\CMS\Extbase\Persistence\Generic\Query $query */
+		$query = $this->createQuery();
+
+		$query->statement('SELECT * FROM sys_file_collection WHERE parentalbum = ? ORDER By RAND(NOW()) LIMIT 1', array($parent->getUid()));
+
+		$result = $query->execute();
+
+		if ($result instanceof \TYPO3\CMS\Extbase\Persistence\QueryResultInterface) {
+			return $result->getFirst();
+		} elseif (is_array($result)) {
+			return isset($result[0]) ? $result[0] : NULL;
+		}
+	}
+
 }
-?>

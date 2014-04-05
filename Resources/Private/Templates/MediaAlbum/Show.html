@@ -1,4 +1,4 @@
-{namespace mfmg=MiniFranske\FsMediaGallery\ViewHelpers}
+{namespace mf=MiniFranske\FsMediaGallery\ViewHelpers}
 
 <f:layout name="Default" />
 
@@ -11,34 +11,53 @@
 		<h1>{mediaAlbum.title}</h1>
 		<div class="description"><f:format.html>{mediaAlbum.description}</f:format.html></div>
 
+		<f:if condition="{mediaAlbum.albums}">
+			<f:then>
+				<f:render partial="MediaAlbum/ListAlbums" arguments="{mediaAlbums:mediaAlbum.albums}" />
+			</f:then>
+			<f:else>
 
-		<mfmg:widget.paginate objects="{mediaAlbum.assets}" as="paginatedAssets" configuration="{itemsPerPage: settings.album.itemsPerPage, insertAbove: 0, insertBelow: 1, maximumNumberOfLinks: 20, pagesBefore: 4, pagesAfter:4}">
-
-			<f:if condition="{paginatedAssets}">
-				<f:then>
-					<div class="thumbs">
-						<f:for each="{paginatedAssets}" as="albumItem">
-							<f:render partial="MediaItem/Thumb" arguments="{mediaGallery:mediaGallery,mediaAlbum:mediaAlbum,mediaItem:albumItem}" />
+				<mf:widget.paginate objects="{mediaAlbum.assets}" as="paginatedAssets" itemsBefore="before" itemsAfter="after" configuration="{itemsPerPage: settings.image.itemsPerPage, insertAbove: 0, insertBelow: 1, maximumNumberOfLinks: 20, pagesBefore: 4, pagesAfter:4}">
+					<f:if condition="{before}">
+						<f:for each="{before}" as="mediaItem">
+							<a href="{f:uri.image(image:mediaItem)}" rel="albm_{mediaAlbum.uid}" class="lightbox" title="{mf:fileTitle(file:mediaItem)} - {mediaAlbum.title}">
+							</a>
 						</f:for>
-					</div>
-				</f:then>
-				<f:else>
-					<div class="alert alert-info">
-						<p><f:translate key="tx_fsmediagallery_no_assets">No items found</f:translate></p>
-					</div>
-				</f:else>
-			</f:if>
+					</f:if>
+					<f:if condition="{paginatedAssets}">
+						<f:then>
+							<div class="thumbs">
+								<f:for each="{paginatedAssets}" as="mediaItem">
+									<f:render partial="MediaItem/Thumb" arguments="{mediaGallery:mediaGallery,mediaAlbum:mediaAlbum,mediaItem:mediaItem}" />
+								</f:for>
+							</div>
+						</f:then>
+						<f:else>
+							<div class="alert alert-info">
+								<p><f:translate key="no_assets_found">No items found</f:translate></p>
+							</div>
+						</f:else>
+					</f:if>
+					<f:if condition="{after}">
+						<f:for each="{after}" as="mediaItem">
+							<a href="{f:uri.image(image:mediaItem)}" rel="albm_{mediaAlbum.uid}" class="lightbox" title="{mf:fileTitle(file:mediaItem)} - {mediaAlbum.title}">
+							</a>
+						</f:for>
+					</f:if>
 
-		</mfmg:widget.paginate>
+				</mf:widget.paginate>
+
+			</f:else>
+		</f:if>
 
 
 		<div class="navigation">
 			<f:if condition="{mediaAlbum.parentalbum}">
 				<f:then>
-					<f:link.action action="show" controller="MediaAlbum" arguments="{mediaAlbum:mediaAlbum.parentalbum}">Back to album</f:link.action>
+					<f:link.action class="btn btn-back" action="show" controller="MediaAlbum" arguments="{mediaAlbum:mediaAlbum.parentalbum}"><f:translate id="back_to_%s"  arguments="{0: mediaAlbum.parentalbum.title}">Back to %s</f:translate></f:link.action>
 				</f:then>
 				<f:else>
-					<f:link.action action="list" controller="MediaAlbum">Back to album</f:link.action>
+					<f:link.action class="btn btn-back" action="list" controller="MediaAlbum"><f:translate key="back_to_album">Back to album</f:translate></f:link.action>
 				</f:else>
 			</f:if>
 		</div>

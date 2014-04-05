@@ -4,7 +4,7 @@ namespace MiniFranske\FsMediaGallery\Controller;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Frans Saris <franssaris@gmail.com>
+ *  (c) 2014 Frans Saris <franssaris@gmail.com>
  *
  *  All rights reserved
  *
@@ -26,11 +26,7 @@ namespace MiniFranske\FsMediaGallery\Controller;
  ***************************************************************/
 
 /**
- *
- *
- * @package fs_media_gallery
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
+ * MediaAlbumController
  */
 class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
@@ -43,32 +39,36 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	protected $mediaAlbumRepository;
 
 	/**
-	 * AssetRepository
+	 * List root of media gallery
 	 *
-	 * @var \TYPO3\CMS\Core\Resource\FileRepository
-	 * @inject
-	 */
-	protected $assetRepository;
-
-	/**
-	 * action list
-	 *
+	 * @param integer $mediaAlbum
 	 * @return void
 	 */
-	public function listAction() {
-		$mediaAlbums = $this->mediaAlbumRepository->findAll();
+	public function listAction($mediaAlbum = null) {
+
+		if ($mediaAlbum) {
+			$mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum);
+			$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum);
+		} elseif (!empty($this->settings['mediagalleries'])) {
+			$mediaAlbums = array();
+			foreach (explode(',', $this->settings['mediagalleries']) as $uid) {
+				$mediaAlbums[] = $this->mediaAlbumRepository->findByUid($uid);
+			}
+		} else {
+			$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum(false);
+		}
 		$this->view->assign('mediaAlbums', $mediaAlbums);
 	}
 
 	/**
 	 * action show
 	 *
-	 * @param \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum $mediaAlbum
-	 * @param int $page the page number
+	 * @param integer $mediaAlbum
+	 * @param integer $page the page number
 	 * @return void
 	 */
-	public function showAction(\MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum $mediaAlbum) {
-
+	public function showAction($mediaAlbum, $page = 0) {
+		$mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum);
 		$this->view->assign('mediaAlbum', $mediaAlbum);
 	}
 
@@ -77,10 +77,11 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	 *
 	 * @param \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum $mediaAlbum
 	 * @param int $mediaItemUid
+	 * @ignorevalidation
 	 */
 	public function showImageAction(\MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum $mediaAlbum, $mediaItemUid) {
 		$this->view->assign('mediaAlbum', $mediaAlbum);
-		$this->view->assign('mediaItem', $this->assetRepository->findByUid($mediaItemUid));
+		$this->view->assign('mediaItem', \TYPO3\CMS\Core\Resource\ResourceFactory::getInstance()->getFileObject($mediaItemUid));
 	}
 
 	/**
@@ -89,8 +90,21 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	 * @return void
 	 */
 	public function randomImageAction() {
+		$mediaAlbums = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $this->settings['mediagalleries'], TRUE);
+		$mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbums[rand(1,count($mediaAlbums))-1]);
+		$this->view->assign('mediaAlbum', $mediaAlbum);
+	}
 
-		return 'RANDOM<pre>'.print_r($this->settings,1).'</pre>';
+
+
+	/**
+	 * If there were validation errors, we don't want to write details like
+	 * "An error occurred while trying to call Tx_Community_Controller_UserController->updateAction()"
+	 *
+	 * @return string|boolean The flash message or FALSE if no flash message should be set
+	 */
+	protected function getErrorFlashMessage() {
+		debug($this->arguments->getValidationResults());
+		return FALSE;
 	}
 }
-?>

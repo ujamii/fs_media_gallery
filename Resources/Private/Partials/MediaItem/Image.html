@@ -1,8 +1,10 @@
+{namespace mf=MiniFranske\FsMediaGallery\ViewHelpers}
+
 <f:if condition="{mediaItem}">
 	<f:then>
-		<f:image src="{mediaItem.publicUrl}" alt="{alt}" title="{title}" maxHeight="{height}" maxWidth="{width}" />
+		<span class="image"><f:image image="{mediaItem}" alt="{alt}" title="{f:if(condition:title, then:title, else:'{mf:fileTitle(file:mediaItem)}')}" maxHeight="{height}" maxWidth="{width}" /></span>
 	</f:then>
 	<f:else>
-		<i class="noimage" style="width:{width}px;height:{height}px;">No image</i>
+		<i class="no-image" style="width:{width}px;">No image</i>
 	</f:else>
 </f:if>

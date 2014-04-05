@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2013-02-02T15:05:08Z" product-name="fs_media_gallery">
+	<file source-language="en" target-lanuage="nl" datatype="plaintext" original="messages" date="2013-02-02T15:05:08Z" product-name="fs_media_gallery">
 		<header/>
 		<body>
 
 			<trans-unit id="no_albums_found">
 				<source>No albums found</source>
+				<target>Geen albums gevonden</target>
 			</trans-unit>
 			<trans-unit id="no_assets_found">
 				<source>No assets found</source>
+				<source>Geen media elementen gevonden</source>
 			</trans-unit>
 			<trans-unit id="back_to_album">
 				<source>Back to album</source>
+				<target>Terug naar de albums</target>
 			</trans-unit>
 			<trans-unit id="back_to_%s">
 				<source>Back to %s</source>
+				<target>Terug naar %s</target>
 			</trans-unit>
 
 		</body>
