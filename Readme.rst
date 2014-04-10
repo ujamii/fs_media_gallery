@@ -27,4 +27,4 @@ A FAL based media gallery for TYPO3. Show your images from your local or remote 
    - Save your new album
 - Insert plugin on page and select "Media Gallery" as plugin type
 - Set the "Record Storage Page" to the "StoragePage you just created
-- Open FE and admire your gallery :)
+- Open FE and admire your album :)
