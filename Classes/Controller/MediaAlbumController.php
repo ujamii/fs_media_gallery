@@ -39,12 +39,13 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	protected $mediaAlbumRepository;
 
 	/**
-	 * List root of media gallery
+	 * action show
 	 *
 	 * @param integer $mediaAlbum
+	 * @param integer $page the page number
 	 * @return void
 	 */
-	public function listAction($mediaAlbum = null) {
+	public function showAction($mediaAlbum = 0, $page = 0) {
 
 		if ($mediaAlbum) {
 			$mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum);
@@ -58,17 +59,6 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 			$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum(false);
 		}
 		$this->view->assign('mediaAlbums', $mediaAlbums);
-	}
-
-	/**
-	 * action show
-	 *
-	 * @param integer $mediaAlbum
-	 * @param integer $page the page number
-	 * @return void
-	 */
-	public function showAction($mediaAlbum, $page = 0) {
-		$mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum);
 		$this->view->assign('mediaAlbum', $mediaAlbum);
 	}
 

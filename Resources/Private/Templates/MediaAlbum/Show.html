@@ -7,61 +7,83 @@
 
 	<f:flashMessages />
 
-	<div class="album">
-		<h1>{mediaAlbum.title}</h1>
-		<div class="description"><f:format.html>{mediaAlbum.description}</f:format.html></div>
+	<f:if condition="{mediaAlbum}">
+		<f:then>
 
-		<f:if condition="{mediaAlbum.albums}">
-			<f:then>
-				<f:render partial="MediaAlbum/ListAlbums" arguments="{mediaAlbums:mediaAlbum.albums}" />
-			</f:then>
-			<f:else>
-
-				<mf:widget.paginate objects="{mediaAlbum.assets}" as="paginatedAssets" itemsBefore="before" itemsAfter="after" configuration="{itemsPerPage: settings.image.itemsPerPage, insertAbove: 0, insertBelow: 1, maximumNumberOfLinks: 20, pagesBefore: 4, pagesAfter:4}">
-					<f:if condition="{before}">
-						<f:for each="{before}" as="mediaItem">
-							<a href="{f:uri.image(image:mediaItem)}" rel="albm_{mediaAlbum.uid}" class="lightbox" title="{mf:fileTitle(file:mediaItem)} - {mediaAlbum.title}">
-							</a>
-						</f:for>
-					</f:if>
-					<f:if condition="{paginatedAssets}">
+			<div class="album">
+				<div class="navigation">
+					<f:if condition="{mediaAlbum.parentalbum}">
 						<f:then>
-							<div class="thumbs">
-								<f:for each="{paginatedAssets}" as="mediaItem">
-									<f:render partial="MediaItem/Thumb" arguments="{mediaGallery:mediaGallery,mediaAlbum:mediaAlbum,mediaItem:mediaItem}" />
-								</f:for>
-							</div>
+							<f:link.action class="btn btn-back" action="show" controller="MediaAlbum" arguments="{mediaAlbum:mediaAlbum.parentalbum}"><f:translate id="back_to_%s"  arguments="{0: mediaAlbum.parentalbum.title}">Back to %s</f:translate></f:link.action>
 						</f:then>
 						<f:else>
-							<div class="alert alert-info">
-								<p><f:translate key="no_assets_found">No items found</f:translate></p>
-							</div>
+							<f:link.action class="btn btn-back" action="show" controller="MediaAlbum"><f:translate key="back_to_album">Back to album</f:translate></f:link.action>
 						</f:else>
 					</f:if>
-					<f:if condition="{after}">
-						<f:for each="{after}" as="mediaItem">
-							<a href="{f:uri.image(image:mediaItem)}" rel="albm_{mediaAlbum.uid}" class="lightbox" title="{mf:fileTitle(file:mediaItem)} - {mediaAlbum.title}">
-							</a>
-						</f:for>
+				</div>
+
+				<h1>{mediaAlbum.title}</h1>
+				<div class="description"><f:format.html>{mediaAlbum.description}</f:format.html></div>
+
+				<f:if condition="{mediaAlbum.albums}">
+					<f:then>
+						<f:render partial="MediaAlbum/ListAlbums" arguments="{mediaAlbums:mediaAlbum.albums}" />
+					</f:then>
+					<f:else>
+
+						<mf:widget.paginate objects="{mediaAlbum.assets}" as="paginatedAssets" itemsBefore="before" itemsAfter="after" configuration="{itemsPerPage: settings.image.itemsPerPage, insertAbove: settings.pagination.insertAbove, insertBelow: settings.pagination.insertBelow, maximumNumberOfLinks: settings.pagination.maximumNumberOfLinks, pagesBefore: settings.pagination.pagesBefore, pagesAfter:settings.pagination.pagesAfter}">
+							<f:if condition="{before}">
+								<f:for each="{before}" as="mediaItem">
+									<a href="{f:uri.image(image:mediaItem)}" rel="albm_{mediaAlbum.uid}" class="lightbox" title="{mf:fileTitle(file:mediaItem)} - {mediaAlbum.title}">
+									</a>
+								</f:for>
+							</f:if>
+							<f:if condition="{paginatedAssets}">
+								<f:then>
+									<div class="thumbs">
+										<f:for each="{paginatedAssets}" as="mediaItem">
+											<f:render partial="MediaItem/Thumb" arguments="{mediaGallery:mediaGallery,mediaAlbum:mediaAlbum,mediaItem:mediaItem}" />
+										</f:for>
+									</div>
+								</f:then>
+								<f:else>
+									<div class="alert alert-info">
+										<p><f:translate key="no_assets_found">No items found</f:translate></p>
+									</div>
+								</f:else>
+							</f:if>
+							<f:if condition="{after}">
+								<f:for each="{after}" as="mediaItem">
+									<a href="{f:uri.image(image:mediaItem)}" rel="albm_{mediaAlbum.uid}" class="lightbox" title="{mf:fileTitle(file:mediaItem)} - {mediaAlbum.title}">
+									</a>
+								</f:for>
+							</f:if>
+
+						</mf:widget.paginate>
+
+					</f:else>
+				</f:if>
+
+
+				<div class="navigation">
+					<f:if condition="{mediaAlbum.parentalbum}">
+						<f:then>
+							<f:link.action class="btn btn-back" action="show" controller="MediaAlbum" arguments="{mediaAlbum:mediaAlbum.parentalbum}"><f:translate id="back_to_%s"  arguments="{0: mediaAlbum.parentalbum.title}">Back to %s</f:translate></f:link.action>
+						</f:then>
+						<f:else>
+							<f:link.action class="btn btn-back" action="show" controller="MediaAlbum"><f:translate key="back_to_album">Back to album</f:translate></f:link.action>
+						</f:else>
 					</f:if>
+				</div>
 
-				</mf:widget.paginate>
+			</div>
+		</f:then>
+		<f:else>
+			<div class="gallery">
+				<f:render partial="MediaAlbum/ListAlbums" arguments="{mediaAlbums:mediaAlbums}" />
+			</div>
+		</f:else>
+	</f:if>
 
-			</f:else>
-		</f:if>
-
-
-		<div class="navigation">
-			<f:if condition="{mediaAlbum.parentalbum}">
-				<f:then>
-					<f:link.action class="btn btn-back" action="show" controller="MediaAlbum" arguments="{mediaAlbum:mediaAlbum.parentalbum}"><f:translate id="back_to_%s"  arguments="{0: mediaAlbum.parentalbum.title}">Back to %s</f:translate></f:link.action>
-				</f:then>
-				<f:else>
-					<f:link.action class="btn btn-back" action="list" controller="MediaAlbum"><f:translate key="back_to_album">Back to album</f:translate></f:link.action>
-				</f:else>
-			</f:if>
-		</div>
-
-	</div>
 
 </f:section>

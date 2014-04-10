@@ -33,7 +33,16 @@ plugin.tx_fsmediagallery {
 				maxHeight = 160
 			}
 		}
+		pagination {
+			insertAbove = 0
+			insertBelow = 1
+			pagesBefore = 4
+			pagesAfter = 4
+			maximumNumberOfLinks = 10
+		}
 	}
+	# skip default arguments
+	features.skipDefaultArguments = 1
 }
 
 

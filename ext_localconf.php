@@ -7,7 +7,7 @@ if (!defined('TYPO3_MODE')) {
 	'MiniFranske.' . $_EXTKEY,
 	'Mediagallery',
 	array(
-		'MediaAlbum' => 'list,show,random,showImage',
+		'MediaAlbum' => 'show,random,showImage',
 	),
 	// non-cacheable actions
 	array(
@@ -28,6 +28,10 @@ $GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['pro
 	'MiniFranske\\FsMediaGallery\\Hooks\\ProcessDatamapHook';
 $GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass'][] =
 	'MiniFranske\\FsMediaGallery\\Hooks\\ProcessDatamapHook';
+
+// Real Url AutoConfiguration
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration'][$_EXTKEY] =
+	'EXT:' . $_EXTKEY . '/Classes/Hooks/RealUrlAutoConfiguration.php:MiniFranske\FsMediaGallery\Hooks\RealUrlAutoConfiguration->addNewsConfig';
 
 
 \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher')->connect(

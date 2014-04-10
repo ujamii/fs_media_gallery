@@ -24,22 +24,6 @@ if (TYPO3_MODE === 'BE') {
 	 * Registers a Backend Module
 	 * @todo: create backend module to order albums
 	 */
-//	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-//		'MiniFranske.' . $_EXTKEY,
-//		'web',	 // Make module a submodule of 'web'
-//		'mediagallery',	// Submodule key
-//		'',						// Position
-//		array(
-//			'MediaGallery' => 'list, new, create, update, edit, delete',
-//			'MediaAlbum' => 'list, new, create, update, edit, delete',
-//
-//		),
-//		array(
-//			'access' => 'user,group',
-//			'icon'   => 'EXT:' . $_EXTKEY . '/ext_icon.gif',
-//			'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_mediagallery.xlf',
-//		)
-//	);
 
 	// Adding click menu item:
 	$GLOBALS['TBE_MODULES_EXT']['xMOD_alt_clickmenu']['extendCMclasses'][] = array(

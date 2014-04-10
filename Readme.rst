@@ -1,7 +1,21 @@
 (FS) Media Gallery
 =================
 
-A media gallery based on the fal extention of TYPO3. Show your images from your local or remote storage as a gallery of albums.
+A FAL based media gallery for TYPO3. Show your images from your local or remote storage as a gallery of albums.
 
 Requirements
-* TYPO3 >= 6.1
+------------
+* TYPO3 >= 6.2
+
+Quick install notes
+-------------------
+
+* Install extension through Extension Manager
+* Include Static Template "Media Galley (fs_media_gallery)"
+* Create a StoragePage and set "Contains Plugin" to "MediaGalleries"
+* Go to file module and open the folder you want to turn into a album
+	Click on the "Create new album..." in context menu of top toolbar
+	Save your new album
+* Insert plugin on page and select "Media Gallery" as plugin type
+* Set the "Record Storage Page" to the "StoragePage you just created
+* Open FE and admire your gallery :)
