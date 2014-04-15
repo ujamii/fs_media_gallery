@@ -45,8 +45,9 @@ $additionalColumns = array(
 				'parentField' => 'parentalbum',
 				'appearance' => array(
 					'expandAll' => TRUE,
-					'showHeader' => FALSE,
+					'showHeader' => TRUE,
 					'maxLevels' => 99,
+					'width' => 650,
 				),
 			),
 			'size' => 10,
