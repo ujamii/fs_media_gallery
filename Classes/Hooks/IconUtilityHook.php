@@ -24,6 +24,9 @@ namespace MiniFranske\FsMediaGallery\Hooks;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Resource\Folder;
+
 /**
  * IconUtility Hook to add media gallery icon
  */
@@ -42,18 +45,34 @@ class IconUtilityHook implements \TYPO3\CMS\Backend\Utility\IconUtilityOverrideR
 	 */
 	public function overrideResourceIcon(\TYPO3\CMS\Core\Resource\ResourceInterface $folderObject, &$iconName, array &$options, array &$overlays) {
 
-		if ($folderObject && $folderObject instanceof \TYPO3\CMS\Core\Resource\Folder && in_array($folderObject->getRole(), array(\TYPO3\CMS\Core\Resource\Folder::ROLE_DEFAULT, \TYPO3\CMS\Core\Resource\Folder::ROLE_USERUPLOAD))) {
+		if ($folderObject && $folderObject instanceof Folder
+			&& in_array($folderObject->getRole(), array(Folder::ROLE_DEFAULT, Folder::ROLE_USERUPLOAD))
+		) {
 
 			$mediaFolders = self::getMediaFolders();
 
 			if (count($mediaFolders)) {
 
-				/** @var $fileCollectionRepository \MiniFranske\FsMediaGallery\Domain\Repository\FileCollectionRepository **/
-				$fileCollectionRepository = new \MiniFranske\FsMediaGallery\Domain\Repository\FileCollectionRepository();
-				$collections = $fileCollectionRepository->findByStorageAndFolder($folderObject->getStorage()->getUid(), $folderObject->getIdentifier(), array_keys($mediaFolders));
+				/** @var \MiniFranske\FsMediaGallery\Service\Utility $utility */
+				$utility = GeneralUtility::makeInstance('MiniFranske\\FsMediaGallery\\Service\\Utility');
+				$collections = $utility->findFileCollectionRecordsForFolder(
+					$folderObject->getStorage()->getUid(),
+					$folderObject->getIdentifier(),
+					array_keys($mediaFolders)
+				);
 
 				if ($collections) {
 					$iconName = 'tcarecords-sys_file_collection-folder';
+					$hidden = TRUE;
+					foreach ($collections as $collection) {
+						if ((int)$collection['hidden'] === 0) {
+							$hidden = FALSE;
+							break;
+						}
+					}
+					if ($hidden) {
+						$overlays['status-overlay-hidden'] = array();
+					}
 				}
 			}
 		}
@@ -65,7 +84,7 @@ class IconUtilityHook implements \TYPO3\CMS\Backend\Utility\IconUtilityOverrideR
 	protected static function getMediaFolders() {
 		if (self::$mediaFolders === NULL) {
 			/** @var \MiniFranske\FsMediaGallery\Service\Utility $utility */
-			$utility = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('MiniFranske\\FsMediaGallery\\Service\\Utility');
+			$utility = GeneralUtility::makeInstance('MiniFranske\\FsMediaGallery\\Service\\Utility');
 			self::$mediaFolders = $utility->getStorageFolders();
 		}
 		return self::$mediaFolders;

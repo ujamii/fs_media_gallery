@@ -61,9 +61,7 @@ abstract class AbstractBeAlbumButtons {
 
 				/** @var \TYPO3\CMS\Core\Charset\CharsetConverter $charsetConverter */
 				$charsetConverter = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Charset\\CharsetConverter');
-				/** @var $fileCollectionRepository \MiniFranske\FsMediaGallery\Domain\Repository\FileCollectionRepository * */
-				$fileCollectionRepository = new \MiniFranske\FsMediaGallery\Domain\Repository\FileCollectionRepository();
-				$collections = $fileCollectionRepository->findByStorageAndFolder(
+				$collections = $utility->findFileCollectionRecordsForFolder(
 					$folder->getStorage()->getUid(),
 					$folder->getIdentifier(),
 					array_keys($mediaFolders)
@@ -71,10 +69,10 @@ abstract class AbstractBeAlbumButtons {
 
 				foreach ($collections as $collection) {
 					$buttons[] = $this->createLink(
-						sprintf($this->sL('editAlbum'), $collection->getTitle()),
-						sprintf($this->sL('editAlbum'), $charsetConverter->crop('utf-8', $collection->getTitle(), 12, '...')),
+						sprintf($this->sL('editAlbum'), $collection['title']),
+						sprintf($this->sL('editAlbum'), $charsetConverter->crop('utf-8', $collection['title'], 12, '...')),
 						IconUtility::getSpriteIcon('extensions-fs_media_gallery-edit-album'),
-						"alt_doc.php?edit[sys_file_collection][" . $collection->getUid() . "]=edit"
+						"alt_doc.php?edit[sys_file_collection][" . $collection['uid'] . "]=edit"
 					);
 				}
 
