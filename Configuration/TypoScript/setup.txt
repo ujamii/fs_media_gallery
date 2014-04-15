@@ -1,8 +1,8 @@
 plugin.tx_fsmediagallery {
 	view {
-		templateRootPath = {$plugin.tx_fsmediagallery.view.templateRootPath}
-		partialRootPath = {$plugin.tx_fsmediagallery.view.partialRootPath}
-		layoutRootPath = {$plugin.tx_fsmediagallery.view.layoutRootPath}
+		templateRootPaths.100 = {$plugin.tx_fsmediagallery.view.templateRootPath}
+		partialRootPaths.100 = {$plugin.tx_fsmediagallery.view.partialRootPath}
+		layoutRootPaths.100 = {$plugin.tx_fsmediagallery.view.layoutRootPath}
 	}
 	persistence {
 		storagePid = {$plugin.tx_fsmediagallery.persistence.storagePid}
