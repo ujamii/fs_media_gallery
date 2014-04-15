@@ -171,7 +171,7 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		// if albums are loaded use these
 		if($this->albumCache !== NULL) {
 			$albums = $this->getAlbums();
-			return $albums[rand(0,count($this->getAlbums())-1)];
+			return $albums[rand(0,count($albums)-1)];
 
 		// else fetch random item from repository
 		} else {
@@ -192,7 +192,7 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 		if (count($this->getAssets())) {
 			$assets = $this->getAssets();
-			return $assets[rand(1,count($this->getAssets()))-1];
+			return $assets[rand(1,count($assets))-1];
 		} else {
 			return NULL;
 		}
