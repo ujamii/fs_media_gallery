@@ -43,9 +43,14 @@ abstract class AbstractBeAlbumButtons {
 	protected function generateButtons($combinedIdentifier) {
 		$buttons = array();
 
-		/** @var $file \TYPO3\CMS\Core\Resource\Folder */
-		$folder = \TYPO3\CMS\Core\Resource\ResourceFactory::getInstance()
-			->retrieveFileOrFolderObject($combinedIdentifier);
+		// In some folder copy/move actions in file list a invalid id is passed
+		try {
+			/** @var $file \TYPO3\CMS\Core\Resource\Folder */
+			$folder = \TYPO3\CMS\Core\Resource\ResourceFactory::getInstance()
+				->retrieveFileOrFolderObject($combinedIdentifier);
+		} catch(\TYPO3\CMS\Core\Resource\Exception\ResourceDoesNotExistException $exception) {
+			$folder = NULL;
+		}
 
 		if ($folder && $folder instanceof Folder && in_array(
 				$folder->getRole(),
@@ -77,12 +82,25 @@ abstract class AbstractBeAlbumButtons {
 				}
 
 				if (!count($collections)) {
+
 					foreach ($mediaFolders as $uid => $title) {
+
+						// find parent album for auto setting parent album
+						$parentUid = 0;
+						$parents = $utility->findFileCollectionRecordsForFolder(
+							$folder->getStorage()->getUid(),
+							$folder->getParentFolder()->getIdentifier(),
+							$uid
+						);
+						// if parent(s) found we take the first one
+						if (count($parents)) {
+							$parentUid = $parents[0]['uid'];
+						}
 						$buttons[] = $this->createLink(
 							sprintf($this->sL('createAlbumIn'), $title),
 							sprintf($this->sL('createAlbumIn'), $charsetConverter->crop('utf-8', $title, 12, '...')),
 							IconUtility::getSpriteIcon('extensions-fs_media_gallery-add-album'),
-							"alt_doc.php?edit[sys_file_collection][" . $uid . "]=new&defVals[sys_file_collection][title]=" . ucfirst(trim(str_replace('_', ' ', $folder->getName()))) . "&defVals[sys_file_collection][storage]=" . $folder->getStorage()->getUid() . "&defVals[sys_file_collection][folder]=" . $folder->getIdentifier() . "&defVals[sys_file_collection][type]=folder"
+							"alt_doc.php?edit[sys_file_collection][" . $uid . "]=new&defVals[sys_file_collection][parentalbum]=" . $parentUid . "&defVals[sys_file_collection][title]=" . ucfirst(trim(str_replace('_', ' ', $folder->getName()))) . "&defVals[sys_file_collection][storage]=" . $folder->getStorage()->getUid() . "&defVals[sys_file_collection][folder]=" . $folder->getIdentifier() . "&defVals[sys_file_collection][type]=folder"
 						);
 					}
 				}
