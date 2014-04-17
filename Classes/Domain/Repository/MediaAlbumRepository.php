@@ -45,7 +45,7 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 		/** @var \TYPO3\CMS\Extbase\Persistence\Generic\Query $query */
 		$query = $this->createQuery();
-		$query->statement('SELECT * FROM sys_file_collection WHERE parentalbum = ? ORDER By RAND(NOW()) LIMIT 1', array($parent->getUid()));
+		$query->statement('SELECT * FROM sys_file_collection WHERE parentalbum = ? ' . $this->getWhereClauseForEnabledFields() . ' ORDER BY RAND(NOW()) LIMIT 1', array($parent->getUid()));
 		$result = $query->execute();
 
 		if ($result instanceof \TYPO3\CMS\Extbase\Persistence\QueryResultInterface) {
@@ -53,6 +53,25 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		} elseif (is_array($result)) {
 			return isset($result[0]) ? $result[0] : NULL;
 		}
+	}
+
+	/**
+	 * get the WHERE clause for the enabled fields of this TCA table
+	 * depending on the context
+	 *
+	 * @return string the additional where clause, something like " AND deleted=0 AND hidden=0"
+	 */
+	protected function getWhereClauseForEnabledFields() {
+		if (TYPO3_MODE === 'FE' && $GLOBALS['TSFE']->sys_page) {
+			// frontend context
+			$whereClause = $GLOBALS['TSFE']->sys_page->enableFields('sys_file_collection');
+			$whereClause .= $GLOBALS['TSFE']->sys_page->deleteClause('sys_file_collection');
+		} else {
+			// backend context
+			$whereClause = \TYPO3\CMS\Backend\Utility\BackendUtility::BEenableFields('sys_file_collection');
+			$whereClause .= \TYPO3\CMS\Backend\Utility\BackendUtility::deleteClause('sys_file_collection');
+		}
+		return $whereClause;
 	}
 
 }

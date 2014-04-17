@@ -86,10 +86,13 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface {
 	 * @param string $identifier
 	 */
 	public function deleteFolderRecord($storageUid, $identifier) {
-		$this->getDatabaseConnection()->exec_DELETEquery(
+		$this->getDatabaseConnection()->exec_UPDATEquery(
 			'sys_file_collection',
 			'storage = ' . (int)$storageUid . '
-			AND folder_hash = ' . $this->getDatabaseConnection()->fullQuoteStr($identifier, 'sys_file_collection')
+			AND folder = ' . $this->getDatabaseConnection()->fullQuoteStr($identifier, 'sys_file_collection'),
+			array(
+				'deleted' => 1
+			)
 		);
 	}
 

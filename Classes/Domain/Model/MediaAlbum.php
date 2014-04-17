@@ -52,6 +52,11 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $assetCache;
 
 	/**
+	 * @var bool
+	 */
+	protected $hidden;
+
+	/**
 	 * Title
 	 *
 	 * @var \string
@@ -78,6 +83,24 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @lazy
 	 */
 	protected $albumCache;
+
+	/**
+	 * Set hidden
+	 *
+	 * @param boolean $hidden
+	 */
+	public function setHidden($hidden) {
+		$this->hidden = $hidden;
+	}
+
+	/**
+	 * Get hidden
+	 *
+	 * @return boolean
+	 */
+	public function getHidden() {
+		return $this->hidden;
+	}
 
 	/**
 	 * Returns the title
@@ -140,10 +163,17 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function getAssets() {
 		if($this->assetCache === NULL) {
-			/** @var $fileCollection \TYPO3\CMS\Core\Resource\Collection\AbstractFileCollection */
-			$fileCollection = $this->fileCollectionRepository->findByUid($this->getUid());
-			$fileCollection->loadContents();
-			$this->assetCache = $fileCollection->getItems();
+			try {
+				/** @var $fileCollection \TYPO3\CMS\Core\Resource\Collection\AbstractFileCollection */
+				$fileCollection = $this->fileCollectionRepository->findByUid($this->getUid());
+				$fileCollection->loadContents();
+				$this->assetCache = $fileCollection->getItems();
+			} catch (\Exception $exception) {
+				// failing albums get disabled
+				$this->setHidden(TRUE);
+				$this->mediaAlbumRepository->update($this);
+				$this->assetCache = array();
+			}
 		}
 		return $this->assetCache;
 	}
