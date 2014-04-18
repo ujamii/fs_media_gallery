@@ -3,6 +3,12 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2013-01-27T20:37:07Z" product-name="fs_media_gallery">
 		<header/>
 		<body>
+			<trans-unit id="plugin.title">
+				<source>Media Album</source>
+			</trans-unit>
+			<trans-unit id="plugin.description">
+				<source>Media Album toevoegen</source>
+			</trans-unit>
 			<trans-unit id="mediagallery_plugin_tab_general">
 				<source>General</source>
 				<target>Algemeen</target>
