@@ -31,7 +31,7 @@ Show your images from your local or remote storage as a gallery of albums.',
 	'version' => '0.0.5',
 	'constraints' => array(
 		'depends' => array(
-			'typo3' => '6.2.0',
+			'typo3' => '6.2.0 - 6.2.99',
 		),
 		'conflicts' => array(
 		),
