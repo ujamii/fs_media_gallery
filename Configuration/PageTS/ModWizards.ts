@@ -13,7 +13,6 @@ mod.wizards {
                         }
                     }
                 }
-                show := addToList(fsmediagallery_mediagallery)
             }
         }
     }
