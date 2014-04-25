@@ -25,6 +25,9 @@ namespace MiniFranske\FsMediaGallery\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * MediaAlbumController
  */
@@ -41,23 +44,43 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	/**
 	 * action show
 	 *
-	 * @param integer $mediaAlbum
+	 * @param MediaAlbum $mediaAlbum
 	 * @param integer $page the page number
 	 * @return void
 	 */
-	public function showAction($mediaAlbum = 0, $page = 0) {
+	public function showAction(MediaAlbum $mediaAlbum = NULL, $page = 0) {
+		$mediaAlbums = NULL;
+		$mediaGalleryUids = array();
+		$showBackLink = TRUE;
+
+		if(!empty($this->settings['mediagalleries'])) {
+			$mediaGalleryUids = GeneralUtility::trimExplode(',', $this->settings['mediagalleries']);
+		}
 
 		if ($mediaAlbum) {
-			$mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum);
+			if (count($mediaGalleryUids) && !in_array($mediaAlbum->getUid(), $mediaGalleryUids)) {
+				$GLOBALS['TSFE']->pageNotFoundAndExit('Album not found');
+			}
 			$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum);
-		} elseif (!empty($this->settings['mediagalleries'])) {
+			if (count($mediaGalleryUids) && !in_array($mediaAlbum->getParentalbum()->getUid(), $mediaGalleryUids)) {
+				$showBackLink = FALSE;
+			}
+		} elseif (count($mediaGalleryUids)) {
 			$mediaAlbums = array();
-			foreach (explode(',', $this->settings['mediagalleries']) as $uid) {
+			foreach (GeneralUtility::trimExplode(',', $this->settings['mediagalleries']) as $uid) {
 				$mediaAlbums[] = $this->mediaAlbumRepository->findByUid($uid);
 			}
 		} else {
 			$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum(false);
 		}
+
+		// when only 1 album skip gallery view
+		if (!empty($this->settings['skipGalleryWhenOneAlbum']) && count($mediaAlbums) === 1) {
+			$mediaAlbum = $mediaAlbums[0];
+			$showBackLink = FALSE;
+		}
+
+		$this->view->assign('showBackLink', $showBackLink);
 		$this->view->assign('mediaAlbums', $mediaAlbums);
 		$this->view->assign('mediaAlbum', $mediaAlbum);
 	}
@@ -69,7 +92,7 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	 * @param int $mediaItemUid
 	 * @ignorevalidation
 	 */
-	public function showImageAction(\MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum $mediaAlbum, $mediaItemUid) {
+	public function showImageAction(MediaAlbum $mediaAlbum, $mediaItemUid) {
 		$this->view->assign('mediaAlbum', $mediaAlbum);
 		$this->view->assign('mediaItem', \TYPO3\CMS\Core\Resource\ResourceFactory::getInstance()->getFileObject($mediaItemUid));
 	}
@@ -80,7 +103,7 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	 * @return void
 	 */
 	public function randomImageAction() {
-		$mediaAlbums = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $this->settings['mediagalleries'], TRUE);
+		$mediaAlbums = GeneralUtility::trimExplode(',', $this->settings['mediagalleries'], TRUE);
 		$mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbums[rand(1,count($mediaAlbums))-1]);
 		$this->view->assign('mediaAlbum', $mediaAlbum);
 	}

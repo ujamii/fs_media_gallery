@@ -10,6 +10,7 @@ plugin.tx_fsmediagallery {
 
 	settings {
 		galleryPid =
+		skipGalleryWhenOneAlbum = 1
 		enableLightbox = 1
 		album {
 			itemsPerPage = 12
