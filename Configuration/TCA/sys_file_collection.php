@@ -44,7 +44,6 @@ $additionalColumns = array(
 			'treeConfig' => array(
 				'parentField' => 'parentalbum',
 				'appearance' => array(
-					'expandAll' => TRUE,
 					'showHeader' => TRUE,
 					'maxLevels' => 99,
 					'width' => 650,

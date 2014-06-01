@@ -41,8 +41,8 @@
 								<treeConfig>
 									<parentField>parentalbum</parentField>
 									<appearance>
-										<expandAll>TRUE</expandAll>
 										<showHeader>TRUE</showHeader>
+										<width>650</width>
 									</appearance>
 								</treeConfig>
 								<internal_type>db</internal_type>
