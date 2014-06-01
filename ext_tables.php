@@ -27,8 +27,7 @@ if (TYPO3_MODE === 'BE') {
 
 	// Adding click menu item:
 	$GLOBALS['TBE_MODULES_EXT']['xMOD_alt_clickmenu']['extendCMclasses'][] = array(
-		'name' => 'MiniFranske\\FsMediaGallery\\Service\\ClickMenuOptions',
-		'path' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY).'Classes/Service/ClickMenuOptions.php'
+		'name' => 'MiniFranske\\FsMediaGallery\\Service\\ClickMenuOptions'
 	);
 }
 
