@@ -28,10 +28,10 @@ Show your images from your local or remote storage as a gallery of albums.',
 	'modify_tables' => '',
 	'clearCacheOnLoad' => 1,
 	'lockType' => '',
-	'version' => '0.0.5',
+	'version' => '0.0.6',
 	'constraints' => array(
 		'depends' => array(
-			'typo3' => '6.2.0 - 6.2.99',
+			'typo3' => '6.2.2 - 6.2.99',
 		),
 		'conflicts' => array(
 		),

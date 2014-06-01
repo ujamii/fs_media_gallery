@@ -33,7 +33,10 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * @var array default ordering
 	 */
-	protected $defaultOrderings = array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING);
+	protected $defaultOrderings = array(
+		'sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+		'crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
+	);
 
 	/**
 	 * Get random sub album

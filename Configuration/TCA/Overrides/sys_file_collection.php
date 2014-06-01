@@ -38,7 +38,7 @@ $additionalColumns = array(
 		'config' => array(
 			'type' => 'select',
 			'foreign_table' => 'sys_file_collection',
-			'foreign_table_where' => ' AND (sys_file_collection.sys_language_uid = 0 OR sys_file_collection.l10n_parent = 0) AND sys_file_collection.pid = ###CURRENT_PID### AND sys_file_collection.uid != ###THIS_UID### ORDER BY sys_file_collection.sorting',
+			'foreign_table_where' => ' AND (sys_file_collection.sys_language_uid = 0 OR sys_file_collection.l10n_parent = 0) AND sys_file_collection.pid = ###CURRENT_PID### AND sys_file_collection.uid != ###THIS_UID### ORDER BY sys_file_collection.sorting ASC, sys_file_collection.crdate DESC',
 			'renderMode' => 'tree',
 			'subType' => 'db',
 			'treeConfig' => array(
@@ -62,6 +62,8 @@ foreach ($GLOBALS['TCA']['sys_file_collection']['types'] as $type => $tmp) {
 	$GLOBALS['TCA']['sys_file_collection']['types'][$type]['showitem'] .= ',parentalbum,webdescription';
 }
 
-\TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule($GLOBALS['TCA']['sys_file_collection']['columns'], $additionalColumns);
+// enable manual sorting
+$GLOBALS['TCA']['sys_file_collection']['ctrl']['sortby'] = 'sorting';
+$GLOBALS['TCA']['sys_file_collection']['ctrl']['default_sortby'] = 'ORDER BY sorting ASC, crdate DESC';
 
-return $GLOBALS['TCA']['sys_file_collection'];
+\TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule($GLOBALS['TCA']['sys_file_collection']['columns'], $additionalColumns);

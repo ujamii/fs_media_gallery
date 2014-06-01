@@ -32,3 +32,9 @@ Quick install notes
 - Insert plugin on page and select "Media Gallery" as plugin type
 - Set the "Record Storage Page" to the "StoragePage you just created
 - Open FE and admire your album :)
+
+Known issues
+============
+
+- After installing fs_media_gallery the ordering of my exiting sys_file_collections changed
+   - This is because fs_media_gallery enables manual sorting of sys_file_collections this is something we need to make the albums manageable.
