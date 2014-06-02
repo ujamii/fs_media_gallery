@@ -27,6 +27,7 @@ namespace MiniFranske\FsMediaGallery\Controller;
 
 use MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * MediaAlbumController
@@ -44,11 +45,11 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	/**
 	 * action show
 	 *
-	 * @param MediaAlbum $mediaAlbum
+	 * @param int $mediaAlbum
 	 * @param integer $page the page number
 	 * @return void
 	 */
-	public function showAction(MediaAlbum $mediaAlbum = NULL, $page = 0) {
+	public function showAction($mediaAlbum = 0, $page = 0) {
 		$mediaAlbums = NULL;
 		$mediaGalleryUids = array();
 		$showBackLink = TRUE;
@@ -58,8 +59,15 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		}
 
 		if ($mediaAlbum) {
-			if (count($mediaGalleryUids) && !in_array($mediaAlbum->getUid(), $mediaGalleryUids)) {
-				$GLOBALS['TSFE']->pageNotFoundAndExit('Album not found');
+			$mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum);
+			if ($mediaAlbum && count($mediaGalleryUids) && !in_array($mediaAlbum->getUid(), $mediaGalleryUids)) {
+				$mediaAlbum = NULL;
+			}
+			if ($mediaAlbum && count($mediaGalleryUids) === 0 && !$this->checkAlbumPid($mediaAlbum)) {
+				$mediaAlbum = NULL;
+			}
+			if (!$mediaAlbum) {
+				$this->pageNotFound(LocalizationUtility::translate('no_album_found', $this->extensionName));
 			}
 			$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum);
 			if (count($mediaGalleryUids) && !in_array($mediaAlbum->getParentalbum()->getUid(), $mediaGalleryUids)) {
@@ -108,8 +116,6 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		$this->view->assign('mediaAlbum', $mediaAlbum);
 	}
 
-
-
 	/**
 	 * If there were validation errors, we don't want to write details like
 	 * "An error occurred while trying to call Tx_Community_Controller_UserController->updateAction()"
@@ -117,7 +123,40 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	 * @return string|boolean The flash message or FALSE if no flash message should be set
 	 */
 	protected function getErrorFlashMessage() {
-		debug($this->arguments->getValidationResults());
 		return FALSE;
+	}
+
+	/**
+	 * Check if album pid is in allowed storage
+	 *
+	 * @param MediaAlbum $mediaAlbum
+	 * @return bool
+	 */
+	protected function checkAlbumPid(MediaAlbum $mediaAlbum) {
+		$frameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+		$allowedStoragePages = GeneralUtility::trimExplode(
+			',',
+			$frameworkConfiguration['persistence']['storagePid']
+		);
+		if (in_array($mediaAlbum->getPid(), $allowedStoragePages)) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
+	/**
+	 * Page not found wrapper
+	 *
+	 * @param string $message
+	 * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+	 */
+	protected function pageNotFound($message) {
+		if (!empty($GLOBALS['TSFE'])) {
+			$GLOBALS['TSFE']->pageNotFoundAndExit($message);
+		} else {
+			echo $message;
+		}
+		throw new \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException();
 	}
 }

@@ -7,6 +7,9 @@
 			<trans-unit id="no_albums_found">
 				<source>No albums found</source>
 			</trans-unit>
+			<trans-unit id="no_album_found">
+				<source>Album not found</source>
+			</trans-unit>
 			<trans-unit id="no_assets_found">
 				<source>No assets found</source>
 			</trans-unit>
