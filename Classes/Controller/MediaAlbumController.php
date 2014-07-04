@@ -45,12 +45,12 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	/**
 	 * action show
 	 *
-	 * @param int $mediaAlbum
-	 * @param integer $page the page number
+	 * @param int $mediaAlbum (this is not directly mapped to a object to handle 404 on our own)
 	 * @return void
 	 */
-	public function showAction($mediaAlbum = 0, $page = 0) {
+	public function showAction($mediaAlbum = 0) {
 		$mediaAlbums = NULL;
+		$mediaAlbum = (int)$mediaAlbum ?: NULL;
 		$mediaGalleryUids = array();
 		$showBackLink = TRUE;
 
@@ -59,6 +59,7 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		}
 
 		if ($mediaAlbum) {
+			/** @var MediaAlbum $mediaAlbum */
 			$mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum);
 			if ($mediaAlbum && count($mediaGalleryUids) && !in_array($mediaAlbum->getUid(), $mediaGalleryUids)) {
 				$mediaAlbum = NULL;
@@ -69,28 +70,46 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 			if (!$mediaAlbum) {
 				$this->pageNotFound(LocalizationUtility::translate('no_album_found', $this->extensionName));
 			}
-			$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum);
-			if (count($mediaGalleryUids) && !in_array($mediaAlbum->getParentalbum()->getUid(), $mediaGalleryUids)) {
-				$showBackLink = FALSE;
-			}
-		} elseif (count($mediaGalleryUids)) {
-			$mediaAlbums = array();
-			foreach (GeneralUtility::trimExplode(',', $this->settings['mediagalleries']) as $uid) {
-				$mediaAlbums[] = $this->mediaAlbumRepository->findByUid($uid);
-			}
-		} else {
-			$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum(false);
 		}
 
+		$mediaAlbums = $this->getAlbums($mediaAlbum, $mediaGalleryUids);
+
 		// when only 1 album skip gallery view
-		if (!empty($this->settings['skipGalleryWhenOneAlbum']) && count($mediaAlbums) === 1) {
+		if ($mediaAlbum === NULL && !empty($this->settings['skipGalleryWhenOneAlbum']) && count($mediaAlbums) === 1) {
 			$mediaAlbum = $mediaAlbums[0];
+			$mediaAlbums = $this->getAlbums($mediaAlbum, $mediaGalleryUids);
 			$showBackLink = FALSE;
 		}
 
 		$this->view->assign('showBackLink', $showBackLink);
 		$this->view->assign('mediaAlbums', $mediaAlbums);
 		$this->view->assign('mediaAlbum', $mediaAlbum);
+	}
+
+	/**
+	 * Get all sub-albums of a given album
+	 *
+	 * @param $parentAlbum
+	 * @param array $allowedAlbumUids
+	 * @return array
+	 */
+	protected function getAlbums($parentAlbum, $allowedAlbumUids = array()) {
+
+		$mediaAlbums = array();
+		$_mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($parentAlbum ?: FALSE);
+
+		// filter albums by allowed uids
+		if (count($allowedAlbumUids)) {
+			foreach ($_mediaAlbums as $_album) {
+				if (in_array($_album->getUid(), $allowedAlbumUids)) {
+					$mediaAlbums[] = $_album;
+				}
+			}
+		} else {
+			$mediaAlbums = $_mediaAlbums;
+		}
+
+		return $mediaAlbums;
 	}
 
 	/**

@@ -28,44 +28,41 @@
 				<h3>{mediaAlbum.title}</h3>
 				<div class="description"><f:format.html>{mediaAlbum.description}</f:format.html></div>
 
-				<f:if condition="{mediaAlbum.albums}">
+				<f:if condition="{mediaAlbums}">
 					<f:then>
-						<f:render partial="MediaAlbum/ListAlbums" arguments="{mediaAlbums:mediaAlbum.albums}" />
+						<f:render partial="MediaAlbum/ListAlbums" arguments="{mediaAlbums:mediaAlbums}" />
 					</f:then>
-					<f:else>
-
-						<mf:widget.paginate objects="{mediaAlbum.assets}" as="paginatedAssets" itemsBefore="before" itemsAfter="after" configuration="{itemsPerPage: settings.image.itemsPerPage, insertAbove: settings.pagination.insertAbove, insertBelow: settings.pagination.insertBelow, maximumNumberOfLinks: settings.pagination.maximumNumberOfLinks, pagesBefore: settings.pagination.pagesBefore, pagesAfter:settings.pagination.pagesAfter}">
-							<f:if condition="{before}">
-								<f:for each="{before}" as="mediaItem">
-									<a href="{f:uri.image(image:mediaItem)}" rel="albm_{mediaAlbum.uid}" class="lightbox" title="{mf:fileTitle(file:mediaItem)} - {mediaAlbum.title}">
-									</a>
-								</f:for>
-							</f:if>
-							<f:if condition="{paginatedAssets}">
-								<f:then>
-									<div class="thumbs">
-										<f:for each="{paginatedAssets}" as="mediaItem">
-											<f:render partial="MediaItem/Thumb" arguments="{mediaGallery:mediaGallery,mediaAlbum:mediaAlbum,mediaItem:mediaItem}" />
-										</f:for>
-									</div>
-								</f:then>
-								<f:else>
-									<div class="alert alert-info">
-										<p><f:translate key="no_assets_found">No items found</f:translate></p>
-									</div>
-								</f:else>
-							</f:if>
-							<f:if condition="{after}">
-								<f:for each="{after}" as="mediaItem">
-									<a href="{f:uri.image(image:mediaItem)}" rel="albm_{mediaAlbum.uid}" class="lightbox" title="{mf:fileTitle(file:mediaItem)} - {mediaAlbum.title}">
-									</a>
-								</f:for>
-							</f:if>
-
-						</mf:widget.paginate>
-
-					</f:else>
 				</f:if>
+
+				<mf:widget.paginate objects="{mediaAlbum.assets}" as="paginatedAssets" itemsBefore="before" itemsAfter="after" configuration="{itemsPerPage: settings.image.itemsPerPage, insertAbove: settings.pagination.insertAbove, insertBelow: settings.pagination.insertBelow, maximumNumberOfLinks: settings.pagination.maximumNumberOfLinks, pagesBefore: settings.pagination.pagesBefore, pagesAfter:settings.pagination.pagesAfter}">
+					<f:if condition="{before}">
+						<f:for each="{before}" as="mediaItem">
+							<a href="{f:uri.image(image:mediaItem)}" rel="albm_{mediaAlbum.uid}" class="lightbox" title="{mf:fileTitle(file:mediaItem)} - {mediaAlbum.title}">
+							</a>
+						</f:for>
+					</f:if>
+					<f:if condition="{paginatedAssets}">
+						<f:then>
+							<div class="thumbs">
+								<f:for each="{paginatedAssets}" as="mediaItem">
+									<f:render partial="MediaItem/Thumb" arguments="{mediaGallery:mediaGallery,mediaAlbum:mediaAlbum,mediaItem:mediaItem}" />
+								</f:for>
+							</div>
+						</f:then>
+						<f:else>
+							<div class="alert alert-info">
+								<p><f:translate key="no_assets_found">No items found</f:translate></p>
+							</div>
+						</f:else>
+					</f:if>
+					<f:if condition="{after}">
+						<f:for each="{after}" as="mediaItem">
+							<a href="{f:uri.image(image:mediaItem)}" rel="albm_{mediaAlbum.uid}" class="lightbox" title="{mf:fileTitle(file:mediaItem)} - {mediaAlbum.title}">
+							</a>
+						</f:for>
+					</f:if>
+
+				</mf:widget.paginate>
 
 
 				<f:if condition="{showBackLink}">
