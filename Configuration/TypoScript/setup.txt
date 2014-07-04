@@ -10,7 +10,8 @@ plugin.tx_fsmediagallery {
 
 	settings {
 		galleryPid =
-		skipGalleryWhenOneAlbum = 1
+		# skip gallery view if there is only 1 album (is currently buggy when used with realUrl autoconf)
+		skipGalleryWhenOneAlbum =
 		enableLightbox = 1
 		album {
 			itemsPerPage = 12
