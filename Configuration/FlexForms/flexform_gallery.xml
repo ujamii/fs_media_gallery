@@ -77,7 +77,7 @@
 									<max>200</max>
 								</range>
 								<size>4</size>
-								<default></default>
+								<default>12</default>
 							</config>
 						</TCEforms>
 					</settings.album.itemsPerPage>
@@ -92,7 +92,7 @@
 									<max>1000</max>
 								</range>
 								<size>4</size>
-								<default></default>
+								<default>120</default>
 							</config>
 						</TCEforms>
 					</settings.album.thumb.maxWidth>
@@ -107,7 +107,7 @@
 									<max>1000</max>
 								</range>
 								<size>4</size>
-								<default></default>
+								<default>100</default>
 							</config>
 						</TCEforms>
 					</settings.album.thumb.maxHeight>
@@ -134,7 +134,7 @@
 									<max>200</max>
 								</range>
 								<size>4</size>
-								<default></default>
+								<default>32</default>
 							</config>
 						</TCEforms>
 					</settings.image.itemsPerPage>
@@ -149,7 +149,7 @@
 									<max>1000</max>
 								</range>
 								<size>4</size>
-								<default></default>
+								<default>120</default>
 							</config>
 						</TCEforms>
 					</settings.image.thumb.maxWidth>
@@ -164,7 +164,7 @@
 									<max>1000</max>
 								</range>
 								<size>4</size>
-								<default></default>
+								<default>100</default>
 							</config>
 						</TCEforms>
 					</settings.image.thumb.maxHeight>
@@ -173,7 +173,7 @@
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_detailsInLightbox</label>
 							<config>
 								<type>check</type>
-								<default></default>
+								<default>1</default>
 							</config>
 						</TCEforms>
 					</settings.enableLightbox>
@@ -188,7 +188,7 @@
 									<max>1000</max>
 								</range>
 								<size>4</size>
-								<default></default>
+								<default>500</default>
 							</config>
 						</TCEforms>
 					</settings.image.maxWidth>
@@ -203,7 +203,7 @@
 									<max>1000</max>
 								</range>
 								<size>4</size>
-								<default></default>
+								<default>800</default>
 							</config>
 						</TCEforms>
 					</settings.image.maxHeight>
@@ -249,7 +249,7 @@
 									<max>1000</max>
 								</range>
 								<size>4</size>
-								<default></default>
+								<default>120</default>
 							</config>
 						</TCEforms>
 					</settings.random.thumb.maxWidth>
@@ -264,7 +264,7 @@
 									<max>1000</max>
 								</range>
 								<size>4</size>
-								<default></default>
+								<default>100</default>
 							</config>
 						</TCEforms>
 					</settings.random.thumb.maxHeight>
