@@ -72,44 +72,18 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 			}
 		}
 
-		$mediaAlbums = $this->getAlbums($mediaAlbum, $mediaGalleryUids);
+		$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $mediaGalleryUids);
 
 		// when only 1 album skip gallery view
 		if ($mediaAlbum === NULL && !empty($this->settings['skipGalleryWhenOneAlbum']) && count($mediaAlbums) === 1) {
 			$mediaAlbum = $mediaAlbums[0];
-			$mediaAlbums = $this->getAlbums($mediaAlbum, $mediaGalleryUids);
+			$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $mediaGalleryUids);
 			$showBackLink = FALSE;
 		}
 
 		$this->view->assign('showBackLink', $showBackLink);
 		$this->view->assign('mediaAlbums', $mediaAlbums);
 		$this->view->assign('mediaAlbum', $mediaAlbum);
-	}
-
-	/**
-	 * Get all sub-albums of a given album
-	 *
-	 * @param $parentAlbum
-	 * @param array $allowedAlbumUids
-	 * @return array
-	 */
-	protected function getAlbums($parentAlbum, $allowedAlbumUids = array()) {
-
-		$mediaAlbums = array();
-		$_mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($parentAlbum ?: FALSE);
-
-		// filter albums by allowed uids
-		if (count($allowedAlbumUids)) {
-			foreach ($_mediaAlbums as $_album) {
-				if (in_array($_album->getUid(), $allowedAlbumUids)) {
-					$mediaAlbums[] = $_album;
-				}
-			}
-		} else {
-			$mediaAlbums = $_mediaAlbums;
-		}
-
-		return $mediaAlbums;
 	}
 
 	/**
