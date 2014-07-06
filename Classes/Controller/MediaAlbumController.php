@@ -61,10 +61,10 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		if ($mediaAlbum) {
 			/** @var MediaAlbum $mediaAlbum */
 			$mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum);
-			if ($mediaAlbum && count($mediaGalleryUids) && !in_array($mediaAlbum->getUid(), $mediaGalleryUids)) {
+			if ($mediaAlbum && $mediaGalleryUids !== array() && !in_array($mediaAlbum->getUid(), $mediaGalleryUids)) {
 				$mediaAlbum = NULL;
 			}
-			if ($mediaAlbum && count($mediaGalleryUids) === 0 && !$this->checkAlbumPid($mediaAlbum)) {
+			if ($mediaAlbum && $mediaGalleryUids === array() && !$this->checkAlbumPid($mediaAlbum)) {
 				$mediaAlbum = NULL;
 			}
 			if (!$mediaAlbum) {
@@ -104,8 +104,8 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	 * @return void
 	 */
 	public function randomImageAction() {
-		$mediaAlbums = GeneralUtility::trimExplode(',', $this->settings['mediagalleries'], TRUE);
-		$mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbums[rand(1,count($mediaAlbums))-1]);
+		$filterByUids = GeneralUtility::trimExplode(',', $this->settings['mediagalleries'], TRUE);
+		$mediaAlbum = $this->mediaAlbumRepository->findRandom(NULL, $filterByUids);
 		$this->view->assign('mediaAlbum', $mediaAlbum);
 	}
 

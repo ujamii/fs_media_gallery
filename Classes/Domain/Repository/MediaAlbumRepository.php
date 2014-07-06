@@ -43,21 +43,40 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Get random sub album
 	 *
-	 * @param MediaAlbum $parent
+	 * @param MediaAlbum|bool $parent parent MediaAlbum, FALSE for parent = 0 or NULL for no restriction by parent
+	 * @param array $filterByUids filter possible result by given uids
+	 * @param bool $useFilterAsExclude
 	 * @return MediaAlbum
 	 */
-	public function findRandom(MediaAlbum $parent) {
+	public function findRandom($parent = NULL, array $filterByUids = array(), $useFilterAsExclude = FALSE) {
 
 		/** @var \TYPO3\CMS\Extbase\Persistence\Generic\Query $query */
 		$query = $this->createQuery();
-		$query->statement('SELECT * FROM sys_file_collection WHERE parentalbum = ? ' . $this->getWhereClauseForEnabledFields() . ' ORDER BY RAND(NOW()) LIMIT 1', array($parent->getUid()));
+		$where = array();
+
+		// restrict by parent album
+		if ($parent !== NULL) {
+			$where[] = 'parentalbum = ' . ($parent ? $parent->getUid() : 0);
+		}
+
+		// restrict by given uids
+		if ($filterByUids !== array()) {
+			$uids = array();
+			foreach ($filterByUids as $uid) {
+				$uids[] = (int)$uid;
+			}
+			$where[] = 'uid ' . ($useFilterAsExclude ? 'NOT ' : '') . 'IN (' . implode(',', $uids) . ')';
+		}
+
+		$statement = 'SELECT * FROM sys_file_collection WHERE ' .
+			(count($where) ? implode(' AND ', $where) : '1=1') .
+			$this->getWhereClauseForEnabledFields() .
+			' ORDER BY RAND(NOW()) LIMIT 1';
+
+		$query->statement($statement);
 		$result = $query->execute();
 
-		if ($result instanceof \TYPO3\CMS\Extbase\Persistence\QueryResultInterface) {
-			return $result->getFirst();
-		} elseif (is_array($result)) {
-			return isset($result[0]) ? $result[0] : NULL;
-		}
+		return $result->getFirst();
 	}
 
 	/**
