@@ -30,7 +30,7 @@ Quick install notes
    - Click on the "Create new album..." in context menu of top toolbar
    - Save your new album
 - Insert plugin on page and select "Media Gallery" as plugin type
-- Set the "Record Storage Page" to the "StoragePage you just created
+- Set the "Record Storage Page" to the "StoragePage" you just created
 - Open FE and admire your album :)
 
 Known issues
@@ -38,3 +38,6 @@ Known issues
 
 - After installing fs_media_gallery the ordering of my exiting sys_file_collections changed
    - This is because fs_media_gallery enables manual sorting of sys_file_collections this is something we need to make the albums manageable.
+
+- I inserted a "Media Gallery" plugin but I see no images in FE
+   - Did you set the "Record Storage Page" of the plugin to the "StoragePage" with your albums?
