@@ -55,6 +55,26 @@
 							</config>
 						</TCEforms>
 					</settings.mediagalleries>
+					<settings.useAlbumFilterAsExclude>
+						<TCEforms>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_useAlbumFilterAsExclude</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="0">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_useAlbumFilterAsExclude.0</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_useAlbumFilterAsExclude.1</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+								</items>
+								<default></default>
+								<size>1</size>
+							</config>
+						</TCEforms>
+					</settings.useAlbumFilterAsExclude>
 				</el>
 			</ROOT>
 		</general>

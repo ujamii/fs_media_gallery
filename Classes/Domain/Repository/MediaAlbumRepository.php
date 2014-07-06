@@ -45,10 +45,10 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 *
 	 * @param MediaAlbum|bool $parent parent MediaAlbum, FALSE for parent = 0 or NULL for no restriction by parent
 	 * @param array $filterByUids filter possible result by given uids
-	 * @param bool $useFilterAsExclude
+	 * @param bool $useAlbumFilterAsExclude
 	 * @return MediaAlbum
 	 */
-	public function findRandom($parent = NULL, array $filterByUids = array(), $useFilterAsExclude = FALSE) {
+	public function findRandom($parent = NULL, array $filterByUids = array(), $useAlbumFilterAsExclude = FALSE) {
 
 		/** @var \TYPO3\CMS\Extbase\Persistence\Generic\Query $query */
 		$query = $this->createQuery();
@@ -65,7 +65,7 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			foreach ($filterByUids as $uid) {
 				$uids[] = (int)$uid;
 			}
-			$where[] = 'uid ' . ($useFilterAsExclude ? 'NOT ' : '') . 'IN (' . implode(',', $uids) . ')';
+			$where[] = 'uid ' . ($useAlbumFilterAsExclude ? 'NOT ' : '') . 'IN (' . implode(',', $uids) . ')';
 		}
 
 		$statement = 'SELECT * FROM sys_file_collection WHERE ' .
@@ -84,15 +84,15 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 *
 	 * @param MediaAlbum $parentAlbum
 	 * @param array $filterByUids filter possible result by given uids
-	 * @param bool $useFilterAsExclude
+	 * @param bool $useAlbumFilterAsExclude
 	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
-	public function findByParentAlbum(MediaAlbum $parentAlbum = NULL, array $filterByUids = array(), $useFilterAsExclude = FALSE) {
+	public function findByParentAlbum(MediaAlbum $parentAlbum = NULL, array $filterByUids = array(), $useAlbumFilterAsExclude = FALSE) {
 		$query = $this->createQuery();
 		$constrains = array();
 		$constrains[] = $query->equals('parentalbum', $parentAlbum ?: FALSE);
 		if (count($filterByUids)) {
-			if ($useFilterAsExclude) {
+			if ($useAlbumFilterAsExclude) {
 				$constrains[] = $query->logicalNot($query->in('uid', $filterByUids));
 			} else {
 				$constrains[] = $query->in('uid', $filterByUids);

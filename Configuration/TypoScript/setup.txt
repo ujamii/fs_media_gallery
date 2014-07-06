@@ -10,6 +10,10 @@ plugin.tx_fsmediagallery {
 
 	settings {
 		galleryPid =
+		# Comma seperated list of albums uids
+		mediagalleries =
+		# Option to exclude given album uids (settings.mediagalleries)
+		useAlbumFilterAsExclude =
 		# skip gallery view if there is only 1 album (is currently buggy when used with realUrl autoconf)
 		skipGalleryWhenOneAlbum =
 		enableLightbox = 1

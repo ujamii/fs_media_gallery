@@ -33,6 +33,15 @@
 			<trans-unit id="mediagallery_plugin_mediaalbums">
 				<source>Album selection</source>
 			</trans-unit>
+			<trans-unit id="mediagallery_plugin_useAlbumFilterAsExclude">
+				<source>Album selection filter (when albums are selected else all are shown)</source>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_useAlbumFilterAsExclude.0">
+				<source>Show above selected albums</source>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_useAlbumFilterAsExclude.1">
+				<source>Exclude above selected albums</source>
+			</trans-unit>
 			<trans-unit id="mediagallery_plugin_detailsInLightbox">
 				<source>Open LightBox/Colorbox instead of detail-page</source>
 			</trans-unit>

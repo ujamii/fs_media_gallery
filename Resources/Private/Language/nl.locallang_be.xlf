@@ -41,6 +41,18 @@
 				<source>Album selection</source>
 				<target>Album selecteren</target>
 			</trans-unit>
+			<trans-unit id="mediagallery_plugin_useAlbumFilterAsExclude">
+				<source>Album selection filter (when albums are selected else all are shown)</source>
+				<target>Album selectie filter (indien albums zijn geselecteerd anders wordt alles getoond)</target>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_useAlbumFilterAsExclude.0">
+				<source>Show above selected albums</source>
+				<target>Toon alleen geselecteerde albums</target>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_useAlbumFilterAsExclude.1">
+				<source>Exclude above selected albums</source>
+				<target>Toon geselecteerde albums niet</target>
+			</trans-unit>
 			<trans-unit id="mediagallery_plugin_detailsInLightbox">
 				<source>Open LightBox/Colorbox instead of detail-page</source>
 				<target>Toon afbeelding in LightBox/Colorbox ipv een detail weergave</target>

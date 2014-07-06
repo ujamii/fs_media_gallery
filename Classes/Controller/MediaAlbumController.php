@@ -52,6 +52,7 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		$mediaAlbums = NULL;
 		$mediaAlbum = (int)$mediaAlbum ?: NULL;
 		$mediaGalleryUids = array();
+		$useAlbumFilterAsExclude = !empty($this->settings['useAlbumFilterAsExclude']);
 		$showBackLink = TRUE;
 
 		if(!empty($this->settings['mediagalleries'])) {
@@ -61,7 +62,10 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		if ($mediaAlbum) {
 			/** @var MediaAlbum $mediaAlbum */
 			$mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum);
-			if ($mediaAlbum && $mediaGalleryUids !== array() && !in_array($mediaAlbum->getUid(), $mediaGalleryUids)) {
+			if ($mediaAlbum && $mediaGalleryUids !== array() && !$useAlbumFilterAsExclude && !in_array($mediaAlbum->getUid(), $mediaGalleryUids)) {
+				$mediaAlbum = NULL;
+			}
+			if ($mediaAlbum && $mediaGalleryUids !== array() && $useAlbumFilterAsExclude && in_array($mediaAlbum->getUid(), $mediaGalleryUids)) {
 				$mediaAlbum = NULL;
 			}
 			if ($mediaAlbum && $mediaGalleryUids === array() && !$this->checkAlbumPid($mediaAlbum)) {
@@ -72,12 +76,12 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 			}
 		}
 
-		$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $mediaGalleryUids);
+		$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $mediaGalleryUids, $useAlbumFilterAsExclude);
 
 		// when only 1 album skip gallery view
 		if ($mediaAlbum === NULL && !empty($this->settings['skipGalleryWhenOneAlbum']) && count($mediaAlbums) === 1) {
 			$mediaAlbum = $mediaAlbums[0];
-			$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $mediaGalleryUids);
+			$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $mediaGalleryUids, $useAlbumFilterAsExclude);
 			$showBackLink = FALSE;
 		}
 
@@ -105,7 +109,7 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	 */
 	public function randomImageAction() {
 		$filterByUids = GeneralUtility::trimExplode(',', $this->settings['mediagalleries'], TRUE);
-		$mediaAlbum = $this->mediaAlbumRepository->findRandom(NULL, $filterByUids);
+		$mediaAlbum = $this->mediaAlbumRepository->findRandom(NULL, $filterByUids, !empty($this->settings['useAlbumFilterAsExclude']));
 		$this->view->assign('mediaAlbum', $mediaAlbum);
 	}
 
