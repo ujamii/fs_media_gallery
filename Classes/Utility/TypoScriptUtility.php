@@ -13,10 +13,13 @@ namespace MiniFranske\FsMediaGallery\Utility;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * TypoScript Utility class
  */
-class TypoScriptUtility implements \TYPO3\CMS\Core\SingletonInterface {
+class TypoScriptUtility implements SingletonInterface {
 
 	/**
 	 * @param array $base
@@ -24,19 +27,19 @@ class TypoScriptUtility implements \TYPO3\CMS\Core\SingletonInterface {
 	 * @return array
 	 */
 	public function override(array $base, array $overload) {
-		$validFields = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $overload['settings']['overrideFlexformSettingsIfEmpty'], TRUE);
+		$validFields = GeneralUtility::trimExplode(',', $overload['settings']['overrideFlexformSettingsIfEmpty'], TRUE);
 		foreach ($validFields as $fieldName) {
 
 			// Multilevel field
 			if (strpos($fieldName, '.') !== FALSE) {
 				$keyAsArray = explode('.', $fieldName);
 
-				$foundInCurrentTs = self::getValue($base, $keyAsArray);
+				$foundInCurrentTs = $this->getValue($base, $keyAsArray);
 
 				if (is_string($foundInCurrentTs) && strlen($foundInCurrentTs) === 0) {
-					$foundInOriginal = self::getValue($overload['settings'], $keyAsArray);
+					$foundInOriginal = $this->getValue($overload['settings'], $keyAsArray);
 					if ($foundInOriginal) {
-						$base = self::setValue($base, $keyAsArray, $foundInOriginal);
+						$base = $this->setValue($base, $keyAsArray, $foundInOriginal);
 					}
 				}
 			} else {
@@ -86,7 +89,7 @@ class TypoScriptUtility implements \TYPO3\CMS\Core\SingletonInterface {
 	 * @return array
 	 */
 	protected function setValue(array $array, $path, $value) {
-		self::setValueByReference($array, $path, $value);
+		$this->setValueByReference($array, $path, $value);
 
 		$final = array_merge_recursive(array(), $array);
 		return $final;

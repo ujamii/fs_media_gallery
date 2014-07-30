@@ -89,22 +89,22 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 */
 	public function findByParentAlbum(MediaAlbum $parentAlbum = NULL, array $filterByUids = array(), $useAlbumFilterAsExclude = FALSE) {
 		$query = $this->createQuery();
-		$constrains = array();
-		$constrains[] = $query->equals('parentalbum', $parentAlbum ?: FALSE);
+		$constraints = array();
+		$constraints[] = $query->equals('parentalbum', $parentAlbum ?: FALSE);
 		if (count($filterByUids)) {
 			if ($useAlbumFilterAsExclude) {
-				$constrains[] = $query->logicalNot($query->in('uid', $filterByUids));
+				$constraints[] = $query->logicalNot($query->in('uid', $filterByUids));
 			} else {
-				$constrains[] = $query->in('uid', $filterByUids);
+				$constraints[] = $query->in('uid', $filterByUids);
 			}
 		}
-		$query->matching($query->logicalAnd($constrains));
+		$query->matching($query->logicalAnd($constraints));
 
 		return $query->execute();
 	}
 
 	/**
-	 * Find albums by findByIdAndStoragePage
+	 * Find albums by Uid and StoragePage
 	 *
 	 * @param MediaAlbum $album
 	 * @param mixed $storagePages Page id or list of comma separated page ids containing album records
@@ -113,9 +113,9 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	public function findByUidAndStoragePage(MediaAlbum $album = NULL, $storagePages = 0) {
 		$query = $this->createQuery();
 		$querySettings = $query->getQuerySettings();
-		$constrains = array();
-		$constrains[] = $query->equals('uid', $album);
-		$query->matching($query->logicalAnd($constrains));
+		$constraints = array();
+		$constraints[] = $query->equals('uid', $album);
+		$query->matching($query->logicalAnd($constraints));
 
 		// storage page
 		if ($storagePages != 0) {
@@ -131,7 +131,7 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	}
 
 	/**
-	 * Find albums by findByStoragePage
+	 * Find albums by StoragePage
 	 *
 	 * @param mixed $storagePages Page id or list of comma separated page ids containing album records
 	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface

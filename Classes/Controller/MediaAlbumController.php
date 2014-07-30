@@ -26,13 +26,18 @@ namespace MiniFranske\FsMediaGallery\Controller;
  ***************************************************************/
 
 use MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum;
+use MiniFranske\FsMediaGallery\Utility\PageUtility;
+use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * MediaAlbumController
  */
-class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class MediaAlbumController extends ActionController {
 
 	/**
 	 * mediaAlbumRepository
@@ -43,30 +48,32 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	protected $mediaAlbumRepository;
 
 	/**
-	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+	 * @var ConfigurationManagerInterface
 	 */
 	protected $configurationManager;
 
 	/**
 	 * Injects the Configuration Manager
 	 *
-	 * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager Instance of the Configuration Manager
+	 * @param ConfigurationManagerInterface $configurationManager Instance of the Configuration Manager
 	 * @return void
 	 */
-	public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager) {
+	public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager) {
 		$this->configurationManager = $configurationManager;
 
 		$frameworkSettings = $this->configurationManager->getConfiguration(
-			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
+			ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
 			'fsmediagallery',
 			'fsmediagallery_mediagallery'
 		);
 		// merge Framework (TypoScript) and Flexform settings
 		if (isset($frameworkSettings['settings']['overrideFlexformSettingsIfEmpty'])) {
 			$flexformSettings = $this->configurationManager->getConfiguration(
-				\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
+				ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
 			);
-			$mergedSettings = \MiniFranske\FsMediaGallery\Utility\TypoScriptUtility::override($flexformSettings, $frameworkSettings);
+			/** @var $typoScriptUtility \MiniFranske\FsMediaGallery\Utility\TypoScriptUtility */
+			$typoScriptUtility = GeneralUtility::makeInstance('MiniFranske\\FsMediaGallery\\Utility\\TypoScriptUtility');
+			$mergedSettings = $typoScriptUtility->override($flexformSettings, $frameworkSettings);
 			$this->settings = $mergedSettings;
 		}
 		$this->settings['_typoscript'] = $frameworkSettings['settings'];
@@ -140,7 +147,7 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 			// ATTENTION: using $this->forward instead $this->redirect disables widget params used in the target action
 			$this->redirect('showAlbum', NULL, NULL, array('mediaAlbum' => $mediaAlbum));
 		}
-		$pidList = \MiniFranske\FsMediaGallery\Utility\PageUtility::extendPidListByChildren($this->settings['startingpoint'], $this->settings['recursive']);
+		$pidList = PageUtility::extendPidListByChildren($this->settings['startingpoint'], $this->settings['recursive']);
 		$mediaAlbums = $this->mediaAlbumRepository->findByStoragePage($pidList);
 		$this->view->assign('mediaAlbums', $mediaAlbums);
 	}
@@ -164,7 +171,7 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	 */
 	public function showAlbumAction($mediaAlbum = NULL) {
 		$mediaAlbum = (int)$mediaAlbum ?: NULL;
-		$pidList = \MiniFranske\FsMediaGallery\Utility\PageUtility::extendPidListByChildren($this->settings['startingpoint'], $this->settings['recursive']);
+		$pidList = PageUtility::extendPidListByChildren($this->settings['startingpoint'], $this->settings['recursive']);
 		$mediaAlbum = $this->mediaAlbumRepository->findByUidAndStoragePage($mediaAlbum, $pidList);
 		if (!$mediaAlbum) {
 			$this->pageNotFound(LocalizationUtility::translate('no_album_found', $this->extensionName));
@@ -182,7 +189,7 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	 */
 	public function showImageAction(MediaAlbum $mediaAlbum, $mediaItemUid) {
 		$this->view->assign('mediaAlbum', $mediaAlbum);
-		$this->view->assign('mediaItem', \TYPO3\CMS\Core\Resource\ResourceFactory::getInstance()->getFileObject($mediaItemUid));
+		$this->view->assign('mediaItem', ResourceFactory::getInstance()->getFileObject($mediaItemUid));
 	}
 
 	/**
@@ -213,7 +220,7 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	 * @return bool
 	 */
 	protected function checkAlbumPid(MediaAlbum $mediaAlbum) {
-		$frameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+		$frameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
 		$allowedStoragePages = GeneralUtility::trimExplode(
 			',',
 			$frameworkConfiguration['persistence']['storagePid']
@@ -229,7 +236,7 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	 * Page not found wrapper
 	 *
 	 * @param string $message
-	 * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+	 * @throws StopActionException
 	 */
 	protected function pageNotFound($message) {
 		if (!empty($GLOBALS['TSFE'])) {
@@ -237,6 +244,7 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		} else {
 			echo $message;
 		}
-		throw new \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException();
+		throw new StopActionException();
 	}
+
 }

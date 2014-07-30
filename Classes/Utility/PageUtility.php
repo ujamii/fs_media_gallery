@@ -13,10 +13,12 @@ namespace MiniFranske\FsMediaGallery\Utility;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Page Utility class
  */
-class PageUtility implements \TYPO3\CMS\Core\SingletonInterface {
+class PageUtility {
 
 	/**
 	 * Find all ids from given ids and level
@@ -31,9 +33,10 @@ class PageUtility implements \TYPO3\CMS\Core\SingletonInterface {
 			return $pidList;
 		}
 
-		$queryGenerator = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Database\\QueryGenerator');
+		/** @var $queryGenerator \TYPO3\CMS\Core\Database\QueryGenerator */
+		$queryGenerator = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Database\\QueryGenerator');
 		$recursiveStoragePids = array();
-		$storagePids = \TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $pidList, TRUE);
+		$storagePids = GeneralUtility::intExplode(',', $pidList, TRUE);
 		foreach ($storagePids as $startPid) {
 			$pids = $queryGenerator->getTreeList($startPid, $recursive, 0, 1);
 			if (strlen($pids) > 0) {
