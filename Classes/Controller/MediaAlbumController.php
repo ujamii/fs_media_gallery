@@ -137,7 +137,8 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		if ($mediaAlbum) {
 			// todo: add option whether to show album in list view
 			// if an album is given, display it
-			$this->forward('showAlbum', NULL, NULL, array('mediaAlbum' => $mediaAlbum));
+			// ATTENTION: using $this->forward instead $this->redirect disables widget params used in the target action
+			$this->redirect('showAlbum', NULL, NULL, array('mediaAlbum' => $mediaAlbum));
 		}
 		$pidList = \MiniFranske\FsMediaGallery\Utility\PageUtility::extendPidListByChildren($this->settings['startingpoint'], $this->settings['recursive']);
 		$mediaAlbums = $this->mediaAlbumRepository->findByStoragePage($pidList);
