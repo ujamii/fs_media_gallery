@@ -152,7 +152,8 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 		// todo: add list order to flexform/TS
 		$query->setOrderings(array(
-			'tstamp' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+			'datetime' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
+			'crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
 		));
 
 		return $query->execute();
