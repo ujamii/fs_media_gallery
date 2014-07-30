@@ -54,8 +54,8 @@
 			<trans-unit id="mediagallery_plugin_useAlbumFilterAsExclude.1">
 				<source>Exclude above selected albums</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_detailsInLightbox">
-				<source>Open LightBox/Colorbox instead of detail-page</source>
+			<trans-unit id="mediagallery_plugin_recursive.I.inherit">
+				<source>Defined in TypoScript</source>
 			</trans-unit>
 			<trans-unit id="mediagallery_plugin_list_thumb_limit">
 				<source>Max. thumbs to show</source>
@@ -65,6 +65,18 @@
 			</trans-unit>
 			<trans-unit id="mediagallery_plugin_list_thumb_height">
 				<source>Thumb height</source>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_album_enableLightbox">
+				<source>Open LightBox/Colorbox instead of detail-page</source>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_album_enableLightbox.I.inherit">
+				<source>Defined in TypoScript</source>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_album_enableLightbox.I.no">
+				<source>No</source>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_album_enableLightbox.I.yes">
+				<source>Yes</source>
 			</trans-unit>
 			<trans-unit id="mediagallery_plugin_album_thumb_limit">
 				<source>Max. thumbs to show</source>
@@ -101,9 +113,6 @@
 			</trans-unit>
 			<trans-unit id="editAlbum">
 				<source>Edit album "%s"</source>
-			</trans-unit>
-			<trans-unit id="flexforms_general.recursive.I.inherit">
-				<source>Defined in TypoScript</source>
 			</trans-unit>
 		</body>
 	</file>

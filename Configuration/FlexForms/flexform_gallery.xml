@@ -80,7 +80,6 @@
 										<numIndex index="1">1</numIndex>
 									</numIndex>
 								</items>
-								<default></default>
 								<size>1</size>
 							</config>
 						</TCEforms>
@@ -136,7 +135,7 @@
 								<type>select</type>
 								<items type="array">
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms_general.recursive.I.inherit</numIndex>
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_recursive.I.inherit</numIndex>
 										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
@@ -184,7 +183,7 @@
 							<config>
 								<type>input</type>
 								<eval>null,num</eval>
-								<size>4</size>
+								<size>2</size>
 								<max>3</max>
 							</config>
 						</TCEforms>
@@ -194,7 +193,7 @@
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_list_thumb_width</label>
 							<config>
 								<type>input</type>
-								<eval>trim</eval>
+								<eval>num</eval>
 								<size>4</size>
 							</config>
 						</TCEforms>
@@ -204,7 +203,7 @@
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_list_thumb_height</label>
 							<config>
 								<type>input</type>
-								<eval>trim</eval>
+								<eval>num</eval>
 								<size>4</size>
 							</config>
 						</TCEforms>
@@ -226,7 +225,7 @@
 							<config>
 								<type>input</type>
 								<eval>null,num</eval>
-								<size>4</size>
+								<size>2</size>
 								<max>3</max>
 							</config>
 						</TCEforms>
@@ -236,13 +235,9 @@
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_album_thumb_maxWidth</label>
 							<config>
 								<type>input</type>
-								<eval>int</eval>
-								<range>
-									<min>30</min>
-									<max>1000</max>
-								</range>
+								<eval>num</eval>
 								<size>4</size>
-								<default>120</default>
+								<max>4</max>
 							</config>
 						</TCEforms>
 					</settings.album.thumb.maxWidth>
@@ -251,22 +246,31 @@
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_album_thumb_maxHeight</label>
 							<config>
 								<type>input</type>
-								<eval>int</eval>
-								<range>
-									<min>30</min>
-									<max>1000</max>
-								</range>
+								<eval>num</eval>
 								<size>4</size>
-								<default>100</default>
+								<max>4</max>
 							</config>
 						</TCEforms>
 					</settings.album.thumb.maxHeight>
 					<settings.album.enableLightbox>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_detailsInLightbox</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_album_enableLightbox</label>
 							<config>
-								<type>check</type>
-								<default>1</default>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_album_enableLightbox.I.inherit</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_album_enableLightbox.I.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_album_enableLightbox.I.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</settings.album.enableLightbox>
@@ -286,13 +290,9 @@
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_detail_maxWidth</label>
 							<config>
 								<type>input</type>
-								<eval>int</eval>
-								<range>
-									<min>1</min>
-									<max>1000</max>
-								</range>
+								<eval>num</eval>
 								<size>4</size>
-								<default>500</default>
+								<max>4</max>
 							</config>
 						</TCEforms>
 					</settings.detail.maxWidth>
@@ -301,13 +301,9 @@
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_detail_maxHeight</label>
 							<config>
 								<type>input</type>
-								<eval>int</eval>
-								<range>
-									<min>1</min>
-									<max>1000</max>
-								</range>
+								<eval>num</eval>
 								<size>4</size>
-								<default>800</default>
+								<max>4</max>
 							</config>
 						</TCEforms>
 					</settings.detail.maxHeight>
@@ -346,13 +342,9 @@
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_random_thumb_maxWidth</label>
 							<config>
 								<type>input</type>
-								<eval>int</eval>
-								<range>
-									<min>30</min>
-									<max>1000</max>
-								</range>
+								<eval>num</eval>
 								<size>4</size>
-								<default>120</default>
+								<max>4</max>
 							</config>
 						</TCEforms>
 					</settings.random.thumb.maxWidth>
@@ -361,13 +353,9 @@
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_random_thumb_maxHeight</label>
 							<config>
 								<type>input</type>
-								<eval>int</eval>
-								<range>
-									<min>30</min>
-									<max>1000</max>
-								</range>
+								<eval>num</eval>
 								<size>4</size>
-								<default>100</default>
+								<max>4</max>
 							</config>
 						</TCEforms>
 					</settings.random.thumb.maxHeight>
