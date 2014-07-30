@@ -23,22 +23,27 @@ plugin.tx_fsmediagallery {
 		useAlbumFilterAsExclude =
 		# skip gallery view if there is only 1 album (is currently buggy when used with realUrl autoconf)
 		skipGalleryWhenOneAlbum =
-		enableLightbox = 1
+		# Settings for album list view
+		list {
+			itemsPerPage = 12
+			thumb {
+				width = 80
+				height = 80
+			}
+		}
+		# Settings for album view
 		album {
 			itemsPerPage = 12
 			thumb {
 				maxWidth = 120
 				maxHeight = 100
 			}
+			enableLightbox = 1
 		}
-		image {
-			itemsPerPage = 32
+		# Settings for detail view
+		detail {
 			maxWidth = 600
 			maxHeight = 800
-			thumb {
-				maxWidth = 120
-				maxHeight = 100
-			}
 		}
 		random {
 			thumb {

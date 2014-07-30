@@ -69,6 +69,14 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 			$mergedSettings = \MiniFranske\FsMediaGallery\Utility\TypoScriptUtility::override($flexformSettings, $frameworkSettings);
 			$this->settings = $mergedSettings;
 		}
+		$this->settings['_typoscript'] = $frameworkSettings['settings'];
+		// check some settings
+		if (!isset($this->settings['list']['itemsPerPage']) || $this->settings['list']['itemsPerPage'] < 1) {
+			$this->settings['list']['itemsPerPage'] = 12;
+		}
+		if (!isset($this->settings['album']['itemsPerPage']) || $this->settings['album']['itemsPerPage'] < 1) {
+			$this->settings['album']['itemsPerPage'] = 12;
+		}
 	}
 
 	/**

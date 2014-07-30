@@ -31,12 +31,12 @@ class TypoScriptUtility implements \TYPO3\CMS\Core\SingletonInterface {
 			if (strpos($fieldName, '.') !== FALSE) {
 				$keyAsArray = explode('.', $fieldName);
 
-				$foundInCurrentTs = $this->getValue($base, $keyAsArray);
+				$foundInCurrentTs = self::getValue($base, $keyAsArray);
 
 				if (is_string($foundInCurrentTs) && strlen($foundInCurrentTs) === 0) {
-					$foundInOriginal = $this->getValue($overload['settings'], $keyAsArray);
+					$foundInOriginal = self::getValue($overload['settings'], $keyAsArray);
 					if ($foundInOriginal) {
-						$base = $this->setValue($base, $keyAsArray, $foundInOriginal);
+						$base = self::setValue($base, $keyAsArray, $foundInOriginal);
 					}
 				}
 			} else {
@@ -86,7 +86,7 @@ class TypoScriptUtility implements \TYPO3\CMS\Core\SingletonInterface {
 	 * @return array
 	 */
 	protected function setValue(array $array, $path, $value) {
-		$this->setValueByReference($array, $path, $value);
+		self::setValueByReference($array, $path, $value);
 
 		$final = array_merge_recursive(array(), $array);
 		return $final;
