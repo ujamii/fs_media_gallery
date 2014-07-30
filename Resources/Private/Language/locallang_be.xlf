@@ -24,11 +24,20 @@
 			<trans-unit id="mediagallery_plugin_display">
 				<source>Display</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_display.0">
+			<trans-unit id="mediagallery_plugin_display.show">
 				<source>Album view</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_display.1">
+			<trans-unit id="mediagallery_plugin_display.randomImage">
 				<source>Random image</source>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_display.list">
+				<source>Album list</source>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_display.showAlbum">
+				<source>Single album</source>
+			</trans-unit>
+			<trans-unit id="mediagallery_plugin_mediaalbum">
+				<source>Album selection</source>
 			</trans-unit>
 			<trans-unit id="mediagallery_plugin_mediaalbums">
 				<source>Album selection</source>
@@ -89,6 +98,9 @@
 			</trans-unit>
 			<trans-unit id="editAlbum">
 				<source>Edit album "%s"</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.recursive.I.inherit">
+				<source>Defined in TypoScript</source>
 			</trans-unit>
 		</body>
 	</file>

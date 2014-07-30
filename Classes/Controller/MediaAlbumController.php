@@ -43,6 +43,35 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	protected $mediaAlbumRepository;
 
 	/**
+	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+	 */
+	protected $configurationManager;
+
+	/**
+	 * Injects the Configuration Manager
+	 *
+	 * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager Instance of the Configuration Manager
+	 * @return void
+	 */
+	public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager) {
+		$this->configurationManager = $configurationManager;
+
+		$frameworkSettings = $this->configurationManager->getConfiguration(
+			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
+			'fsmediagallery',
+			'fsmediagallery_mediagallery'
+		);
+		// merge Framework (TypoScript) and Flexform settings
+		if (isset($frameworkSettings['settings']['overrideFlexformSettingsIfEmpty'])) {
+			$flexformSettings = $this->configurationManager->getConfiguration(
+				\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
+			);
+			$mergedSettings = \MiniFranske\FsMediaGallery\Utility\TypoScriptUtility::override($flexformSettings, $frameworkSettings);
+			$this->settings = $mergedSettings;
+		}
+	}
+
+	/**
 	 * action show
 	 *
 	 * @param int $mediaAlbum (this is not directly mapped to a object to handle 404 on our own)
@@ -88,6 +117,51 @@ class MediaAlbumController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		$this->view->assign('showBackLink', $showBackLink);
 		$this->view->assign('mediaAlbums', $mediaAlbums);
 		$this->view->assign('mediaAlbum', $mediaAlbum);
+	}
+
+	/**
+	 * List Action
+	 *
+	 * @param int $mediaAlbum (this is not directly mapped to a object to handle 404 on our own)
+	 * @return void
+	 */
+	public function listAction($mediaAlbum = 0) {
+		if ($mediaAlbum) {
+			// todo: add option whether to show album in list view
+			// if an album is given, display it
+			$this->forward('showAlbum', NULL, NULL, array('mediaAlbum' => $mediaAlbum));
+		}
+		$pidList = \MiniFranske\FsMediaGallery\Utility\PageUtility::extendPidListByChildren($this->settings['startingpoint'], $this->settings['recursive']);
+		$mediaAlbums = $this->mediaAlbumRepository->findByStoragePage($pidList);
+		$this->view->assign('mediaAlbums', $mediaAlbums);
+	}
+
+	/**
+	 * Show single Album (defined in FlexForm/TS) Action
+	 * As showAlbumAction() displays any album by the given param this function gets its value from TS/Felxform
+	 * This could be merged with showAlbumAction() if there is a way to determine which switchableControllerActions is defined in Felxform.
+	 *
+	 * @return void
+	 */
+	public function showAlbumByConfigAction() {
+		$this->forward('showAlbum', NULL, NULL, array('mediaAlbum' => $this->settings['mediaAlbum']));
+	}
+
+	/**
+	 * Show single Album Action
+	 *
+	 * @param int $mediaAlbum (this is not directly mapped to a object to handle 404 on our own)
+	 * @return void
+	 */
+	public function showAlbumAction($mediaAlbum = NULL) {
+		$mediaAlbum = (int)$mediaAlbum ?: NULL;
+		$pidList = \MiniFranske\FsMediaGallery\Utility\PageUtility::extendPidListByChildren($this->settings['startingpoint'], $this->settings['recursive']);
+		$mediaAlbum = $this->mediaAlbumRepository->findByUidAndStoragePage($mediaAlbum, $pidList);
+		if (!$mediaAlbum) {
+			$this->pageNotFound(LocalizationUtility::translate('no_album_found', $this->extensionName));
+		}
+		$this->view->assign('mediaAlbum', $mediaAlbum);
+		$this->view->assign('showBackLink', FALSE);
 	}
 
 	/**

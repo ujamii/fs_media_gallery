@@ -29,6 +29,10 @@ if (TYPO3_MODE === 'BE') {
 	$GLOBALS['TBE_MODULES_EXT']['xMOD_alt_clickmenu']['extendCMclasses'][] = array(
 		'name' => 'MiniFranske\\FsMediaGallery\\Service\\ClickMenuOptions'
 	);
+
+	// Add CSH
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
+		'tt_content.pi_flexform.' . $pluginSignature . '.list', 'EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_csh_flexforms.xlf');
 }
 
 // Add MediaGallery folder type and icon

@@ -9,6 +9,13 @@ plugin.tx_fsmediagallery {
 	}
 
 	settings {
+		# Comma seperated list of pages/sysfolders which hold the album records
+		startingpoint = {$plugin.tx_fsmediagallery.settings.startingpoint}
+		# Recursion level of the startingpoint
+		recursive = {$plugin.tx_fsmediagallery.settings.recursive}
+		# Comma seperated list of settings which are allowed to be set by TypoScript
+		overrideFlexformSettingsIfEmpty = {$plugin.tx_fsmediagallery.settings.overrideFlexformSettingsIfEmpty}
+		#
 		galleryPid =
 		# Comma seperated list of albums uids
 		mediagalleries =

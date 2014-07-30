@@ -104,6 +104,61 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	}
 
 	/**
+	 * Find albums by findByIdAndStoragePage
+	 *
+	 * @param MediaAlbum $album
+	 * @param mixed $storagePages Page id or list of comma separated page ids containing album records
+	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
+	public function findByUidAndStoragePage(MediaAlbum $album = NULL, $storagePages = 0) {
+		$query = $this->createQuery();
+		$querySettings = $query->getQuerySettings();
+		$constrains = array();
+		$constrains[] = $query->equals('uid', $album);
+		$query->matching($query->logicalAnd($constrains));
+
+		// storage page
+		if ($storagePages != 0) {
+			$pidList = array_unique(\TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $storagePages, TRUE));
+			$querySettings->setRespectStoragePage(TRUE);
+			$querySettings->setStoragePageIds($pidList);
+		} else {
+			$querySettings->setRespectStoragePage(FALSE);
+		}
+		$query->setQuerySettings($querySettings);
+		$result = $query->execute();
+		return $result->getFirst();
+	}
+
+	/**
+	 * Find albums by findByStoragePage
+	 *
+	 * @param mixed $storagePages Page id or list of comma separated page ids containing album records
+	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
+	public function findByStoragePage($storagePages = 0) {
+		$query = $this->createQuery();
+		$querySettings = $query->getQuerySettings();
+
+		// storage page
+		if ($storagePages != 0) {
+			$pidList = array_unique(\TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $storagePages, TRUE));
+			$querySettings->setRespectStoragePage(TRUE);
+			$querySettings->setStoragePageIds($pidList);
+		} else {
+			$querySettings->setRespectStoragePage(FALSE);
+		}
+		$query->setQuerySettings($querySettings);
+
+		// todo: add list order to flexform/TS
+		$query->setOrderings(array(
+			'tstamp' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+		));
+
+		return $query->execute();
+	}
+
+	/**
 	 * get the WHERE clause for the enabled fields of this TCA table
 	 * depending on the context
 	 *
