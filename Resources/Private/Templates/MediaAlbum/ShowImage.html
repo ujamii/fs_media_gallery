@@ -10,11 +10,11 @@
 		<h1>{mediaAlbum.title}</h1>
 		<div class="mediaitem {mediaItem.type}">
 			<figure>
-			<f:render partial="MediaItem/Image" arguments="{mediaItem:mediaItem,width:settings.image.maxWidth,height:settings.image.maxHeight}" />
+				<f:render partial="MediaItem/Detail" arguments="{mediaItem:mediaItem,width:settings.detail.maxWidth,height:settings.detail.maxHeight}" />
 				<figcaption>{mf:fileTitle(file:mediaItem)}</figcaption>
-			<f:if condition="{mediaItem.property.description}">
-				<div class="description"><f:format.html>{mediaItem.property.description}</f:format.html></div>
-			</f:if>
+				<f:if condition="{mediaItem.property.description}">
+					<div class="description"><f:format.html>{mediaItem.property.description}</f:format.html></div>
+				</f:if>
 			</figure>
 		</div>
 	</div>

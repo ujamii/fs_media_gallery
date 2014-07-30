@@ -1,7 +1,6 @@
-
 <div class="thumb">
 	<f:link.action action="show" controller="MediaAlbum" arguments="{mediaAlbum : mediaAlbum}">
-		<f:render partial="MediaItem/Image" arguments="{alt:mediaAlbum.title,title:mediaAlbum.title,mediaItem:mediaAlbum.randomAsset,width:settings.album.thumb.maxWidth,height:settings.album.thumb.maxHeight}" />
+		<f:render partial="MediaItem/Detail" arguments="{alt:mediaAlbum.title,title:mediaAlbum.title,mediaItem:mediaAlbum.randomAsset,width:settings.album.thumb.maxWidth,height:settings.album.thumb.maxHeight}" />
 		<div class="name">{mediaAlbum.title}</div>
 		<div class="description"><f:format.crop maxCharacters="17" append="&nbsp;...">{mediaAlbum.webdescription}</f:format.crop></div>
 	</f:link.action>

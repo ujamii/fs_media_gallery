@@ -85,6 +85,11 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $albumCache;
 
 	/**
+	 * @var DateTime
+	 */
+	protected $datetime;
+
+	/**
 	 * Set hidden
 	 *
 	 * @param boolean $hidden
@@ -226,4 +231,24 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 			return NULL;
 		}
 	}
+
+	/**
+	 * Get datetime
+	 *
+	 * @return DateTime
+	 */
+	public function getDatetime() {
+		return $this->datetime;
+	}
+
+	/**
+	 * Set date time
+	 *
+	 * @param DateTime $datetime datetime
+	 * @return void
+	 */
+	public function setDatetime($datetime) {
+		$this->datetime = $datetime;
+	}
+
 }

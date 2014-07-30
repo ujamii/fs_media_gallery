@@ -7,6 +7,9 @@
 			<trans-unit id="tx_fsmediagallery_domain_model_mediaalbum">
 				<source>Media Album</source>
 			</trans-unit>
+			<trans-unit id="tx_fsmediagallery_domain_model_mediaalbum.datetime">
+				<source>Date</source>
+			</trans-unit>
 			<trans-unit id="tx_fsmediagallery_domain_model_mediaalbum.webdescription">
 				<source>Album description</source>
 			</trans-unit>

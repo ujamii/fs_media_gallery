@@ -1,15 +1,15 @@
 {namespace mf=MiniFranske\FsMediaGallery\ViewHelpers}
 
 <div class="thumb">
-	<f:if condition="{settings.enableLightbox}">
+	<f:if condition="{settings.album.enableLightbox}">
 		<f:then>
 			<a href="{f:uri.image(image:mediaItem)}" rel="albm_{mediaAlbum.uid}" class="lightbox" title="{mf:fileTitle(file:mediaItem)} - {mediaAlbum.title}">
-				<f:render partial="MediaItem/Image" arguments="{alt:mediaItem.alternative,title:mediaItem.title,mediaItem:mediaItem,width:settings.image.thumb.maxWidth,height:settings.image.thumb.maxHeight}" />
+				<f:render partial="MediaItem/Detail" arguments="{alt:mediaItem.alternative,title:mediaItem.title,mediaItem:mediaItem,width:settings.album.thumb.maxWidth,height:settings.album.thumb.maxHeight}" />
 			</a>
 		</f:then>
 		<f:else>
 			<f:link.action action="showImage" arguments="{mediaAlbum:mediaAlbum,mediaItemUid:mediaItem.uid}" title="{mf:fileTitle(file:mediaItem)} - {mediaAlbum.title}">
-				<f:render partial="MediaItem/Image" arguments="{alt:mediaItem.alternative,title:mediaItem.title,mediaItem:mediaItem,width:settings.image.thumb.maxWidth,height:settings.image.thumb.maxHeight}" />
+				<f:render partial="MediaItem/Detail" arguments="{alt:mediaItem.alternative,title:mediaItem.title,mediaItem:mediaItem,width:settings.album.thumb.maxWidth,height:settings.album.thumb.maxHeight}" />
 			</f:link.action>
 		</f:else>
 	</f:if>

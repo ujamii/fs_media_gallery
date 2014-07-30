@@ -4,6 +4,17 @@ if (!defined('TYPO3_MODE')) {
 }
 
 $additionalColumns = array(
+	'datetime' => array(
+		'exclude' => 0,
+		'l10n_mode' => 'mergeIfNotBlank',
+		'label' => 'LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_db.xlf:tx_fsmediagallery_domain_model_mediaalbum.datetime',
+		'config' => array(
+			'type' => 'input',
+			'size' => 12,
+			'max' => 20,
+			'eval' => 'datetime,required',
+		)
+	),
 	'sorting' => array(
 		'label' => 'sorting',
 		'config' => array(
@@ -59,6 +70,12 @@ $additionalColumns = array(
 
 foreach ($GLOBALS['TCA']['sys_file_collection']['types'] as $type => $tmp) {
 	$GLOBALS['TCA']['sys_file_collection']['types'][$type]['showitem'] .= ',--div--;LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_db.xlf:tx_fsmediagallery_domain_model_mediaalbum';
+	// try to add field datetime before type (after title)
+	if ($replacedTca = preg_replace('/(\s*)type(\s*)(;|,)/', 'datetime,type$3', $GLOBALS['TCA']['sys_file_collection']['types'][$type]['showitem'])) {
+		$GLOBALS['TCA']['sys_file_collection']['types'][$type]['showitem'] = $replacedTca;
+	} else {
+		$GLOBALS['TCA']['sys_file_collection']['types'][$type]['showitem'] .= ',datetime';
+	}
 	$GLOBALS['TCA']['sys_file_collection']['types'][$type]['showitem'] .= ',parentalbum,webdescription';
 }
 
