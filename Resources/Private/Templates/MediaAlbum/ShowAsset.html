@@ -1,0 +1,26 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	 xmlns:f="http://typo3.org/ns/fluid/ViewHelpers"
+	 xmlns:mf="http://typo3.org/ns/MiniFranske/FsMediaGallery/ViewHelpers">
+
+	<f:layout name="Default" />
+
+	<f:section name="main">
+		<f:flashMessages />
+		<div class="asset">
+			<h1>{mediaAlbum.title}</h1>
+			<div class="mediaasset {mediaAsset.type}">
+				<figure>
+					<f:render partial="MediaAsset/Detail" section="Detail" arguments="{mediaAsset:mediaAsset,width:settings.detail.maxWidth,height:settings.detail.maxHeight}" />
+					<figcaption>{mf:fileTitle(file:mediaAsset)}</figcaption>
+					<f:if condition="{mediaAsset.property.description}">
+						<div class="description"><f:format.html>{mediaAsset.property.description}</f:format.html></div>
+					</f:if>
+				</figure>
+			</div>
+		</div>
+		<div class="navigation">
+			<f:link.action class="btn btn-back" action="show" controller="MediaAlbum" arguments="{mediaAlbum:mediaAlbum}"><f:translate id="back_to_%s" arguments="{0: mediaAlbum.title}">Back to %s</f:translate></f:link.action>
+		</div>
+	</f:section>
+
+</div>

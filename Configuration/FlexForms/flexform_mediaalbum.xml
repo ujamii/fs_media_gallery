@@ -4,46 +4,45 @@
 	</meta>
 	<sheets>
 		<general>
-
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_tab_general</sheetTitle>
+					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.tabs.general</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<switchableControllerActions>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_display</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.switchableControllerActions</label>
 							<onChange>reload</onChange>
 							<config>
 								<type>select</type>
 								<items type="array">
 									<numIndex index="0">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_display.show</numIndex>
-										<numIndex index="1">MediaAlbum->show</numIndex>
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.switchableControllerActions.I.show</numIndex>
+										<numIndex index="1">MediaAlbum->nestedList;MediaAlbum->showAsset</numIndex>
 									</numIndex>
 									<numIndex index="1">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_display.list</numIndex>
-										<numIndex index="1">MediaAlbum->list;MediaAlbum->showAlbum;MediaAlbum->showImage</numIndex>
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.switchableControllerActions.I.flatList</numIndex>
+										<numIndex index="1">MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset</numIndex>
 									</numIndex>
 									<numIndex index="2">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_display.showAlbum</numIndex>
-										<numIndex index="1">MediaAlbum->showAlbumByConfig</numIndex>
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.switchableControllerActions.I.showAlbum</numIndex>
+										<numIndex index="1">MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset</numIndex>
 									</numIndex>
 									<numIndex index="3">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_display.randomImage</numIndex>
-										<numIndex index="1">MediaAlbum->randomImage</numIndex>
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.switchableControllerActions.I.randomAsset</numIndex>
+										<numIndex index="1">MediaAlbum->randomAsset</numIndex>
 									</numIndex>
 								</items>
-								<default>MediaAlbum->show</default>
+								<default>MediaAlbum->nestedList;MediaAlbum->showAsset</default>
 								<size>1</size>
 							</config>
 						</TCEforms>
 					</switchableControllerActions>
-					<settings.mediagalleries>
+					<settings.mediaAlbums>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_mediaalbums</label>
-							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->show,MediaAlbum->randomImage</displayCond>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.mediaAlbums</label>
+							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->randomAsset</displayCond>
 							<config>
 								<type>select</type>
 								<renderMode>tree</renderMode>
@@ -63,20 +62,20 @@
 								<foreign_table_where>AND (sys_file_collection.sys_language_uid = 0 OR sys_file_collection.l10n_parent = 0) ORDER BY sys_file_collection.sorting ASC, sys_file_collection.crdate DESC</foreign_table_where>
 							</config>
 						</TCEforms>
-					</settings.mediagalleries>
+					</settings.mediaAlbums>
 					<settings.useAlbumFilterAsExclude>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_useAlbumFilterAsExclude</label>
-							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->show,MediaAlbum->randomImage</displayCond>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.useAlbumFilterAsExclude</label>
+							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->randomAsset</displayCond>
 							<config>
 								<type>select</type>
 								<items type="array">
 									<numIndex index="0">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_useAlbumFilterAsExclude.0</numIndex>
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.useAlbumFilterAsExclude.I.0</numIndex>
 										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="1">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_useAlbumFilterAsExclude.1</numIndex>
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.useAlbumFilterAsExclude.I.1</numIndex>
 										<numIndex index="1">1</numIndex>
 									</numIndex>
 								</items>
@@ -87,8 +86,8 @@
 					<!-- single album selection -->
 					<settings.mediaAlbum>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_mediaalbum</label>
-							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->showAlbumByConfig</displayCond>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.mediaAlbum</label>
+							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset</displayCond>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -109,7 +108,7 @@
 					<settings.startingpoint>
 						<TCEforms>
 							<label>LLL:EXT:lang/locallang_general.xlf:LGL.startingpoint</label>
-							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->list;MediaAlbum->showAlbum;MediaAlbum->showImage</displayCond>
+							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset</displayCond>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -130,12 +129,12 @@
 					<settings.recursive>
 						<TCEforms>
 							<label>LLL:EXT:lang/locallang_general.xlf:LGL.recursive</label>
-							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->list;MediaAlbum->showAlbum;MediaAlbum->showImage</displayCond>
+							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset</displayCond>
 							<config>
 								<type>select</type>
 								<items type="array">
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_recursive.I.inherit</numIndex>
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
 										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
@@ -172,14 +171,14 @@
 		<list>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_tab_list</sheetTitle>
-					<displayCond>FIELD:general.switchableControllerActions:=:MediaAlbum->list;MediaAlbum->showAlbum;MediaAlbum->showImage</displayCond>
+					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.tabs.list</sheetTitle>
+					<displayCond>FIELD:general.switchableControllerActions:=:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset</displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<settings.list.itemsPerPage>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_list_thumb_limit</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.itemsPerPage</label>
 							<config>
 								<type>input</type>
 								<eval>null,num</eval>
@@ -190,7 +189,7 @@
 					</settings.list.itemsPerPage>
 					<settings.list.thumb.width>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_list_thumb_width</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.thumb.width</label>
 							<config>
 								<type>input</type>
 								<eval>num</eval>
@@ -200,7 +199,7 @@
 					</settings.list.thumb.width>
 					<settings.list.thumb.height>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_list_thumb_height</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.thumb.height</label>
 							<config>
 								<type>input</type>
 								<eval>num</eval>
@@ -208,20 +207,42 @@
 							</config>
 						</TCEforms>
 					</settings.list.thumb.height>
+					<settings.list.hideEmptyAlbums>
+						<TCEforms>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.hideEmptyAlbums</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:lang/locallang_common.xlf:yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">LLL:EXT:lang/locallang_common.xlf:no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</settings.list.hideEmptyAlbums>
 				</el>
 			</ROOT>
 		</list>
 		<album>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_tab_album</sheetTitle>
-					<displayCond>FIELD:general.switchableControllerActions:=:MediaAlbum->show,MediaAlbum->list;MediaAlbum->showAlbum;MediaAlbum->showImage,MediaAlbum->showAlbumByConfig</displayCond>
+					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.tabs.album</sheetTitle>
+					<displayCond>FIELD:general.switchableControllerActions:=:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset,MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset</displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<settings.album.itemsPerPage>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_album_thumb_limit</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.album.itemsPerPage</label>
 							<config>
 								<type>input</type>
 								<eval>null,num</eval>
@@ -232,7 +253,7 @@
 					</settings.album.itemsPerPage>
 					<settings.album.thumb.maxWidth>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_album_thumb_maxWidth</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.album.thumb.maxWidth</label>
 							<config>
 								<type>input</type>
 								<eval>num</eval>
@@ -243,7 +264,7 @@
 					</settings.album.thumb.maxWidth>
 					<settings.album.thumb.maxHeight>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_album_thumb_maxHeight</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.album.thumb.maxHeight</label>
 							<config>
 								<type>input</type>
 								<eval>num</eval>
@@ -252,42 +273,42 @@
 							</config>
 						</TCEforms>
 					</settings.album.thumb.maxHeight>
-					<settings.album.enableLightbox>
+					<settings.album.lightbox.enable>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_album_enableLightbox</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.album.lightbox.enable</label>
 							<config>
 								<type>select</type>
 								<items type="array">
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_album_enableLightbox.I.inherit</numIndex>
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
 										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_album_enableLightbox.I.no</numIndex>
-										<numIndex index="1">0</numIndex>
+										<numIndex index="0">LLL:EXT:lang/locallang_common.xlf:yes</numIndex>
+										<numIndex index="1">1</numIndex>
 									</numIndex>
 									<numIndex index="3" type="array">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_album_enableLightbox.I.yes</numIndex>
-										<numIndex index="1">1</numIndex>
+										<numIndex index="0">LLL:EXT:lang/locallang_common.xlf:no</numIndex>
+										<numIndex index="1">0</numIndex>
 									</numIndex>
 								</items>
 							</config>
 						</TCEforms>
-					</settings.album.enableLightbox>
+					</settings.album.lightbox.enable>
 				</el>
 			</ROOT>
 		</album>
 		<detail>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_tab_detail</sheetTitle>
-					<displayCond>FIELD:general.switchableControllerActions:=:MediaAlbum->show,MediaAlbum->list;MediaAlbum->showAlbum;MediaAlbum->showImage,MediaAlbum->showAlbumByConfig</displayCond>
+					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.tabs.detail</sheetTitle>
+					<displayCond>FIELD:general.switchableControllerActions:=:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset,MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset</displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<settings.detail.maxWidth>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_detail_maxWidth</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.detail.maxWidth</label>
 							<config>
 								<type>input</type>
 								<eval>num</eval>
@@ -298,7 +319,7 @@
 					</settings.detail.maxWidth>
 					<settings.detail.maxHeight>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_detail_maxHeight</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.detail.maxHeight</label>
 							<config>
 								<type>input</type>
 								<eval>num</eval>
@@ -313,14 +334,14 @@
 		<random>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_tab_random</sheetTitle>
-					<displayCond>FIELD:general.switchableControllerActions:=:MediaAlbum->randomImage</displayCond>
+					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.tabs.random</sheetTitle>
+					<displayCond>FIELD:general.switchableControllerActions:=:MediaAlbum->randomAsset</displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<settings.galleryPid>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_gallery_page</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.galleryPid</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -339,7 +360,7 @@
 					</settings.galleryPid>
 					<settings.random.thumb.maxWidth>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_random_thumb_maxWidth</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.random.thumb.maxWidth</label>
 							<config>
 								<type>input</type>
 								<eval>num</eval>
@@ -350,7 +371,7 @@
 					</settings.random.thumb.maxWidth>
 					<settings.random.thumb.maxHeight>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery_plugin_random_thumb_maxHeight</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.random.thumb.maxHeight</label>
 							<config>
 								<type>input</type>
 								<eval>num</eval>

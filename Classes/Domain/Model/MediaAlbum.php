@@ -52,6 +52,18 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $assetCache;
 
 	/**
+	 * Assets
+	 * An array of \TYPO3\CMS\Core\Resource\File
+	 * @var array
+	 */
+	protected $assets;
+
+	/**
+	 * @var integer
+	 */
+	protected $assetsCount;
+
+	/**
 	 * @var bool
 	 */
 	protected $hidden;
@@ -184,6 +196,18 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
+	 * Get assetsCount
+	 *
+	 * @return integer
+	 */
+	public function getAssetsCount() {
+		if ($this->assetCache === NULL) {
+			return count($this->getAssets());
+		}
+		return count($this->assetCache);
+	}
+
+	/**
 	 * Get child albums
 	 *
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum>>
@@ -203,11 +227,11 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function getRandomAlbum() {
 
 		// if albums are loaded use these
-		if($this->albumCache !== NULL) {
+		if ($this->albumCache !== NULL) {
 			$albums = $this->getAlbums();
 			return $albums[rand(0,count($albums)-1)];
 
-		// else fetch random item from repository
+		// else fetch random asset from repository
 		} else {
 			return $this->mediaAlbumRepository->findRandom($this);
 		}

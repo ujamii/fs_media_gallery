@@ -87,32 +87,33 @@ class MediaAlbumController extends ActionController {
 	}
 
 	/**
-	 * action show
+	 * NestedList Action
+	 * Displays a (nested) list of albums; default/show action in fs_media_gallery <= 0.0.6
 	 *
-	 * @param int $mediaAlbum (this is not directly mapped to a object to handle 404 on our own)
+	 * @param int $mediaAlbum (this is not directly mapped to an object to handle 404 on our own)
 	 * @return void
 	 */
-	public function showAction($mediaAlbum = 0) {
+	public function nestedListAction($mediaAlbum = 0) {
 		$mediaAlbums = NULL;
 		$mediaAlbum = (int)$mediaAlbum ?: NULL;
-		$mediaGalleryUids = array();
+		$mediaAlbumsUids = array();
 		$useAlbumFilterAsExclude = !empty($this->settings['useAlbumFilterAsExclude']);
 		$showBackLink = TRUE;
 
-		if(!empty($this->settings['mediagalleries'])) {
-			$mediaGalleryUids = GeneralUtility::trimExplode(',', $this->settings['mediagalleries']);
+		if (!empty($this->settings['mediaAlbums'])) {
+			$mediaAlbumsUids = GeneralUtility::trimExplode(',', $this->settings['mediaAlbums']);
 		}
 
 		if ($mediaAlbum) {
 			/** @var MediaAlbum $mediaAlbum */
 			$mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum);
-			if ($mediaAlbum && $mediaGalleryUids !== array() && !$useAlbumFilterAsExclude && !in_array($mediaAlbum->getUid(), $mediaGalleryUids)) {
+			if ($mediaAlbum && $mediaAlbumsUids !== array() && !$useAlbumFilterAsExclude && !in_array($mediaAlbum->getUid(), $mediaAlbumsUids)) {
 				$mediaAlbum = NULL;
 			}
-			if ($mediaAlbum && $mediaGalleryUids !== array() && $useAlbumFilterAsExclude && in_array($mediaAlbum->getUid(), $mediaGalleryUids)) {
+			if ($mediaAlbum && $mediaAlbumsUids !== array() && $useAlbumFilterAsExclude && in_array($mediaAlbum->getUid(), $mediaAlbumsUids)) {
 				$mediaAlbum = NULL;
 			}
-			if ($mediaAlbum && $mediaGalleryUids === array() && !$this->checkAlbumPid($mediaAlbum)) {
+			if ($mediaAlbum && $mediaAlbumsUids === array() && !$this->checkAlbumPid($mediaAlbum)) {
 				$mediaAlbum = NULL;
 			}
 			if (!$mediaAlbum) {
@@ -120,12 +121,12 @@ class MediaAlbumController extends ActionController {
 			}
 		}
 
-		$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $mediaGalleryUids, $useAlbumFilterAsExclude);
+		$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $mediaAlbumsUids, $useAlbumFilterAsExclude);
 
 		// when only 1 album skip gallery view
-		if ($mediaAlbum === NULL && !empty($this->settings['skipGalleryWhenOneAlbum']) && count($mediaAlbums) === 1) {
+		if ($mediaAlbum === NULL && !empty($this->settings['list']['skipListWhenOnlyOneAlbum']) && count($mediaAlbums) === 1) {
 			$mediaAlbum = $mediaAlbums[0];
-			$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $mediaGalleryUids, $useAlbumFilterAsExclude);
+			$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $mediaAlbumsUids, $useAlbumFilterAsExclude);
 			$showBackLink = FALSE;
 		}
 
@@ -135,21 +136,28 @@ class MediaAlbumController extends ActionController {
 	}
 
 	/**
-	 * List Action
+	 * FlatList Action
+	 * Displays a (one-dimensional, flattened) list of albums
 	 *
-	 * @param int $mediaAlbum (this is not directly mapped to a object to handle 404 on our own)
+	 * @param int $mediaAlbum (this is not directly mapped to an object to handle 404 on our own)
 	 * @return void
 	 */
-	public function listAction($mediaAlbum = 0) {
-		if ($mediaAlbum) {
-			// todo: add option whether to show album in list view
-			// if an album is given, display it
-			// ATTENTION: using $this->forward instead $this->redirect disables widget params used in the target action
-			$this->redirect('showAlbum', NULL, NULL, array('mediaAlbum' => $mediaAlbum));
-		}
+	public function flatListAction($mediaAlbum = 0) {
 		$pidList = PageUtility::extendPidListByChildren($this->settings['startingpoint'], $this->settings['recursive']);
-		$mediaAlbums = $this->mediaAlbumRepository->findByStoragePage($pidList);
-		$this->view->assign('mediaAlbums', $mediaAlbums);
+		if ($mediaAlbum) {
+			// if an album is given, display it
+			$mediaAlbum = $this->mediaAlbumRepository->findByUidAndStoragePage($mediaAlbum, $pidList);
+			if (!$mediaAlbum) {
+				$this->pageNotFound(LocalizationUtility::translate('no_album_found', $this->extensionName));
+			}
+			$this->view->assign('displayMode', 'album');
+			$this->view->assign('mediaAlbum', $mediaAlbum);
+		} else {
+			// display the album list
+			$mediaAlbums = $this->mediaAlbumRepository->findByStoragePage($pidList);
+			$this->view->assign('displayMode', 'flatList');
+			$this->view->assign('mediaAlbums', $mediaAlbums);
+		}
 	}
 
 	/**
@@ -166,7 +174,7 @@ class MediaAlbumController extends ActionController {
 	/**
 	 * Show single Album Action
 	 *
-	 * @param int $mediaAlbum (this is not directly mapped to a object to handle 404 on our own)
+	 * @param int $mediaAlbum (this is not directly mapped to an object to handle 404 on our own)
 	 * @return void
 	 */
 	public function showAlbumAction($mediaAlbum = NULL) {
@@ -181,24 +189,25 @@ class MediaAlbumController extends ActionController {
 	}
 
 	/**
-	 * Show single image from album
+	 * Show single media asset from album
 	 *
 	 * @param \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum $mediaAlbum
-	 * @param int $mediaItemUid
+	 * @param int $mediaAssetUid
 	 * @ignorevalidation
 	 */
-	public function showImageAction(MediaAlbum $mediaAlbum, $mediaItemUid) {
+	public function showAssetAction(MediaAlbum $mediaAlbum, $mediaAssetUid) {
 		$this->view->assign('mediaAlbum', $mediaAlbum);
-		$this->view->assign('mediaItem', ResourceFactory::getInstance()->getFileObject($mediaItemUid));
+		// todo: rename 'item' to 'asset'
+		$this->view->assign('mediaAsset', ResourceFactory::getInstance()->getFileObject($mediaAssetUid));
 	}
 
 	/**
-	 * Show random image
+	 * Show random media asset
 	 *
 	 * @return void
 	 */
-	public function randomImageAction() {
-		$filterByUids = GeneralUtility::trimExplode(',', $this->settings['mediagalleries'], TRUE);
+	public function randomAssetAction() {
+		$filterByUids = GeneralUtility::trimExplode(',', $this->settings['mediaAlbums'], TRUE);
 		$mediaAlbum = $this->mediaAlbumRepository->findRandom(NULL, $filterByUids, !empty($this->settings['useAlbumFilterAsExclude']));
 		$this->view->assign('mediaAlbum', $mediaAlbum);
 	}

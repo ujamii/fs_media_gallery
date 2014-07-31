@@ -89,8 +89,11 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 */
 	public function findByParentAlbum(MediaAlbum $parentAlbum = NULL, array $filterByUids = array(), $useAlbumFilterAsExclude = FALSE) {
 		$query = $this->createQuery();
+		$querySettings = $query->getQuerySettings();
+		// todo: add startingpoint and persistence.storagePid
+		$querySettings->setRespectStoragePage(FALSE);
 		$constraints = array();
-		$constraints[] = $query->equals('parentalbum', $parentAlbum ?: FALSE);
+		$constraints[] = $query->equals('parentalbum', $parentAlbum ?: 0);
 		if (count($filterByUids)) {
 			if ($useAlbumFilterAsExclude) {
 				$constraints[] = $query->logicalNot($query->in('uid', $filterByUids));

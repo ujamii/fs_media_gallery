@@ -49,14 +49,17 @@ class PaginateController extends \TYPO3\CMS\Fluid\ViewHelpers\Widget\Controller\
 		} else {
 			// modify query
 			$itemsPerPage = (integer) $this->configuration['itemsPerPage'];
-			if(is_a($this->objects, '\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult')){
+			if ($itemsPerPage < 1) {
+				$itemsPerPage = 1;
+			}
+			if (is_a($this->objects, '\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult')) {
 				$query = $this->objects->getQuery();
 				$query->setLimit($itemsPerPage);
 				if ($this->currentPage > 1) {
 					$query->setOffset((integer)($itemsPerPage * ($this->currentPage - 1)));
 				}
 				$modifiedObjects = $query->execute();
-			}else{
+			} else {
 				$offset = 0;
 				if ($this->currentPage > 1) {
 					$offset = ((integer)($itemsPerPage * ($this->currentPage - 1)));
@@ -64,7 +67,7 @@ class PaginateController extends \TYPO3\CMS\Fluid\ViewHelpers\Widget\Controller\
 				if (!empty($this->widgetConfiguration['itemsBefore'])) {
 					$itemsBefore = array_slice($this->objects, 0, $offset);
 				}
-				if(is_array($this->objects)) {
+				if (is_array($this->objects)) {
 					$modifiedObjects = array_slice($this->objects, $offset, (integer)$this->configuration['itemsPerPage']);
 				} else {
 					$modifiedObjects = array_slice($this->objects->toArray(), $offset, (integer)$this->configuration['itemsPerPage']);
@@ -82,4 +85,5 @@ class PaginateController extends \TYPO3\CMS\Fluid\ViewHelpers\Widget\Controller\
 		$this->view->assign('configuration', $this->configuration);
 		$this->view->assign('pagination', $this->buildPagination());
 	}
+
 }

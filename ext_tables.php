@@ -15,7 +15,7 @@ $pluginSignature = strtolower($extensionName) . '_mediagallery';
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'layout,recursive,select_key';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($pluginSignature,
-	'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_gallery.xml');
+	'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_mediaalbum.xml');
 
 
 if (TYPO3_MODE === 'BE') {

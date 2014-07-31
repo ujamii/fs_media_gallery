@@ -18,37 +18,46 @@ plugin.tx_fsmediagallery {
 		#
 		galleryPid =
 		# Comma seperated list of albums uids
-		mediagalleries =
-		# Option to exclude given album uids (settings.mediagalleries)
+		mediaAlbums =
+		# Option to exclude given album uids (settings.mediaAlbums)
 		useAlbumFilterAsExclude =
-		# skip gallery view if there is only 1 album (is currently buggy when used with realUrl autoconf)
-		skipGalleryWhenOneAlbum =
-		# Settings for album list view
+		# Settings for album lists (both nested and flat)
 		list {
 			itemsPerPage = 12
 			thumb {
-				width = 80
-				height = 80
+				width = 180
+				height = 100
+			}
+			hideEmptyAlbums = 1
+			# skip gallery view if there is only 1 album (is currently buggy when used with realUrl autoconf)
+			skipListWhenOnlyOneAlbum = 0
+			# Settings for nested album list
+			nested {
+			}
+			# Settings for flat album list
+			flat {
 			}
 		}
-		# Settings for album view
+		# Settings for album view (list of images)
 		album {
 			itemsPerPage = 12
 			thumb {
 				maxWidth = 120
-				maxHeight = 100
+				maxHeight = 70
 			}
-			enableLightbox = 1
+			lightbox {
+				enable = 1
+			}
 		}
 		# Settings for detail view
 		detail {
-			maxWidth = 600
-			maxHeight = 800
+			maxWidth = 1920
+			maxHeight = 1080
 		}
 		random {
 			thumb {
-				maxWidth = 200
-				maxHeight = 160
+				maxWidth = 250
+				maxHeight = 140
 			}
 		}
 		pagination {
@@ -65,4 +74,4 @@ plugin.tx_fsmediagallery {
 
 
 # Include MediaGallery default styles
-page.includeCSS.tx-fs-media-gallery = EXT:fs_media_gallery/Resources/Public/Css/MediaGallery.css
+page.includeCSS.tx-fs-media-gallery = EXT:fs_media_gallery/Resources/Public/Css/MediaAlbum.css

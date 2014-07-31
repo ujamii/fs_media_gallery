@@ -3,117 +3,142 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2013-01-27T20:37:07Z" product-name="fs_media_gallery">
 		<header/>
 		<body>
+			<!--
+				General plugin configuration
+			-->
+
 			<trans-unit id="plugin.title">
-				<source>Media Album</source>
+				<source>### Media Album</source>
 			</trans-unit>
 			<trans-unit id="plugin.description">
-				<source>Add Media Album</source>
+				<source>### Add Media Album</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_tab_general">
+
+			<!--
+				FLEXFORMS
+			-->
+
+			<!-- flexforms.general -->
+			<trans-unit id="flexforms.general.I.inherit">
+				<source>Inherit (TypoScript)</source>
+			</trans-unit>
+			<!--
+				flexforms.mediagallery
+			-->
+			<trans-unit id="flexforms.mediagallery.tabs.general">
 				<source>General</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_tab_list">
-				<source>Album list settings</source>
+			<trans-unit id="flexforms.mediagallery.tabs.list">
+				<source>Albums list</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_tab_album">
-				<source>Album settings</source>
-			</trans-unit>
-			<trans-unit id="mediagallery_plugin_tab_detail">
-				<source>Detail view settings</source>
-			</trans-unit>
-			<trans-unit id="mediagallery_plugin_tab_random">
-				<source>Random image settings</source>
-			</trans-unit>
-			<trans-unit id="mediagallery_plugin_display">
-				<source>Display</source>
-			</trans-unit>
-			<trans-unit id="mediagallery_plugin_display.show">
+			<trans-unit id="flexforms.mediagallery.tabs.album">
 				<source>Album view</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_display.randomImage">
-				<source>Random image</source>
+			<trans-unit id="flexforms.mediagallery.tabs.detail">
+				<source>Detail view</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_display.list">
-				<source>Album list</source>
+			<trans-unit id="flexforms.mediagallery.tabs.random">
+				<source>Random asset</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_display.showAlbum">
+			<trans-unit id="flexforms.mediagallery.switchableControllerActions">
+				<source>Display mode</source>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.show">
+				<source>Selected Albums (nested)</source>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.flatList">
+				<source>Albums list (flattened)</source>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.showAlbum">
 				<source>Single album</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_mediaalbum">
-				<source>Album selection</source>
+			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.randomAsset">
+				<source>Random media asset</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_mediaalbums">
-				<source>Album selection</source>
+			<trans-unit id="flexforms.mediagallery.mediaAlbum">
+				<source>Album to display</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_useAlbumFilterAsExclude">
-				<source>Album selection filter (when albums are selected else all are shown)</source>
+			<trans-unit id="flexforms.mediagallery.mediaAlbums">
+				<source>Albums to display</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_useAlbumFilterAsExclude.0">
-				<source>Show above selected albums</source>
+			<trans-unit id="flexforms.mediagallery.galleryPid">
+				<source>Album page</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_useAlbumFilterAsExclude.1">
-				<source>Exclude above selected albums</source>
+			<trans-unit id="flexforms.mediagallery.useAlbumFilterAsExclude">
+				<source>Album selection filter (if no items are selected all are shown)</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_recursive.I.inherit">
-				<source>Defined in TypoScript</source>
+			<trans-unit id="flexforms.mediagallery.useAlbumFilterAsExclude.I.0">
+				<source>Show only selected items</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_list_thumb_limit">
-				<source>Max. thumbs to show</source>
+			<trans-unit id="flexforms.mediagallery.useAlbumFilterAsExclude.I.1">
+				<source>Exclude selected items</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_list_thumb_width">
+			<!-- flexforms.mediagallery.list (both nested and flat) -->
+			<trans-unit id="flexforms.mediagallery.list.hideEmptyAlbums">
+				<source>Hide empty albums</source>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.list.itemsPerPage">
+				<source>Max. thumbs to display per page</source>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.list.thumb.width">
 				<source>Thumb width</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_list_thumb_height">
+			<trans-unit id="flexforms.mediagallery.list.thumb.height">
 				<source>Thumb height</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_album_enableLightbox">
-				<source>Open LightBox/Colorbox instead of detail-page</source>
+			<!-- flexforms.mediagallery.nestedList -->
+			<trans-unit id="flexforms.mediagallery.nestedList.yxz">
+				<source>xyz</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_album_enableLightbox.I.inherit">
-				<source>Defined in TypoScript</source>
+			<!-- flexforms.mediagallery.flatList -->
+			<trans-unit id="flexforms.mediagallery.flatList.yxz">
+				<source>xyz</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_album_enableLightbox.I.no">
-				<source>No</source>
+			<!-- flexforms.mediagallery.album -->
+			<trans-unit id="flexforms.mediagallery.album.itemsPerPage">
+				<source>Max. thumbs to display per page</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_album_enableLightbox.I.yes">
-				<source>Yes</source>
-			</trans-unit>
-			<trans-unit id="mediagallery_plugin_album_thumb_limit">
-				<source>Max. thumbs to show</source>
-			</trans-unit>
-			<trans-unit id="mediagallery_plugin_album_thumb_maxWidth">
+			<trans-unit id="flexforms.mediagallery.album.thumb.maxWidth">
 				<source>Max. thumb width</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_album_thumb_maxHeight">
+			<trans-unit id="flexforms.mediagallery.album.thumb.maxHeight">
 				<source>Max. thumb height</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_detail_maxWidth">
+			<trans-unit id="flexforms.mediagallery.album.lightbox.enable">
+				<source>Use LightBox/Colorbox instead of detail view</source>
+			</trans-unit>
+			<!-- flexforms.mediagallery.detail -->
+			<trans-unit id="flexforms.mediagallery.detail.maxWidth">
 				<source>Max. media width</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_detail_maxHeight">
+			<trans-unit id="flexforms.mediagallery.detail.maxHeight">
 				<source>Max. media height</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_gallery_page">
-				<source>Gallery page</source>
-			</trans-unit>
-			<trans-unit id="mediagallery_plugin_random_thumb_maxWidth">
+			<!-- flexforms.mediagallery.random -->
+			<trans-unit id="flexforms.mediagallery.random.thumb.maxWidth">
 				<source>Max. thumb width</source>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_random_thumb_maxHeight">
+			<trans-unit id="flexforms.mediagallery.random.thumb.maxHeight">
 				<source>Max. thumb height</source>
 			</trans-unit>
-			<trans-unit id="firstCreateStorageFolder">
-				<source>First create a MediaGalleries StorageFolder!</source>
-			</trans-unit>
-			<trans-unit id="createAlbum">
+
+			<!--
+				BE MODULE
+			-->
+
+			<trans-unit id="module.buttons.createAlbum">
 				<source>Create album</source>
 			</trans-unit>
-			<trans-unit id="createAlbumIn">
-				<source>Create new album in "%s"</source>
+			<trans-unit id="module.buttons.createAlbumIn">
+				<source>Create album in "%s"</source>
 			</trans-unit>
-			<trans-unit id="editAlbum">
+			<trans-unit id="module.buttons.editAlbum">
 				<source>Edit album "%s"</source>
 			</trans-unit>
+			<trans-unit id="module.alerts.firstCreateStorageFolder">
+				<source>First create a MediaGalleries StorageFolder!</source>
+			</trans-unit>
+
 		</body>
 	</file>
 </xliff>
