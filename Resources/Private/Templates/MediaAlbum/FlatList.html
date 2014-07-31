@@ -6,16 +6,14 @@
 
 	<f:section name="main">
 		<f:flashMessages />
-		<div class="gallery">
-			<f:if condition="{0:displayMode} == {0:'album'}">
-				<f:then>
-					<f:render partial="MediaAlbum/FlatList/AssetsList" section="AssetsList" arguments="{_all}" />
-				</f:then>
-				<f:else>
-					<f:render partial="MediaAlbum/FlatList/AlbumsList" section="AlbumsList" arguments="{_all}" />
-				</f:else>
-			</f:if>
-		</div>
+		<f:if condition="{0:displayMode} == {0:'album'}">
+			<f:then>
+				<f:render partial="MediaAlbum/FlatList/AssetsList" section="AssetsList" arguments="{_all}" />
+			</f:then>
+			<f:else>
+				<f:render partial="MediaAlbum/FlatList/AlbumsList" section="AlbumsList" arguments="{_all}" />
+			</f:else>
+		</f:if>
 	</f:section>
 
 </div>

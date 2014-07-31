@@ -11,9 +11,11 @@
 			<mf:widget.paginate objects="{mediaAlbums}" as="paginatedAlbums" configuration="{itemsPerPage: settings.list.itemsPerPage, insertAbove: settings.pagination.insertAbove, insertBelow: settings.pagination.insertBelow, maximumNumberOfLinks: settings.pagination.maximumNumberOfLinks, pagesBefore: settings.pagination.pagesBefore, pagesAfter:settings.pagination.pagesAfter}">
 				<f:if condition="{paginatedAlbums}">
 					<f:then>
-						<f:for each="{paginatedAlbums}" as="mediaAlbum">
-							<f:render section="AlbumPreview" arguments="{mediaAlbum:mediaAlbum}" />
-						</f:for>
+						<div class="thumbs">
+							<f:for each="{paginatedAlbums}" as="mediaAlbum">
+								<f:render section="AlbumPreview" arguments="{mediaAlbum:mediaAlbum}" />
+							</f:for>
+						</div>
 					</f:then>
 					<f:else>
 						<div class="alert alert-info">
@@ -28,7 +30,7 @@
 	<f:section name="AlbumPreview">
 		<f:if condition="{0:0, 1:1} == {0:mediaAlbum.assetsCount, 1:settings.list.hideEmptyAlbums}">
 			<f:else>
-				<div class="thumb">
+				<div class="img-thumbnail">
 					<f:link.action action="show" controller="MediaAlbum" arguments="{mediaAlbum : mediaAlbum}">
 						<f:if condition="{mediaAlbum.randomAsset}">
 							<f:then>
