@@ -48,11 +48,6 @@ class MediaAlbumController extends ActionController {
 	protected $mediaAlbumRepository;
 
 	/**
-	 * @var ConfigurationManagerInterface
-	 */
-	protected $configurationManager;
-
-	/**
 	 * Injects the Configuration Manager
 	 *
 	 * @param ConfigurationManagerInterface $configurationManager Instance of the Configuration Manager
