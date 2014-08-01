@@ -10,9 +10,11 @@
 		<mf:widget.paginate objects="{mediaAlbums}" as="paginatedAlbums" configuration="{itemsPerPage: settings.list.itemsPerPage, insertAbove: settings.pagination.insertAbove, insertBelow: settings.pagination.insertBelow, maximumNumberOfLinks: settings.pagination.maximumNumberOfLinks, pagesBefore: settings.pagination.pagesBefore, pagesAfter:settings.pagination.pagesAfter}">
 			<f:if condition="{paginatedAlbums}">
 				<f:then>
-					<f:for each="{paginatedAlbums}" as="mediaAlbum">
-						<f:render partial="MediaAlbum/Thumb" section="Thumb" arguments="{mediaAlbum:mediaAlbum,width:settings.list.thumb.width,height:settings.list.thumb.height}" />
-					</f:for>
+					<div class="thumbs clearfix">
+						<f:for each="{paginatedAlbums}" as="mediaAlbum">
+							<f:render partial="MediaAlbum/Thumb" section="Thumb" arguments="{mediaAlbum:mediaAlbum,width:settings.list.thumb.width,height:settings.list.thumb.height}" />
+						</f:for>
+					</div>
 				</f:then>
 				<f:else>
 					<div class="alert alert-info">

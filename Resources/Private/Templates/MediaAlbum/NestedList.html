@@ -71,9 +71,7 @@
 				</div>
 			</f:then>
 			<f:else>
-				<div class="gallery">
-					<f:render partial="MediaAlbum/NestedList/AlbumsList" section="AlbumsList" arguments="{mediaAlbums:mediaAlbums}" />
-				</div>
+				<f:render partial="MediaAlbum/NestedList/AlbumsList" section="AlbumsList" arguments="{mediaAlbums:mediaAlbums}" />
 			</f:else>
 		</f:if>
 	</f:section>

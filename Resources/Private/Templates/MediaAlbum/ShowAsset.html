@@ -8,7 +8,7 @@
 		<f:flashMessages />
 		<div class="asset">
 			<h1>{mediaAlbum.title}</h1>
-			<div class="mediaasset {mediaAsset.type}">
+			<div class="mediaasset mediatype{mediaAsset.type}">
 				<figure>
 					<f:render partial="MediaAsset/Detail" section="Detail" arguments="{mediaAsset:mediaAsset,width:settings.detail.maxWidth,height:settings.detail.maxHeight}" />
 					<figcaption>{mf:fileTitle(file:mediaAsset)}</figcaption>
