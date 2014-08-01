@@ -10,8 +10,8 @@
 						image="{mediaAsset}"
 						alt="{alt}"
 						title="{f:if(condition:title, then:title, else:'{mf:fileTitle(file:mediaAsset)}')}"
-						height="{height}c"
-						width="{width}c"
+						height="{height}{resizeMode}"
+						width="{width}{resizeMode}"
 						/>
 				</span>
 			</f:then>

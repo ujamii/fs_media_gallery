@@ -61,16 +61,19 @@ class MediaAlbumController extends ActionController {
 			'fsmediagallery',
 			'fsmediagallery_mediagallery'
 		);
+		$flexformSettings = $this->configurationManager->getConfiguration(
+			ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
+		);
 		// merge Framework (TypoScript) and Flexform settings
 		if (isset($frameworkSettings['settings']['overrideFlexformSettingsIfEmpty'])) {
-			$flexformSettings = $this->configurationManager->getConfiguration(
-				ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
-			);
 			/** @var $typoScriptUtility \MiniFranske\FsMediaGallery\Utility\TypoScriptUtility */
 			$typoScriptUtility = GeneralUtility::makeInstance('MiniFranske\\FsMediaGallery\\Utility\\TypoScriptUtility');
 			$mergedSettings = $typoScriptUtility->override($flexformSettings, $frameworkSettings);
 			$this->settings = $mergedSettings;
+		} else {
+			$this->settings = $flexformSettings;
 		}
+		// store framework settings
 		$this->settings['_typoscript'] = $frameworkSettings['settings'];
 		// check some settings
 		if (!isset($this->settings['list']['itemsPerPage']) || $this->settings['list']['itemsPerPage'] < 1) {
@@ -78,6 +81,19 @@ class MediaAlbumController extends ActionController {
 		}
 		if (!isset($this->settings['album']['itemsPerPage']) || $this->settings['album']['itemsPerPage'] < 1) {
 			$this->settings['album']['itemsPerPage'] = 12;
+		}
+		// correct resizeMode 's' set in flexforms (flexforms value '' is used for inherit/definition by TS)
+		if (isset($this->settings['list']['thumb']['resizeMode']) && $this->settings['list']['thumb']['resizeMode'] == 's') {
+			$this->settings['list']['thumb']['resizeMode'] = '';
+		}
+		if (isset($this->settings['album']['thumb']['resizeMode']) && $this->settings['album']['thumb']['resizeMode'] == 's') {
+			$this->settings['album']['thumb']['resizeMode'] = '';
+		}
+		if (isset($this->settings['detail']['asset']['resizeMode']) && $this->settings['detail']['asset']['resizeMode'] == 's') {
+			$this->settings['detail']['asset']['resizeMode'] = '';
+		}
+		if (isset($this->settings['random']['thumb']['resizeMode']) && $this->settings['random']['thumb']['resizeMode'] == 's') {
+			$this->settings['random']['thumb']['resizeMode'] = '';
 		}
 	}
 

@@ -207,6 +207,32 @@
 							</config>
 						</TCEforms>
 					</settings.list.thumb.height>
+					<settings.list.thumb.resizeMode>
+						<TCEforms>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.resizeMode</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.resizeMode.I.m</numIndex>
+										<numIndex index="1">m</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.resizeMode.I.c</numIndex>
+										<numIndex index="1">c</numIndex>
+									</numIndex>
+									<numIndex index="4" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.resizeMode.I.s</numIndex>
+										<numIndex index="1">s</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</settings.list.thumb.resizeMode>
 					<settings.list.hideEmptyAlbums>
 						<TCEforms>
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.hideEmptyAlbums</label>
@@ -251,9 +277,9 @@
 							</config>
 						</TCEforms>
 					</settings.album.itemsPerPage>
-					<settings.album.thumb.maxWidth>
+					<settings.album.thumb.width>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.album.thumb.maxWidth</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.album.thumb.width</label>
 							<config>
 								<type>input</type>
 								<eval>num</eval>
@@ -261,10 +287,10 @@
 								<max>4</max>
 							</config>
 						</TCEforms>
-					</settings.album.thumb.maxWidth>
-					<settings.album.thumb.maxHeight>
+					</settings.album.thumb.width>
+					<settings.album.thumb.height>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.album.thumb.maxHeight</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.album.thumb.height</label>
 							<config>
 								<type>input</type>
 								<eval>num</eval>
@@ -272,7 +298,33 @@
 								<max>4</max>
 							</config>
 						</TCEforms>
-					</settings.album.thumb.maxHeight>
+					</settings.album.thumb.height>
+					<settings.album.thumb.resizeMode>
+						<TCEforms>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.resizeMode</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.resizeMode.I.m</numIndex>
+										<numIndex index="1">m</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.resizeMode.I.c</numIndex>
+										<numIndex index="1">c</numIndex>
+									</numIndex>
+									<numIndex index="4" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.resizeMode.I.s</numIndex>
+										<numIndex index="1">s</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</settings.album.thumb.resizeMode>
 					<settings.album.lightbox.enable>
 						<TCEforms>
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.album.lightbox.enable</label>
@@ -306,9 +358,9 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
-					<settings.detail.maxWidth>
+					<settings.detail.asset.width>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.detail.maxWidth</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.detail.asset.width</label>
 							<config>
 								<type>input</type>
 								<eval>num</eval>
@@ -316,10 +368,10 @@
 								<max>4</max>
 							</config>
 						</TCEforms>
-					</settings.detail.maxWidth>
-					<settings.detail.maxHeight>
+					</settings.detail.asset.width>
+					<settings.detail.asset.height>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.detail.maxHeight</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.detail.asset.height</label>
 							<config>
 								<type>input</type>
 								<eval>num</eval>
@@ -327,7 +379,33 @@
 								<max>4</max>
 							</config>
 						</TCEforms>
-					</settings.detail.maxHeight>
+					</settings.detail.asset.height>
+					<settings.detail.asset.resizeMode>
+						<TCEforms>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.resizeMode</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.resizeMode.I.m</numIndex>
+										<numIndex index="1">m</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.resizeMode.I.c</numIndex>
+										<numIndex index="1">c</numIndex>
+									</numIndex>
+									<numIndex index="4" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.resizeMode.I.s</numIndex>
+										<numIndex index="1">s</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</settings.detail.asset.resizeMode>
 				</el>
 			</ROOT>
 		</detail>
@@ -358,9 +436,9 @@
 							</config>
 						</TCEforms>
 					</settings.galleryPid>
-					<settings.random.thumb.maxWidth>
+					<settings.random.thumb.width>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.random.thumb.maxWidth</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.random.thumb.width</label>
 							<config>
 								<type>input</type>
 								<eval>num</eval>
@@ -368,10 +446,10 @@
 								<max>4</max>
 							</config>
 						</TCEforms>
-					</settings.random.thumb.maxWidth>
-					<settings.random.thumb.maxHeight>
+					</settings.random.thumb.width>
+					<settings.random.thumb.height>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.random.thumb.maxHeight</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.random.thumb.height</label>
 							<config>
 								<type>input</type>
 								<eval>num</eval>
@@ -379,7 +457,33 @@
 								<max>4</max>
 							</config>
 						</TCEforms>
-					</settings.random.thumb.maxHeight>
+					</settings.random.thumb.height>
+					<settings.random.thumb.resizeMode>
+						<TCEforms>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.resizeMode</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.resizeMode.I.m</numIndex>
+										<numIndex index="1">m</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.resizeMode.I.c</numIndex>
+										<numIndex index="1">c</numIndex>
+									</numIndex>
+									<numIndex index="4" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.resizeMode.I.s</numIndex>
+										<numIndex index="1">s</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</settings.random.thumb.resizeMode>
 				</el>
 			</ROOT>
 		</random>

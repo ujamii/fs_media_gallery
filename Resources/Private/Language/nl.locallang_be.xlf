@@ -61,11 +61,11 @@
 				<source>Max. thumbs to show</source>
 				<target>Max. aantal to tonen thumbnails</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_album_thumb_maxWidth">
+			<trans-unit id="mediagallery_plugin_album_thumb_width">
 				<source>Max. thumb width</source>
 				<target>Max. breedte thumbnails</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_album_thumb_maxHeight">
+			<trans-unit id="mediagallery_plugin_album_thumb_height">
 				<source>Max. thumb height</source>
 				<target>Max. hoogte thumbnail</target>
 			</trans-unit>
@@ -73,19 +73,19 @@
 				<source>Max. thumbs to show</source>
 				<target>Max. aantal to tonen thumbnails</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_image_thumb_maxWidth">
+			<trans-unit id="mediagallery_plugin_image_thumb_width">
 				<source>Max. thumb width</source>
 				<target>Max. breedte thumbnails</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_image_thumb_maxHeight">
+			<trans-unit id="mediagallery_plugin_image_thumb_height">
 				<source>Max. thumb height</source>
 				<target>Max. hoogte thumbnail</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_image_maxWidth">
+			<trans-unit id="mediagallery_plugin_image_width">
 				<source>Max. image width</source>
 				<target>Max. breedte afbeelding</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_image_maxHeight">
+			<trans-unit id="mediagallery_plugin_image_height">
 				<source>Max. image height</source>
 				<target>Max. hoogte afbeelding</target>
 			</trans-unit>
@@ -93,11 +93,11 @@
 				<source>Gallery page</source>
 				<target>Gallerij pagina</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_random_thumb_maxWidth">
+			<trans-unit id="mediagallery_plugin_random_thumb_width">
 				<source>Max. thumb width</source>
 				<target>Max. breedte thumbnails</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_random_thumb_maxHeight">
+			<trans-unit id="mediagallery_plugin_random_thumb_height">
 				<source>Max. thumb height</source>
 				<target>Max. hoogte thumbnail</target>
 			</trans-unit>

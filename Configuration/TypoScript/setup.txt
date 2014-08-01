@@ -27,6 +27,8 @@ plugin.tx_fsmediagallery {
 			thumb {
 				width = 180
 				height = 100
+				# Resize assets: m=resize proportional, c=crop, ''=squeeze (unproportional exact fit)
+				resizeMode = m
 			}
 			hideEmptyAlbums = 1
 			# skip gallery view if there is only 1 album (is currently buggy when used with realUrl autoconf)
@@ -42,8 +44,10 @@ plugin.tx_fsmediagallery {
 		album {
 			itemsPerPage = 12
 			thumb {
-				maxWidth = 120
-				maxHeight = 70
+				width = 120
+				height = 70
+				# Resize assets: m=resize proportional, c=crop, ''=squeeze (unproportional exact fit)
+				resizeMode = m
 			}
 			lightbox {
 				enable = 1
@@ -61,13 +65,19 @@ plugin.tx_fsmediagallery {
 		}
 		# Settings for detail view
 		detail {
-			maxWidth = 1920
-			maxHeight = 1080
+			asset {
+				width = 1920
+				height = 1080
+				# Resize assets: m=resize proportional, c=crop, '' or s=squeeze (unproportional exact fit)
+				resizeMode = m
+			}
 		}
 		random {
 			thumb {
-				maxWidth = 250
-				maxHeight = 140
+				width = 250
+				height = 140
+				# Resize assets: m=resize proportional, c=crop, ''=squeeze (unproportional exact fit)
+				resizeMode = m
 			}
 		}
 		pagination {

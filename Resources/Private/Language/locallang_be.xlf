@@ -22,6 +22,18 @@
 			<trans-unit id="flexforms.general.I.inherit">
 				<source>Inherit (TypoScript)</source>
 			</trans-unit>
+			<trans-unit id="flexforms.general.resizeMode">
+				<source>Resize mode</source>
+			</trans-unit>
+			<trans-unit id="flexforms.general.resizeMode.I.m">
+				<source>resize proportional</source>
+			</trans-unit>
+			<trans-unit id="flexforms.general.resizeMode.I.c">
+				<source>crop</source>
+			</trans-unit>
+			<trans-unit id="flexforms.general.resizeMode.I.s">
+				<source>squeeze (unproportional exact fit)</source>
+			</trans-unit>
 			<!--
 				flexforms.mediagallery
 			-->
@@ -98,28 +110,28 @@
 			<trans-unit id="flexforms.mediagallery.album.itemsPerPage">
 				<source>Max. thumbs to display per page</source>
 			</trans-unit>
-			<trans-unit id="flexforms.mediagallery.album.thumb.maxWidth">
-				<source>Max. thumb width</source>
+			<trans-unit id="flexforms.mediagallery.album.thumb.width">
+				<source>Thumbnail width</source>
 			</trans-unit>
-			<trans-unit id="flexforms.mediagallery.album.thumb.maxHeight">
-				<source>Max. thumb height</source>
+			<trans-unit id="flexforms.mediagallery.album.thumb.height">
+				<source>Thumbnail height</source>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.album.lightbox.enable">
 				<source>Use LightBox/Colorbox instead of detail view</source>
 			</trans-unit>
 			<!-- flexforms.mediagallery.detail -->
-			<trans-unit id="flexforms.mediagallery.detail.maxWidth">
-				<source>Max. media width</source>
+			<trans-unit id="flexforms.mediagallery.detail.asset.width">
+				<source>Media width</source>
 			</trans-unit>
-			<trans-unit id="flexforms.mediagallery.detail.maxHeight">
-				<source>Max. media height</source>
+			<trans-unit id="flexforms.mediagallery.detail.asset.height">
+				<source>Media height</source>
 			</trans-unit>
 			<!-- flexforms.mediagallery.random -->
-			<trans-unit id="flexforms.mediagallery.random.thumb.maxWidth">
-				<source>Max. thumb width</source>
+			<trans-unit id="flexforms.mediagallery.random.thumb.width">
+				<source>Thumbnail width</source>
 			</trans-unit>
-			<trans-unit id="flexforms.mediagallery.random.thumb.maxHeight">
-				<source>Max. thumb height</source>
+			<trans-unit id="flexforms.mediagallery.random.thumb.height">
+				<source>Thumbnail height</source>
 			</trans-unit>
 
 			<!--
