@@ -166,7 +166,11 @@ class MediaAlbumController extends ActionController {
 	 * @return void
 	 */
 	public function showAlbumByConfigAction() {
-		$this->forward('showAlbum', NULL, NULL, array('mediaAlbum' => $this->settings['mediaAlbum']));
+		// get all request arguments (e.g. pagination widget)
+		$arguments = $this->request->getArguments();
+		// set album id from settings
+		$arguments['mediaAlbum'] = $this->settings['mediaAlbum'];
+		$this->forward('showAlbum', NULL, NULL, $arguments);
 	}
 
 	/**
