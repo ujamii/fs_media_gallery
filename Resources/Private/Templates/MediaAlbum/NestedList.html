@@ -13,10 +13,10 @@
 						<div class="navigation">
 							<f:if condition="{mediaAlbum.parentalbum}">
 								<f:then>
-									<f:link.action class="btn btn-back" controller="MediaAlbum" arguments="{mediaAlbum:mediaAlbum.parentalbum}"><f:translate id="back_to_%s"  arguments="{0: mediaAlbum.parentalbum.title}">Back to %s</f:translate></f:link.action>
+									<f:link.action class="btn btn-default" controller="MediaAlbum" arguments="{mediaAlbum:mediaAlbum.parentalbum}"><f:translate id="back_to_%s"  arguments="{0: mediaAlbum.parentalbum.title}">Back to %s</f:translate></f:link.action>
 								</f:then>
 								<f:else>
-									<f:link.action class="btn btn-back" controller="MediaAlbum"><f:translate key="back_to_album">Back to album</f:translate></f:link.action>
+									<f:link.action class="btn btn-default" controller="MediaAlbum"><f:translate key="back_to_album">Back to album</f:translate></f:link.action>
 								</f:else>
 							</f:if>
 						</div>
@@ -60,10 +60,10 @@
 						<div class="navigation">
 							<f:if condition="{mediaAlbum.parentalbum}">
 								<f:then>
-									<f:link.action class="btn btn-back" controller="MediaAlbum" arguments="{mediaAlbum:mediaAlbum.parentalbum}"><f:translate id="back_to_%s"  arguments="{0: mediaAlbum.parentalbum.title}">Back to %s</f:translate></f:link.action>
+									<f:link.action class="btn btn-default" controller="MediaAlbum" arguments="{mediaAlbum:mediaAlbum.parentalbum}"><f:translate id="back_to_%s"  arguments="{0: mediaAlbum.parentalbum.title}">Back to %s</f:translate></f:link.action>
 								</f:then>
 								<f:else>
-									<f:link.action class="btn btn-back" controller="MediaAlbum"><f:translate key="back_to_album">Back to album</f:translate></f:link.action>
+									<f:link.action class="btn btn-default" controller="MediaAlbum"><f:translate key="back_to_album">Back to album</f:translate></f:link.action>
 								</f:else>
 							</f:if>
 						</div>
