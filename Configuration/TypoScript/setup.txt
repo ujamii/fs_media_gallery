@@ -50,9 +50,9 @@ plugin.tx_fsmediagallery {
 				styleClass = lightbox
 				relPrefix = albm_
 				asset {
-					width = 300
-					height = 300
-					# Resize assets: m=resize_proportional, c=crop, ''=squeeze (unproportional exact fit)
+					width = 1920
+					height = 1080
+					# Resize assets: m=resize proportional, c=crop, ''=squeeze (unproportional exact fit)
 					resizeMode = m
 				}
 			}
