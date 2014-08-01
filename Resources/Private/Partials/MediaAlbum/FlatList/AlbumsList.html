@@ -11,7 +11,7 @@
 			<mf:widget.paginate objects="{mediaAlbums}" as="paginatedAlbums" configuration="{itemsPerPage: settings.list.itemsPerPage, insertAbove: settings.pagination.insertAbove, insertBelow: settings.pagination.insertBelow, maximumNumberOfLinks: settings.pagination.maximumNumberOfLinks, pagesBefore: settings.pagination.pagesBefore, pagesAfter:settings.pagination.pagesAfter}">
 				<f:if condition="{paginatedAlbums}">
 					<f:then>
-						<div class="thumbs clearfix">
+						<div class="thumbs thumbs-albums clearfix">
 							<f:for each="{paginatedAlbums}" as="mediaAlbum">
 								<f:render section="AlbumPreview" arguments="{mediaAlbum:mediaAlbum}" />
 							</f:for>
@@ -51,9 +51,9 @@
 					</h4>
 					<div class="description">
 						<f:if condition="{mediaAlbum.webdescription}">
-				<span class="teaser">
-					<f:format.crop maxCharacters="17" append="&nbsp;...">{mediaAlbum.webdescription}</f:format.crop>
-				</span>
+							<span class="teaser">
+								<f:format.crop maxCharacters="17" append="&nbsp;...">{mediaAlbum.webdescription}</f:format.crop>
+							</span>
 						</f:if>
 						<span class="asset-count">{mediaAlbum.assetsCount} <f:translate key="assets">assets</f:translate></span>
 						<span class="date"><f:format.date date="{mediaAlbum.datetime}" format="d.m.Y" /></span>

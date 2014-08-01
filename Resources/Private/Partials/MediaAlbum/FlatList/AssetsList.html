@@ -18,7 +18,7 @@
 				</f:if>
 				<f:if condition="{paginatedAssets}">
 					<f:then>
-						<div class="thumbs clearfix">
+						<div class="thumbs thumbs-assets clearfix">
 							<f:for each="{paginatedAssets}" as="mediaAsset">
 								<f:render partial="MediaAsset/Thumb" section="Thumb" arguments="{mediaGallery:mediaGallery,mediaAlbum:mediaAlbum,mediaAsset:mediaAsset}" />
 							</f:for>
