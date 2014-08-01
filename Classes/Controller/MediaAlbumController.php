@@ -138,6 +138,7 @@ class MediaAlbumController extends ActionController {
 	 * @return void
 	 */
 	public function flatListAction($mediaAlbum = 0) {
+		$showBackLink = TRUE;
 		$pidList = PageUtility::extendPidListByChildren($this->settings['startingpoint'], $this->settings['recursive']);
 		if ($mediaAlbum) {
 			// if an album is given, display it
@@ -152,7 +153,9 @@ class MediaAlbumController extends ActionController {
 			$mediaAlbums = $this->mediaAlbumRepository->findByStoragePage($pidList);
 			$this->view->assign('displayMode', 'flatList');
 			$this->view->assign('mediaAlbums', $mediaAlbums);
+			$showBackLink = FALSE;
 		}
+		$this->view->assign('showBackLink', $showBackLink);
 	}
 
 	/**

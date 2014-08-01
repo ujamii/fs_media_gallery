@@ -36,6 +36,11 @@
 					</f:for>
 				</f:if>
 			</mf:widget.paginate>
+			<f:if condition="{showBackLink}">
+				<div class="navigation">
+					<f:link.action class="btn btn-default" controller="MediaAlbum"><f:translate key="back_to_albums_list">Back to album list</f:translate></f:link.action>
+				</div>
+			</f:if>
 		</div>
 	</f:section>
 

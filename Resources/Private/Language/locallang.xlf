@@ -19,6 +19,9 @@
 			<trans-unit id="back_to_%s">
 				<source>Back to %s</source>
 			</trans-unit>
+			<trans-unit id="back_to_albums_list">
+				<source>Back to albums list</source>
+			</trans-unit>
 
 		</body>
 	</file>
