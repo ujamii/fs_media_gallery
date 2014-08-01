@@ -11,10 +11,12 @@
 				<h3>{mediaAlbum.title}</h3>
 				<div class="description"><f:format.html>{mediaAlbum.description}</f:format.html></div>
 				<mf:widget.paginate objects="{mediaAlbum.assets}" as="paginatedAssets" itemsBefore="before" itemsAfter="after" configuration="{itemsPerPage: settings.album.itemsPerPage,insertAbove: settings.pagination.insertAbove,insertBelow: settings.pagination.insertBelow,maximumNumberOfLinks: settings.pagination.maximumNumberOfLinks,pagesBefore: settings.pagination.pagesBefore,pagesAfter: settings.pagination.pagesAfter}">
-					<f:if condition="{before}">
-						<f:for each="{before}" as="mediaAsset">
-							<a href="{f:uri.image(image:mediaAsset)}" rel="{settings.album.lightbox.relPrefix}{mediaAlbum.uid}" class="{settings.album.lightbox.styleClass}" title="{mf:fileTitle(file:mediaAsset)} - {mediaAlbum.title}"></a>
-						</f:for>
+					<f:if condition="{settings.album.lightbox.enable}">
+						<f:if condition="{before}">
+							<f:for each="{before}" as="mediaAsset">
+								<a href="{f:uri.image(image:mediaAsset)}" rel="{settings.album.lightbox.relPrefix}{mediaAlbum.uid}" class="{settings.album.lightbox.styleClass}" title="{mf:fileTitle(file:mediaAsset)} - {mediaAlbum.title}"></a>
+							</f:for>
+						</f:if>
 					</f:if>
 					<f:if condition="{paginatedAssets}">
 						<f:then>
@@ -30,10 +32,12 @@
 							</div>
 						</f:else>
 					</f:if>
-					<f:if condition="{after}">
-						<f:for each="{after}" as="mediaAsset">
-							<a href="{f:uri.image(image:mediaAsset)}" rel="{settings.album.lightbox.relPrefix}{mediaAlbum.uid}" class="{settings.album.lightbox.styleClass}" title="{mf:fileTitle(file:mediaAsset)} - {mediaAlbum.title}"></a>
-						</f:for>
+					<f:if condition="{settings.album.lightbox.enable}">
+						<f:if condition="{after}">
+							<f:for each="{after}" as="mediaAsset">
+								<a href="{f:uri.image(image:mediaAsset)}" rel="{settings.album.lightbox.relPrefix}{mediaAlbum.uid}" class="{settings.album.lightbox.styleClass}" title="{mf:fileTitle(file:mediaAsset)} - {mediaAlbum.title}"></a>
+							</f:for>
+						</f:if>
 					</f:if>
 				</mf:widget.paginate>
 			</div>
