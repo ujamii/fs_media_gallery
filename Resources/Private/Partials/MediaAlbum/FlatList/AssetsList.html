@@ -46,6 +46,9 @@
 				</div>
 			</f:if>
 		</div>
+		<f:if condition="{settings.album.lightbox.enable}">
+			<f:render partial="MediaAlbum/Lightbox" section="Lightbox" arguments="{mediaAlbum:mediaAlbum}" />
+		</f:if>
 	</f:section>
 
 </div>

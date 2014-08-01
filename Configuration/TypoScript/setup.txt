@@ -49,6 +49,8 @@ plugin.tx_fsmediagallery {
 				enable = 1
 				styleClass = lightbox
 				relPrefix = albm_
+				# render JS code for colorbox
+				jsPlugin = colorbox
 				asset {
 					width = 1920
 					height = 1080

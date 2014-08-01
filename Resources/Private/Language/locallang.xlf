@@ -22,6 +22,9 @@
 			<trans-unit id="back_to_albums_list">
 				<source>Back to albums list</source>
 			</trans-unit>
+			<trans-unit id="lightbox_current">
+				<source>image {current} of {total}</source>
+			</trans-unit>
 
 		</body>
 	</file>
