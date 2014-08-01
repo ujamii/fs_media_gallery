@@ -31,7 +31,7 @@
 		<f:if condition="{0:0, 1:1} == {0:mediaAlbum.assetsCount, 1:settings.list.hideEmptyAlbums}">
 			<f:else>
 				<div class="img-thumbnail">
-					<f:link.action action="show" controller="MediaAlbum" arguments="{mediaAlbum : mediaAlbum}">
+					<f:link.action controller="MediaAlbum" arguments="{mediaAlbum: mediaAlbum}">
 						<f:if condition="{mediaAlbum.randomAsset}">
 							<f:then>
 								<f:image
@@ -47,7 +47,7 @@
 						</f:if>
 					</f:link.action>
 					<h4 class="name">
-						<f:link.action action="show" controller="MediaAlbum" arguments="{mediaAlbum : mediaAlbum}">{mediaAlbum.title}</f:link.action>
+						<f:link.action controller="MediaAlbum" arguments="{mediaAlbum: mediaAlbum}">{mediaAlbum.title}</f:link.action>
 					</h4>
 					<div class="description">
 						<f:if condition="{mediaAlbum.webdescription}">

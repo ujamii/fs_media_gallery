@@ -4,7 +4,7 @@
 
 	<f:section name="Thumb">
 		<div class="thumb">
-			<f:link.action action="show" controller="MediaAlbum" arguments="{mediaAlbum : mediaAlbum}">
+			<f:link.action controller="MediaAlbum" arguments="{mediaAlbum: mediaAlbum}">
 				<f:render partial="MediaAsset/Detail" section="Detail" arguments="{alt:mediaAlbum.title,title:mediaAlbum.title,mediaAsset:mediaAlbum.randomAsset,width:width,height:height}" />
 				<div class="name">{mediaAlbum.title}</div>
 				<div class="description"><f:format.crop maxCharacters="17" append="&nbsp;...">{mediaAlbum.webdescription}</f:format.crop></div>

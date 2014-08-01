@@ -6,7 +6,7 @@
 
 	<f:section name="main">
 		<div class="thumb random">
-			<f:link.action pageUid="{settings.galleryPid}" action="show" controller="MediaAlbum" arguments="{mediaAlbum : mediaAlbum}">
+			<f:link.action pageUid="{settings.galleryPid}" controller="MediaAlbum" arguments="{mediaAlbum : mediaAlbum}">
 				<f:render partial="MediaAsset/Detail" section="Detail" arguments="{alt:mediaAlbum.title,title:mediaAlbum.title,mediaAsset:mediaAlbum.randomAsset,height:settings.random.thumb.maxHeight,width:settings.random.thumb.maxWidth}" />
 				<div class="name">{mediaAlbum.title}</div>
 				<div class="description"><f:format.crop maxCharacters="17" append="&nbsp;...">{mediaAlbum.webdescription}</f:format.crop></div>
