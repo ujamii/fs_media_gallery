@@ -64,6 +64,7 @@ class MediaAlbumController extends ActionController {
 		$flexformSettings = $this->configurationManager->getConfiguration(
 			ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
 		);
+
 		// merge Framework (TypoScript) and Flexform settings
 		if (isset($frameworkSettings['settings']['overrideFlexformSettingsIfEmpty'])) {
 			/** @var $typoScriptUtility \MiniFranske\FsMediaGallery\Utility\TypoScriptUtility */
@@ -73,8 +74,39 @@ class MediaAlbumController extends ActionController {
 		} else {
 			$this->settings = $flexformSettings;
 		}
-		// store framework settings
-		$this->settings['_typoscript'] = $frameworkSettings['settings'];
+
+		/**
+		 * sync persistence.storagePid=settings.startingpoint and persistence.recursive=settings.recursive
+		 */
+		// overwrite persistence.storagePid if settings.startingpoint is defined in flexform
+		if (!empty($this->settings['startingpoint'])) {
+			$frameworkSettings['persistence']['storagePid'] = $this->settings['startingpoint'];
+		} else {
+			// if settings.startingpoint is not set in flexform, use persistence.storagePid from TS
+			if (!empty($frameworkSettings['persistence']['storagePid'])) {
+				$this->settings['startingpoint'] = $frameworkSettings['persistence']['storagePid'];
+			}
+		}
+		if (empty($this->settings['startingpoint'])) {
+			// startingpoint/storagePid is not set via TS nor flexforms > fallback to current pid
+			$this->settings['startingpoint'] = $frameworkSettings['persistence']['storagePid'] = $GLOBALS['TSFE']->id;
+		}
+		// set persistence.recursive if settings.recursive is defined in flexform
+		if (!empty($this->settings['recursive'])) {
+			$frameworkSettings['persistence']['recursive'] = $this->settings['recursive'];
+		} else {
+			// if settings.recursive is not set in flexform, use persistence.recursive from TS
+			if (!empty($frameworkSettings['persistence']['recursive'])) {
+				$this->settings['recursive'] = $frameworkSettings['persistence']['recursive'];
+			}
+		}
+		if (empty($this->settings['recursive'])) {
+			// recursive is not set via TS nor flexforms
+			$this->settings['recursive'] = $frameworkSettings['persistence']['recursive'] = 0;
+		}
+		// write back altered configuration
+		$this->configurationManager->setConfiguration($frameworkSettings);
+
 		// check some settings
 		if (!isset($this->settings['list']['itemsPerPage']) || $this->settings['list']['itemsPerPage'] < 1) {
 			$this->settings['list']['itemsPerPage'] = 12;

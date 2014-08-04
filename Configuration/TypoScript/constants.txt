@@ -8,16 +8,14 @@ plugin.tx_fsmediagallery {
 		layoutRootPath = EXT:fs_media_gallery/Resources/Private/Layouts/
 	}
 	persistence {
-		# cat=plugin.tx_fsmediagallery//a; type=string; label=Default storage PID
+		# cat=plugin.tx_fsmediagallery//a; type=string; label=Default storage PID: Comma seperated list of pages/sysfolders which hold the album records
 		storagePid =
+		# cat=plugin.tx_fsmediagallery//b; type=options[0 levels (only selected page)=0,1 level=1,2 levels=2,3 levels=3,4levels=4,Infinite=250]; label=Recursion level: Recursion level of the storage PID. Default: 0 levels (only selected page)
+		recursive = 0
 	}
 	settings {
-		# cat=plugin.tx_fsmediagallery//b; type=string; label=Startingpoint: Comma seperated list of pages/sysfolders which hold the album records
-		startingpoint =
-		# cat=plugin.tx_fsmediagallery//c; type=options[0 levels (only selected page)=0,1 level=1,2 levels=2,3 levels=3,4levels=4,Infinite=250]; label=Recursion level: Recursion level of the startingpoint. Default: 0 levels (only selected page)
-		recursive = 0
-		# cat=plugin.tx_fsmediagallery//d; type=string; label=Allowed Overwrite Fields: Comma seperated list of settings which are allowed to be set by TypoScript
-		overrideFlexformSettingsIfEmpty = startingpoint,recursive,list.itemsPerPage,list.thumb.width,list.thumb.height,list.thumb.resizeMode,list.hideEmptyAlbums,album.itemsPerPage,album.thumb.width,album.thumb.height,album.thumb.resizeMode,album.lightbox.enable,album.lightbox.styleClass,album.lightbox.relPrefix,detail.asset.width,detail.asset.height,detail.asset.resizeMode,random.thumb.width,random.thumb.height,random.thumb.resizeMode
+		# cat=plugin.tx_fsmediagallery//c; type=string; label=Allowed Overwrite Fields: Comma seperated list of settings which are allowed to be set by TypoScript
+		overrideFlexformSettingsIfEmpty = list.itemsPerPage,list.thumb.width,list.thumb.height,list.thumb.resizeMode,list.hideEmptyAlbums,album.itemsPerPage,album.thumb.width,album.thumb.height,album.thumb.resizeMode,album.lightbox.enable,album.lightbox.styleClass,album.lightbox.relPrefix,detail.asset.width,detail.asset.height,detail.asset.resizeMode,random.thumb.width,random.thumb.height,random.thumb.resizeMode
 	}
 }
 

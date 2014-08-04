@@ -91,7 +91,7 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$query = $this->createQuery();
 		$querySettings = $query->getQuerySettings();
 		// todo: add startingpoint and persistence.storagePid
-		$querySettings->setRespectStoragePage(FALSE);
+		$querySettings->setRespectStoragePage(TRUE);
 		$constraints = array();
 		$constraints[] = $query->equals('parentalbum', $parentAlbum ?: 0);
 		if (count($filterByUids)) {
@@ -116,6 +116,7 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	public function findByUidAndStoragePage(MediaAlbum $album = NULL, $storagePages = 0) {
 		$query = $this->createQuery();
 		$querySettings = $query->getQuerySettings();
+		$querySettings->setRespectStoragePage(TRUE);
 		$constraints = array();
 		$constraints[] = $query->equals('uid', $album);
 		$query->matching($query->logicalAnd($constraints));
@@ -123,10 +124,7 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		// storage page
 		if ($storagePages != 0) {
 			$pidList = array_unique(\TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $storagePages, TRUE));
-			$querySettings->setRespectStoragePage(TRUE);
 			$querySettings->setStoragePageIds($pidList);
-		} else {
-			$querySettings->setRespectStoragePage(FALSE);
 		}
 		$query->setQuerySettings($querySettings);
 		$result = $query->execute();
@@ -142,14 +140,12 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	public function findByStoragePage($storagePages = 0) {
 		$query = $this->createQuery();
 		$querySettings = $query->getQuerySettings();
+		$querySettings->setRespectStoragePage(TRUE);
 
 		// storage page
 		if ($storagePages != 0) {
 			$pidList = array_unique(\TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $storagePages, TRUE));
-			$querySettings->setRespectStoragePage(TRUE);
 			$querySettings->setStoragePageIds($pidList);
-		} else {
-			$querySettings->setRespectStoragePage(FALSE);
 		}
 		$query->setQuerySettings($querySettings);
 

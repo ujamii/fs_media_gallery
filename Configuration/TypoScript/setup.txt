@@ -5,14 +5,13 @@ plugin.tx_fsmediagallery {
 		layoutRootPaths.100 = {$plugin.tx_fsmediagallery.view.layoutRootPath}
 	}
 	persistence {
+		# Comma seperated list of pages/sysfolders which hold the album records
 		storagePid = {$plugin.tx_fsmediagallery.persistence.storagePid}
+		# Recursion level of the storagePid (startingpoint in flexform)
+		recursive = {$plugin.tx_fsmediagallery.persistence.recursive}
 	}
 
 	settings {
-		# Comma seperated list of pages/sysfolders which hold the album records
-		startingpoint = {$plugin.tx_fsmediagallery.settings.startingpoint}
-		# Recursion level of the startingpoint
-		recursive = {$plugin.tx_fsmediagallery.settings.recursive}
 		# Comma seperated list of settings which are allowed to be set by TypoScript
 		overrideFlexformSettingsIfEmpty = {$plugin.tx_fsmediagallery.settings.overrideFlexformSettingsIfEmpty}
 		#
