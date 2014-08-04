@@ -35,7 +35,7 @@
 										<numIndex index="1">MediaAlbum->randomAsset</numIndex>
 									</numIndex>
 								</items>
-								<default>MediaAlbum->nestedList;MediaAlbum->showAsset</default>
+								<default></default>
 								<size>1</size>
 							</config>
 						</TCEforms>
