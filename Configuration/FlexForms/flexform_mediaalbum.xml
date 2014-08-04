@@ -16,6 +16,7 @@
 							<onChange>reload</onChange>
 							<config>
 								<type>select</type>
+								<itemsProcFunc>MiniFranske\FsMediaGallery\Hooks\ItemsProcFuncHook->getItemsForSwitchableControllerActions</itemsProcFunc>
 								<items type="array">
 									<numIndex index="0">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.switchableControllerActions.I.show</numIndex>

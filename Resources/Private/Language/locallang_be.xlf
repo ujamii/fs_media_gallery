@@ -135,6 +135,13 @@
 			</trans-unit>
 
 			<!--
+				EXTENSION MANAGER
+			-->
+			<trans-unit id="extmng.allowedActionsInFlexforms">
+				<source>Plugin actions shown in flexforms: Comma separated list of controller actions which could be selected as plugin action in flexforms. Available actions are nestedList,flatList,showAlbum,randomAsset</source>
+			</trans-unit>
+
+			<!--
 				BE MODULE
 			-->
 
