@@ -1,122 +1,195 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2013-01-27T20:37:07Z" product-name="fs_media_gallery">
+	<file source-language="en" target-lanuage="nl" datatype="plaintext" original="messages" date="2013-01-27T20:37:07Z" product-name="fs_media_gallery">
 		<header/>
 		<body>
-			<trans-unit id="plugin.title">
+			<!--
+				General plugin configuration
+			-->
+
+			<trans-unit id="mediagallery.title">
 				<source>Media Album</source>
+				<target>Media album</target>
 			</trans-unit>
-			<trans-unit id="plugin.description">
-				<source>Media Album toevoegen</source>
+			<trans-unit id="mediagallery.description">
+				<source>Show your assets from your local or remote storage as a gallery of albums.</source>
+				<target>#translate# Show your assets from your local or remote storage as a gallery of albums.</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_tab_general">
+
+			<!--
+				FLEXFORMS
+			-->
+
+			<!-- flexforms.general -->
+			<trans-unit id="flexforms.general.I.inherit">
+				<source>Inherit (TypoScript)</source>
+				<target>#translate# Inherit (TypoScript)</target>
+			</trans-unit>
+			<trans-unit id="flexforms.general.resizeMode">
+				<source>Resize mode</source>
+				<target>#translate# Resize mode</target>
+			</trans-unit>
+			<trans-unit id="flexforms.general.resizeMode.I.m">
+				<source>resize proportional</source>
+				<target>#translate# resize proportional</target>
+			</trans-unit>
+			<trans-unit id="flexforms.general.resizeMode.I.c">
+				<source>crop</source>
+				<target>#translate# crop</target>
+			</trans-unit>
+			<trans-unit id="flexforms.general.resizeMode.I.s">
+				<source>squeeze (unproportional exact fit)</source>
+				<target>#translate# squeeze (unproportional exact fit)</target>
+			</trans-unit>
+			<!--
+				flexforms.mediagallery
+			-->
+			<trans-unit id="flexforms.mediagallery.tabs.general">
 				<source>General</source>
-				<target>Algemeen</target>
+				<target>#translate# General</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_tab_album">
-				<source>Album settings</source>
-				<target>Album instellingen</target>
+			<trans-unit id="flexforms.mediagallery.tabs.list">
+				<source>Albums list</source>
+				<target>#translate# Albums list</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_tab_image">
-				<source>Single image settings</source>
-				<target>Detail weergave instellingen</target>
-			</trans-unit>
-			<trans-unit id="mediagallery_plugin_tab_random">
-				<source>Random image settings</source>
-				<target>Willekeurige afbeelding instellingen</target>
-			</trans-unit>
-			<trans-unit id="mediagallery_plugin_display">
-				<source>Display</source>
-				<target>Toon</target>
-			</trans-unit>
-			<trans-unit id="mediagallery_plugin_display.0">
+			<trans-unit id="flexforms.mediagallery.tabs.album">
 				<source>Album view</source>
 				<target>Album weergave</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_display.1">
-				<source>Random image</source>
+			<trans-unit id="flexforms.mediagallery.tabs.detail">
+				<source>Detail view</source>
+				<target>#translate# Detail view</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.tabs.random">
+				<source>Random asset</source>
 				<target>Willekeurige afbeelding</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_mediaalbums">
-				<source>Album selection</source>
-				<target>Album selecteren</target>
+			<trans-unit id="flexforms.mediagallery.switchableControllerActions">
+				<source>Display mode</source>
+				<target>#translate# Display mode</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_useAlbumFilterAsExclude">
-				<source>Album selection filter (when albums are selected else all are shown)</source>
+			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.show">
+				<source>Selected Albums (nested)</source>
+				<target>#translate# Selected Albums (nested)</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.flatList">
+				<source>Albums list (flattened)</source>
+				<target>#translate# Albums list (flattened)</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.showAlbum">
+				<source>Single album</source>
+				<target>#translate# Single album</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.randomAsset">
+				<source>Random media asset</source>
+				<target>#translate# Random media asset</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.mediaAlbum">
+				<source>Album to display</source>
+				<target>#translate# Album to display</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.mediaAlbums">
+				<source>Albums to display</source>
+				<target>#translate# Albums to display</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.galleryPid">
+				<source>Album page</source>
+				<target>#translate# Album page</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.useAlbumFilterAsExclude">
+				<source>Album selection filter (if no items are selected all are shown)</source>
 				<target>Album selectie filter (indien albums zijn geselecteerd anders wordt alles getoond)</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_useAlbumFilterAsExclude.0">
-				<source>Show above selected albums</source>
+			<trans-unit id="flexforms.mediagallery.useAlbumFilterAsExclude.I.0">
+				<source>Show only selected items</source>
 				<target>Toon alleen geselecteerde albums</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_useAlbumFilterAsExclude.1">
-				<source>Exclude above selected albums</source>
+			<trans-unit id="flexforms.mediagallery.useAlbumFilterAsExclude.I.1">
+				<source>Exclude selected items</source>
 				<target>Toon geselecteerde albums niet</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_detailsInLightbox">
-				<source>Open LightBox/Colorbox instead of detail-page</source>
+			<!-- flexforms.mediagallery.list (both nested and flat) -->
+			<trans-unit id="flexforms.mediagallery.list.hideEmptyAlbums">
+				<source>Hide empty albums</source>
+				<target>#translate#Hide empty albums</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.list.itemsPerPage">
+				<source>Max. thumbs to display per page</source>
+				<target>Max. aantal to tonen thumbnails</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.list.thumb.width">
+				<source>Thumb width</source>
+				<target>Breedte thumbnails</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.list.thumb.height">
+				<source>Thumb height</source>
+				<target>Hoogte thumbnails</target>
+			</trans-unit>
+			<!-- flexforms.mediagallery.album -->
+			<trans-unit id="flexforms.mediagallery.album.itemsPerPage">
+				<source>Max. thumbs to display per page</source>
+				<target>Max. aantal to tonen thumbnails</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.album.thumb.width">
+				<source>Thumbnail width</source>
+				<target>Breedte thumbnails</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.album.thumb.height">
+				<source>Thumbnail height</source>
+				<target>Hoogte thumbnails</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.album.lightbox.enable">
+				<source>Use LightBox/Colorbox instead of detail view</source>
 				<target>Toon afbeelding in LightBox/Colorbox ipv een detail weergave</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_album_thumb_limit">
-				<source>Max. thumbs to show</source>
-				<target>Max. aantal to tonen thumbnails</target>
+			<!-- flexforms.mediagallery.detail -->
+			<trans-unit id="flexforms.mediagallery.detail.asset.width">
+				<source>Media width</source>
+				<target>Breedte afbeelding</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_album_thumb_width">
-				<source>Max. thumb width</source>
-				<target>Max. breedte thumbnails</target>
+			<trans-unit id="flexforms.mediagallery.detail.asset.height">
+				<source>Media height</source>
+				<target>Hoogte afbeelding</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_album_thumb_height">
-				<source>Max. thumb height</source>
-				<target>Max. hoogte thumbnail</target>
+			<!-- flexforms.mediagallery.random -->
+			<trans-unit id="flexforms.mediagallery.random.thumb.width">
+				<source>Thumbnail width</source>
+				<target>Breedte thumbnail</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_image_thumb_limit">
-				<source>Max. thumbs to show</source>
-				<target>Max. aantal to tonen thumbnails</target>
+			<trans-unit id="flexforms.mediagallery.random.thumb.height">
+				<source>Thumbnail height</source>
+				<target>Hoogte thumbnail</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_image_thumb_width">
-				<source>Max. thumb width</source>
-				<target>Max. breedte thumbnails</target>
+
+			<!--
+				EXTENSION MANAGER
+			-->
+			<trans-unit id="extmng.allowedActionsInFlexforms">
+				<source>Plugin actions shown in flexforms: Comma separated list of controller actions which could be selected as plugin action in flexforms. Available actions are nestedList,flatList,showAlbum,randomAsset</source>
+				<target>#translate# Plugin actions shown in flexforms: Comma separated list of controller actions which could be selected as plugin action in flexforms. Available actions are nestedList,flatList,showAlbum,randomAsset</target>
 			</trans-unit>
-			<trans-unit id="mediagallery_plugin_image_thumb_height">
-				<source>Max. thumb height</source>
-				<target>Max. hoogte thumbnail</target>
-			</trans-unit>
-			<trans-unit id="mediagallery_plugin_image_width">
-				<source>Max. image width</source>
-				<target>Max. breedte afbeelding</target>
-			</trans-unit>
-			<trans-unit id="mediagallery_plugin_image_height">
-				<source>Max. image height</source>
-				<target>Max. hoogte afbeelding</target>
-			</trans-unit>
-			<trans-unit id="mediagallery_gallery_page">
-				<source>Gallery page</source>
-				<target>Gallerij pagina</target>
-			</trans-unit>
-			<trans-unit id="mediagallery_plugin_random_thumb_width">
-				<source>Max. thumb width</source>
-				<target>Max. breedte thumbnails</target>
-			</trans-unit>
-			<trans-unit id="mediagallery_plugin_random_thumb_height">
-				<source>Max. thumb height</source>
-				<target>Max. hoogte thumbnail</target>
-			</trans-unit>
-			<trans-unit id="firstCreateStorageFolder">
-				<source>First create a MediaGalleries StorageFolder!</source>
-				<target>Maak eerst een MediaGalleries Map in je pagina boom! Bevat plugin: MediaGalleries</target>
-			</trans-unit>
-			<trans-unit id="createAlbum">
+
+			<!--
+				BE MODULE
+			-->
+
+			<trans-unit id="module.buttons.createAlbum">
 				<source>Create album</source>
 				<target>Album aanmaken</target>
 			</trans-unit>
-			<trans-unit id="createAlbumIn">
-				<source>Create new album in "%s"</source>
+			<trans-unit id="module.buttons.createAlbumIn">
+				<source>Create album in "%s"</source>
 				<target>Nieuw album aanmaken in "%s"</target>
 			</trans-unit>
-			<trans-unit id="editAlbum">
+			<trans-unit id="module.buttons.editAlbum">
 				<source>Edit album "%s"</source>
 				<target>Album "%s" bewerken</target>
 			</trans-unit>
+			<trans-unit id="module.alerts.firstCreateStorageFolder">
+				<source>You must first create a storage folder for your media albums!</source>
+				<target>Maak eerst een MediaGalleries Map in je pagina boom! Bevat plugin: MediaGalleries</target>
+			</trans-unit>
+
 		</body>
 	</file>
 </xliff>

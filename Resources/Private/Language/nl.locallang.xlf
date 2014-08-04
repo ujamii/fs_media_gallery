@@ -3,24 +3,34 @@
 	<file source-language="en" target-lanuage="nl" datatype="plaintext" original="messages" date="2013-02-02T15:05:08Z" product-name="fs_media_gallery">
 		<header/>
 		<body>
-
 			<trans-unit id="no_albums_found">
 				<source>No albums found</source>
 				<target>Geen albums gevonden</target>
 			</trans-unit>
+			<trans-unit id="no_album_found">
+				<source>Album not found</source>
+				<target>Geen album gevonden</target>
+			</trans-unit>
 			<trans-unit id="no_assets_found">
 				<source>No assets found</source>
-				<source>Geen media elementen gevonden</source>
+				<target>Geen media elementen gevonden</target>
 			</trans-unit>
 			<trans-unit id="back_to_album">
 				<source>Back to album</source>
-				<target>Terug naar de albums</target>
+				<target>Terug naar de album</target>
 			</trans-unit>
 			<trans-unit id="back_to_%s">
 				<source>Back to %s</source>
 				<target>Terug naar %s</target>
 			</trans-unit>
-
+			<trans-unit id="back_to_albums_list">
+				<source>Back to albums list</source>
+				<target>Terug naar de albums</target>
+			</trans-unit>
+			<trans-unit id="lightbox_current">
+				<source>image {current} of {total}</source>
+				<target>{current} / {total}</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
