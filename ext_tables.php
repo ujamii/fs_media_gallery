@@ -8,7 +8,7 @@ $extensionName = \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamel
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'Mediagallery',
-	'Media Gallery'
+	'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_be.xlf:mediagallery.title'
 );
 
 $pluginSignature = strtolower($extensionName) . '_mediagallery';

@@ -7,11 +7,11 @@
 				General plugin configuration
 			-->
 
-			<trans-unit id="plugin.title">
-				<source>### Media Album</source>
+			<trans-unit id="mediagallery.title">
+				<source>Media Album</source>
 			</trans-unit>
-			<trans-unit id="plugin.description">
-				<source>### Add Media Album</source>
+			<trans-unit id="mediagallery.description">
+				<source>Show your assets from your local or remote storage as a gallery of albums.</source>
 			</trans-unit>
 
 			<!--
@@ -155,7 +155,7 @@
 				<source>Edit album "%s"</source>
 			</trans-unit>
 			<trans-unit id="module.alerts.firstCreateStorageFolder">
-				<source>First create a MediaGalleries StorageFolder!</source>
+				<source>You must first create a storage folder for your media albums!</source>
 			</trans-unit>
 
 		</body>

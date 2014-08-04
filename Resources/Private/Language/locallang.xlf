@@ -3,7 +3,6 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2013-02-02T15:05:08Z" product-name="fs_media_gallery">
 		<header/>
 		<body>
-
 			<trans-unit id="no_albums_found">
 				<source>No albums found</source>
 			</trans-unit>
@@ -25,7 +24,6 @@
 			<trans-unit id="lightbox_current">
 				<source>image {current} of {total}</source>
 			</trans-unit>
-
 		</body>
 	</file>
 </xliff>
