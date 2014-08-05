@@ -35,6 +35,14 @@
 				<source>image {current} of {total}</source>
 				<target>Bild {current} von {total}</target>
 			</trans-unit>
+			<trans-unit id="asset">
+				<source>asset</source>
+				<target>Medienobjekt</target>
+			</trans-unit>
+			<trans-unit id="assets">
+				<source>assets</source>
+				<target>Medienobjekte</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

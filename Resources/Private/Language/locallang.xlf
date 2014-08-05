@@ -27,6 +27,12 @@
 			<trans-unit id="lightbox_current">
 				<source>image {current} of {total}</source>
 			</trans-unit>
+			<trans-unit id="asset">
+				<source>asset</source>
+			</trans-unit>
+			<trans-unit id="assets">
+				<source>assets</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
