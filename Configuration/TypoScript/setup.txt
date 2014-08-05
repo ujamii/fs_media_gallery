@@ -32,6 +32,10 @@ plugin.tx_fsmediagallery {
 				maxWidth = 120
 				maxHeight = 100
 			}
+			lightbox {
+				maxWidth = 1400
+				maxHeight = 1400
+			}
 		}
 		random {
 			thumb {
