@@ -27,7 +27,7 @@ Quick install notes
 - Include Static Template "Media Galley (fs_media_gallery)"
 - Create a StoragePage and set "Contains Plugin" to "MediaGalleries"
 - Go to file module and open the folder you want to turn into a album
-   - Click on the "Create new album..." in context menu of top toolbar
+   - Click on the "Create new album..." in context menu or top toolbar
    - Save your new album
 - Insert plugin on page and select "Media Gallery" as plugin type
 - Set the "Record Storage Page" to the "StoragePage" you just created
