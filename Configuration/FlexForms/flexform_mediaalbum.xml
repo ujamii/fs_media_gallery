@@ -27,10 +27,14 @@
 										<numIndex index="1">MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset</numIndex>
 									</numIndex>
 									<numIndex index="2">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.switchableControllerActions.I.showAlbum</numIndex>
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.switchableControllerActions.I.showAlbumByConfig</numIndex>
 										<numIndex index="1">MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset</numIndex>
 									</numIndex>
 									<numIndex index="3">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.switchableControllerActions.I.showAlbumByParam</numIndex>
+										<numIndex index="1">MediaAlbum->showAlbum;MediaAlbum->showAsset</numIndex>
+									</numIndex>
+									<numIndex index="4">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.switchableControllerActions.I.randomAsset</numIndex>
 										<numIndex index="1">MediaAlbum->randomAsset</numIndex>
 									</numIndex>
@@ -89,7 +93,7 @@
 					<settings.mediaAlbum>
 						<TCEforms>
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.mediaAlbum</label>
-							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset</displayCond>
+							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->showAlbum;MediaAlbum->showAsset,MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset</displayCond>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>

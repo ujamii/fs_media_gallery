@@ -76,9 +76,13 @@
 				<source>Albums list (flattened)</source>
 				<target>#translate# Albums list (flattened)</target>
 			</trans-unit>
-			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.showAlbum">
-				<source>Single album</source>
-				<target>#translate# Single album</target>
+			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.showAlbumByParam">
+				<source>Single album (URL handover enabled)</source>
+				<target>#translate# Single album (URL handover enabled)</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.showAlbumByConfig">
+				<source>Single album (URL handover disabled)</source>
+				<target>#translate# Single album (URL handover disabled)</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.randomAsset">
 				<source>Random media asset</source>
@@ -165,8 +169,8 @@
 				EXTENSION MANAGER
 			-->
 			<trans-unit id="extmng.allowedActionsInFlexforms">
-				<source>Plugin actions shown in flexforms: Comma separated list of controller actions which could be selected as plugin action in flexforms. Available actions are nestedList,flatList,showAlbum,randomAsset</source>
-				<target>#translate# Plugin actions shown in flexforms: Comma separated list of controller actions which could be selected as plugin action in flexforms. Available actions are nestedList,flatList,showAlbum,randomAsset</target>
+				<source>Plugin actions shown in flexforms: Comma separated list of controller actions which could be selected as plugin action in flexforms. Available actions are nestedList,flatList,showAlbumByParam,showAlbumByConfig,randomAsset</source>
+				<target>#translate# Plugin actions shown in flexforms: Comma separated list of controller actions which could be selected as plugin action in flexforms. Available actions are nestedList,flatList,showAlbumByParam,showAlbumByConfig,randomAsset</target>
 			</trans-unit>
 
 			<!--

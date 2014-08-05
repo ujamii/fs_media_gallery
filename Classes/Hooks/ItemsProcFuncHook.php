@@ -26,10 +26,11 @@ class ItemsProcFuncHook {
 	 */
 	public function getItemsForSwitchableControllerActions(array &$config) {
 		$availableActions = array(
-			'nestedList'	=> 'MediaAlbum->nestedList;MediaAlbum->showAsset',
-			'flatList'		=> 'MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset',
-			'showAlbum'		=> 'MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset',
-			'randomAsset'	=> 'MediaAlbum->randomAsset',
+			'nestedList'		=> 'MediaAlbum->nestedList;MediaAlbum->showAsset',
+			'flatList'			=> 'MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset',
+			'showAlbumByParam'	=> 'MediaAlbum->showAlbum;MediaAlbum->showAsset',
+			'showAlbumByConfig'	=> 'MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset',
+			'randomAsset'		=> 'MediaAlbum->randomAsset',
 		);
 		$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['fs_media_gallery']);
 		$allowedActions = array();
