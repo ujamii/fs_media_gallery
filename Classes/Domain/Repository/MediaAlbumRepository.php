@@ -41,6 +41,29 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	);
 
 	/**
+	 * @var array
+	 */
+	protected $allowedAssetMimeTypes = array();
+
+	/**
+	 * Set allowedAssetMimeTypes
+	 *
+	 * @param array $allowedAssetMimeTypes
+	 */
+	public function setAllowedAssetMimeTypes($allowedAssetMimeTypes) {
+		$this->allowedAssetMimeTypes = $allowedAssetMimeTypes;
+	}
+
+	/**
+	 * Get allowedAssetMimeTypes
+	 *
+	 * @return array $allowedAssetMimeTypes
+	 */
+	public function getAllowedAssetMimeTypes() {
+		return $this->allowedAssetMimeTypes;
+	}
+
+	/**
 	 * Get random sub album
 	 *
 	 * @param MediaAlbum|bool $parent parent MediaAlbum, FALSE for parent = 0 or NULL for no restriction by parent
@@ -76,7 +99,14 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$query->statement($statement);
 		$result = $query->execute();
 
-		return $result->getFirst();
+		// todo: getFirst() might return an empty album
+		/** @var \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum $mediaAlbum */
+		$mediaAlbum = $result->getFirst();
+		// set allowed asset mime types
+		if ($mediaAlbum) {
+			$mediaAlbum->setAllowedMimeTypes($this->allowedAssetMimeTypes);
+		}
+		return $mediaAlbum;
 	}
 
 	/**
@@ -84,10 +114,12 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 *
 	 * @param MediaAlbum $parentAlbum
 	 * @param array $filterByUids filter possible result by given uids
-	 * @param bool $useAlbumFilterAsExclude
+	 * @param boolean $useAlbumFilterAsExclude
+	 * @param boolean $excludeEmptyAlbums
 	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
-	public function findByParentAlbum(MediaAlbum $parentAlbum = NULL, array $filterByUids = array(), $useAlbumFilterAsExclude = FALSE) {
+	public function findByParentAlbum(MediaAlbum $parentAlbum = NULL, array $filterByUids = array(), $useAlbumFilterAsExclude = FALSE, $excludeEmptyAlbums = TRUE) {
+		$excludeEmptyAlbums = filter_var($excludeEmptyAlbums, FILTER_VALIDATE_BOOLEAN);
 		$query = $this->createQuery();
 		$querySettings = $query->getQuerySettings();
 		// todo: add startingpoint and persistence.storagePid
@@ -103,7 +135,17 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		}
 		$query->matching($query->logicalAnd($constraints));
 
-		return $query->execute();
+		$mediaAlbums = $query->execute();
+		foreach ($mediaAlbums as $key => $mediaAlbum) {
+			/** @var $mediaAlbum \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum */
+			// set allowed asset mime types
+			$mediaAlbum->setAllowedMimeTypes($this->allowedAssetMimeTypes);
+			// exclude if album is empty
+			if (TRUE === $excludeEmptyAlbums && $mediaAlbum->getAssetsCount() < 1) {
+				unset($mediaAlbums[$key]);
+			}
+		}
+		return $mediaAlbums;
 	}
 
 	/**
@@ -111,7 +153,7 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 *
 	 * @param MediaAlbum $album
 	 * @param mixed $storagePages Page id or list of comma separated page ids containing album records
-	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 * @return array|\MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum
 	 */
 	public function findByUidAndStoragePage(MediaAlbum $album = NULL, $storagePages = 0) {
 		$query = $this->createQuery();
@@ -128,16 +170,24 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		}
 		$query->setQuerySettings($querySettings);
 		$result = $query->execute();
-		return $result->getFirst();
+		/** @var $mediaAlbum \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum */
+		$mediaAlbum = $result->getFirst();
+		// set allowed asset mime types
+		if ($mediaAlbum) {
+			$mediaAlbum->setAllowedMimeTypes($this->allowedAssetMimeTypes);
+		}
+		return $mediaAlbum;
 	}
 
 	/**
 	 * Find albums by StoragePage
 	 *
 	 * @param mixed $storagePages Page id or list of comma separated page ids containing album records
-	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 * @param boolean $excludeEmptyAlbums
+	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
-	public function findByStoragePage($storagePages = 0) {
+	public function findByStoragePage($storagePages = 0, $excludeEmptyAlbums = TRUE) {
+		$excludeEmptyAlbums = filter_var($excludeEmptyAlbums, FILTER_VALIDATE_BOOLEAN);
 		$query = $this->createQuery();
 		$querySettings = $query->getQuerySettings();
 		$querySettings->setRespectStoragePage(TRUE);
@@ -155,7 +205,17 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			'crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
 		));
 
-		return $query->execute();
+		$mediaAlbums = $query->execute();
+		foreach ($mediaAlbums as $key => $mediaAlbum) {
+			/** @var $mediaAlbum \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum */
+			// set allowed asset mime types
+			$mediaAlbum->setAllowedMimeTypes($this->allowedAssetMimeTypes);
+			// exclude if album is empty
+			if (TRUE === $excludeEmptyAlbums && $mediaAlbum->getAssetsCount() < 1) {
+				unset($mediaAlbums[$key]);
+			}
+		}
+		return $mediaAlbums;
 	}
 
 	/**

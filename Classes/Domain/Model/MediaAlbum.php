@@ -54,6 +54,11 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $assetCache;
 
 	/**
+	 * @var array
+	 */
+	protected $allowedMimeTypes = array();
+
+	/**
 	 * Assets
 	 * An array of \TYPO3\CMS\Core\Resource\File
 	 * @var array
@@ -102,6 +107,24 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @var DateTime
 	 */
 	protected $datetime;
+
+	/**
+	 * Set allowedMimeTypes
+	 *
+	 * @param array $allowedMimeTypes
+	 */
+	public function setAllowedMimeTypes($allowedMimeTypes) {
+		$this->allowedMimeTypes = $allowedMimeTypes;
+	}
+
+	/**
+	 * Get allowedMimeTypes
+	 *
+	 * @return array $allowedMimeTypes
+	 */
+	public function getAllowedMimeTypes() {
+		return $this->allowedMimeTypes;
+	}
 
 	/**
 	 * Set hidden
@@ -186,7 +209,19 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 				/** @var $fileCollection \TYPO3\CMS\Core\Resource\Collection\AbstractFileCollection */
 				$fileCollection = $this->fileCollectionRepository->findByUid($this->getUid());
 				$fileCollection->loadContents();
-				$this->assetCache = $fileCollection->getItems();
+				$files = $fileCollection->getItems();
+				// check if file has right mimeType
+				if (count($this->allowedMimeTypes) > 0) {
+					foreach ($files as $key => $fileObject) {
+						/** @var $fileObject \TYPO3\CMS\Core\Resource\File */
+						if (!in_array($fileObject->getMimeType(), $this->allowedMimeTypes)) {
+							unset($files[$key]);
+						}
+					}
+					// reset keys
+					$files = array_values($files);
+				}
+				$this->assetCache = $files;
 			} catch (\Exception $exception) {
 				// failing albums get disabled
 				$this->setHidden(TRUE);

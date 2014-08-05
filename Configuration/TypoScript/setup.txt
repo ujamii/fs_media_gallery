@@ -14,6 +14,8 @@ plugin.tx_fsmediagallery {
 	settings {
 		# Comma seperated list of settings which are allowed to be set by TypoScript
 		overrideFlexformSettingsIfEmpty = {$plugin.tx_fsmediagallery.settings.overrideFlexformSettingsIfEmpty}
+		# Comma seperated list of mime types (if empty, all files are included)
+		allowedAssetMimeTypes = {$plugin.tx_fsmediagallery.settings.allowedAssetMimeTypes}
 		#
 		galleryPid =
 		# Comma seperated list of albums uids

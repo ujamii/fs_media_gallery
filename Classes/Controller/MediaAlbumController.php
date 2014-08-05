@@ -40,14 +40,6 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 class MediaAlbumController extends ActionController {
 
 	/**
-	 * mediaAlbumRepository
-	 *
-	 * @var \MiniFranske\FsMediaGallery\Domain\Repository\MediaAlbumRepository
-	 * @inject
-	 */
-	protected $mediaAlbumRepository;
-
-	/**
 	 * Injects the Configuration Manager
 	 *
 	 * @param ConfigurationManagerInterface $configurationManager Instance of the Configuration Manager
@@ -130,6 +122,26 @@ class MediaAlbumController extends ActionController {
 	}
 
 	/**
+	 * mediaAlbumRepository
+	 *
+	 * @var \MiniFranske\FsMediaGallery\Domain\Repository\MediaAlbumRepository
+	 */
+	protected $mediaAlbumRepository;
+
+	/**
+	 * Injects the MediaAlbumRepository
+	 *
+	 * @param \MiniFranske\FsMediaGallery\Domain\Repository\MediaAlbumRepository $mediaAlbumRepository
+	 * @return void
+	 */
+	public function injectMediaAlbumRepository(\MiniFranske\FsMediaGallery\Domain\Repository\MediaAlbumRepository $mediaAlbumRepository) {
+		$this->mediaAlbumRepository = $mediaAlbumRepository;
+		if (!empty($this->settings['allowedAssetMimeTypes'])) {
+			$this->mediaAlbumRepository->setAllowedAssetMimeTypes(GeneralUtility::trimExplode(',', $this->settings['allowedAssetMimeTypes']));
+		}
+	}
+
+	/**
 	 * NestedList Action
 	 * Displays a (nested) list of albums; default/show action in fs_media_gallery <= 0.0.6
 	 *
@@ -164,12 +176,12 @@ class MediaAlbumController extends ActionController {
 			}
 		}
 
-		$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $mediaAlbumsUids, $useAlbumFilterAsExclude);
+		$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $mediaAlbumsUids, $useAlbumFilterAsExclude, $this->settings['list']['hideEmptyAlbums']);
 
 		// when only 1 album skip gallery view
 		if ($mediaAlbum === NULL && !empty($this->settings['list']['skipListWhenOnlyOneAlbum']) && count($mediaAlbums) === 1) {
 			$mediaAlbum = $mediaAlbums[0];
-			$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $mediaAlbumsUids, $useAlbumFilterAsExclude);
+			$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $mediaAlbumsUids, $useAlbumFilterAsExclude, $this->settings['list']['hideEmptyAlbums']);
 			$showBackLink = FALSE;
 		}
 
@@ -198,7 +210,7 @@ class MediaAlbumController extends ActionController {
 			$this->view->assign('mediaAlbum', $mediaAlbum);
 		} else {
 			// display the album list
-			$mediaAlbums = $this->mediaAlbumRepository->findByStoragePage($pidList);
+			$mediaAlbums = $this->mediaAlbumRepository->findByStoragePage($pidList, $this->settings['list']['hideEmptyAlbums']);
 			$this->view->assign('displayMode', 'flatList');
 			$this->view->assign('mediaAlbums', $mediaAlbums);
 			$showBackLink = FALSE;
@@ -246,6 +258,7 @@ class MediaAlbumController extends ActionController {
 	 * @ignorevalidation
 	 */
 	public function showAssetAction(MediaAlbum $mediaAlbum, $mediaAssetUid) {
+		/** @var $mediaAsset \TYPO3\CMS\Core\Resource\File */
 		if (!$mediaAsset = $mediaAlbum->getAssetByUid($mediaAssetUid)) {
 			$message = LocalizationUtility::translate('asset_not_found', $this->extensionName);
 			$this->pageNotFound((empty($message) ? 'Asset not found.' : $message));
