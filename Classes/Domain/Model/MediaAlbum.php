@@ -25,6 +25,8 @@ namespace MiniFranske\FsMediaGallery\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use \TYPO3\CMS\Core\Resource\ResourceFactory;
+
 /**
  * Media album
  */
@@ -179,7 +181,7 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return array<\TYPO3\CMS\Core\Resource\File>
 	 */
 	public function getAssets() {
-		if($this->assetCache === NULL) {
+		if ($this->assetCache === NULL) {
 			try {
 				/** @var $fileCollection \TYPO3\CMS\Core\Resource\Collection\AbstractFileCollection */
 				$fileCollection = $this->fileCollectionRepository->findByUid($this->getUid());
@@ -193,6 +195,30 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 			}
 		}
 		return $this->assetCache;
+	}
+
+	/**
+	 * @param integer $assetUid
+	 * @return mixed array<\TYPO3\CMS\Core\Resource\File> or NULL
+	 */
+	public function getAssetByUid($assetUid) {
+		$assetsUids = $this->getAssetsUids();
+		if (in_array($assetUid, $assetsUids)) {
+			return ResourceFactory::getInstance()->getFileObject($assetUid);
+		}
+		return NULL;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getAssetsUids() {
+		$assetsUids = array();
+		foreach ($assets = $this->getAssets() as $asset) {
+			/** @var $asset \TYPO3\CMS\Core\Resource\File */
+			$assetsUids[] = $asset->getUid();
+		}
+		return $assetsUids;
 	}
 
 	/**
@@ -213,7 +239,7 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum>>
 	 */
 	public function getAlbums() {
-		if($this->albumCache === NULL) {
+		if ($this->albumCache === NULL) {
 			$this->albumCache = $this->mediaAlbumRepository->findByParentalbum($this);
 		}
 		return $this->albumCache;

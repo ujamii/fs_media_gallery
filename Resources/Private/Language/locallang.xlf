@@ -12,6 +12,9 @@
 			<trans-unit id="no_assets_found">
 				<source>No assets found</source>
 			</trans-unit>
+			<trans-unit id="asset_not_found">
+				<source>Asset not found</source>
+			</trans-unit>
 			<trans-unit id="back_to_album">
 				<source>Back to album</source>
 			</trans-unit>

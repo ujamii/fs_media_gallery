@@ -15,6 +15,10 @@
 				<source>No assets found</source>
 				<target>Es sind keine Medieninhalte vorhanden</target>
 			</trans-unit>
+			<trans-unit id="asset_not_found">
+				<source>Asset not found</source>
+				<target>Das Medienobjekt wurde nicht gefunden</target>
+			</trans-unit>
 			<trans-unit id="back_to_album">
 				<source>Back to album</source>
 				<target>Zurück zum Album</target>

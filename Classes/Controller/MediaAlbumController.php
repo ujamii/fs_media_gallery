@@ -246,9 +246,12 @@ class MediaAlbumController extends ActionController {
 	 * @ignorevalidation
 	 */
 	public function showAssetAction(MediaAlbum $mediaAlbum, $mediaAssetUid) {
+		if (!$mediaAsset = $mediaAlbum->getAssetByUid($mediaAssetUid)) {
+			$message = LocalizationUtility::translate('asset_not_found', $this->extensionName);
+			$this->pageNotFound((empty($message) ? 'Asset not found.' : $message));
+		}
 		$this->view->assign('mediaAlbum', $mediaAlbum);
-		// todo: rename 'item' to 'asset'
-		$this->view->assign('mediaAsset', ResourceFactory::getInstance()->getFileObject($mediaAssetUid));
+		$this->view->assign('mediaAsset', $mediaAsset);
 	}
 
 	/**
