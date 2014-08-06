@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-lanuage="de" datatype="plaintext" original="messages" date="2013-02-02T15:05:08Z" product-name="fs_media_gallery">
+	<file source-language="en" target-lanuage="de" datatype="plaintext" original="messages" date="2014-08-06T00:00:00Z" product-name="fs_media_gallery">
 		<header/>
 		<body>
+			<trans-unit id="date_format">
+				<source>Y-m-d</source>
+				<target>d.m.Y</target>
+			</trans-unit>
+			<trans-unit id="media_album">
+				<source>Media Album</source>
+				<target>Medienalbum</target>
+			</trans-unit>
+			<trans-unit id="media_albums">
+				<source>Media Albums</source>
+				<target>Medienalben</target>
+			</trans-unit>
+			<trans-unit id="asset">
+				<source>asset</source>
+				<target>Medienobjekt</target>
+			</trans-unit>
+			<trans-unit id="assets">
+				<source>assets</source>
+				<target>Medienobjekte</target>
+			</trans-unit>
 			<trans-unit id="no_albums_found">
 				<source>No albums found</source>
 				<target>Es wurden keine Fotoalben gefunden</target>
@@ -35,13 +55,9 @@
 				<source>image {current} of {total}</source>
 				<target>Bild {current} von {total}</target>
 			</trans-unit>
-			<trans-unit id="asset">
-				<source>asset</source>
-				<target>Medienobjekt</target>
-			</trans-unit>
-			<trans-unit id="assets">
-				<source>assets</source>
-				<target>Medienobjekte</target>
+			<trans-unit id="link_to_album">
+				<source>Show album '%s'</source>
+				<target>Album '%s' anzeigen</target>
 			</trans-unit>
 		</body>
 	</file>

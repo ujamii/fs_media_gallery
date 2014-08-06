@@ -93,6 +93,27 @@ plugin.tx_fsmediagallery {
 	features.skipDefaultArguments = 1
 }
 
-
 # Include MediaGallery default styles
 page.includeCSS.tx-fs-media-gallery = EXT:fs_media_gallery/Resources/Public/Css/MediaAlbum.css
+
+# Setting for EXT:news
+plugin.tx_news {
+	settings {
+		detail {
+			fsmediaalbum {
+				targetPid =
+				lightbox {
+					enable < plugin.tx_fsmediagallery.settings.album.lightbox.enable
+					styleClass < plugin.tx_fsmediagallery.settings.album.lightbox.styleClass
+					relPrefix < plugin.tx_fsmediagallery.settings.album.lightbox.relPrefix
+					jsPlugin < plugin.tx_fsmediagallery.settings.album.lightbox.jsPlugin
+					asset {
+						width < plugin.tx_fsmediagallery.settings.detail.asset.width
+						height < plugin.tx_fsmediagallery.settings.detail.asset.height
+						resizeMode < plugin.tx_fsmediagallery.settings.detail.asset.resizeMode
+					}
+				}
+			}
+		}
+	}
+}

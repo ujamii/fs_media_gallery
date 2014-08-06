@@ -19,6 +19,10 @@
 				<source>Parent album</source>
 				<target>Hoofd album</target>
 			</trans-unit>
+			<trans-unit id="tx_news_domain_model_news.related_fsmediaalbums">
+				<source>Related Media Albums</source>
+				<target>Gerelateerd albums</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
