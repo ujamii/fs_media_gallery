@@ -96,10 +96,6 @@
 				<source>Albums to display</source>
 				<target>Anzuzeigende Alben</target>
 			</trans-unit>
-			<trans-unit id="flexforms.mediagallery.galleryPid">
-				<source>Album page</source>
-				<target>Album-Seite</target>
-			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.useAlbumFilterAsExclude">
 				<source>Album selection filter (if no items are selected all are shown)</source>
 				<target>Alben-Filer (wenn kein Album ausgewählt ist, werden alle Alben angezeigt)</target>
@@ -156,6 +152,10 @@
 				<target>Höhe des Medienelements</target>
 			</trans-unit>
 			<!-- flexforms.mediagallery.random -->
+			<trans-unit id="flexforms.mediagallery.random.targetPid">
+				<source>Album page</source>
+				<target>Album-Seite</target>
+			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.random.thumb.width">
 				<source>Thumbnail width</source>
 				<target>Breite des Vorschaubildes</target>

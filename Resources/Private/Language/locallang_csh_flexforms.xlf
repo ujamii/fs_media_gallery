@@ -9,7 +9,7 @@
 			<trans-unit id="settings.recursive.description" xml:space="preserve">
 				<source>Select the recursion level of the startingpoint.</source>
 			</trans-unit>
-			<trans-unit id="settings.galleryPid.description" xml:space="preserve">
+			<trans-unit id="settings.random.targetPid.description" xml:space="preserve">
 				<source>Target page the random assets should link to. Select the page on which the full album is shown.</source>
 			</trans-unit>
 		</body>

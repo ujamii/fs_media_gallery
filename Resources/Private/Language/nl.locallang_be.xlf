@@ -96,10 +96,6 @@
 				<source>Albums to display</source>
 				<target>#translate# Albums to display</target>
 			</trans-unit>
-			<trans-unit id="flexforms.mediagallery.galleryPid">
-				<source>Album page</source>
-				<target>#translate# Album page</target>
-			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.useAlbumFilterAsExclude">
 				<source>Album selection filter (if no items are selected all are shown)</source>
 				<target>Album selectie filter (indien albums zijn geselecteerd anders wordt alles getoond)</target>
@@ -156,6 +152,10 @@
 				<target>Hoogte afbeelding</target>
 			</trans-unit>
 			<!-- flexforms.mediagallery.random -->
+			<trans-unit id="flexforms.mediagallery.random.targetPid">
+				<source>Album page</source>
+				<target>#translate# Album page</target>
+			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.random.thumb.width">
 				<source>Thumbnail width</source>
 				<target>Breedte thumbnail</target>
