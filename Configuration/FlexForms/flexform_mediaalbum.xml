@@ -421,9 +421,9 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
-					<settings.galleryPid>
+					<settings.random.targetPid>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.galleryPid</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.random.targetPid</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -439,7 +439,7 @@
 								</wizards>
 							</config>
 						</TCEforms>
-					</settings.galleryPid>
+					</settings.random.targetPid>
 					<settings.random.thumb.width>
 						<TCEforms>
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.random.thumb.width</label>
