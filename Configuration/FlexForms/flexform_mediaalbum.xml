@@ -19,7 +19,7 @@
 								<itemsProcFunc>MiniFranske\FsMediaGallery\Hooks\ItemsProcFuncHook->getItemsForSwitchableControllerActions</itemsProcFunc>
 								<items type="array">
 									<numIndex index="0">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.switchableControllerActions.I.show</numIndex>
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.switchableControllerActions.I.nestedList</numIndex>
 										<numIndex index="1">MediaAlbum->nestedList;MediaAlbum->showAsset</numIndex>
 									</numIndex>
 									<numIndex index="1">

@@ -68,9 +68,9 @@
 				<source>Display mode</source>
 				<target>#translate# Display mode</target>
 			</trans-unit>
-			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.show">
-				<source>Selected Albums (nested)</source>
-				<target>#translate# Selected Albums (nested)</target>
+			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.nestedList">
+				<source>Selected albums (nested)</source>
+				<target>#translate# Selected albums (nested)</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.flatList">
 				<source>Albums list (flattened)</source>
