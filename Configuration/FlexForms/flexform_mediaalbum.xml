@@ -266,7 +266,7 @@
 			<ROOT>
 				<TCEforms>
 					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.tabs.album</sheetTitle>
-					<displayCond>FIELD:general.switchableControllerActions:=:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset,MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset</displayCond>
+					<displayCond>FIELD:general.switchableControllerActions:=:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset,MediaAlbum->showAlbum;MediaAlbum->showAsset,MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset</displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>
@@ -358,7 +358,7 @@
 			<ROOT>
 				<TCEforms>
 					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.tabs.detail</sheetTitle>
-					<displayCond>FIELD:general.switchableControllerActions:=:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset,MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset</displayCond>
+					<displayCond>FIELD:general.switchableControllerActions:=:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset,MediaAlbum->showAlbum;MediaAlbum->showAsset,MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset</displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>
