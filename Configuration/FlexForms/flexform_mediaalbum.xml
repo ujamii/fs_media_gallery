@@ -76,11 +76,15 @@
 							<config>
 								<type>select</type>
 								<items type="array">
-									<numIndex index="0">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.useAlbumFilterAsExclude.I.0</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
 										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="1">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.useAlbumFilterAsExclude.I.0</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+									<numIndex index="2">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.useAlbumFilterAsExclude.I.1</numIndex>
 										<numIndex index="1">1</numIndex>
 									</numIndex>
