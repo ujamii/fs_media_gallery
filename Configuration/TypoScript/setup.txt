@@ -21,7 +21,7 @@ plugin.tx_fsmediagallery {
 		# Comma separated list of albums uids
 		mediaAlbums =
 		# Option to exclude given album uids (settings.mediaAlbums)
-		useAlbumFilterAsExclude =
+		useAlbumFilterAsExclude = 0
 		# Settings for album lists (both nested and flat)
 		list {
 			itemsPerPage = 12
