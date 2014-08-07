@@ -1,22 +1,24 @@
 plugin.tx_fsmediagallery {
+
 	view {
 		templateRootPaths.100 = {$plugin.tx_fsmediagallery.view.templateRootPath}
 		partialRootPaths.100 = {$plugin.tx_fsmediagallery.view.partialRootPath}
 		layoutRootPaths.100 = {$plugin.tx_fsmediagallery.view.layoutRootPath}
 	}
+
 	persistence {
-		# Comma seperated list of pages/sysfolders which hold the album records
+		# Comma separated list of pages/sysfolders which hold the album records
 		storagePid = {$plugin.tx_fsmediagallery.persistence.storagePid}
 		# Recursion level of the storagePid (startingpoint in flexform)
 		recursive = {$plugin.tx_fsmediagallery.persistence.recursive}
 	}
 
 	settings {
-		# Comma seperated list of settings which are allowed to be set by TypoScript
+		# Comma separated list of settings which are allowed to be set by TypoScript
 		overrideFlexformSettingsIfEmpty = {$plugin.tx_fsmediagallery.settings.overrideFlexformSettingsIfEmpty}
-		# Comma seperated list of mime types (if empty, all files are included)
+		# Comma separated list of mime types (if empty, all files are included)
 		allowedAssetMimeTypes = {$plugin.tx_fsmediagallery.settings.allowedAssetMimeTypes}
-		# Comma seperated list of albums uids
+		# Comma separated list of albums uids
 		mediaAlbums =
 		# Option to exclude given album uids (settings.mediaAlbums)
 		useAlbumFilterAsExclude =
