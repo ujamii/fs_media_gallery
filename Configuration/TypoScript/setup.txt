@@ -43,7 +43,7 @@ plugin.tx_fsmediagallery {
 		}
 		# Settings for album view (list of images)
 		album {
-			itemsPerPage = 12
+			itemsPerPage = 32
 			thumb {
 				width = 120
 				height = 70
