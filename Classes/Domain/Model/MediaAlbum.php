@@ -302,17 +302,17 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return \TYPO3\CMS\Core\Resource\File
 	 */
 	public function getRandomAsset() {
-
-		// check if we need to fetch it from child album
-		$randomAlbum = $this->getRandomAlbum();
-		if ($randomAlbum) {
-			return $randomAlbum->getRandomAsset();
-		}
-
-		if (count($this->getAssets())) {
-			$assets = $this->getAssets();
-			return $assets[rand(1,count($assets))-1];
+		$assets = $this->getAssets();
+		if (count($assets)) {
+			// if there is an asset, return it
+			return $assets[rand(1, count($assets)) - 1];
 		} else {
+			// try to fetch it from child album
+			$randomAlbum = $this->getRandomAlbum();
+			if ($randomAlbum) {
+				return $randomAlbum->getRandomAsset();
+			}
+			// album and child album are empty
 			return NULL;
 		}
 	}
