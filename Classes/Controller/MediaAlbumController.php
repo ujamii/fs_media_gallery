@@ -242,7 +242,7 @@ class MediaAlbumController extends ActionController {
 	public function showAlbumAction($mediaAlbum = NULL) {
 		$mediaAlbum = (int)$mediaAlbum ?: NULL;
 		if (empty($mediaAlbum)) {
-			$mediaAlbum = $this->settings['mediaAlbum'];
+			$mediaAlbum = (int)$this->settings['mediaAlbum'];
 		}
 		$pidList = PageUtility::extendPidListByChildren($this->settings['startingpoint'], $this->settings['recursive']);
 		$mediaAlbum = $this->mediaAlbumRepository->findByUidAndStoragePage($mediaAlbum, $pidList);
