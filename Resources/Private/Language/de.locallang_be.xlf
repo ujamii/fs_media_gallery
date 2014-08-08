@@ -169,8 +169,8 @@
 				EXTENSION MANAGER
 			-->
 			<trans-unit id="extmng.allowedActionsInFlexforms">
-				<source>Plugin actions shown in flexforms: Comma separated list of controller actions which could be selected as plugin action in flexforms. Available actions are nestedList,flatList,showAlbumByParam,showAlbumByConfig,randomAsset</source>
-				<target>Plugin-Aktionen, die in Flexforms angezeigt werden: Kommaseparierte Liste von Controller-Aktionen, die als Plugin-Aktion in Flexforms verwendet werden. Mögliche Aktionen sind nestedList,flatList,showAlbumByParam,showAlbumByConfig,randomAsset</target>
+				<source>Plugin actions shown in flexforms: Comma separated list of controller actions which could be selected as plugin action in flexforms. Available actions are nestedList,flatList,showAlbumByParam,showAlbumByConfig,randomAsset. If no action is defined, all available actions are selectable.</source>
+				<target>Plugin-Aktionen, die in Flexforms angezeigt werden: Kommaseparierte Liste von Controller-Aktionen, die als Plugin-Aktion in Flexforms verwendet werden. Mögliche Aktionen sind nestedList,flatList,showAlbumByParam,showAlbumByConfig,randomAsset. Wird keine Plugin-Aktion angegeben, sind alle Aktionen auswählbar.</target>
 			</trans-unit>
 
 			<!--

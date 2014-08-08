@@ -43,10 +43,12 @@ class ItemsProcFuncHook {
 				$allowedActions[$allowedActionFromExtConf] = $availableActions[$allowedActionFromExtConf];
 			}
 		}
-		// check items
-		foreach ($config['items'] as $key => $item) {
-			if (!in_array($item[1], $allowedActions)) {
-				unset($config['items'][$key]);
+		// check items; allow all actions if something went wrong (no action is allowed)
+		if (count($allowedActions) > 0) {
+			foreach ($config['items'] as $key => $item) {
+				if (!in_array($item[1], $allowedActions)) {
+					unset($config['items'][$key]);
+				}
 			}
 		}
 	}

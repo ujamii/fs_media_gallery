@@ -45,5 +45,6 @@ Available actions are:
 * showAlbumByConfig
 * randomAsset
 
+If no action is defined, *all* available actions are selectable.
 
 .. todo: add screenshot of EM config
