@@ -33,7 +33,12 @@ class ItemsProcFuncHook {
 			'randomAsset'		=> 'MediaAlbum->randomAsset',
 		);
 		$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['fs_media_gallery']);
-		$allowedActions = array();
+		$allowedActions = array(
+			// index action is always allowed
+			// this is needed to make sure the correct tabs/fields are shown in
+			// flexform when a new plugin is added
+			'index'				=> 'MediaAlbum->index',
+		);
 		$allowedActionsFromExtConf = array();
 		if (!empty($extConf['allowedActionsInFlexforms'])) {
 			$allowedActionsFromExtConf = GeneralUtility::trimExplode(',', $extConf['allowedActionsInFlexforms']);
@@ -43,8 +48,8 @@ class ItemsProcFuncHook {
 				$allowedActions[$allowedActionFromExtConf] = $availableActions[$allowedActionFromExtConf];
 			}
 		}
-		// check items; allow all actions if something went wrong (no action is allowed)
-		if (count($allowedActions) > 0) {
+		// check items; allow all actions if something went wrong (no action except of "indexAction" is allowed)
+		if (count($allowedActions) > 1) {
 			foreach ($config['items'] as $key => $item) {
 				if (!in_array($item[1], $allowedActions)) {
 					unset($config['items'][$key]);

@@ -19,27 +19,31 @@
 								<itemsProcFunc>MiniFranske\FsMediaGallery\Hooks\ItemsProcFuncHook->getItemsForSwitchableControllerActions</itemsProcFunc>
 								<items type="array">
 									<numIndex index="0">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.switchableControllerActions.I.empty</numIndex>
+										<numIndex index="1">MediaAlbum->index</numIndex>
+									</numIndex>
+									<numIndex index="1">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.switchableControllerActions.I.nestedList</numIndex>
 										<numIndex index="1">MediaAlbum->nestedList;MediaAlbum->showAsset</numIndex>
 									</numIndex>
-									<numIndex index="1">
+									<numIndex index="2">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.switchableControllerActions.I.flatList</numIndex>
 										<numIndex index="1">MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset</numIndex>
 									</numIndex>
-									<numIndex index="2">
+									<numIndex index="3">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.switchableControllerActions.I.showAlbumByConfig</numIndex>
 										<numIndex index="1">MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset</numIndex>
 									</numIndex>
-									<numIndex index="3">
+									<numIndex index="4">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.switchableControllerActions.I.showAlbumByParam</numIndex>
 										<numIndex index="1">MediaAlbum->showAlbum;MediaAlbum->showAsset</numIndex>
 									</numIndex>
-									<numIndex index="4">
+									<numIndex index="5">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.switchableControllerActions.I.randomAsset</numIndex>
 										<numIndex index="1">MediaAlbum->randomAsset</numIndex>
 									</numIndex>
 								</items>
-								<default></default>
+								<default>MediaAlbum->index</default>
 								<size>1</size>
 							</config>
 						</TCEforms>

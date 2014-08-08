@@ -142,6 +142,20 @@ class MediaAlbumController extends ActionController {
 	}
 
 	/**
+	 * Index Action
+	 *
+	 * As switchableControllerActions can be limited in EM this function
+	 * is needed as default action (with no output).
+	 * It is set as default action in flexform to make sure the
+	 * correct tabs/fields are shown when a new plugin is added.
+	 *
+	 * @return string
+	 */
+	public function indexAction() {
+		return '';
+	}
+
+	/**
 	 * NestedList Action
 	 * Displays a (nested) list of albums; default/show action in fs_media_gallery <= 0.0.6
 	 *
