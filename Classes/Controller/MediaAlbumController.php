@@ -27,7 +27,6 @@ namespace MiniFranske\FsMediaGallery\Controller;
 
 use MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum;
 use MiniFranske\FsMediaGallery\Utility\PageUtility;
-use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
