@@ -289,4 +289,4 @@ All settings are defined by using :typoscript:`plugin.tx_fsmediagallery.<propert
    :status:         no change
    :newProperty:    settings.features.\
                     :ref:`skipDefaultArguments <plugin.tx_fsmediagallery.settings.features.skipDefaultArguments>`
-   :proposal:       it's the only settings under ``settings.features`` at the moment and thus could be moved to ``settings``
+   :proposal:       `Extbase feature <https://forge.typo3.org/projects/typo3v4-mvc/wiki/Skip_default_arguments_in_URIs>`_ that can't be changed

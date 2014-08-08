@@ -314,7 +314,7 @@ They are set by :typoscript:`plugin.tx_news.settings.album.<property>`
    ===================================================================================================== ============================================ ======================= =================
    Property                                                                                              Data type                                    :ref:`t3tsref:stdwrap`  Default
    ===================================================================================================== ============================================ ======================= =================
-   :ref:`itemsPerPage <plugin.tx_fsmediagallery.settings.album.itemsPerPage>`                            :ref:`t3tsref:data-type-positive-integer`    no                      :code:`12`
+   :ref:`itemsPerPage <plugin.tx_fsmediagallery.settings.album.itemsPerPage>`                            :ref:`t3tsref:data-type-positive-integer`    no                      :code:`32`
    :ref:`lightbox.enable <plugin.tx_fsmediagallery.settings.album.lightbox.enable>`                      :ref:`t3tsref:data-type-boolean`             no                      :code:`1`
    :ref:`lightbox.jsPlugin <plugin.tx_fsmediagallery.settings.album.lightbox.jsPlugin>`                  :ref:`t3tsref:data-type-string`              no                      :code:`colorbox`
    :ref:`lightbox.relPrefix <plugin.tx_fsmediagallery.settings.album.lightbox.relPrefix>`                :ref:`t3tsref:data-type-string`              no                      :code:`albm_`
@@ -462,8 +462,8 @@ They are set by :typoscript:`plugin.tx_news.settings.detail.<property>`
    ==================================================================================== ============================================ ======================= =============
    Property                                                                             Data type                                    :ref:`t3tsref:stdwrap`  Default
    ==================================================================================== ============================================ ======================= =============
-   :ref:`asset.width <plugin.tx_fsmediagallery.settings.detail.asset.width>`            :ref:`t3tsref:data-type-pixels`              no                      :code:`1080`
-   :ref:`asset.height <plugin.tx_fsmediagallery.settings.detail.asset.height>`          :ref:`t3tsref:data-type-pixels`              no                      :code:`1920`
+   :ref:`asset.width <plugin.tx_fsmediagallery.settings.detail.asset.width>`            :ref:`t3tsref:data-type-pixels`              no                      :code:`1920`
+   :ref:`asset.height <plugin.tx_fsmediagallery.settings.detail.asset.height>`          :ref:`t3tsref:data-type-pixels`              no                      :code:`1080`
    :ref:`asset.resizeMode <plugin.tx_fsmediagallery.settings.detail.asset.resizeMode>`  :ref:`t3tsref:data-type-string` ``[m|c|s]``  no                      :code:`m`
    ==================================================================================== ============================================ ======================= =============
 
@@ -517,9 +517,9 @@ They are set by :typoscript:`plugin.tx_news.settings.random.<property>`
    ==================================================================================== ============================================ ======================= =============
    Property                                                                             Data type                                    :ref:`t3tsref:stdwrap`  Default
    ==================================================================================== ============================================ ======================= =============
-   :ref:`targetPid <plugin.tx_fsmediagallery.settings.random.targetpid>`                :ref:`t3tsref:data-type-page-id`             no
-   :ref:`thumb.width <plugin.tx_fsmediagallery.settings.random.thumb.width>`            :ref:`t3tsref:data-type-pixels`              no                      :code:`1080`
-   :ref:`thumb.height <plugin.tx_fsmediagallery.settings.random.thumb.height>`          :ref:`t3tsref:data-type-pixels`              no                      :code:`1920`
+   :ref:`targetPid <plugin.tx_fsmediagallery.settings.random.targetPid>`                :ref:`t3tsref:data-type-page-id`             no
+   :ref:`thumb.width <plugin.tx_fsmediagallery.settings.random.thumb.width>`            :ref:`t3tsref:data-type-pixels`              no                      :code:`250`
+   :ref:`thumb.height <plugin.tx_fsmediagallery.settings.random.thumb.height>`          :ref:`t3tsref:data-type-pixels`              no                      :code:`140`
    :ref:`thumb.resizeMode <plugin.tx_fsmediagallery.settings.random.thumb.resizeMode>`  :ref:`t3tsref:data-type-string` ``[m|c|s]``  no                      :code:`m`
    ==================================================================================== ============================================ ======================= =============
 
@@ -579,7 +579,7 @@ Properties for pagination
 -------------------------
 
 The following table describes the settings for the *pagination* in list and album view.
-They are set by :typoscript:`plugin.tx_news.settings.pagination.<property>`
+They are set by :typoscript:`plugin.tx_fsmediagallery.settings.pagination.<property>`
 
 .. container:: ts-properties
 
@@ -672,4 +672,6 @@ skipDefaultArguments
 
 :typoscript:`plugin.tx_fsmediagallery.settings.features.skipDefaultArguments =` :ref:`t3tsref:data-type-boolean`
 
-todo: add description
+Configure Extbase to skip the URI arguments for controller and action
+(see `Skip default arguments in URIs <https://forge.typo3.org/projects/typo3v4-mvc/wiki/Skip_default_arguments_in_URIs>`_
+on TYPO3 Forge).

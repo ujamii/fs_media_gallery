@@ -95,7 +95,7 @@ Tab "General"
    :Description:
        .. _flexforms.mediagallery.tabs.general.startingpoint:
 
-       The Storage Folder which holds the Album Records.
+       The "Storage Folder" which holds the album records.
 
 
  - :Field:       Recursive

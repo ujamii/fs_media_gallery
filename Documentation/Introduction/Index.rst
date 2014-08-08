@@ -26,7 +26,8 @@ Features
 * Easy to use for editors through TYPO3's Mass Uploader
 * Quickly turns your FAL file collections into media albums
 * Based on Extbase and Fluid and therefore very easy to style
+* Comes with a basic automatic RealURL configuration
 * Supports LightBox/Colorbox
 * Fully configurable by TypoScript
 * Smoothly integrates into `EXT:news <http://typo3.org/extensions/repository/view/news>`_
-* Media Assets (images) can be protected with `EXT:naw_securedl <http://typo3.org/extensions/repository/view/naw_securedl>`_
+* Media Assets (images) can be protected with `EXT:fal_secure_download <http://typo3.org/extensions/repository/view/fal_securedownload>`_ or `EXT:naw_securedl <http://typo3.org/extensions/repository/view/naw_securedl>`_

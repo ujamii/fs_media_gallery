@@ -11,7 +11,7 @@
 ChangeLog
 =========
 
-All changes are documented on `https://bitbucket.org/franssaris/fs_media_gallery <https://bitbucket.org/franssaris/fs_media_gallery>`_ .
+All changes are documented on `https://bitbucket.org/franssaris/fs_media_gallery <https://bitbucket.org/franssaris/fs_media_gallery>`_.
 Please follow the link to know which bugs have been fixed in which version.
 
 
