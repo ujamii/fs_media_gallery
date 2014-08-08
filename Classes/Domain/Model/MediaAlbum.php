@@ -206,7 +206,7 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function getAssets() {
 		if ($this->assetCache === NULL) {
 			try {
-				/** @var $fileCollection \TYPO3\CMS\Core\Resource\Collection\AbstractFileCollection */
+				/** @var $fileCollection \TYPO3\CMS\Core\Resource\Collection\StaticFileCollection */
 				$fileCollection = $this->fileCollectionRepository->findByUid($this->getUid());
 				$fileCollection->loadContents();
 				$files = $fileCollection->getItems();
@@ -286,7 +286,6 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return MediaAlbum
 	 */
 	public function getRandomAlbum() {
-
 		// if albums are loaded use these
 		if ($this->albumCache !== NULL) {
 			$albums = $this->getAlbums();
@@ -303,8 +302,8 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function getRandomAsset() {
 		$assets = $this->getAssets();
+		// if there is an asset, return it
 		if (count($assets)) {
-			// if there is an asset, return it
 			return $assets[rand(1, count($assets)) - 1];
 		} else {
 			// try to fetch it from child album
