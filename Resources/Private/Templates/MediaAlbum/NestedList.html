@@ -33,9 +33,13 @@
 								</div>
 							</f:then>
 							<f:else>
-								<div class="alert alert-info">
-									<p><f:translate key="no_assets_found">No assets found.</f:translate></p>
-								</div>
+								<f:if condition="{mediaAlbums}">
+									<f:else>
+										<div class="alert alert-info">
+											<p><f:translate key="no_assets_found">No assets found.</f:translate></p>
+										</div>
+									</f:else>
+								</f:if>
 							</f:else>
 						</f:if>
 						<f:if condition="{settings.album.lightbox.enable}">
