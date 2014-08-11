@@ -58,3 +58,5 @@ $TCA['pages']['columns']['module']['config']['items'][] = array(
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Media Gallery');
+// Add Theme 'Bootstrap3'
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/Themes/Bootstrap3', 'Media Gallery Theme \'Bootstrap3\'');
