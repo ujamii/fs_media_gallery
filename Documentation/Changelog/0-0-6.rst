@@ -50,7 +50,8 @@ The most important changes are:
 * Empty flexform field can be overwritten by TypoScript (see :ref:`settings.overrideFlexformSettingsIfEmpty <plugin.tx_fsmediagallery.settings.overrideFlexformSettingsIfEmpty>`)
 
 * Plugin flexform has changed a lot (todo: upgrade script);
-  new :ref:`Display Modes <flexforms.mediagallery.tabs.general.displayMode>` (``switchableControllerActions``) ``nestedList`` (former default action), ``flatList`` and ``showAlbumByConfig``
+  new :ref:`Display Modes <flexforms.mediagallery.tabs.general.displayMode>` (``switchableControllerActions``)
+  ``nestedList`` (former default action), ``flatList``, ``showAlbum`` and ``showAlbumByConfig``
 
 * :ref:`Display Modes <flexforms.mediagallery.tabs.general.displayMode>` (``switchableControllerActions``) can be removed in plugin via :ref:`Extension Manager <configuration-extConf>` (see ``Classes/Hooks/ItemProcFuncHook.php``)
 
