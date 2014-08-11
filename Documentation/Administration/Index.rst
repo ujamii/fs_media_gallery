@@ -48,4 +48,37 @@ To use the latest version from the `code repository <https://bitbucket.org/frans
 EXT:fs_media_gallery and RealURL
 --------------------------------
 
-todo: describe realurl autoconf, add examples
+EXT:fs_media_gallery comes with a basic automatic RealURL config (see file ``Classes/Hooks/RealUrlAutoConfiguration.php``).
+It will add the following configuration to the `postVarSets['_DEFAULT'] <http://docs.typo3.org/typo3cms/extensions/realurl/Realurl/Configuration/ConfigurationDirectives/Index.html#postvarsets-pageindex-keyword>`_ section:
+
+.. code-block:: php
+
+				'postVarSets' => array(
+					'_DEFAULT' => array(
+						'album' => array(
+							array(
+								'GETvar' => 'tx_fsmediagallery_mediagallery[mediaAlbum]',
+								'lookUpTable' => array(
+									'table' => 'sys_file_collection',
+									'id_field' => 'uid',
+									'alias_field' => 'title',
+									'addWhereClause' => ' AND NOT deleted',
+									'useUniqueCache' => 1,
+									'useUniqueCache_conf' => array(
+										'strtolower' => 1,
+										'spaceCharacter' => '_',
+									),
+									'languageGetVar' => 'L',
+									'languageExceptionUids' => '',
+									'languageField' => 'sys_language_uid',
+									'transOrigPointerField' => 'l10n_parent',
+									'autoUpdate' => 1,
+									'expireDays' => 700,
+								),
+							),
+							array(
+								'GETvar' => 'tx_fsmediagallery_mediagallery[@widget_0][currentPage]',
+							),
+						)
+					)
+				)
