@@ -206,7 +206,7 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function getAssets() {
 		if ($this->assetCache === NULL) {
 			try {
-				/** @var $fileCollection \TYPO3\CMS\Core\Resource\Collection\StaticFileCollection */
+				/** @var $fileCollection \TYPO3\CMS\Core\Resource\Collection\AbstractFileCollection */
 				$fileCollection = $this->fileCollectionRepository->findByUid($this->getUid());
 				$fileCollection->loadContents();
 				$files = $fileCollection->getItems();
