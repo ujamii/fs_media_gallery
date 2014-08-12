@@ -21,8 +21,10 @@ Upgrade procedure
 
 todo: describe upgrade procedure
 
-This version adds and alters database tables. The easiest way to apply these changes is to de-install an re-install the
-extension in Extension Manager. To do this from command line use:
+This version adds and alters database tables.
+If you're updating EXT:fs_media_gallery by git you have to de-install and
+re-install the extension to apply these changes.
+This can be either done in Extension Manager or from command line:
 
 .. code:: bash
 
