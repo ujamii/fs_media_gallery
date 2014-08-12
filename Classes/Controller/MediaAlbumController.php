@@ -212,10 +212,9 @@ class MediaAlbumController extends ActionController {
 	 */
 	public function flatListAction($mediaAlbum = 0) {
 		$showBackLink = TRUE;
-		$pidList = PageUtility::extendPidListByChildren($this->settings['startingpoint'], $this->settings['recursive']);
 		if ($mediaAlbum) {
 			// if an album is given, display it
-			$mediaAlbum = $this->mediaAlbumRepository->findByUidAndStoragePage($mediaAlbum, $pidList);
+			$mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum);
 			if (!$mediaAlbum) {
 				$this->pageNotFound(LocalizationUtility::translate('no_album_found', $this->extensionName));
 			}
@@ -223,7 +222,7 @@ class MediaAlbumController extends ActionController {
 			$this->view->assign('mediaAlbum', $mediaAlbum);
 		} else {
 			// display the album list
-			$mediaAlbums = $this->mediaAlbumRepository->findByStoragePage($pidList, $this->settings['list']['hideEmptyAlbums']);
+			$mediaAlbums = $this->mediaAlbumRepository->findAll($this->settings['list']['hideEmptyAlbums']);
 			$this->view->assign('displayMode', 'flatList');
 			$this->view->assign('mediaAlbums', $mediaAlbums);
 			$showBackLink = FALSE;
@@ -257,8 +256,7 @@ class MediaAlbumController extends ActionController {
 		if (empty($mediaAlbum)) {
 			$mediaAlbum = (int)$this->settings['mediaAlbum'];
 		}
-		$pidList = PageUtility::extendPidListByChildren($this->settings['startingpoint'], $this->settings['recursive']);
-		$mediaAlbum = $this->mediaAlbumRepository->findByUidAndStoragePage($mediaAlbum, $pidList);
+		$mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum);
 		if (!$mediaAlbum) {
 			$this->pageNotFound(LocalizationUtility::translate('no_album_found', $this->extensionName));
 		}
