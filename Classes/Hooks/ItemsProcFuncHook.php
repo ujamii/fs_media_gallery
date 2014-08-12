@@ -58,4 +58,31 @@ class ItemsProcFuncHook {
 		}
 	}
 
+	/**
+	 * Sets the available options for settings.list.flat.orderBy
+	 *
+	 * @param array &$config
+	 * @return void
+	 */
+	public function getItemsForFlatListOrderBy(array &$config) {
+		$availableOptions = array('datetime', 'crdate', 'sorting');
+		$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['fs_media_gallery']);
+		$allowedOptions = array();
+		$allowedOptionsFromExtConf = array();
+		if (!empty($extConf['list.']['flat.']['orderOptions'])) {
+			$allowedOptionsFromExtConf = GeneralUtility::trimExplode(',', $extConf['list.']['flat.']['orderOptions']);
+		}
+		foreach ($allowedOptionsFromExtConf as $allowedOptionFromExtConf) {
+			if (in_array($allowedOptionFromExtConf, $availableOptions)) {
+				$allowedOptions[] = $allowedOptionFromExtConf;
+			}
+		}
+		foreach ($config['items'] as $key => $item) {
+			// check items; empty value (inherit from TS) is always allowed
+			if (!empty($item[1]) && !in_array($item[1], $allowedOptions)) {
+				unset($config['items'][$key]);
+			}
+		}
+	}
+
 }

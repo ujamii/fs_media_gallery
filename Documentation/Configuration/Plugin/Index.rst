@@ -89,6 +89,24 @@ Tab "General"
        Include or exclude selected album items
 
 
+ - :Field:       Sort albums list by
+   :Modes:       flatList
+   :TSref:       :ref:`settings.list.flat.orderBy <plugin.tx_fsmediagallery.settings.list.flat.orderBy>`
+   :Description:
+       .. _flexforms.mediagallery.tabs.general.list.flat.orderBy:
+
+       Defines how albums in ``flatList`` view are ordered.
+
+
+ - :Field:       Sort direction for albums list
+   :Modes:       flatList
+   :TSref:       :ref:`settings.list.flat.orderDirection <plugin.tx_fsmediagallery.settings.list.flat.orderDirection>`
+   :Description:
+       .. _flexforms.mediagallery.tabs.general.list.flat.orderDirection:
+
+       Defines the sort direction (ascending/descending) for albums list in ``flatList`` view.
+
+
  - :Field:       Startingpoint
    :Modes:       all
    :TSref:       :ref:`presistence.storagePid <plugin.tx_fsmediagallery.persistence.storagePid>`

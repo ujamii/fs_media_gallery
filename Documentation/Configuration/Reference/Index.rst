@@ -222,16 +222,18 @@ They are set by :typoscript:`plugin.tx_news.settings.list.<property>`
 
 .. container:: ts-properties
 
-   ================================================================================================== ============================================ ======================= ============
-   Property                                                                                           Data type                                    :ref:`t3tsref:stdwrap`  Default
-   ================================================================================================== ============================================ ======================= ============
-   :ref:`hideEmptyAlbums <plugin.tx_fsmediagallery.settings.list.hideEmptyAlbums>`                    :ref:`t3tsref:data-type-boolean`             no                      :code:`1`
-   :ref:`itemsPerPage <plugin.tx_fsmediagallery.settings.list.itemsPerPage>`                          :ref:`t3tsref:data-type-positive-integer`    no                      :code:`12`
-   :ref:`skipListWhenOnlyOneAlbum <plugin.tx_fsmediagallery.settings.list.skipListWhenOnlyOneAlbum>`  :ref:`t3tsref:data-type-boolean`             no                      :code:`0`
-   :ref:`thumb.width <plugin.tx_fsmediagallery.settings.list.thumb.width>`                            :ref:`t3tsref:data-type-pixels`              no                      :code:`180`
-   :ref:`thumb.height <plugin.tx_fsmediagallery.settings.list.thumb.height>`                          :ref:`t3tsref:data-type-pixels`              no                      :code:`100`
-   :ref:`thumb.resizeMode <plugin.tx_fsmediagallery.settings.list.thumb.resizeMode>`                  :ref:`t3tsref:data-type-string` ``[m|c|s]``  no                      :code:`m`
-   ================================================================================================== ============================================ ======================= ============
+   ================================================================================================== ============================================================== ======================= =================
+   Property                                                                                           Data type                                                      :ref:`t3tsref:stdwrap`  Default
+   ================================================================================================== ============================================================== ======================= =================
+   :ref:`hideEmptyAlbums <plugin.tx_fsmediagallery.settings.list.hideEmptyAlbums>`                    :ref:`t3tsref:data-type-boolean`                               no                      :code:`1`
+   :ref:`itemsPerPage <plugin.tx_fsmediagallery.settings.list.itemsPerPage>`                          :ref:`t3tsref:data-type-positive-integer`                      no                      :code:`12`
+   :ref:`skipListWhenOnlyOneAlbum <plugin.tx_fsmediagallery.settings.list.skipListWhenOnlyOneAlbum>`  :ref:`t3tsref:data-type-boolean`                               no                      :code:`0`
+   :ref:`thumb.width <plugin.tx_fsmediagallery.settings.list.thumb.width>`                            :ref:`t3tsref:data-type-pixels`                                no                      :code:`180`
+   :ref:`thumb.height <plugin.tx_fsmediagallery.settings.list.thumb.height>`                          :ref:`t3tsref:data-type-pixels`                                no                      :code:`100`
+   :ref:`thumb.resizeMode <plugin.tx_fsmediagallery.settings.list.thumb.resizeMode>`                  :ref:`t3tsref:data-type-string` ``[m|c|s]``                    no                      :code:`m`
+   :ref:`flat.orderBy <plugin.tx_fsmediagallery.settings.list.flat.orderBy>`                          :ref:`t3tsref:data-type-string` ``[datetime|crdate|sorting]``  no                      :code:`datetime`
+   :ref:`flat.orderDirection <plugin.tx_fsmediagallery.settings.list.flat.orderDirection>`            :ref:`t3tsref:data-type-string` ``[asc|desc]``                 no                      :code:`desc`
+   ================================================================================================== ============================================================== ======================= =================
 
 
 Property details
@@ -299,6 +301,31 @@ skipListWhenOnlyOneAlbum
 :typoscript:`plugin.tx_fsmediagallery.settings.list.skipListWhenOnlyOneAlbum =` :ref:`t3tsref:data-type-boolean`
 
 If :code:`1` (:code:`TRUE`) the nested album list view is skipped if only one album is to be displayed.
+
+
+.. _plugin.tx_fsmediagallery.settings.list.flat.orderBy:
+
+flat.orderBy
+""""""""""""
+
+:typoscript:`plugin.tx_fsmediagallery.settings.list.flat.orderBy =` :ref:`t3tsref:data-type-string` ``[datetime|crdate|sorting]``
+
+| Defines how albums in flat list view are ordered.
+| :code:`datetime` = Given date/time
+| :code:`crdate` = Creation date/time
+| :code:`sorting` = Given sort order
+
+
+.. _plugin.tx_fsmediagallery.settings.list.flat.orderDirection:
+
+flat.orderDirection
+"""""""""""""""""""
+
+:typoscript:`plugin.tx_fsmediagallery.settings.list.flat.orderDirection =` :ref:`t3tsref:data-type-string` ``[asc|desc]``
+
+| Defines the sort order of albums in flat list view.
+| :code:`asc` = Ascending (old to new/low to high)
+| :code:`desc` = Descending (new to old/high to low)
 
 
 .. _plugin.tx_fsmediagallery.settings.album:

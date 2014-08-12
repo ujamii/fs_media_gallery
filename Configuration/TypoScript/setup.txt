@@ -39,6 +39,10 @@ plugin.tx_fsmediagallery {
 			}
 			# Settings for flat album list
 			flat {
+				# Sort albums list by: datetime|crdate|sorting
+				orderBy = datetime
+				# Sort direction for albums list: asc|desc
+				orderDirection = desc
 			}
 		}
 		# Settings for album view (list of images)

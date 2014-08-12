@@ -222,7 +222,7 @@ class MediaAlbumController extends ActionController {
 			$this->view->assign('mediaAlbum', $mediaAlbum);
 		} else {
 			// display the album list
-			$mediaAlbums = $this->mediaAlbumRepository->findAll($this->settings['list']['hideEmptyAlbums']);
+			$mediaAlbums = $this->mediaAlbumRepository->findAll($this->settings['list']['hideEmptyAlbums'], $this->settings['list']['flat']['orderBy'], $this->settings['list']['flat']['orderDirection']);
 			$this->view->assign('displayMode', 'flatList');
 			$this->view->assign('mediaAlbums', $mediaAlbums);
 			$showBackLink = FALSE;

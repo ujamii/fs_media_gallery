@@ -98,13 +98,27 @@
 			<trans-unit id="flexforms.mediagallery.list.thumb.height">
 				<source>Thumb height</source>
 			</trans-unit>
-			<!-- flexforms.mediagallery.nestedList -->
-			<trans-unit id="flexforms.mediagallery.nestedList.yxz">
-				<source>xyz</source>
+			<!-- flexforms.mediagallery.list.flat -->
+			<trans-unit id="flexforms.mediagallery.list.flat.orderBy">
+				<source>Sort albums list by</source>
 			</trans-unit>
-			<!-- flexforms.mediagallery.flatList -->
-			<trans-unit id="flexforms.mediagallery.flatList.yxz">
-				<source>xyz</source>
+			<trans-unit id="flexforms.mediagallery.list.flat.orderBy.I.datetime">
+				<source>Given date</source>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.list.flat.orderBy.I.crdate">
+				<source>Creation date</source>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.list.flat.orderBy.I.sorting">
+				<source>Given sort order</source>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.list.flat.orderDirection">
+				<source>Sort direction for albums list</source>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.list.flat.orderDirection.I.asc">
+				<source>Ascending (old to new/low to high)</source>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.list.flat.orderDirection.I.desc">
+				<source>Descending (new to old/high to low)</source>
 			</trans-unit>
 			<!-- flexforms.mediagallery.album -->
 			<trans-unit id="flexforms.mediagallery.album.itemsPerPage">
@@ -142,6 +156,9 @@
 			-->
 			<trans-unit id="extmng.allowedActionsInFlexforms">
 				<source>Plugin actions shown in flexforms: Comma separated list of controller actions which could be selected as plugin action in flexforms. Available actions are nestedList,flatList,showAlbumByParam,showAlbumByConfig,randomAsset. If no action is defined, all available actions are selectable.</source>
+			</trans-unit>
+			<trans-unit id="extmng.list.flat.orderOptions">
+				<source>Sort options for flat albums list in flexforms: Comma separated list of sort options for field "Sort albums list by" which could be selected in flexforms. Available options are datetime,crdate,sorting.</source>
 			</trans-unit>
 
 			<!--

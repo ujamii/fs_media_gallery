@@ -125,6 +125,35 @@
 				<source>Thumb height</source>
 				<target>Hoogte thumbnails</target>
 			</trans-unit>
+			<!-- flexforms.mediagallery.list.flat -->
+			<trans-unit id="flexforms.mediagallery.list.flat.orderBy">
+				<source>Sort albums list by</source>
+				<target>#translate# Sort albums list by</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.list.flat.orderBy.I.datetime">
+				<source>Given date</source>
+				<target>#translate# Given date</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.list.flat.orderBy.I.crdate">
+				<source>Creation date</source>
+				<target>#translate# Creation date</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.list.flat.orderBy.I.sorting">
+				<source>Given sort order</source>
+				<target>#translate# Given sort order</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.list.flat.orderDirection">
+				<source>Sort direction for albums list</source>
+				<target>#translate# Sort direction for albums list</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.list.flat.orderDirection.I.asc">
+				<source>Ascending (old to new/low to high)</source>
+				<target>#translate# Ascending (old to new/low to high)</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.list.flat.orderDirection.I.desc">
+				<source>Descending (new to old/high to low)</source>
+				<target>#translate# Descending (new to old/high to low)</target>
+			</trans-unit>
 			<!-- flexforms.mediagallery.album -->
 			<trans-unit id="flexforms.mediagallery.album.itemsPerPage">
 				<source>Max. thumbs to display per page</source>
@@ -171,6 +200,10 @@
 			<trans-unit id="extmng.allowedActionsInFlexforms">
 				<source>Plugin actions shown in flexforms: Comma separated list of controller actions which could be selected as plugin action in flexforms. Available actions are nestedList,flatList,showAlbumByParam,showAlbumByConfig,randomAsset. If no action is defined, all available actions are selectable.</source>
 				<target>#translate# Plugin actions shown in flexforms: Comma separated list of controller actions which could be selected as plugin action in flexforms. Available actions are nestedList,flatList,showAlbumByParam,showAlbumByConfig,randomAsset. If no action is defined, all available actions are selectable.</target>
+			</trans-unit>
+			<trans-unit id="extmng.list.flat.orderOptions">
+				<source>Sort options for flat albums list in flexforms: Comma separated list of sort options for field "Sort albums list by" which could be selected in flexforms. Available options are datetime,crdate,sorting.</source>
+				<target>#translate# Sort options for flat albums list in flexforms: Comma separated list of sort options for field "Sort albums list by" which could be selected in flexforms. Available options are datetime,crdate,sorting.</target>
 			</trans-unit>
 
 			<!--

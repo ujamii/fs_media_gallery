@@ -154,6 +154,16 @@ All settings are defined by using :typoscript:`plugin.tx_fsmediagallery.<propert
 
  - :oldProperty:
    :status:         new
+   :newProperty:    settings.list.flat.\
+                    :ref:`orderBy <plugin.tx_fsmediagallery.settings.list.flat.orderBy>`
+
+ - :oldProperty:
+   :status:         new
+   :newProperty:    settings.list.flat.\
+                    :ref:`orderDirection <plugin.tx_fsmediagallery.settings.list.flat.orderDirection>`
+
+ - :oldProperty:
+   :status:         new
    :newProperty:    settings.list.\
                     :ref:`hideEmptyAlbums <plugin.tx_fsmediagallery.settings.list.hideEmptyAlbums>`
 

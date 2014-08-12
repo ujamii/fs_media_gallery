@@ -170,17 +170,36 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * Find all albums
 	 *
 	 * @param boolean $excludeEmptyAlbums
+	 * @param string $orderBy Sort albums by: datetime|crdate|sorting
+	 * @param string $orderDirection Sort order: asc|desc
 	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
-	public function findAll($excludeEmptyAlbums = TRUE) {
+	public function findAll($excludeEmptyAlbums = TRUE, $orderBy = 'datetime', $orderDirection = 'desc') {
 		$excludeEmptyAlbums = filter_var($excludeEmptyAlbums, FILTER_VALIDATE_BOOLEAN);
 		$query = $this->createQuery();
 
-		// todo: add list order to flexform/TS
-		$query->setOrderings(array(
-			'datetime' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
-			'crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
-		));
+		// check orderDirection
+		if ($orderDirection === 'asc') {
+			$orderDirection = \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING;
+		} else {
+			$orderDirection = \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING;
+		}
+
+		// set orderBy and orderDirection
+		switch ($orderBy) {
+			case 'sorting':
+				$query->setOrderings(array('sorting' => $orderDirection));
+				break;
+			case 'crdate':
+				$query->setOrderings(array('crdate' => $orderDirection));
+				break;
+			default:
+				// datetime
+				$query->setOrderings(array(
+					'datetime' => $orderDirection,
+					'crdate' => $orderDirection,
+				));
+		}
 
 		$mediaAlbums = $query->execute();
 
