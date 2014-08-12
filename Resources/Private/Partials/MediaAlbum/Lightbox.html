@@ -6,7 +6,7 @@
 		<f:if condition="{0:'colorbox'} == {0:settings.album.lightbox.jsPlugin}">
 			<mf:embed.javaScript moveToFooter="TRUE">
 jQuery(document).ready(function($) {
-	var styleClass = '{settings.album.lightbox.styleClass}';
+	var styleClass = '{settings.album.lightbox.styleClass}-{mediaAlbum.uid}';
 	var relName = '{settings.album.lightbox.relPrefix}{mediaAlbum.uid}';
 	var current = '{f:translate(key:'lightbox_current', default:'image {current} of {total}')}';
 	$("." + styleClass).colorbox({

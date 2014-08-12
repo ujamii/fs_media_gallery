@@ -15,7 +15,7 @@
 				<f:if condition="{settings.album.lightbox.enable}">
 					<f:if condition="{before}">
 						<f:for each="{before}" as="mediaAsset">
-							<a href="{f:uri.image(image:mediaAsset, width:'{settings.album.lightbox.asset.width}{settings.album.lightbox.asset.resizeMode}', height:'{settings.album.lightbox.asset.height}{settings.album.lightbox.asset.resizeMode}')}" rel="{settings.album.lightbox.relPrefix}{mediaAlbum.uid}" class="{settings.album.lightbox.styleClass}" title="{mf:fileTitle(file:mediaAsset)} - {mediaAlbum.title}"></a>
+							<a href="{f:uri.image(image:mediaAsset, width:'{settings.album.lightbox.asset.width}{settings.album.lightbox.asset.resizeMode}', height:'{settings.album.lightbox.asset.height}{settings.album.lightbox.asset.resizeMode}')}" rel="{settings.album.lightbox.relPrefix}{mediaAlbum.uid}" class="{settings.album.lightbox.styleClass} {settings.album.lightbox.styleClass}-{mediaAlbum.uid}" title="{mf:fileTitle(file:mediaAsset)} - {mediaAlbum.title}"></a>
 						</f:for>
 					</f:if>
 				</f:if>
@@ -40,7 +40,7 @@
 				<f:if condition="{settings.album.lightbox.enable}">
 					<f:if condition="{after}">
 						<f:for each="{after}" as="mediaAsset">
-							<a href="{f:uri.image(image:mediaAsset, width:'{settings.album.lightbox.asset.width}{settings.album.lightbox.asset.resizeMode}', height:'{settings.album.lightbox.asset.height}{settings.album.lightbox.asset.resizeMode}')}" rel="{settings.album.lightbox.relPrefix}{mediaAlbum.uid}" class="{settings.album.lightbox.styleClass}" title="{mf:fileTitle(file:mediaAsset)} - {mediaAlbum.title}"></a>
+							<a href="{f:uri.image(image:mediaAsset, width:'{settings.album.lightbox.asset.width}{settings.album.lightbox.asset.resizeMode}', height:'{settings.album.lightbox.asset.height}{settings.album.lightbox.asset.resizeMode}')}" rel="{settings.album.lightbox.relPrefix}{mediaAlbum.uid}" class="{settings.album.lightbox.styleClass} {settings.album.lightbox.styleClass}-{mediaAlbum.uid}" title="{mf:fileTitle(file:mediaAsset)} - {mediaAlbum.title}"></a>
 						</f:for>
 					</f:if>
 				</f:if>
