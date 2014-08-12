@@ -269,34 +269,39 @@ All settings are defined by using :typoscript:`plugin.tx_fsmediagallery.<propert
    :proposal:       rename to ``scaleMode``
 
  - :oldProperty:    settings.pagination.insertAbove
-   :status:         no change
-   :newProperty:    settings.pagination.\
-                    :ref:`insertAbove <plugin.tx_fsmediagallery.settings.pagination.insertAbove>`
-   :proposal:       divide into ``settings.list.paginate.itemsPerPage`` and ``settings.album.paginate.itemsPerPage``
+   :status:         splitted (moved, renamed)
+   :newProperty:    settings.list.pagination.\
+                    :ref:`insertAbove <plugin.tx_fsmediagallery.settings.list.pagination.insertAbove>`,
+                    settings.album.pagination.\
+                    :ref:`insertAbove <plugin.tx_fsmediagallery.settings.album.pagination.insertAbove>`
 
  - :oldProperty:    settings.pagination.insertBelow
-   :status:         no change
-   :newProperty:    settings.pagination.\
-                    :ref:`insertBelow <plugin.tx_fsmediagallery.settings.pagination.insertBelow>`
-   :proposal:       divide into ``settings.list.paginate.insertBelow`` and ``settings.album.paginate.insertBelow``
+   :status:         splitted (moved, renamed)
+   :newProperty:    settings.list.pagination.\
+                    :ref:`insertBelow <plugin.tx_fsmediagallery.settings.list.pagination.insertBelow>`,
+                    settings.album.pagination.\
+                    :ref:`insertBelow <plugin.tx_fsmediagallery.settings.album.pagination.insertBelow>`
 
  - :oldProperty:    settings.pagination.pagesBefore
-   :status:         no change
-   :newProperty:    settings.pagination.\
-                    :ref:`pagesBefore <plugin.tx_fsmediagallery.settings.pagination.pagesBefore>`
-   :proposal:       divide into ``settings.list.paginate.pagesBefore`` and ``settings.album.paginate.pagesBefore``
+   :status:         splitted (moved, renamed)
+   :newProperty:    settings.list.pagination.\
+                    :ref:`pagesBefore <plugin.tx_fsmediagallery.settings.list.pagination.pagesBefore>`,
+                    settings.album.pagination.\
+                    :ref:`pagesBefore <plugin.tx_fsmediagallery.settings.album.pagination.pagesBefore>`
 
  - :oldProperty:    settings.pagination.pagesAfter
-   :status:         no change
-   :newProperty:    settings.pagination.\
-                    :ref:`pagesAfter <plugin.tx_fsmediagallery.settings.pagination.pagesAfter>`
-   :proposal:       divide into ``settings.list.paginate.pagesAfter`` and ``settings.album.paginate.pagesAfter``
+   :status:         splitted (moved, renamed)
+   :newProperty:    settings.list.pagination.\
+                    :ref:`pagesAfter <plugin.tx_fsmediagallery.settings.list.pagination.pagesAfter>`,
+                    settings.album.pagination.\
+                    :ref:`pagesAfter <plugin.tx_fsmediagallery.settings.album.pagination.pagesAfter>`
 
  - :oldProperty:    settings.pagination.maximumNumberOfLinks
-   :status:         no change
-   :newProperty:    settings.pagination.\
-                    :ref:`maximumNumberOfLinks <plugin.tx_fsmediagallery.settings.pagination.maximumNumberOfLinks>`
-   :proposal:       divide into ``settings.list.paginate.maximumNumberOfLinks`` and ``settings.album.paginate.maximumNumberOfLinks``; rename to ``numberOfLinks``
+   :status:         splitted (moved, renamed), value altered
+   :newProperty:    settings.list.pagination.\
+                    :ref:`maximumNumberOfLinks <plugin.tx_fsmediagallery.settings.list.pagination.maximumNumberOfLinks>`,
+                    settings.album.pagination.\
+                    :ref:`maximumNumberOfLinks <plugin.tx_fsmediagallery.settings.album.pagination.maximumNumberOfLinks>`
 
  - :oldProperty:    settings.features.skipDefaultArguments
    :status:         no change

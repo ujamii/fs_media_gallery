@@ -222,18 +222,23 @@ They are set by :typoscript:`plugin.tx_news.settings.list.<property>`
 
 .. container:: ts-properties
 
-   ================================================================================================== ============================================================== ======================= =================
-   Property                                                                                           Data type                                                      :ref:`t3tsref:stdwrap`  Default
-   ================================================================================================== ============================================================== ======================= =================
-   :ref:`hideEmptyAlbums <plugin.tx_fsmediagallery.settings.list.hideEmptyAlbums>`                    :ref:`t3tsref:data-type-boolean`                               no                      :code:`1`
-   :ref:`itemsPerPage <plugin.tx_fsmediagallery.settings.list.itemsPerPage>`                          :ref:`t3tsref:data-type-positive-integer`                      no                      :code:`12`
-   :ref:`skipListWhenOnlyOneAlbum <plugin.tx_fsmediagallery.settings.list.skipListWhenOnlyOneAlbum>`  :ref:`t3tsref:data-type-boolean`                               no                      :code:`0`
-   :ref:`thumb.width <plugin.tx_fsmediagallery.settings.list.thumb.width>`                            :ref:`t3tsref:data-type-pixels`                                no                      :code:`180`
-   :ref:`thumb.height <plugin.tx_fsmediagallery.settings.list.thumb.height>`                          :ref:`t3tsref:data-type-pixels`                                no                      :code:`100`
-   :ref:`thumb.resizeMode <plugin.tx_fsmediagallery.settings.list.thumb.resizeMode>`                  :ref:`t3tsref:data-type-string` ``[m|c|s]``                    no                      :code:`m`
-   :ref:`flat.orderBy <plugin.tx_fsmediagallery.settings.list.flat.orderBy>`                          :ref:`t3tsref:data-type-string` ``[datetime|crdate|sorting]``  no                      :code:`datetime`
-   :ref:`flat.orderDirection <plugin.tx_fsmediagallery.settings.list.flat.orderDirection>`            :ref:`t3tsref:data-type-string` ``[asc|desc]``                 no                      :code:`desc`
-   ================================================================================================== ============================================================== ======================= =================
+   ================================================================================================================ ============================================================== ======================= =================
+   Property                                                                                                         Data type                                                      :ref:`t3tsref:stdwrap`  Default
+   ================================================================================================================ ============================================================== ======================= =================
+   :ref:`hideEmptyAlbums <plugin.tx_fsmediagallery.settings.list.hideEmptyAlbums>`                                  :ref:`t3tsref:data-type-boolean`                               no                      :code:`1`
+   :ref:`itemsPerPage <plugin.tx_fsmediagallery.settings.list.itemsPerPage>`                                        :ref:`t3tsref:data-type-positive-integer`                      no                      :code:`12`
+   :ref:`flat.orderBy <plugin.tx_fsmediagallery.settings.list.flat.orderBy>`                                        :ref:`t3tsref:data-type-string` ``[datetime|crdate|sorting]``  no                      :code:`datetime`
+   :ref:`flat.orderDirection <plugin.tx_fsmediagallery.settings.list.flat.orderDirection>`                          :ref:`t3tsref:data-type-string` ``[asc|desc]``                 no                      :code:`desc`
+   :ref:`pagination.insertAbove <plugin.tx_fsmediagallery.settings.list.pagination.insertAbove>`                    :ref:`t3tsref:data-type-boolean`                               no                      :code:`0`
+   :ref:`pagination.insertBelow <plugin.tx_fsmediagallery.settings.list.pagination.insertBelow>`                    :ref:`t3tsref:data-type-boolean`                               no                      :code:`1`
+   :ref:`pagination.pagesBefore <plugin.tx_fsmediagallery.settings.list.pagination.pagesBefore>`                    :ref:`t3tsref:data-type-positive-integer` or ``0``             no                      :code:`4`
+   :ref:`pagination.pagesAfter <plugin.tx_fsmediagallery.settings.list.pagination.pagesAfter>`                      :ref:`t3tsref:data-type-positive-integer` or ``0``             no                      :code:`4`
+   :ref:`pagination.maximumNumberOfLinks <plugin.tx_fsmediagallery.settings.list.pagination.maximumNumberOfLinks>`  :ref:`t3tsref:data-type-positive-integer`                      no                      :code:`9`
+   :ref:`skipListWhenOnlyOneAlbum <plugin.tx_fsmediagallery.settings.list.skipListWhenOnlyOneAlbum>`                :ref:`t3tsref:data-type-boolean`                               no                      :code:`0`
+   :ref:`thumb.width <plugin.tx_fsmediagallery.settings.list.thumb.width>`                                          :ref:`t3tsref:data-type-pixels`                                no                      :code:`180`
+   :ref:`thumb.height <plugin.tx_fsmediagallery.settings.list.thumb.height>`                                        :ref:`t3tsref:data-type-pixels`                                no                      :code:`100`
+   :ref:`thumb.resizeMode <plugin.tx_fsmediagallery.settings.list.thumb.resizeMode>`                                :ref:`t3tsref:data-type-string` ``[m|c|s]``                    no                      :code:`m`
+   ================================================================================================================ ============================================================== ======================= =================
 
 
 Property details
@@ -328,6 +333,55 @@ flat.orderDirection
 | :code:`desc` = Descending (new to old/high to low)
 
 
+.. _plugin.tx_fsmediagallery.settings.list.pagination.insertAbove:
+
+insertAbove
+"""""""""""
+
+:typoscript:`plugin.tx_fsmediagallery.settings.list.pagination.insertAbove =` :ref:`t3tsref:data-type-boolean`
+
+Set it to ``1`` (``TRUE``) or ``0`` (``FALSE``) to either show or hide the pagination before an album list.
+
+.. _plugin.tx_fsmediagallery.settings.list.pagination.insertBelow:
+
+insertBelow
+"""""""""""
+
+:typoscript:`plugin.tx_fsmediagallery.settings.list.pagination.insertBelow =` :ref:`t3tsref:data-type-boolean`
+
+Set it to ``1`` (``TRUE``) or ``0`` (``FALSE``) to either show or hide the pagination after an album list.
+
+.. _plugin.tx_fsmediagallery.settings.list.pagination.pagesBefore:
+
+pagesBefore
+"""""""""""
+
+:typoscript:`plugin.tx_fsmediagallery.settings.list.pagination.pagesBefore =` :ref:`t3tsref:data-type-positive-integer` or ``0``
+
+Number of page links before the current page.
+
+
+.. _plugin.tx_fsmediagallery.settings.list.pagination.pagesAfter:
+
+pagesAfter
+""""""""""
+
+:typoscript:`plugin.tx_fsmediagallery.settings.list.pagination.pagesAfter =` :ref:`t3tsref:data-type-positive-integer` or ``0``
+
+Number of page links after the current page.
+
+
+.. _plugin.tx_fsmediagallery.settings.list.pagination.maximumNumberOfLinks:
+
+maximumNumberOfLinks
+""""""""""""""""""""
+
+:typoscript:`plugin.tx_fsmediagallery.settings.list.pagination.maximumNumberOfLinks =` :ref:`t3tsref:data-type-positive-integer`
+
+Force this number of page browser links on the screen.
+An odd number is recommended because it looks more symmetrical.
+
+
 .. _plugin.tx_fsmediagallery.settings.album:
 
 Properties for album view
@@ -338,21 +392,26 @@ They are set by :typoscript:`plugin.tx_news.settings.album.<property>`
 
 .. container:: ts-properties
 
-   ===================================================================================================== ============================================ ======================= =================
-   Property                                                                                              Data type                                    :ref:`t3tsref:stdwrap`  Default
-   ===================================================================================================== ============================================ ======================= =================
-   :ref:`itemsPerPage <plugin.tx_fsmediagallery.settings.album.itemsPerPage>`                            :ref:`t3tsref:data-type-positive-integer`    no                      :code:`32`
-   :ref:`lightbox.enable <plugin.tx_fsmediagallery.settings.album.lightbox.enable>`                      :ref:`t3tsref:data-type-boolean`             no                      :code:`1`
-   :ref:`lightbox.jsPlugin <plugin.tx_fsmediagallery.settings.album.lightbox.jsPlugin>`                  :ref:`t3tsref:data-type-string`              no                      :code:`colorbox`
-   :ref:`lightbox.relPrefix <plugin.tx_fsmediagallery.settings.album.lightbox.relPrefix>`                :ref:`t3tsref:data-type-string`              no                      :code:`albm_`
-   :ref:`lightbox.styleClass <plugin.tx_fsmediagallery.settings.album.lightbox.styleClass>`              :ref:`t3tsref:data-type-string`              no                      :code:`lightbox`
-   :ref:`lightbox.asset.width <plugin.tx_fsmediagallery.settings.album.lightbox.asset.width>`            :ref:`t3tsref:data-type-pixels`              no                      :code:`1920`
-   :ref:`lightbox.asset.height <plugin.tx_fsmediagallery.settings.album.lightbox.asset.height>`          :ref:`t3tsref:data-type-pixels`              no                      :code:`1080`
-   :ref:`lightbox.asset.resizeMode <plugin.tx_fsmediagallery.settings.album.lightbox.asset.resizeMode>`  :ref:`t3tsref:data-type-string` ``[m|c|s]``  no                      :code:`m`
-   :ref:`thumb.width <plugin.tx_fsmediagallery.settings.album.thumb.width>`                              :ref:`t3tsref:data-type-pixels`              no                      :code:`120`
-   :ref:`thumb.height <plugin.tx_fsmediagallery.settings.album.thumb.height>`                            :ref:`t3tsref:data-type-pixels`              no                      :code:`70`
-   :ref:`thumb.resizeMode <plugin.tx_fsmediagallery.settings.album.thumb.resizeMode>`                    :ref:`t3tsref:data-type-string` ``[m|c|s]``  no                      :code:`m`
-   ===================================================================================================== ============================================ ======================= =================
+   ================================================================================================================= =================================================== ======================= =================
+   Property                                                                                                          Data type                                           :ref:`t3tsref:stdwrap`  Default
+   ================================================================================================================= =================================================== ======================= =================
+   :ref:`itemsPerPage <plugin.tx_fsmediagallery.settings.album.itemsPerPage>`                                        :ref:`t3tsref:data-type-positive-integer`           no                      :code:`32`
+   :ref:`lightbox.enable <plugin.tx_fsmediagallery.settings.album.lightbox.enable>`                                  :ref:`t3tsref:data-type-boolean`                    no                      :code:`1`
+   :ref:`lightbox.jsPlugin <plugin.tx_fsmediagallery.settings.album.lightbox.jsPlugin>`                              :ref:`t3tsref:data-type-string`                     no                      :code:`colorbox`
+   :ref:`lightbox.relPrefix <plugin.tx_fsmediagallery.settings.album.lightbox.relPrefix>`                            :ref:`t3tsref:data-type-string`                     no                      :code:`albm_`
+   :ref:`lightbox.styleClass <plugin.tx_fsmediagallery.settings.album.lightbox.styleClass>`                          :ref:`t3tsref:data-type-string`                     no                      :code:`lightbox`
+   :ref:`lightbox.asset.width <plugin.tx_fsmediagallery.settings.album.lightbox.asset.width>`                        :ref:`t3tsref:data-type-pixels`                     no                      :code:`1920`
+   :ref:`lightbox.asset.height <plugin.tx_fsmediagallery.settings.album.lightbox.asset.height>`                      :ref:`t3tsref:data-type-pixels`                     no                      :code:`1080`
+   :ref:`lightbox.asset.resizeMode <plugin.tx_fsmediagallery.settings.album.lightbox.asset.resizeMode>`              :ref:`t3tsref:data-type-string` ``[m|c|s]``         no                      :code:`m`
+   :ref:`pagination.insertAbove <plugin.tx_fsmediagallery.settings.album.pagination.insertAbove>`                    :ref:`t3tsref:data-type-boolean`                    no                      :code:`0`
+   :ref:`pagination.insertBelow <plugin.tx_fsmediagallery.settings.album.pagination.insertBelow>`                    :ref:`t3tsref:data-type-boolean`                    no                      :code:`1`
+   :ref:`pagination.pagesBefore <plugin.tx_fsmediagallery.settings.album.pagination.pagesBefore>`                    :ref:`t3tsref:data-type-positive-integer` or ``0``  no                      :code:`4`
+   :ref:`pagination.pagesAfter <plugin.tx_fsmediagallery.settings.album.pagination.pagesAfter>`                      :ref:`t3tsref:data-type-positive-integer` or ``0``  no                      :code:`4`
+   :ref:`pagination.maximumNumberOfLinks <plugin.tx_fsmediagallery.settings.album.pagination.maximumNumberOfLinks>`  :ref:`t3tsref:data-type-positive-integer`           no                      :code:`9`
+   :ref:`thumb.width <plugin.tx_fsmediagallery.settings.album.thumb.width>`                                          :ref:`t3tsref:data-type-pixels`                     no                      :code:`120`
+   :ref:`thumb.height <plugin.tx_fsmediagallery.settings.album.thumb.height>`                                        :ref:`t3tsref:data-type-pixels`                     no                      :code:`70`
+   :ref:`thumb.resizeMode <plugin.tx_fsmediagallery.settings.album.thumb.resizeMode>`                                :ref:`t3tsref:data-type-string` ``[m|c|s]``         no                      :code:`m`
+   ================================================================================================================= =================================================== ======================= =================
 
 
 Property details
@@ -474,6 +533,55 @@ lightbox.asset.resizeMode
 | :code:`m` = resize proportional; the proportions will be preserved and thus width/height are treated as maximum dimensions for the image. The image will be scaled to fit into width/height rectangle.
 | :code:`c` = crop; the proportions will be preserved and the image will be scaled to fit around a rectangle with width/height dimensions. Then, a centered portion from inside of the image (size defined by width/height) will be cut out.
 | :code:`s` = squeeze (unproportional exact fit); the proportions will *not* be preserved and the image will be unproportional scaled.
+
+
+.. _plugin.tx_fsmediagallery.settings.album.pagination.insertAbove:
+
+insertAbove
+"""""""""""
+
+:typoscript:`plugin.tx_fsmediagallery.settings.album.pagination.insertAbove =` :ref:`t3tsref:data-type-boolean`
+
+Set it to ``1`` (``TRUE``) or ``0`` (``FALSE``) to either show or hide the pagination before an asset list.
+
+.. _plugin.tx_fsmediagallery.settings.album.pagination.insertBelow:
+
+insertBelow
+"""""""""""
+
+:typoscript:`plugin.tx_fsmediagallery.settings.album.pagination.insertBelow =` :ref:`t3tsref:data-type-boolean`
+
+Set it to ``1`` (``TRUE``) or ``0`` (``FALSE``) to either show or hide the pagination after an asset list.
+
+.. _plugin.tx_fsmediagallery.settings.album.pagination.pagesBefore:
+
+pagesBefore
+"""""""""""
+
+:typoscript:`plugin.tx_fsmediagallery.settings.album.pagination.pagesBefore =` :ref:`t3tsref:data-type-positive-integer` or ``0``
+
+Number of page links before the current page.
+
+
+.. _plugin.tx_fsmediagallery.settings.album.pagination.pagesAfter:
+
+pagesAfter
+""""""""""
+
+:typoscript:`plugin.tx_fsmediagallery.settings.album.pagination.pagesAfter =` :ref:`t3tsref:data-type-positive-integer` or ``0``
+
+Number of page links after the current page.
+
+
+.. _plugin.tx_fsmediagallery.settings.album.pagination.maximumNumberOfLinks:
+
+maximumNumberOfLinks
+""""""""""""""""""""
+
+:typoscript:`plugin.tx_fsmediagallery.settings.album.pagination.maximumNumberOfLinks =` :ref:`t3tsref:data-type-positive-integer`
+
+Force this number of page browser links on the screen.
+An odd number is recommended because it looks more symmetrical.
 
 
 .. _plugin.tx_fsmediagallery.settings.detail:
@@ -598,79 +706,6 @@ thumb.resizeMode
 | :code:`m` = resize proportional; the proportions will be preserved and thus width/height are treated as maximum dimensions for the image. The image will be scaled to fit into width/height rectangle.
 | :code:`c` = crop; the proportions will be preserved and the image will be scaled to fit around a rectangle with width/height dimensions. Then, a centered portion from inside of the image (size defined by width/height) will be cut out.
 | :code:`s` = squeeze (unproportional exact fit); the proportions will *not* be preserved and the image will be unproportional scaled.
-
-
-.. _plugin.tx_fsmediagallery.settings.pagination:
-
-Properties for pagination
--------------------------
-
-The following table describes the settings for the *pagination* in list and album view.
-They are set by :typoscript:`plugin.tx_fsmediagallery.settings.pagination.<property>`
-
-.. container:: ts-properties
-
-   ================================================================================================ =================================================== ======================= ===========
-   Property                                                                                         Data type                                           :ref:`t3tsref:stdwrap`  Default
-   ================================================================================================ =================================================== ======================= ===========
-   :ref:`insertAbove <plugin.tx_fsmediagallery.settings.pagination.insertAbove>`                    :ref:`t3tsref:data-type-boolean`                    no                      :code:`0`
-   :ref:`insertBelow <plugin.tx_fsmediagallery.settings.pagination.insertBelow>`                    :ref:`t3tsref:data-type-boolean`                    no                      :code:`1`
-   :ref:`pagesBefore <plugin.tx_fsmediagallery.settings.pagination.pagesBefore>`                    :ref:`t3tsref:data-type-positive-integer` or ``0``  no                      :code:`4`
-   :ref:`pagesAfter <plugin.tx_fsmediagallery.settings.pagination.pagesAfter>`                      :ref:`t3tsref:data-type-positive-integer` or ``0``  no                      :code:`4`
-   :ref:`maximumNumberOfLinks <plugin.tx_fsmediagallery.settings.pagination.maximumNumberOfLinks>`  :ref:`t3tsref:data-type-positive-integer`           no                      :code:`10`
-   ================================================================================================ =================================================== ======================= ===========
-
-
-Property details
-^^^^^^^^^^^^^^^^
-
-.. _plugin.tx_fsmediagallery.settings.pagination.insertAbove:
-
-insertAbove
-"""""""""""
-
-:typoscript:`plugin.tx_fsmediagallery.settings.pagination.insertAbove =` :ref:`t3tsref:data-type-boolean`
-
-Set it to ``1`` (``TRUE``) or ``0`` (``FALSE``) to either show or hide the pagination before an item list.
-
-.. _plugin.tx_fsmediagallery.settings.pagination.insertBelow:
-
-insertBelow
-"""""""""""
-
-:typoscript:`plugin.tx_fsmediagallery.settings.pagination.insertBelow =` :ref:`t3tsref:data-type-boolean`
-
-Set it to ``1`` (``TRUE``) or ``0`` (``FALSE``) to either show or hide the pagination after an item list.
-
-.. _plugin.tx_fsmediagallery.settings.pagination.pagesBefore:
-
-pagesBefore
-"""""""""""
-
-:typoscript:`plugin.tx_fsmediagallery.settings.pagination.pagesBefore =` :ref:`t3tsref:data-type-positive-integer` or ``0``
-
-Number of page links before the current page.
-
-
-.. _plugin.tx_fsmediagallery.settings.pagination.pagesAfter:
-
-pagesAfter
-""""""""""
-
-:typoscript:`plugin.tx_fsmediagallery.settings.pagination.pagesAfter =` :ref:`t3tsref:data-type-positive-integer` or ``0``
-
-Number of page links after the current page.
-
-
-.. _plugin.tx_fsmediagallery.settings.pagination.maximumNumberOfLinks:
-
-maximumNumberOfLinks
-""""""""""""""""""""
-
-:typoscript:`plugin.tx_fsmediagallery.settings.pagination.maximumNumberOfLinks =` :ref:`t3tsref:data-type-positive-integer`
-
-Force this number of page browser links on the screen.
-An odd number is recommended because it looks more symmetrical.
 
 
 .. _plugin.tx_fsmediagallery.settings.features:

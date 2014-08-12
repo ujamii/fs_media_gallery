@@ -10,7 +10,7 @@
 		<div class="album">
 			<h3>{mediaAlbum.title}</h3>
 			<div class="description"><f:format.html>{mediaAlbum.description}</f:format.html></div>
-			<mf:widget.paginate objects="{mediaAlbum.assets}" as="paginatedAssets" itemsBefore="before" itemsAfter="after" configuration="{itemsPerPage: settings.album.itemsPerPage,insertAbove: settings.pagination.insertAbove,insertBelow: settings.pagination.insertBelow,maximumNumberOfLinks: settings.pagination.maximumNumberOfLinks,pagesBefore: settings.pagination.pagesBefore,pagesAfter: settings.pagination.pagesAfter}">
+			<mf:widget.paginate objects="{mediaAlbum.assets}" as="paginatedAssets" itemsBefore="before" itemsAfter="after" configuration="{itemsPerPage:settings.album.itemsPerPage, insertAbove:settings.album.pagination.insertAbove, insertBelow:settings.album.pagination.insertBelow, maximumNumberOfLinks:settings.album.pagination.maximumNumberOfLinks, pagesBefore:settings.album.pagination.pagesBefore, pagesAfter:settings.album.pagination.pagesAfter}">
 				<f:if condition="{settings.album.lightbox.enable}">
 					<f:if condition="{before}">
 						<f:for each="{before}" as="mediaAsset">
@@ -22,7 +22,7 @@
 					<f:then>
 						<div class="thumbs thumbs-assets clearfix">
 							<f:for each="{paginatedAssets}" as="mediaAsset">
-								<f:render partial="MediaAsset/Thumb" section="Thumb" arguments="{mediaAlbum:mediaAlbum,mediaAsset:mediaAsset}" />
+								<f:render partial="MediaAsset/Thumb" section="Thumb" arguments="{mediaAlbum:mediaAlbum, mediaAsset:mediaAsset}" />
 							</f:for>
 						</div>
 					</f:then>

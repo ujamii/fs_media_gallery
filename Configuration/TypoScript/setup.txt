@@ -44,6 +44,13 @@ plugin.tx_fsmediagallery {
 				# Sort direction for albums list: asc|desc
 				orderDirection = desc
 			}
+			pagination {
+				insertAbove = 0
+				insertBelow = 1
+				pagesBefore = 4
+				pagesAfter = 4
+				maximumNumberOfLinks = 9
+			}
 		}
 		# Settings for album view (list of images)
 		album {
@@ -67,6 +74,13 @@ plugin.tx_fsmediagallery {
 					resizeMode = m
 				}
 			}
+			pagination {
+				insertAbove = 0
+				insertBelow = 1
+				pagesBefore = 4
+				pagesAfter = 4
+				maximumNumberOfLinks = 9
+			}
 		}
 		# Settings for detail view
 		detail {
@@ -85,13 +99,6 @@ plugin.tx_fsmediagallery {
 				# Resize assets: m=resize proportional, c=crop, ''=squeeze (unproportional exact fit)
 				resizeMode = m
 			}
-		}
-		pagination {
-			insertAbove = 0
-			insertBelow = 1
-			pagesBefore = 4
-			pagesAfter = 4
-			maximumNumberOfLinks = 10
 		}
 	}
 	# skip default arguments
