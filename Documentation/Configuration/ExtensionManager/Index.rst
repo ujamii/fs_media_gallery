@@ -24,7 +24,7 @@ To set this configuration, switch to the Extension Manager, search for the exten
    Property                                                                                 Data type                      Default
    ======================================================================================== ============================== ===================================================================
    :ref:`allowedActionsInFlexforms <extConf.tx_fsmedia_gallery.allowedActionsInFlexforms>`  :ref:`t3tsref:data-type-list`  nestedList,flatList,showAlbumByParam,showAlbumByConfig,randomAsset
-   :ref:`list.flat.orderOptions <extConf.tx_fsmedia_gallery.list.flat.orderOptions>`        :ref:`t3tsref:data-type-list`  datetime,crdate,sorting
+   :ref:`list.orderOptions <extConf.tx_fsmedia_gallery.list.orderOptions>`                  :ref:`t3tsref:data-type-list`  datetime,crdate,sorting
    ======================================================================================== ============================== ===================================================================
 
 
@@ -50,12 +50,12 @@ Available actions are:
 If no action is defined, *all* available actions are selectable.
 
 
-.. _extConf.tx_fsmedia_gallery.list.flat.orderOptions:
+.. _extConf.tx_fsmedia_gallery.list.orderOptions:
 
-list.flat.orderOptions
-""""""""""""""""""""""
+list.orderOptions
+"""""""""""""""""
 
-Comma separated list of sort options for field ":ref:`Sort albums list by <flexforms.mediagallery.tabs.general.list.flat.orderBy>`" in flexforms.
+Comma separated list of sort options for field ":ref:`Sort albums list by <flexforms.mediagallery.tabs.general.list.orderBy>`" in flexforms.
 Available actions are:
 
 * datetime

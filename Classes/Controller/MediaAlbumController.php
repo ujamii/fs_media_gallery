@@ -189,12 +189,12 @@ class MediaAlbumController extends ActionController {
 			}
 		}
 
-		$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $mediaAlbumsUids, $useAlbumFilterAsExclude, $this->settings['list']['hideEmptyAlbums']);
+		$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $mediaAlbumsUids, $useAlbumFilterAsExclude, $this->settings['list']['hideEmptyAlbums'], $this->settings['list']['orderBy'], $this->settings['list']['orderDirection']);
 
 		// when only 1 album skip gallery view
 		if ($mediaAlbum === NULL && !empty($this->settings['list']['skipListWhenOnlyOneAlbum']) && count($mediaAlbums) === 1) {
 			$mediaAlbum = $mediaAlbums[0];
-			$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $mediaAlbumsUids, $useAlbumFilterAsExclude, $this->settings['list']['hideEmptyAlbums']);
+			$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $mediaAlbumsUids, $useAlbumFilterAsExclude, $this->settings['list']['hideEmptyAlbums'], $this->settings['list']['orderBy'], $this->settings['list']['orderDirection']);
 			$showBackLink = FALSE;
 		}
 
@@ -222,7 +222,7 @@ class MediaAlbumController extends ActionController {
 			$this->view->assign('mediaAlbum', $mediaAlbum);
 		} else {
 			// display the album list
-			$mediaAlbums = $this->mediaAlbumRepository->findAll($this->settings['list']['hideEmptyAlbums'], $this->settings['list']['flat']['orderBy'], $this->settings['list']['flat']['orderDirection']);
+			$mediaAlbums = $this->mediaAlbumRepository->findAll($this->settings['list']['hideEmptyAlbums'], $this->settings['list']['orderBy'], $this->settings['list']['orderDirection']);
 			$this->view->assign('displayMode', 'flatList');
 			$this->view->assign('mediaAlbums', $mediaAlbums);
 			$showBackLink = FALSE;

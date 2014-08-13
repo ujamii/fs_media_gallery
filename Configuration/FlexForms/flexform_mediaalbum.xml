@@ -118,38 +118,38 @@
 							</config>
 						</TCEforms>
 					</settings.mediaAlbum>
-					<settings.list.flat.orderBy>
+					<settings.list.orderBy>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.flat.orderBy</label>
-							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset</displayCond>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.orderBy</label>
+							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset</displayCond>
 							<config>
 								<type>select</type>
-								<itemsProcFunc>MiniFranske\FsMediaGallery\Hooks\ItemsProcFuncHook->getItemsForFlatListOrderBy</itemsProcFunc>
+								<itemsProcFunc>MiniFranske\FsMediaGallery\Hooks\ItemsProcFuncHook->getItemsForListOrderBy</itemsProcFunc>
 								<items>
 									<numIndex index="0" type="array">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
 										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="1">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.flat.orderBy.I.datetime</numIndex>
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.orderBy.I.datetime</numIndex>
 										<numIndex index="1">datetime</numIndex>
 									</numIndex>
 									<numIndex index="2">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.flat.orderBy.I.crdate</numIndex>
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.orderBy.I.crdate</numIndex>
 										<numIndex index="1">crdate</numIndex>
 									</numIndex>
 									<numIndex index="3">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.flat.orderBy.I.sorting</numIndex>
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.orderBy.I.sorting</numIndex>
 										<numIndex index="1">sorting</numIndex>
 									</numIndex>
 								</items>
 							</config>
 						</TCEforms>
-					</settings.list.flat.orderBy>
-					<settings.list.flat.orderDirection>
+					</settings.list.orderBy>
+					<settings.list.orderDirection>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.flat.orderDirection</label>
-							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset</displayCond>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.orderDirection</label>
+							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset</displayCond>
 							<config>
 								<type>select</type>
 								<items>
@@ -158,17 +158,17 @@
 										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="1">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.flat.orderDirection.I.asc</numIndex>
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.orderDirection.I.asc</numIndex>
 										<numIndex index="1">asc</numIndex>
 									</numIndex>
 									<numIndex index="2">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.flat.orderDirection.I.desc</numIndex>
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.orderDirection.I.desc</numIndex>
 										<numIndex index="1">desc</numIndex>
 									</numIndex>
 								</items>
 							</config>
 						</TCEforms>
-					</settings.list.flat.orderDirection>
+					</settings.list.orderDirection>
 					<!-- startingpoint -->
 					<settings.startingpoint>
 						<TCEforms>

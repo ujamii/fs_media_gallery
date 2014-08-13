@@ -31,6 +31,10 @@ plugin.tx_fsmediagallery {
 				resizeMode = m
 			}
 			hideEmptyAlbums = 1
+			# Sort albums list by: datetime|crdate|sorting
+			orderBy = datetime
+			# Sort direction for albums list: asc|desc
+			orderDirection = desc
 			# skip gallery view if there is only 1 album (is currently buggy when used with realUrl autoconf)
 			skipListWhenOnlyOneAlbum = 0
 			# Settings for nested album list
@@ -38,10 +42,6 @@ plugin.tx_fsmediagallery {
 			}
 			# Settings for flat album list
 			flat {
-				# Sort albums list by: datetime|crdate|sorting
-				orderBy = datetime
-				# Sort direction for albums list: asc|desc
-				orderDirection = desc
 			}
 			pagination {
 				itemsPerPage = 12

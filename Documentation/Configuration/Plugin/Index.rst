@@ -35,7 +35,7 @@ Tab "General"
 -------------
 
 .. figure:: ../../Images/Configuration/Plugin/flexforms.mediagallery.tabs.general.nested.png
-   :width: 718px
+   :width: 716px
    :alt: Tab "General" of plugin in display mode "Selected albums (nested)"
 
    **Image 1:** Tab "General" of plugin in display mode "Selected albums (nested)"
@@ -90,21 +90,21 @@ Tab "General"
 
 
  - :Field:       Sort albums list by
-   :Modes:       flatList
-   :TSref:       :ref:`settings.list.flat.orderBy <plugin.tx_fsmediagallery.settings.list.flat.orderBy>`
+   :Modes:       nestedList, flatList
+   :TSref:       :ref:`settings.list.orderBy <plugin.tx_fsmediagallery.settings.list.orderBy>`
    :Description:
-       .. _flexforms.mediagallery.tabs.general.list.flat.orderBy:
+       .. _flexforms.mediagallery.tabs.general.list.orderBy:
 
-       Defines how albums in ``flatList`` view are ordered.
+       Defines how albums in list views are ordered.
 
 
  - :Field:       Sort direction for albums list
-   :Modes:       flatList
-   :TSref:       :ref:`settings.list.flat.orderDirection <plugin.tx_fsmediagallery.settings.list.flat.orderDirection>`
+   :Modes:       nestedList, flatList
+   :TSref:       :ref:`settings.list.orderDirection <plugin.tx_fsmediagallery.settings.list.orderDirection>`
    :Description:
-       .. _flexforms.mediagallery.tabs.general.list.flat.orderDirection:
+       .. _flexforms.mediagallery.tabs.general.list.orderDirection:
 
-       Defines the sort direction (ascending/descending) for albums list in ``flatList`` view.
+       Defines the sort direction (ascending/descending) for albums list in list views.
 
 
  - :Field:       Startingpoint

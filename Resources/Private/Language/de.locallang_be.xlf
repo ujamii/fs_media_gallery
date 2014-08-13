@@ -125,32 +125,31 @@
 				<source>Thumb height</source>
 				<target>Höhe der Vorschaubilder</target>
 			</trans-unit>
-			<!-- flexforms.mediagallery.list.flat -->
-			<trans-unit id="flexforms.mediagallery.list.flat.orderBy">
+			<trans-unit id="flexforms.mediagallery.list.orderBy">
 				<source>Sort albums list by</source>
 				<target>Albenliste sortieren nach</target>
 			</trans-unit>
-			<trans-unit id="flexforms.mediagallery.list.flat.orderBy.I.datetime">
+			<trans-unit id="flexforms.mediagallery.list.orderBy.I.datetime">
 				<source>Given date</source>
 				<target>Vergebenes Datum</target>
 			</trans-unit>
-			<trans-unit id="flexforms.mediagallery.list.flat.orderBy.I.crdate">
+			<trans-unit id="flexforms.mediagallery.list.orderBy.I.crdate">
 				<source>Creation date</source>
 				<target>Erstellungsdatum</target>
 			</trans-unit>
-			<trans-unit id="flexforms.mediagallery.list.flat.orderBy.I.sorting">
+			<trans-unit id="flexforms.mediagallery.list.orderBy.I.sorting">
 				<source>Given sort order</source>
 				<target>Manuelle Sortierung</target>
 			</trans-unit>
-			<trans-unit id="flexforms.mediagallery.list.flat.orderDirection">
+			<trans-unit id="flexforms.mediagallery.list.orderDirection">
 				<source>Sort direction for albums list</source>
 				<target>Sortierreihenfolge für Albenliste</target>
 			</trans-unit>
-			<trans-unit id="flexforms.mediagallery.list.flat.orderDirection.I.asc">
+			<trans-unit id="flexforms.mediagallery.list.orderDirection.I.asc">
 				<source>Ascending (old to new/low to high)</source>
 				<target>Aufsteigend (alt zu neu/niedrig zu hoch)</target>
 			</trans-unit>
-			<trans-unit id="flexforms.mediagallery.list.flat.orderDirection.I.desc">
+			<trans-unit id="flexforms.mediagallery.list.orderDirection.I.desc">
 				<source>Descending (new to old/high to low)</source>
 				<target>Absteigend (neu zu alt/hoch zu niedrig)</target>
 			</trans-unit>
@@ -201,9 +200,9 @@
 				<source>Plugin actions shown in flexforms: Comma separated list of controller actions which could be selected as plugin action in flexforms. Available actions are nestedList,flatList,showAlbumByParam,showAlbumByConfig,randomAsset. If no action is defined, all available actions are selectable.</source>
 				<target>Plugin-Aktionen, die in Flexforms angezeigt werden: Kommaseparierte Liste von Controller-Aktionen, die als Plugin-Aktion in Flexforms verwendet werden. Mögliche Aktionen sind nestedList,flatList,showAlbumByParam,showAlbumByConfig,randomAsset. Wird keine Plugin-Aktion angegeben, sind alle Aktionen auswählbar.</target>
 			</trans-unit>
-			<trans-unit id="extmng.list.flat.orderOptions">
-				<source>Sort options for flat albums list in flexforms: Comma separated list of sort options for field "Sort albums list by" which could be selected in flexforms. Available options are datetime,crdate,sorting.</source>
-				<target>Sortier-Optionen, die in Flexforms für "Albenliste (ausgeflacht)" angezeigt werden: Kommaseparierte Liste von Sortier-Optionen, die in Flexforms für das Feld "Albenliste sortieren nach" verwendet werden. Mögliche Optionen sind datetime,crdate,sorting.</target>
+			<trans-unit id="extmng.list.orderOptions">
+				<source>Sort options for albums lists in flexforms: Comma separated list of sort options for field "Sort albums list by" which could be selected in flexforms. Available options are datetime,crdate,sorting.</source>
+				<target>Sortier-Optionen für Albenlisten, die in Flexforms angezeigt werden: Kommaseparierte Liste von Sortier-Optionen, die in Flexforms für das Feld "Albenliste sortieren nach" verwendet werden. Mögliche Optionen sind datetime,crdate,sorting.</target>
 			</trans-unit>
 
 			<!--

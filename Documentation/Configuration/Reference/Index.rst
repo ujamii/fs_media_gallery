@@ -226,8 +226,8 @@ They are set by :typoscript:`plugin.tx_news.settings.list.<property>`
    Property                                                                                                         Data type                                                      :ref:`t3tsref:stdwrap`  Default
    ================================================================================================================ ============================================================== ======================= =================
    :ref:`hideEmptyAlbums <plugin.tx_fsmediagallery.settings.list.hideEmptyAlbums>`                                  :ref:`t3tsref:data-type-boolean`                               no                      :code:`1`
-   :ref:`flat.orderBy <plugin.tx_fsmediagallery.settings.list.flat.orderBy>`                                        :ref:`t3tsref:data-type-string` ``[datetime|crdate|sorting]``  no                      :code:`datetime`
-   :ref:`flat.orderDirection <plugin.tx_fsmediagallery.settings.list.flat.orderDirection>`                          :ref:`t3tsref:data-type-string` ``[asc|desc]``                 no                      :code:`desc`
+   :ref:`orderBy <plugin.tx_fsmediagallery.settings.list.orderBy>`                                                  :ref:`t3tsref:data-type-string` ``[datetime|crdate|sorting]``  no                      :code:`datetime`
+   :ref:`orderDirection <plugin.tx_fsmediagallery.settings.list.orderDirection>`                                    :ref:`t3tsref:data-type-string` ``[asc|desc]``                 no                      :code:`desc`
    :ref:`pagination.insertAbove <plugin.tx_fsmediagallery.settings.list.pagination.insertAbove>`                    :ref:`t3tsref:data-type-boolean`                               no                      :code:`0`
    :ref:`pagination.insertBelow <plugin.tx_fsmediagallery.settings.list.pagination.insertBelow>`                    :ref:`t3tsref:data-type-boolean`                               no                      :code:`1`
    :ref:`pagination.itemsPerPage <plugin.tx_fsmediagallery.settings.list.pagination.itemsPerPage>`                  :ref:`t3tsref:data-type-positive-integer`                      no                      :code:`12`
@@ -298,27 +298,27 @@ skipListWhenOnlyOneAlbum
 If :code:`1` (:code:`TRUE`) the nested album list view is skipped if only one album is to be displayed.
 
 
-.. _plugin.tx_fsmediagallery.settings.list.flat.orderBy:
+.. _plugin.tx_fsmediagallery.settings.list.orderBy:
 
-flat.orderBy
-""""""""""""
+orderBy
+"""""""
 
-:typoscript:`plugin.tx_fsmediagallery.settings.list.flat.orderBy =` :ref:`t3tsref:data-type-string` ``[datetime|crdate|sorting]``
+:typoscript:`plugin.tx_fsmediagallery.settings.list.orderBy =` :ref:`t3tsref:data-type-string` ``[datetime|crdate|sorting]``
 
-| Defines how albums in flat list view are ordered.
+| Defines how albums in list views are ordered.
 | :code:`datetime` = Given date/time
 | :code:`crdate` = Creation date/time
 | :code:`sorting` = Given sort order
 
 
-.. _plugin.tx_fsmediagallery.settings.list.flat.orderDirection:
+.. _plugin.tx_fsmediagallery.settings.list.orderDirection:
 
-flat.orderDirection
-"""""""""""""""""""
+orderDirection
+""""""""""""""
 
-:typoscript:`plugin.tx_fsmediagallery.settings.list.flat.orderDirection =` :ref:`t3tsref:data-type-string` ``[asc|desc]``
+:typoscript:`plugin.tx_fsmediagallery.settings.list.orderDirection =` :ref:`t3tsref:data-type-string` ``[asc|desc]``
 
-| Defines the sort order of albums in flat list view.
+| Defines the sort order of albums in list views.
 | :code:`asc` = Ascending (old to new/low to high)
 | :code:`desc` = Descending (new to old/high to low)
 

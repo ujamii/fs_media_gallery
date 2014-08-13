@@ -40,6 +40,8 @@ The most important changes are:
 
 * New option ``resizeMode`` for media assets and thumbnail images for all display modes
 
+* Sort order of albums lists can be set in :ref:`plugin <flexforms.mediagallery.tabs.general.list.orderBy>` and via TS (:ref:`settings.list.orderBy <plugin.tx_fsmediagallery.settings.list.orderBy>`, :ref:`settings.list.orderDirection <plugin.tx_fsmediagallery.settings.list.orderDirection>`)
+
 * Default media asset dimensions orient on 1080i (widescreen aspect ratio of 16:9)
 
 * Translation key have been reordered and renamed
@@ -334,18 +336,18 @@ All settings are defined by using :typoscript:`plugin.tx_fsmediagallery.<propert
 
  - :oldProperty:
    :status:         new
-   :newProperty:    settings.list.flat.\
-                    :ref:`orderBy <plugin.tx_fsmediagallery.settings.list.flat.orderBy>`
-
- - :oldProperty:
-   :status:         new
-   :newProperty:    settings.list.flat.\
-                    :ref:`orderDirection <plugin.tx_fsmediagallery.settings.list.flat.orderDirection>`
+   :newProperty:    settings.list.\
+                    :ref:`hideEmptyAlbums <plugin.tx_fsmediagallery.settings.list.hideEmptyAlbums>`
 
  - :oldProperty:
    :status:         new
    :newProperty:    settings.list.\
-                    :ref:`hideEmptyAlbums <plugin.tx_fsmediagallery.settings.list.hideEmptyAlbums>`
+                    :ref:`orderBy <plugin.tx_fsmediagallery.settings.list.orderBy>`
+
+ - :oldProperty:
+   :status:         new
+   :newProperty:    settings.list.\
+                    :ref:`orderDirection <plugin.tx_fsmediagallery.settings.list.orderDirection>`
 
  - :oldProperty:    settings.skipGalleryWhenOneAlbum
    :status:         renamed, moved

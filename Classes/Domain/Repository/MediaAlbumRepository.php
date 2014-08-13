@@ -118,9 +118,11 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * @param array $filterByUids filter possible result by given uids
 	 * @param boolean $useAlbumFilterAsExclude
 	 * @param boolean $excludeEmptyAlbums
+	 * @param string $orderBy Sort albums by: datetime|crdate|sorting
+	 * @param string $orderDirection Sort order: asc|desc
 	 * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
 	 */
-	public function findByParentAlbum(MediaAlbum $parentAlbum = NULL, array $filterByUids = array(), $useAlbumFilterAsExclude = FALSE, $excludeEmptyAlbums = TRUE) {
+	public function findByParentAlbum(MediaAlbum $parentAlbum = NULL, array $filterByUids = array(), $useAlbumFilterAsExclude = FALSE, $excludeEmptyAlbums = TRUE, $orderBy = 'sorting', $orderDirection = 'desc') {
 		$excludeEmptyAlbums = filter_var($excludeEmptyAlbums, FILTER_VALIDATE_BOOLEAN);
 		$query = $this->createQuery();
 		$constraints = array();
@@ -133,6 +135,7 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			}
 		}
 		$query->matching($query->logicalAnd($constraints));
+		$query->setOrderings($this->getOrderingsSettings($orderBy, $orderDirection));
 		$mediaAlbums = $query->execute();
 
 		foreach ($mediaAlbums as $key => $mediaAlbum) {
@@ -177,30 +180,7 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	public function findAll($excludeEmptyAlbums = TRUE, $orderBy = 'datetime', $orderDirection = 'desc') {
 		$excludeEmptyAlbums = filter_var($excludeEmptyAlbums, FILTER_VALIDATE_BOOLEAN);
 		$query = $this->createQuery();
-
-		// check orderDirection
-		if ($orderDirection === 'asc') {
-			$orderDirection = \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING;
-		} else {
-			$orderDirection = \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING;
-		}
-
-		// set orderBy and orderDirection
-		switch ($orderBy) {
-			case 'sorting':
-				$query->setOrderings(array('sorting' => $orderDirection));
-				break;
-			case 'crdate':
-				$query->setOrderings(array('crdate' => $orderDirection));
-				break;
-			default:
-				// datetime
-				$query->setOrderings(array(
-					'datetime' => $orderDirection,
-					'crdate' => $orderDirection,
-				));
-		}
-
+		$query->setOrderings($this->getOrderingsSettings($orderBy, $orderDirection));
 		$mediaAlbums = $query->execute();
 
 		foreach ($mediaAlbums as $key => $mediaAlbum) {
@@ -233,6 +213,48 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			$whereClause .= \TYPO3\CMS\Backend\Utility\BackendUtility::deleteClause('sys_file_collection');
 		}
 		return $whereClause;
+	}
+
+	/**
+	 * Get orderings settings. Returns an array like:
+	 * array(
+	 *  'foo' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+	 *  'bar' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING
+	 * )
+	 *
+	 * @param string $orderBy Sort albums by: datetime|crdate|sorting
+	 * @param string $orderDirection Sort order: asc|desc
+	 * @return array Orderings settings used by \TYPO3\CMS\Extbase\Persistence\QueryInterface->setOrderings()
+	 */
+	protected function getOrderingsSettings($orderBy = 'sorting', $orderDirection = 'asc') {
+
+		// check orderDirection
+		if ($orderDirection === 'asc') {
+			$orderDirection = \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING;
+		} else {
+			$orderDirection = \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING;
+		}
+
+		// set $orderingsSettings by orderBy and orderDirection
+		switch ($orderBy) {
+			case 'datetime':
+				$orderingsSettings = array(
+					'datetime' => $orderDirection,
+					'crdate' => $orderDirection
+				);
+				break;
+			case 'crdate':
+				$orderingsSettings = array('crdate' => $orderDirection);
+				break;
+			default:
+				// sorting
+				$orderingsSettings = array(
+					'sorting' => $orderDirection,
+					'crdate' => $orderDirection
+				);
+		}
+
+		return $orderingsSettings;
 	}
 
 }
