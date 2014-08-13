@@ -12,7 +12,7 @@ $additionalColumns = array(
 			'type' => 'input',
 			'size' => 12,
 			'max' => 20,
-			'eval' => 'datetime,required',
+			'eval' => 'datetime',
 		)
 	),
 	'sorting' => array(
