@@ -29,7 +29,7 @@
 			</trans-unit>
 			<trans-unit id="no_album_found">
 				<source>Album not found</source>
-				<target>Geen album gevonden</target>
+				<target>Album niet gevonden</target>
 			</trans-unit>
 			<trans-unit id="no_assets_found">
 				<source>No assets found</source>
@@ -57,7 +57,7 @@
 			</trans-unit>
 			<trans-unit id="link_to_album">
 				<source>Show album '%s'</source>
-				<target>Album '%s' aanwijzen</target>
+				<target>Album '%s' bekijken</target>
 			</trans-unit>
 		</body>
 	</file>
