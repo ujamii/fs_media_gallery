@@ -5,7 +5,7 @@ if (!defined('TYPO3_MODE')) {
 
 $additionalColumns = array(
 	'datetime' => array(
-		'exclude' => 0,
+		'exclude' => 1,
 		'l10n_mode' => 'mergeIfNotBlank',
 		'label' => 'LLL:EXT:cms/locallang_ttc.xlf:date_formlabel',
 		'config' => array(
@@ -43,7 +43,7 @@ $additionalColumns = array(
 		'defaultExtras' => 'richtext[]',
 	),
 	'parentalbum' => array(
-		'exclude' => 0,
+		'exclude' => 1,
 		'l10n_mode' => 'exclude',
 		'label' => 'LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_db.xlf:tx_fsmediagallery_domain_model_mediaalbum.parentalbum',
 		'config' => array(

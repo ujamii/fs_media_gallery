@@ -5,7 +5,7 @@ if (!defined('TYPO3_MODE')) {
 
 $additionalColumns = array(
 	'related_fsmediaalbums' => array(
-		'exclude' => 0,
+		'exclude' => 1,
 		'l10n_mode' => 'exclude',
 		'label' => 'LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_db.xlf:tx_news_domain_model_news.related_fsmediaalbums',
 		'config' => array(

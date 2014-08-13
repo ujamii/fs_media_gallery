@@ -48,6 +48,8 @@ The most important changes are:
 
 * Field "Date" was added to FAL file collections (adds field ``datetime`` to database table ``sys_file_collection``)
 
+* Field "Parent" was set as exclude field so you need to enable this (BeUser/BeGroup settings) for you editors if used (table ``sys_file_collection``)
+
 * EXT:fs_media_gallery now integrates into `EXT:news <http://typo3.org/extensions/repository/view/news>`_ (alters database table ``tx_news_domain_model_news``, adds table ``tx_news_domain_model_news_fsmediaalbums_mm``)
 
 
