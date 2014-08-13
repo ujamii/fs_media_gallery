@@ -39,6 +39,13 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 class MediaAlbumController extends ActionController {
 
 	/**
+	 * mediaAlbumRepository
+	 *
+	 * @var \MiniFranske\FsMediaGallery\Domain\Repository\MediaAlbumRepository
+	 */
+	protected $mediaAlbumRepository;
+
+	/**
 	 * Injects the Configuration Manager
 	 *
 	 * @param ConfigurationManagerInterface $configurationManager Instance of the Configuration Manager
@@ -72,29 +79,25 @@ class MediaAlbumController extends ActionController {
 		// overwrite persistence.storagePid if settings.startingpoint is defined in flexform
 		if (!empty($this->settings['startingpoint'])) {
 			$frameworkSettings['persistence']['storagePid'] = $this->settings['startingpoint'];
+		// if settings.startingpoint is not set in flexform, use persistence.storagePid from TS
+		} elseif (!empty($frameworkSettings['persistence']['storagePid'])) {
+			$this->settings['startingpoint'] = $frameworkSettings['persistence']['storagePid'];
+		// startingpoint/storagePid is not set via TS nor flexforms > fallback to current pid
 		} else {
-			// if settings.startingpoint is not set in flexform, use persistence.storagePid from TS
-			if (!empty($frameworkSettings['persistence']['storagePid'])) {
-				$this->settings['startingpoint'] = $frameworkSettings['persistence']['storagePid'];
-			}
-		}
-		if (empty($this->settings['startingpoint'])) {
-			// startingpoint/storagePid is not set via TS nor flexforms > fallback to current pid
 			$this->settings['startingpoint'] = $frameworkSettings['persistence']['storagePid'] = $GLOBALS['TSFE']->id;
 		}
+
 		// set persistence.recursive if settings.recursive is defined in flexform
 		if (!empty($this->settings['recursive'])) {
 			$frameworkSettings['persistence']['recursive'] = $this->settings['recursive'];
+		// if settings.recursive is not set in flexform, use persistence.recursive from TS
+		} elseif (!empty($frameworkSettings['persistence']['recursive'])) {
+			$this->settings['recursive'] = $frameworkSettings['persistence']['recursive'];
+		// recursive is not set via TS nor flexforms
 		} else {
-			// if settings.recursive is not set in flexform, use persistence.recursive from TS
-			if (!empty($frameworkSettings['persistence']['recursive'])) {
-				$this->settings['recursive'] = $frameworkSettings['persistence']['recursive'];
-			}
-		}
-		if (empty($this->settings['recursive'])) {
-			// recursive is not set via TS nor flexforms
 			$this->settings['recursive'] = $frameworkSettings['persistence']['recursive'] = 0;
 		}
+
 		// write back altered configuration
 		$this->configurationManager->setConfiguration($frameworkSettings);
 
@@ -119,13 +122,6 @@ class MediaAlbumController extends ActionController {
 			$this->settings['random']['thumb']['resizeMode'] = '';
 		}
 	}
-
-	/**
-	 * mediaAlbumRepository
-	 *
-	 * @var \MiniFranske\FsMediaGallery\Domain\Repository\MediaAlbumRepository
-	 */
-	protected $mediaAlbumRepository;
 
 	/**
 	 * Injects the MediaAlbumRepository
@@ -179,9 +175,6 @@ class MediaAlbumController extends ActionController {
 				$mediaAlbum = NULL;
 			}
 			if ($mediaAlbum && $mediaAlbumsUids !== array() && $useAlbumFilterAsExclude && in_array($mediaAlbum->getUid(), $mediaAlbumsUids)) {
-				$mediaAlbum = NULL;
-			}
-			if ($mediaAlbum && $mediaAlbumsUids === array() && !$this->checkAlbumPid($mediaAlbum)) {
 				$mediaAlbum = NULL;
 			}
 			if (!$mediaAlbum) {
@@ -300,25 +293,6 @@ class MediaAlbumController extends ActionController {
 	 */
 	protected function getErrorFlashMessage() {
 		return FALSE;
-	}
-
-	/**
-	 * Check if album pid is in allowed storage
-	 *
-	 * @param MediaAlbum $mediaAlbum
-	 * @return bool
-	 */
-	protected function checkAlbumPid(MediaAlbum $mediaAlbum) {
-		$frameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-		$allowedStoragePages = GeneralUtility::trimExplode(
-			',',
-			$frameworkConfiguration['persistence']['storagePid']
-		);
-		if (in_array($mediaAlbum->getPid(), $allowedStoragePages)) {
-			return TRUE;
-		} else {
-			return FALSE;
-		}
 	}
 
 	/**

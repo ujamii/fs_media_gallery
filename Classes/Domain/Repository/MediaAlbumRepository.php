@@ -158,8 +158,10 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * @return \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum|NULL The matching media album if found, otherwise NULL
 	 */
 	public function findByUid($uid) {
+
+		$query = $this->createQuery();
 		/** @var $mediaAlbum \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum */
-		$mediaAlbum = $this->findByIdentifier($uid);
+		$mediaAlbum = $query->matching($query->equals('uid', (int)$uid))->execute()->getFirst();
 
 		if ($mediaAlbum) {
 			// set allowed asset mime types
