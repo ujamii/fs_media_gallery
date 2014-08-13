@@ -24,7 +24,6 @@ plugin.tx_fsmediagallery {
 		useAlbumFilterAsExclude = 0
 		# Settings for album lists (both nested and flat)
 		list {
-			itemsPerPage = 12
 			thumb {
 				width = 180
 				height = 100
@@ -45,6 +44,7 @@ plugin.tx_fsmediagallery {
 				orderDirection = desc
 			}
 			pagination {
+				itemsPerPage = 12
 				insertAbove = 0
 				insertBelow = 1
 				pagesBefore = 4
@@ -54,7 +54,6 @@ plugin.tx_fsmediagallery {
 		}
 		# Settings for album view (list of images)
 		album {
-			itemsPerPage = 32
 			thumb {
 				width = 120
 				height = 70
@@ -75,6 +74,7 @@ plugin.tx_fsmediagallery {
 				}
 			}
 			pagination {
+				itemsPerPage = 32
 				insertAbove = 0
 				insertBelow = 1
 				pagesBefore = 4

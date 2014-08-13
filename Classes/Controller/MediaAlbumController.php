@@ -99,11 +99,11 @@ class MediaAlbumController extends ActionController {
 		$this->configurationManager->setConfiguration($frameworkSettings);
 
 		// check some settings
-		if (!isset($this->settings['list']['itemsPerPage']) || $this->settings['list']['itemsPerPage'] < 1) {
-			$this->settings['list']['itemsPerPage'] = 12;
+		if (!isset($this->settings['list']['pagination']['itemsPerPage']) || $this->settings['list']['pagination']['itemsPerPage'] < 1) {
+			$this->settings['list']['pagination']['itemsPerPage'] = 12;
 		}
-		if (!isset($this->settings['album']['itemsPerPage']) || $this->settings['album']['itemsPerPage'] < 1) {
-			$this->settings['album']['itemsPerPage'] = 12;
+		if (!isset($this->settings['album']['pagination']['itemsPerPage']) || $this->settings['album']['pagination']['itemsPerPage'] < 1) {
+			$this->settings['album']['pagination']['itemsPerPage'] = 12;
 		}
 		// correct resizeMode 's' set in flexforms (flexforms value '' is used for inherit/definition by TS)
 		if (isset($this->settings['list']['thumb']['resizeMode']) && $this->settings['list']['thumb']['resizeMode'] == 's') {
@@ -156,7 +156,7 @@ class MediaAlbumController extends ActionController {
 
 	/**
 	 * NestedList Action
-	 * Displays a (nested) list of albums; default/show action in fs_media_gallery <= 0.0.6
+	 * Displays a (nested) list of albums; default/show action in fs_media_gallery <= 1.0.0
 	 *
 	 * @param int $mediaAlbum (this is not directly mapped to an object to handle 404 on our own)
 	 * @return void

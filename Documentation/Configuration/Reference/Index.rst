@@ -226,11 +226,11 @@ They are set by :typoscript:`plugin.tx_news.settings.list.<property>`
    Property                                                                                                         Data type                                                      :ref:`t3tsref:stdwrap`  Default
    ================================================================================================================ ============================================================== ======================= =================
    :ref:`hideEmptyAlbums <plugin.tx_fsmediagallery.settings.list.hideEmptyAlbums>`                                  :ref:`t3tsref:data-type-boolean`                               no                      :code:`1`
-   :ref:`itemsPerPage <plugin.tx_fsmediagallery.settings.list.itemsPerPage>`                                        :ref:`t3tsref:data-type-positive-integer`                      no                      :code:`12`
    :ref:`flat.orderBy <plugin.tx_fsmediagallery.settings.list.flat.orderBy>`                                        :ref:`t3tsref:data-type-string` ``[datetime|crdate|sorting]``  no                      :code:`datetime`
    :ref:`flat.orderDirection <plugin.tx_fsmediagallery.settings.list.flat.orderDirection>`                          :ref:`t3tsref:data-type-string` ``[asc|desc]``                 no                      :code:`desc`
    :ref:`pagination.insertAbove <plugin.tx_fsmediagallery.settings.list.pagination.insertAbove>`                    :ref:`t3tsref:data-type-boolean`                               no                      :code:`0`
    :ref:`pagination.insertBelow <plugin.tx_fsmediagallery.settings.list.pagination.insertBelow>`                    :ref:`t3tsref:data-type-boolean`                               no                      :code:`1`
+   :ref:`pagination.itemsPerPage <plugin.tx_fsmediagallery.settings.list.pagination.itemsPerPage>`                  :ref:`t3tsref:data-type-positive-integer`                      no                      :code:`12`
    :ref:`pagination.pagesBefore <plugin.tx_fsmediagallery.settings.list.pagination.pagesBefore>`                    :ref:`t3tsref:data-type-positive-integer` or ``0``             no                      :code:`4`
    :ref:`pagination.pagesAfter <plugin.tx_fsmediagallery.settings.list.pagination.pagesAfter>`                      :ref:`t3tsref:data-type-positive-integer` or ``0``             no                      :code:`4`
    :ref:`pagination.maximumNumberOfLinks <plugin.tx_fsmediagallery.settings.list.pagination.maximumNumberOfLinks>`  :ref:`t3tsref:data-type-positive-integer`                      no                      :code:`9`
@@ -243,16 +243,6 @@ They are set by :typoscript:`plugin.tx_news.settings.list.<property>`
 
 Property details
 ^^^^^^^^^^^^^^^^
-
-.. _plugin.tx_fsmediagallery.settings.list.itemsPerPage:
-
-itemsPerPage
-""""""""""""
-
-:typoscript:`plugin.tx_fsmediagallery.settings.list.itemsPerPage =` :ref:`t3tsref:data-type-positive-integer`
-
-Define how many items are shown on one page.
-
 
 .. _plugin.tx_fsmediagallery.settings.list.thumb.width:
 
@@ -335,26 +325,38 @@ flat.orderDirection
 
 .. _plugin.tx_fsmediagallery.settings.list.pagination.insertAbove:
 
-insertAbove
-"""""""""""
+pagination.insertAbove
+""""""""""""""""""""""
 
 :typoscript:`plugin.tx_fsmediagallery.settings.list.pagination.insertAbove =` :ref:`t3tsref:data-type-boolean`
 
 Set it to ``1`` (``TRUE``) or ``0`` (``FALSE``) to either show or hide the pagination before an album list.
 
+
 .. _plugin.tx_fsmediagallery.settings.list.pagination.insertBelow:
 
-insertBelow
-"""""""""""
+pagination.insertBelow
+""""""""""""""""""""""
 
 :typoscript:`plugin.tx_fsmediagallery.settings.list.pagination.insertBelow =` :ref:`t3tsref:data-type-boolean`
 
 Set it to ``1`` (``TRUE``) or ``0`` (``FALSE``) to either show or hide the pagination after an album list.
 
+
+.. _plugin.tx_fsmediagallery.settings.list.pagination.itemsPerPage:
+
+pagination.itemsPerPage
+"""""""""""""""""""""""
+
+:typoscript:`plugin.tx_fsmediagallery.settings.list.pagination.itemsPerPage =` :ref:`t3tsref:data-type-positive-integer`
+
+Define how many items are shown on one page.
+
+
 .. _plugin.tx_fsmediagallery.settings.list.pagination.pagesBefore:
 
-pagesBefore
-"""""""""""
+pagination.pagesBefore
+""""""""""""""""""""""
 
 :typoscript:`plugin.tx_fsmediagallery.settings.list.pagination.pagesBefore =` :ref:`t3tsref:data-type-positive-integer` or ``0``
 
@@ -363,8 +365,8 @@ Number of page links before the current page.
 
 .. _plugin.tx_fsmediagallery.settings.list.pagination.pagesAfter:
 
-pagesAfter
-""""""""""
+pagination.pagesAfter
+"""""""""""""""""""""
 
 :typoscript:`plugin.tx_fsmediagallery.settings.list.pagination.pagesAfter =` :ref:`t3tsref:data-type-positive-integer` or ``0``
 
@@ -373,8 +375,8 @@ Number of page links after the current page.
 
 .. _plugin.tx_fsmediagallery.settings.list.pagination.maximumNumberOfLinks:
 
-maximumNumberOfLinks
-""""""""""""""""""""
+pagination.maximumNumberOfLinks
+"""""""""""""""""""""""""""""""
 
 :typoscript:`plugin.tx_fsmediagallery.settings.list.pagination.maximumNumberOfLinks =` :ref:`t3tsref:data-type-positive-integer`
 
@@ -395,7 +397,6 @@ They are set by :typoscript:`plugin.tx_news.settings.album.<property>`
    ================================================================================================================= =================================================== ======================= =================
    Property                                                                                                          Data type                                           :ref:`t3tsref:stdwrap`  Default
    ================================================================================================================= =================================================== ======================= =================
-   :ref:`itemsPerPage <plugin.tx_fsmediagallery.settings.album.itemsPerPage>`                                        :ref:`t3tsref:data-type-positive-integer`           no                      :code:`32`
    :ref:`lightbox.enable <plugin.tx_fsmediagallery.settings.album.lightbox.enable>`                                  :ref:`t3tsref:data-type-boolean`                    no                      :code:`1`
    :ref:`lightbox.jsPlugin <plugin.tx_fsmediagallery.settings.album.lightbox.jsPlugin>`                              :ref:`t3tsref:data-type-string`                     no                      :code:`colorbox`
    :ref:`lightbox.relPrefix <plugin.tx_fsmediagallery.settings.album.lightbox.relPrefix>`                            :ref:`t3tsref:data-type-string`                     no                      :code:`albm_`
@@ -405,6 +406,7 @@ They are set by :typoscript:`plugin.tx_news.settings.album.<property>`
    :ref:`lightbox.asset.resizeMode <plugin.tx_fsmediagallery.settings.album.lightbox.asset.resizeMode>`              :ref:`t3tsref:data-type-string` ``[m|c|s]``         no                      :code:`m`
    :ref:`pagination.insertAbove <plugin.tx_fsmediagallery.settings.album.pagination.insertAbove>`                    :ref:`t3tsref:data-type-boolean`                    no                      :code:`0`
    :ref:`pagination.insertBelow <plugin.tx_fsmediagallery.settings.album.pagination.insertBelow>`                    :ref:`t3tsref:data-type-boolean`                    no                      :code:`1`
+   :ref:`pagination.itemsPerPage <plugin.tx_fsmediagallery.settings.album.pagination.itemsPerPage>`                  :ref:`t3tsref:data-type-positive-integer`           no                      :code:`32`
    :ref:`pagination.pagesBefore <plugin.tx_fsmediagallery.settings.album.pagination.pagesBefore>`                    :ref:`t3tsref:data-type-positive-integer` or ``0``  no                      :code:`4`
    :ref:`pagination.pagesAfter <plugin.tx_fsmediagallery.settings.album.pagination.pagesAfter>`                      :ref:`t3tsref:data-type-positive-integer` or ``0``  no                      :code:`4`
    :ref:`pagination.maximumNumberOfLinks <plugin.tx_fsmediagallery.settings.album.pagination.maximumNumberOfLinks>`  :ref:`t3tsref:data-type-positive-integer`           no                      :code:`9`
@@ -416,16 +418,6 @@ They are set by :typoscript:`plugin.tx_news.settings.album.<property>`
 
 Property details
 ^^^^^^^^^^^^^^^^
-
-.. _plugin.tx_fsmediagallery.settings.album.itemsPerPage:
-
-itemsPerPage
-""""""""""""
-
-:typoscript:`plugin.tx_fsmediagallery.settings.album.itemsPerPage =` :ref:`t3tsref:data-type-positive-integer`
-
-Define how many items are shown on one page.
-
 
 .. _plugin.tx_fsmediagallery.settings.album.thumb.width:
 
@@ -537,26 +529,38 @@ lightbox.asset.resizeMode
 
 .. _plugin.tx_fsmediagallery.settings.album.pagination.insertAbove:
 
-insertAbove
-"""""""""""
+pagination.insertAbove
+""""""""""""""""""""""
 
 :typoscript:`plugin.tx_fsmediagallery.settings.album.pagination.insertAbove =` :ref:`t3tsref:data-type-boolean`
 
 Set it to ``1`` (``TRUE``) or ``0`` (``FALSE``) to either show or hide the pagination before an asset list.
 
+
 .. _plugin.tx_fsmediagallery.settings.album.pagination.insertBelow:
 
-insertBelow
-"""""""""""
+pagination.insertBelow
+""""""""""""""""""""""
 
 :typoscript:`plugin.tx_fsmediagallery.settings.album.pagination.insertBelow =` :ref:`t3tsref:data-type-boolean`
 
 Set it to ``1`` (``TRUE``) or ``0`` (``FALSE``) to either show or hide the pagination after an asset list.
 
+
+.. _plugin.tx_fsmediagallery.settings.album.pagination.itemsPerPage:
+
+pagination.itemsPerPage
+"""""""""""""""""""""""
+
+:typoscript:`plugin.tx_fsmediagallery.settings.album.pagination.itemsPerPage =` :ref:`t3tsref:data-type-positive-integer`
+
+Define how many items are shown on one page.
+
+
 .. _plugin.tx_fsmediagallery.settings.album.pagination.pagesBefore:
 
-pagesBefore
-"""""""""""
+pagination.pagesBefore
+""""""""""""""""""""""
 
 :typoscript:`plugin.tx_fsmediagallery.settings.album.pagination.pagesBefore =` :ref:`t3tsref:data-type-positive-integer` or ``0``
 
@@ -565,8 +569,8 @@ Number of page links before the current page.
 
 .. _plugin.tx_fsmediagallery.settings.album.pagination.pagesAfter:
 
-pagesAfter
-""""""""""
+pagination.pagesAfter
+"""""""""""""""""""""
 
 :typoscript:`plugin.tx_fsmediagallery.settings.album.pagination.pagesAfter =` :ref:`t3tsref:data-type-positive-integer` or ``0``
 
@@ -575,8 +579,8 @@ Number of page links after the current page.
 
 .. _plugin.tx_fsmediagallery.settings.album.pagination.maximumNumberOfLinks:
 
-maximumNumberOfLinks
-""""""""""""""""""""
+pagination.maximumNumberOfLinks
+"""""""""""""""""""""""""""""""
 
 :typoscript:`plugin.tx_fsmediagallery.settings.album.pagination.maximumNumberOfLinks =` :ref:`t3tsref:data-type-positive-integer`
 

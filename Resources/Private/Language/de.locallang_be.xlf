@@ -113,7 +113,7 @@
 				<source>Hide empty albums</source>
 				<target>Leere Alben nicht anzeigen</target>
 			</trans-unit>
-			<trans-unit id="flexforms.mediagallery.list.itemsPerPage">
+			<trans-unit id="flexforms.mediagallery.list.pagination.itemsPerPage">
 				<source>Max. thumbs to display per page</source>
 				<target>Vorschaubilder pro Seite</target>
 			</trans-unit>
@@ -155,7 +155,7 @@
 				<target>Absteigend (neu zu alt/hoch zu niedrig)</target>
 			</trans-unit>
 			<!-- flexforms.mediagallery.album -->
-			<trans-unit id="flexforms.mediagallery.album.itemsPerPage">
+			<trans-unit id="flexforms.mediagallery.album.pagination.itemsPerPage">
 				<source>Max. thumbs to display per page</source>
 				<target>Vorschaubilder pro Seite</target>
 			</trans-unit>

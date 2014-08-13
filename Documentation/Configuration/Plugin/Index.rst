@@ -141,7 +141,7 @@ Tab "Albums list"
 
  - :Field:       Max. thumbs to display per page
    :Modes:       nestedList, flatList
-   :TSref:       :ref:`settings.list.itemsPerPage <plugin.tx_fsmediagallery.settings.list.itemsPerPage>`
+   :TSref:       :ref:`settings.list.pagination.itemsPerPage <plugin.tx_fsmediagallery.settings.list.pagination.itemsPerPage>`
    :Description:
        .. _flexforms.mediagallery.tabs.list.itemsPerPage:
 
@@ -200,7 +200,7 @@ Tab "Album view"
 
  - :Field:       Max. thumbs to display per page
    :Modes:       nestedList, flatList, showAlbumByParam, showAlbumByParam
-   :TSref:       :ref:`settings.album.itemsPerPage <plugin.tx_fsmediagallery.settings.album.itemsPerPage>`
+   :TSref:       :ref:`settings.album.pagination.itemsPerPage <plugin.tx_fsmediagallery.settings.album.pagination.itemsPerPage>`
    :Description:
        .. _flexforms.mediagallery.tabs.album.itemsPerPage:
 

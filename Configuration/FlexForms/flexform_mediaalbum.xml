@@ -239,9 +239,9 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
-					<settings.list.itemsPerPage>
+					<settings.list.pagination.itemsPerPage>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.itemsPerPage</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.pagination.itemsPerPage</label>
 							<config>
 								<type>input</type>
 								<eval>null,num</eval>
@@ -249,7 +249,7 @@
 								<max>3</max>
 							</config>
 						</TCEforms>
-					</settings.list.itemsPerPage>
+					</settings.list.pagination.itemsPerPage>
 					<settings.list.thumb.width>
 						<TCEforms>
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.thumb.width</label>
@@ -329,9 +329,9 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
-					<settings.album.itemsPerPage>
+					<settings.album.pagination.itemsPerPage>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.album.itemsPerPage</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.album.pagination.itemsPerPage</label>
 							<config>
 								<type>input</type>
 								<eval>null,num</eval>
@@ -339,7 +339,7 @@
 								<max>3</max>
 							</config>
 						</TCEforms>
-					</settings.album.itemsPerPage>
+					</settings.album.pagination.itemsPerPage>
 					<settings.album.thumb.width>
 						<TCEforms>
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.album.thumb.width</label>

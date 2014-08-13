@@ -150,7 +150,7 @@ To migrate your templates, change every occurrence of the following TypoScript v
    :templateFiles,30:   Template files
 
  - :oldProperty:     settings.album.itemsPerPage
-   :newProperty:     settings.list.itemsPerPage
+   :newProperty:     settings.list.pagination.itemsPerPage
    :templateFiles:   Partials/MediaAlbum/ListAlbums.html
 
  - :oldProperty:     settings.pagination.insertAbove
@@ -216,7 +216,7 @@ To migrate your templates, change every occurrence of the following TypoScript v
    :templateFiles:   Templates/MediaAlbum/RandomImage.html
 
  - :oldProperty:     settings.image.itemsPerPage
-   :newProperty:     settings.album.itemsPerPage
+   :newProperty:     settings.album.pagination.itemsPerPage
    :templateFiles:   Templates/MediaAlbum/Show.html
 
  - :oldProperty:     settings.pagination.insertAbove
@@ -313,9 +313,8 @@ All settings are defined by using :typoscript:`plugin.tx_fsmediagallery.<propert
 
  - :oldProperty:    settings.album.itemsPerPage
    :status:         moved
-   :newProperty:    settings.list.\
-                    :ref:`itemsPerPage <plugin.tx_fsmediagallery.settings.list.itemsPerPage>`
-   :proposal:       move to ``settings.list.paginate.itemsPerPage``
+   :newProperty:    settings.list.pagination.\
+                    :ref:`itemsPerPage <plugin.tx_fsmediagallery.settings.list.pagination.itemsPerPage>`
 
  - :oldProperty:    settings.album.thumb.maxWidth
    :status:         moved, renamed, value altered
@@ -355,9 +354,8 @@ All settings are defined by using :typoscript:`plugin.tx_fsmediagallery.<propert
 
  - :oldProperty:    settings.image.itemsPerPage
    :status:         moved
-   :newProperty:    settings.album.\
-                    :ref:`itemsPerPage <plugin.tx_fsmediagallery.settings.album.itemsPerPage>`
-   :proposal:       move to ``settings.album.paginate.itemsPerPage``
+   :newProperty:    settings.album.pagination.\
+                    :ref:`itemsPerPage <plugin.tx_fsmediagallery.settings.album.pagination.itemsPerPage>`
 
  - :oldProperty:    settings.image.thumb.maxWidth
    :status:         moved, renamed, value altered

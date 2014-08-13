@@ -89,7 +89,7 @@
 			<trans-unit id="flexforms.mediagallery.list.hideEmptyAlbums">
 				<source>Hide empty albums</source>
 			</trans-unit>
-			<trans-unit id="flexforms.mediagallery.list.itemsPerPage">
+			<trans-unit id="flexforms.mediagallery.list.pagination.itemsPerPage">
 				<source>Max. thumbs to display per page</source>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.list.thumb.width">
@@ -121,7 +121,7 @@
 				<source>Descending (new to old/high to low)</source>
 			</trans-unit>
 			<!-- flexforms.mediagallery.album -->
-			<trans-unit id="flexforms.mediagallery.album.itemsPerPage">
+			<trans-unit id="flexforms.mediagallery.album.pagination.itemsPerPage">
 				<source>Max. thumbs to display per page</source>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.album.thumb.width">

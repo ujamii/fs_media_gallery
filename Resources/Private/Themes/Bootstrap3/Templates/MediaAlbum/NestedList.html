@@ -16,7 +16,7 @@
 							<f:render partial="MediaAlbum/NestedList/AlbumsList" section="AlbumsList" arguments="{mediaAlbums:mediaAlbums}" />
 						</f:then>
 					</f:if>
-					<mf:widget.paginate objects="{mediaAlbum.assets}" as="paginatedAssets" itemsBefore="before" itemsAfter="after" configuration="{itemsPerPage:settings.album.itemsPerPage, insertAbove:settings.album.pagination.insertAbove, insertBelow:settings.album.pagination.insertBelow, maximumNumberOfLinks:settings.album.pagination.maximumNumberOfLinks, pagesBefore:settings.album.pagination.pagesBefore, pagesAfter:settings.album.pagination.pagesAfter}">
+					<mf:widget.paginate objects="{mediaAlbum.assets}" as="paginatedAssets" itemsBefore="before" itemsAfter="after" configuration="{itemsPerPage:settings.album.pagination.itemsPerPage, insertAbove:settings.album.pagination.insertAbove, insertBelow:settings.album.pagination.insertBelow, maximumNumberOfLinks:settings.album.pagination.maximumNumberOfLinks, pagesBefore:settings.album.pagination.pagesBefore, pagesAfter:settings.album.pagination.pagesAfter}">
 						<f:if condition="{settings.album.lightbox.enable}">
 							<f:if condition="{before}">
 								<f:for each="{before}" as="mediaAsset">
