@@ -18,5 +18,7 @@ plugin.tx_fsmediagallery {
 		overrideFlexformSettingsIfEmpty = list.pagination.itemsPerPage,list.thumb.width,list.thumb.height,list.thumb.resizeMode,list.hideEmptyAlbums,list.orderBy,list.orderDirection,album.pagination.itemsPerPage,album.thumb.width,album.thumb.height,album.thumb.resizeMode,album.lightbox.enable,album.lightbox.styleClass,album.lightbox.relPrefix,detail.asset.width,detail.asset.height,detail.asset.resizeMode,random.thumb.width,random.thumb.height,random.thumb.resizeMode
 		# cat=plugin.tx_fsmediagallery//d; type=string; label=Allowed Asset MimeTypes: Comma separated list of mime types (if empty, all files are included)
 		allowedAssetMimeTypes = image/jpeg, image/png, image/gif
+		# cat=plugin.tx_fsmediagallery//e; type=int; label=Target page uid for random view and ext:News integration
+		targetPid =
 	}
 }

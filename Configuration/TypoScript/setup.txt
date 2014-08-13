@@ -96,7 +96,7 @@ plugin.tx_fsmediagallery {
 			}
 		}
 		random {
-			targetPid =
+			targetPid = {$plugin.tx_fsmediagallery.settings.targetPid}
 			thumb {
 				width = 250
 				height = 140
@@ -117,7 +117,7 @@ plugin.tx_news {
 	settings {
 		detail {
 			fsmediaalbum {
-				targetPid =
+				targetPid = {$plugin.tx_fsmediagallery.settings.targetPid}
 				lightbox {
 					enable < plugin.tx_fsmediagallery.settings.album.lightbox.enable
 					styleClass < plugin.tx_fsmediagallery.settings.album.lightbox.styleClass
