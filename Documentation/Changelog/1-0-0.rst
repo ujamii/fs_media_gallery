@@ -5,16 +5,16 @@
 
 .. include:: ../Includes.txt
 
-.. _changelog_0-0-6:
+.. _changelog_1-0-0:
 
-Version 0.0.6 - 2014/00/00
+Version 1.0.0 - 2014/00/00
 ==========================
 
 This is a major upgrade introducing lots of new features.
-Read and follow the section :ref:`Upgrade procedure <upgrade_procedure_0-0-6>` carefully!
+Read and follow the section :ref:`Upgrade procedure <upgrade_procedure_1-0-0>` carefully!
 
 
-.. _upgrade_procedure_0-0-6:
+.. _upgrade_procedure_1-0-0:
 
 Upgrade procedure
 -----------------
@@ -33,7 +33,7 @@ This can be either done in Extension Manager or from command line:
     ./typo3/cli_dispatch.phpsh extbase extension:install fs_media_gallery
 
 
-.. _important_changes_0-0-6:
+.. _important_changes_1-0-0:
 
 Important changes
 -----------------
@@ -68,7 +68,7 @@ The most important changes are:
 * EXT:fs_media_gallery now integrates into EXT:news (alters database table ``tx_news_domain_model_news``, adds table ``tx_news_domain_model_news_fsmediaalbums_mm``)
 
 
-.. _typoscript_changes_0-0-6:
+.. _typoscript_changes_1-0-0:
 
 TypoScript changes
 ------------------
@@ -81,7 +81,7 @@ All settings are defined by using :typoscript:`plugin.tx_fsmediagallery.<propert
 
  - :oldProperty,25:    Property in 0.0.5
    :status,20:         Alteration
-   :newProperty,25:    Property in 0.0.6
+   :newProperty,25:    Property in 1.0.0
    :proposal,30:       Proposal
 
  - :oldProperty:    view.templateRootPaths.100
