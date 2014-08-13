@@ -25,6 +25,8 @@ namespace MiniFranske\FsMediaGallery\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use \TYPO3\CMS\Core\Resource\ResourceFactory;
+
 /**
  * Media album
  */
@@ -50,6 +52,23 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @var array
 	 */
 	protected $assetCache;
+
+	/**
+	 * @var array
+	 */
+	protected $allowedMimeTypes = array();
+
+	/**
+	 * Assets
+	 * An array of \TYPO3\CMS\Core\Resource\File
+	 * @var array
+	 */
+	protected $assets;
+
+	/**
+	 * @var integer
+	 */
+	protected $assetsCount;
 
 	/**
 	 * @var bool
@@ -83,6 +102,29 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @lazy
 	 */
 	protected $albumCache;
+
+	/**
+	 * @var DateTime
+	 */
+	protected $datetime;
+
+	/**
+	 * Set allowedMimeTypes
+	 *
+	 * @param array $allowedMimeTypes
+	 */
+	public function setAllowedMimeTypes($allowedMimeTypes) {
+		$this->allowedMimeTypes = $allowedMimeTypes;
+	}
+
+	/**
+	 * Get allowedMimeTypes
+	 *
+	 * @return array $allowedMimeTypes
+	 */
+	public function getAllowedMimeTypes() {
+		return $this->allowedMimeTypes;
+	}
 
 	/**
 	 * Set hidden
@@ -162,12 +204,24 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return array<\TYPO3\CMS\Core\Resource\File>
 	 */
 	public function getAssets() {
-		if($this->assetCache === NULL) {
+		if ($this->assetCache === NULL) {
 			try {
 				/** @var $fileCollection \TYPO3\CMS\Core\Resource\Collection\AbstractFileCollection */
 				$fileCollection = $this->fileCollectionRepository->findByUid($this->getUid());
 				$fileCollection->loadContents();
-				$this->assetCache = $fileCollection->getItems();
+				$files = $fileCollection->getItems();
+				// check if file has right mimeType
+				if (count($this->allowedMimeTypes) > 0) {
+					foreach ($files as $key => $fileObject) {
+						/** @var $fileObject \TYPO3\CMS\Core\Resource\File */
+						if (!in_array($fileObject->getMimeType(), $this->allowedMimeTypes)) {
+							unset($files[$key]);
+						}
+					}
+					// reset keys
+					$files = array_values($files);
+				}
+				$this->assetCache = $files;
 			} catch (\Exception $exception) {
 				// failing albums get disabled
 				$this->setHidden(TRUE);
@@ -179,12 +233,48 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
+	 * @param integer $assetUid
+	 * @return mixed array<\TYPO3\CMS\Core\Resource\File> or NULL
+	 */
+	public function getAssetByUid($assetUid) {
+		$assetsUids = $this->getAssetsUids();
+		if (in_array($assetUid, $assetsUids)) {
+			return ResourceFactory::getInstance()->getFileObject($assetUid);
+		}
+		return NULL;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getAssetsUids() {
+		$assetsUids = array();
+		foreach ($assets = $this->getAssets() as $asset) {
+			/** @var $asset \TYPO3\CMS\Core\Resource\File */
+			$assetsUids[] = $asset->getUid();
+		}
+		return $assetsUids;
+	}
+
+	/**
+	 * Get assetsCount
+	 *
+	 * @return integer
+	 */
+	public function getAssetsCount() {
+		if ($this->assetCache === NULL) {
+			return count($this->getAssets());
+		}
+		return count($this->assetCache);
+	}
+
+	/**
 	 * Get child albums
 	 *
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum>>
 	 */
 	public function getAlbums() {
-		if($this->albumCache === NULL) {
+		if ($this->albumCache === NULL) {
 			$this->albumCache = $this->mediaAlbumRepository->findByParentalbum($this);
 		}
 		return $this->albumCache;
@@ -196,13 +286,12 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return MediaAlbum
 	 */
 	public function getRandomAlbum() {
-
 		// if albums are loaded use these
-		if($this->albumCache !== NULL) {
+		if ($this->albumCache !== NULL) {
 			$albums = $this->getAlbums();
 			return $albums[rand(0,count($albums)-1)];
 
-		// else fetch random item from repository
+		// else fetch random asset from repository
 		} else {
 			return $this->mediaAlbumRepository->findRandom($this);
 		}
@@ -212,18 +301,38 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return \TYPO3\CMS\Core\Resource\File
 	 */
 	public function getRandomAsset() {
-
-		// check if we need to fetch it from child album
-		$randomAlbum = $this->getRandomAlbum();
-		if ($randomAlbum) {
-			return $randomAlbum->getRandomAsset();
-		}
-
-		if (count($this->getAssets())) {
-			$assets = $this->getAssets();
-			return $assets[rand(1,count($assets))-1];
+		$assets = $this->getAssets();
+		// if there is an asset, return it
+		if (count($assets)) {
+			return $assets[rand(1, count($assets)) - 1];
 		} else {
+			// try to fetch it from child album
+			$randomAlbum = $this->getRandomAlbum();
+			if ($randomAlbum) {
+				return $randomAlbum->getRandomAsset();
+			}
+			// album and child album are empty
 			return NULL;
 		}
 	}
+
+	/**
+	 * Get datetime
+	 *
+	 * @return DateTime
+	 */
+	public function getDatetime() {
+		return $this->datetime;
+	}
+
+	/**
+	 * Set date time
+	 *
+	 * @param DateTime $datetime datetime
+	 * @return void
+	 */
+	public function setDatetime($datetime) {
+		$this->datetime = $datetime;
+	}
+
 }

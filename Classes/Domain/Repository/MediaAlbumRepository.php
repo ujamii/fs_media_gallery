@@ -41,12 +41,35 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	);
 
 	/**
+	 * @var array
+	 */
+	protected $allowedAssetMimeTypes = array();
+
+	/**
+	 * Set allowedAssetMimeTypes
+	 *
+	 * @param array $allowedAssetMimeTypes
+	 */
+	public function setAllowedAssetMimeTypes($allowedAssetMimeTypes) {
+		$this->allowedAssetMimeTypes = $allowedAssetMimeTypes;
+	}
+
+	/**
+	 * Get allowedAssetMimeTypes
+	 *
+	 * @return array $allowedAssetMimeTypes
+	 */
+	public function getAllowedAssetMimeTypes() {
+		return $this->allowedAssetMimeTypes;
+	}
+
+	/**
 	 * Get random sub album
 	 *
 	 * @param MediaAlbum|bool $parent parent MediaAlbum, FALSE for parent = 0 or NULL for no restriction by parent
 	 * @param array $filterByUids filter possible result by given uids
 	 * @param bool $useAlbumFilterAsExclude
-	 * @return MediaAlbum
+	 * @return \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum|NULL
 	 */
 	public function findRandom($parent = NULL, array $filterByUids = array(), $useAlbumFilterAsExclude = FALSE) {
 
@@ -76,7 +99,16 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$query->statement($statement);
 		$result = $query->execute();
 
-		return $result->getFirst();
+		// todo: getFirst() might return an empty album
+		/** @var \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum $mediaAlbum */
+		$mediaAlbum = $result->getFirst();
+
+		if ($mediaAlbum) {
+			// set allowed asset mime types
+			$mediaAlbum->setAllowedMimeTypes($this->allowedAssetMimeTypes);
+		}
+
+		return $mediaAlbum;
 	}
 
 	/**
@@ -84,23 +116,84 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 *
 	 * @param MediaAlbum $parentAlbum
 	 * @param array $filterByUids filter possible result by given uids
-	 * @param bool $useAlbumFilterAsExclude
-	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 * @param boolean $useAlbumFilterAsExclude
+	 * @param boolean $excludeEmptyAlbums
+	 * @param string $orderBy Sort albums by: datetime|crdate|sorting
+	 * @param string $orderDirection Sort order: asc|desc
+	 * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
 	 */
-	public function findByParentAlbum(MediaAlbum $parentAlbum = NULL, array $filterByUids = array(), $useAlbumFilterAsExclude = FALSE) {
+	public function findByParentAlbum(MediaAlbum $parentAlbum = NULL, array $filterByUids = array(), $useAlbumFilterAsExclude = FALSE, $excludeEmptyAlbums = TRUE, $orderBy = 'sorting', $orderDirection = 'desc') {
+		$excludeEmptyAlbums = filter_var($excludeEmptyAlbums, FILTER_VALIDATE_BOOLEAN);
 		$query = $this->createQuery();
-		$constrains = array();
-		$constrains[] = $query->equals('parentalbum', $parentAlbum ?: FALSE);
+		$constraints = array();
+		$constraints[] = $query->equals('parentalbum', $parentAlbum ?: 0);
 		if (count($filterByUids)) {
 			if ($useAlbumFilterAsExclude) {
-				$constrains[] = $query->logicalNot($query->in('uid', $filterByUids));
+				$constraints[] = $query->logicalNot($query->in('uid', $filterByUids));
 			} else {
-				$constrains[] = $query->in('uid', $filterByUids);
+				$constraints[] = $query->in('uid', $filterByUids);
 			}
 		}
-		$query->matching($query->logicalAnd($constrains));
+		$query->matching($query->logicalAnd($constraints));
+		$query->setOrderings($this->getOrderingsSettings($orderBy, $orderDirection));
+		$mediaAlbums = $query->execute();
 
-		return $query->execute();
+		foreach ($mediaAlbums as $key => $mediaAlbum) {
+			/** @var $mediaAlbum \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum */
+			// set allowed asset mime types
+			$mediaAlbum->setAllowedMimeTypes($this->allowedAssetMimeTypes);
+			// exclude if album is empty
+			if (TRUE === $excludeEmptyAlbums && $mediaAlbum->getAssetsCount() < 1) {
+				unset($mediaAlbums[$key]);
+			}
+		}
+
+		return $mediaAlbums;
+	}
+
+	/**
+	 * Find album by Uid
+	 *
+	 * @param integer $uid The identifier of the MediaAlbum to find
+	 * @return \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum|NULL The matching media album if found, otherwise NULL
+	 */
+	public function findByUid($uid) {
+		/** @var $mediaAlbum \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum */
+		$mediaAlbum = $this->findByIdentifier($uid);
+
+		if ($mediaAlbum) {
+			// set allowed asset mime types
+			$mediaAlbum->setAllowedMimeTypes($this->allowedAssetMimeTypes);
+		}
+
+		return $mediaAlbum;
+	}
+
+	/**
+	 * Find all albums
+	 *
+	 * @param boolean $excludeEmptyAlbums
+	 * @param string $orderBy Sort albums by: datetime|crdate|sorting
+	 * @param string $orderDirection Sort order: asc|desc
+	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
+	public function findAll($excludeEmptyAlbums = TRUE, $orderBy = 'datetime', $orderDirection = 'desc') {
+		$excludeEmptyAlbums = filter_var($excludeEmptyAlbums, FILTER_VALIDATE_BOOLEAN);
+		$query = $this->createQuery();
+		$query->setOrderings($this->getOrderingsSettings($orderBy, $orderDirection));
+		$mediaAlbums = $query->execute();
+
+		foreach ($mediaAlbums as $key => $mediaAlbum) {
+			/** @var $mediaAlbum \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum */
+			// set allowed asset mime types
+			$mediaAlbum->setAllowedMimeTypes($this->allowedAssetMimeTypes);
+			// exclude if album is empty
+			if (TRUE === $excludeEmptyAlbums && $mediaAlbum->getAssetsCount() < 1) {
+				unset($mediaAlbums[$key]);
+			}
+		}
+
+		return $mediaAlbums;
 	}
 
 	/**
@@ -120,6 +213,48 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			$whereClause .= \TYPO3\CMS\Backend\Utility\BackendUtility::deleteClause('sys_file_collection');
 		}
 		return $whereClause;
+	}
+
+	/**
+	 * Get orderings settings. Returns an array like:
+	 * array(
+	 *  'foo' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+	 *  'bar' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING
+	 * )
+	 *
+	 * @param string $orderBy Sort albums by: datetime|crdate|sorting
+	 * @param string $orderDirection Sort order: asc|desc
+	 * @return array Orderings settings used by \TYPO3\CMS\Extbase\Persistence\QueryInterface->setOrderings()
+	 */
+	protected function getOrderingsSettings($orderBy = 'sorting', $orderDirection = 'asc') {
+
+		// check orderDirection
+		if ($orderDirection === 'asc') {
+			$orderDirection = \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING;
+		} else {
+			$orderDirection = \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING;
+		}
+
+		// set $orderingsSettings by orderBy and orderDirection
+		switch ($orderBy) {
+			case 'datetime':
+				$orderingsSettings = array(
+					'datetime' => $orderDirection,
+					'crdate' => $orderDirection
+				);
+				break;
+			case 'crdate':
+				$orderingsSettings = array('crdate' => $orderDirection);
+				break;
+			default:
+				// sorting
+				$orderingsSettings = array(
+					'sorting' => $orderDirection,
+					'crdate' => $orderDirection
+				);
+		}
+
+		return $orderingsSettings;
 	}
 
 }

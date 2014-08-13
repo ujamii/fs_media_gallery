@@ -1,0 +1,66 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	 xmlns:f="http://typo3.org/ns/fluid/ViewHelpers"
+	 xmlns:mf="http://typo3.org/ns/MiniFranske/FsMediaGallery/ViewHelpers">
+
+	<!--
+	 Displays a flattened, one-dimensional album list
+	-->
+
+	<f:section name="AlbumsList">
+		<div class="albums-list">
+			<mf:widget.paginate objects="{mediaAlbums}" as="paginatedAlbums" configuration="{itemsPerPage:settings.list.pagination.itemsPerPage, insertAbove:settings.list.pagination.insertAbove, insertBelow:settings.list.pagination.insertBelow, maximumNumberOfLinks:settings.list.pagination.maximumNumberOfLinks, pagesBefore:settings.list.pagination.pagesBefore, pagesAfter:settings.list.pagination.pagesAfter}">
+				<f:if condition="{paginatedAlbums}">
+					<f:then>
+						<div class="thumbs thumbs-albums clearfix">
+							<f:for each="{paginatedAlbums}" as="mediaAlbum">
+								<f:render section="AlbumPreview" arguments="{mediaAlbum:mediaAlbum}" />
+							</f:for>
+						</div>
+					</f:then>
+					<f:else>
+						<div class="alert alert-info">
+							<p><f:translate key="no_albums_found">No albums found.</f:translate></p>
+						</div>
+					</f:else>
+				</f:if>
+			</mf:widget.paginate>
+		</div>
+	</f:section>
+
+	<f:section name="AlbumPreview">
+		<f:if condition="{0:0, 1:1} == {0:mediaAlbum.assetsCount, 1:settings.list.hideEmptyAlbums}">
+			<f:else>
+				<div class="img-thumbnail">
+					<f:link.action controller="MediaAlbum" arguments="{mediaAlbum: mediaAlbum}">
+						<f:if condition="{mediaAlbum.randomAsset}">
+							<f:then>
+								<f:image
+									image="{mediaAlbum.randomAsset}"
+									alt="{mediaAlbum.title}"
+									height="{settings.list.thumb.height}{settings.list.thumb.resizeMode}"
+									width="{settings.list.thumb.width}{settings.list.thumb.resizeMode}"
+									/>
+							</f:then>
+							<f:else>
+								<div class="dummy" style="height:{settings.list.thumb.height}px;width:{settings.list.thumb.width}px;"></div>
+							</f:else>
+						</f:if>
+					</f:link.action>
+					<h4 class="name">
+						<f:link.action controller="MediaAlbum" arguments="{mediaAlbum: mediaAlbum}">{mediaAlbum.title}</f:link.action>
+					</h4>
+					<div class="description">
+						<f:if condition="{mediaAlbum.webdescription}">
+							<span class="teaser">
+								<f:format.crop maxCharacters="17" append="&nbsp;...">{mediaAlbum.webdescription}</f:format.crop>
+							</span>
+						</f:if>
+						<span class="asset-count">{mediaAlbum.assetsCount} <f:translate key="assets">assets</f:translate></span>
+						<span class="date"><f:format.date date="{mediaAlbum.datetime}" format="d.m.Y" /></span>
+					</div>
+				</div>
+			</f:else>
+		</f:if>
+	</f:section>
+
+</div>

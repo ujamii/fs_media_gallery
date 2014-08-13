@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-lanuage="de" datatype="plaintext" original="messages" date="2014-07-29T12:00:00Z" product-name="fs_media_gallery">
+		<header/>
+		<body>
+			<trans-unit id="settings.startingpoint.description" xml:space="preserve">
+				<source>Define the pages/sysfolders which hold the album records.</source>
+				<target>Geben Sie die Seite/den Ordner an, in dem die anzuzeigenden Alben abgelegt sind.</target>
+			</trans-unit>
+			<trans-unit id="settings.recursive.description" xml:space="preserve">
+				<source>Select the recursion level of the startingpoint.</source>
+				<target>Wählen Sie die Rekursionstiefe des Ausgangspunktes.</target>
+			</trans-unit>
+			<trans-unit id="settings.random.targetPid.description" xml:space="preserve">
+				<source>Target page the random assets should link to. Select the page on which the full album is shown.</source>
+				<target>Zielseite, auf die das Zufalls-Medienelement verweist. Wählen Sie eine Seite, auf der das vollständige Album angezeigt wird.</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

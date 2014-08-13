@@ -7,7 +7,7 @@ if (!defined('TYPO3_MODE')) {
 	'MiniFranske.' . $_EXTKEY,
 	'Mediagallery',
 	array(
-		'MediaAlbum' => 'show,random,showImage',
+		'MediaAlbum' => 'index,nestedList,flatList,showAlbum,showAlbumByConfig,showAsset,random',
 	),
 	// non-cacheable actions
 	array(
@@ -15,8 +15,8 @@ if (!defined('TYPO3_MODE')) {
 	)
 );
 
-// ModWizard config
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:' . $_EXTKEY . '/Configuration/PageTS/ModWizards.ts">');
+// Page TSConfig
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:' . $_EXTKEY . '/Configuration/TSConfig/Page.ts">');
 
 // Resource Icon hook
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_iconworks.php']['overrideResourceIcon']['FsMediaGallery'] =

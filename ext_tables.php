@@ -8,14 +8,14 @@ $extensionName = \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamel
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'Mediagallery',
-	'Media Gallery'
+	'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_be.xlf:mediagallery.title'
 );
 
 $pluginSignature = strtolower($extensionName) . '_mediagallery';
-$TCA['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'layout,recursive,select_key';
+$TCA['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'layout,select_key,pages,recursive';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($pluginSignature,
-	'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_gallery.xml');
+	'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_mediaalbum.xml');
 
 
 if (TYPO3_MODE === 'BE') {
@@ -29,6 +29,10 @@ if (TYPO3_MODE === 'BE') {
 	$GLOBALS['TBE_MODULES_EXT']['xMOD_alt_clickmenu']['extendCMclasses'][] = array(
 		'name' => 'MiniFranske\\FsMediaGallery\\Service\\ClickMenuOptions'
 	);
+
+	// Add CSH
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
+		'tt_content.pi_flexform.' . $pluginSignature . '.list', 'EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_csh_flexforms.xlf');
 }
 
 // Add MediaGallery folder type and icon
@@ -54,3 +58,5 @@ $TCA['pages']['columns']['module']['config']['items'][] = array(
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Media Gallery');
+// Add Theme 'Bootstrap3'
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/Themes/Bootstrap3', 'Media Gallery Theme \'Bootstrap3\'');

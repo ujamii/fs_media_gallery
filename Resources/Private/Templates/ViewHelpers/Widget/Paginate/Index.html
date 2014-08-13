@@ -36,7 +36,7 @@
 					<f:if condition="{page.isCurrent}">
 						<f:then>
 							<li class="active">
-								<f:widget.link>{page.number}</f:widget.link>
+								<f:widget.link arguments="{currentPage: page.number}">{page.number}</f:widget.link>
 							</li>
 						</f:then>
 						<f:else>
