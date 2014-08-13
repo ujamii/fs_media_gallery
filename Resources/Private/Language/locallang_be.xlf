@@ -93,10 +93,10 @@
 				<source>Max. thumbs to display per page</source>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.list.thumb.width">
-				<source>Thumb width</source>
+				<source>Thumbnail width</source>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.list.thumb.height">
-				<source>Thumb height</source>
+				<source>Thumbnail height</source>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.list.orderBy">
 				<source>Sort albums list by</source>

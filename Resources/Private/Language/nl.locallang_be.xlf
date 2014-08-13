@@ -118,11 +118,11 @@
 				<target>Max. aantal to tonen thumbnails</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.list.thumb.width">
-				<source>Thumb width</source>
+				<source>Thumbnail width</source>
 				<target>Breedte thumbnails</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.list.thumb.height">
-				<source>Thumb height</source>
+				<source>Thumbnail height</source>
 				<target>Hoogte thumbnails</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.list.orderBy">
