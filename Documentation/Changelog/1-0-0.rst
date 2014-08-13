@@ -91,7 +91,7 @@ Following template files have been renamed, moved or were added:
 .. t3-field-list-table::
  :header-rows: 1
 
- - :oldFile,40:    Template file in 0.0.5
+ - :oldFile,40:    Template file in 0.0.6
    :status,20:     Alteration
    :newFile,40:    Template file in 1.0.0
 
@@ -260,7 +260,7 @@ All settings are defined by using :typoscript:`plugin.tx_fsmediagallery.<propert
 .. t3-field-list-table::
  :header-rows: 1
 
- - :oldProperty,25:    Property in 0.0.5
+ - :oldProperty,25:    Property in 0.0.6
    :status,20:         Alteration
    :newProperty,25:    Property in 1.0.0
    :proposal,30:       Proposal
