@@ -78,7 +78,17 @@ This can be either done in Extension Manager or from command line:
     ./typo3/cli_dispatch.phpsh extbase extension:install fs_media_gallery
 
 
+.. _upgrade_procedure_1-0-0_plugin-migration:
+
+Migrate existing plugins
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Because of the renaming of multiple values the existing plugins need to be updated. The extensions comes with a upgrade script than helps you with this.
+
+Go to the extension manager and search for ext:fs_media_gallery. Click on the "Execute update script" button in the Actions column.
+
 .. _upgrade_procedure_1-0-0_fluid-templates:
+
 
 Migrate your Fluid templates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
