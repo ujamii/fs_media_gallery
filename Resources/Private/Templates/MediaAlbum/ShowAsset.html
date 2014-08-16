@@ -12,8 +12,8 @@
 				<figure>
 					<f:render partial="MediaAsset/Detail" section="Detail" arguments="{mediaAsset:mediaAsset,width:settings.detail.asset.width,height:settings.detail.asset.height,resizeMode:settings.detail.asset.resizeMode}" />
 					<figcaption>{mf:fileTitle(file:mediaAsset)}</figcaption>
-					<f:if condition="{mediaAsset.property.description}">
-						<div class="description"><f:format.html>{mediaAsset.property.description}</f:format.html></div>
+					<f:if condition="{mediaAsset.properties.description}">
+						<div class="description"><f:format.html>{mediaAsset.properties.description}</f:format.html></div>
 					</f:if>
 				</figure>
 			</div>
