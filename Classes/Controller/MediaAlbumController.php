@@ -249,7 +249,12 @@ class MediaAlbumController extends ActionController {
 		if (empty($mediaAlbum)) {
 			$mediaAlbum = (int)$this->settings['mediaAlbum'];
 		}
-		$mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum);
+		// if album uid is set through settings (typoscript or flexform) we skip the storage check
+		$respectStorage = TRUE;
+		if ((int)$this->settings['mediaAlbum'] === (int)$mediaAlbum) {
+			$respectStorage = FALSE;
+		}
+		$mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum, $respectStorage);
 		if (!$mediaAlbum) {
 			$this->pageNotFound(LocalizationUtility::translate('no_album_found', $this->extensionName));
 		}

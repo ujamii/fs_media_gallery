@@ -155,11 +155,16 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * Find album by Uid
 	 *
 	 * @param integer $uid The identifier of the MediaAlbum to find
-	 * @return \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum|NULL The matching media album if found, otherwise NULL
+	 * @param bool $respectStorage possibility to disable storage restriction
+	 * @return MediaAlbum|NULL The matching media album if found, otherwise NULL
 	 */
-	public function findByUid($uid) {
+	public function findByUid($uid, $respectStorage = TRUE) {
 
 		$query = $this->createQuery();
+		if (!$respectStorage) {
+			$query->getQuerySettings()->setRespectStoragePage(FALSE);
+		}
+
 		/** @var $mediaAlbum \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum */
 		$mediaAlbum = $query->matching($query->equals('uid', (int)$uid))->execute()->getFirst();
 
