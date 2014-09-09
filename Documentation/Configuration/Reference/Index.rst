@@ -54,7 +54,7 @@ All others can remain in the default location.
     Please notice the ending **s** in templateRootPath\ **s**\ , partialRootPath\ **s** and
     layoutRootPath\ **s**\ .
 
-.. code-block:: typoscript
+.. code-block:: ts
 
     plugin.tx_fsmediagallery {
         view {
