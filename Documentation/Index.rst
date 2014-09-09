@@ -60,4 +60,3 @@
     Configuration/Index
     KnownProblems/Index
     Changelog/Index
-    Targets
