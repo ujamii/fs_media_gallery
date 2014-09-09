@@ -48,9 +48,9 @@
 							</config>
 						</TCEforms>
 					</switchableControllerActions>
-					<settings.mediaAlbums>
+					<settings.mediaAlbumsUids>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.mediaAlbums</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.mediaAlbumsUids</label>
 							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->randomAsset</displayCond>
 							<config>
 								<type>select</type>
@@ -72,7 +72,7 @@
 								<foreign_table_where>AND sys_file_collection.hidden = 0 AND (sys_file_collection.sys_language_uid = 0 OR sys_file_collection.l10n_parent = 0) ORDER BY sys_file_collection.sorting ASC, sys_file_collection.crdate DESC</foreign_table_where>
 							</config>
 						</TCEforms>
-					</settings.mediaAlbums>
+					</settings.mediaAlbumsUids>
 					<settings.useAlbumFilterAsExclude>
 						<TCEforms>
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.useAlbumFilterAsExclude</label>

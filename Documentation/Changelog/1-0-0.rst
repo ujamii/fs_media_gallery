@@ -178,8 +178,8 @@ persistence.storagePid                     not changed              persistence.
                                                                     :ref:`overrideFlexformSettingsIfEmpty <plugin.tx_fsmediagallery.settings.overrideFlexformSettingsIfEmpty>`
 .                                          new                      settings.\
                                                                     :ref:`allowedAssetMimeTypes <plugin.tx_fsmediagallery.settings.allowedAssetMimeTypes>`
-settings.mediagalleries                    renamed                  settings.\                                                                                                     mediaAlbumsUids
-                                                                    :ref:`mediaAlbums <plugin.tx_fsmediagallery.settings.mediaAlbums>`
+settings.mediagalleries                    renamed                  settings.\
+                                                                    :ref:`mediaAlbumsUids <plugin.tx_fsmediagallery.settings.mediaAlbumsUids>`
 settings.useAlbumFilterAsExclude           value altered            settings.\
                                                                     :ref:`useAlbumFilterAsExclude <plugin.tx_fsmediagallery.settings.useAlbumFilterAsExclude>`
 settings.album.itemsPerPage                moved                    settings.list.pagination.\

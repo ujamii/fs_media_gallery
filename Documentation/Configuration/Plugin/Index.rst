@@ -55,7 +55,7 @@ Display mode all                      .. _flexforms.mediagallery.tabs.general.di
 
                                       You enable/disable these items via the plugin configuration in the
                                       :ref:`Extension Manager <configuration-extConf>`
-Media Albums        nestedList,       .. _flexforms.mediagallery.tabs.general.mediaAlbums:                                               :ref:`settings.mediaAlbums <plugin.tx_fsmediagallery.settings.mediaAlbums>`
+Media Albums        nestedList,       .. _flexforms.mediagallery.tabs.general.mediaAlbums:                                               :ref:`settings.mediaAlbumsUids <plugin.tx_fsmediagallery.settings.mediaAlbumsUids>`
                     randomAsset
                                       Album selection for ``nestedList`` and ``randomAsset`` views.
 

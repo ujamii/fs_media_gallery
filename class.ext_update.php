@@ -90,8 +90,12 @@ class ext_update {
 
 		$migrations = array(
 			array(
+				'old' => array('general', 'settings.mediaAlbums'),
+				'new' => array('general', 'settings.mediaAlbumsUids')
+			),
+			array(
 				'old' => array('general', 'settings.mediagalleries'),
-				'new' => array('general', 'settings.mediaAlbums')
+				'new' => array('general', 'settings.mediaAlbumsUids')
 			),
 			array(
 				'old' => array('album', 'settings.album.itemsPerPage'),

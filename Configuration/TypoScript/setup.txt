@@ -19,7 +19,7 @@ plugin.tx_fsmediagallery {
 		# Comma separated list of mime types (if empty, all files are included)
 		allowedAssetMimeTypes = {$plugin.tx_fsmediagallery.settings.allowedAssetMimeTypes}
 		# Comma separated list of albums uids
-		mediaAlbums =
+		mediaAlbumsUids =
 		# Option to exclude given album uids (settings.mediaAlbums)
 		useAlbumFilterAsExclude = 0
 		# Settings for album lists (both nested and flat)

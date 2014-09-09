@@ -164,8 +164,8 @@ class MediaAlbumController extends ActionController {
 		$useAlbumFilterAsExclude = !empty($this->settings['useAlbumFilterAsExclude']);
 		$showBackLink = TRUE;
 
-		if (!empty($this->settings['mediaAlbums'])) {
-			$mediaAlbumsUids = GeneralUtility::trimExplode(',', $this->settings['mediaAlbums']);
+		if (!empty($this->settings['mediaAlbumsUids'])) {
+			$mediaAlbumsUids = GeneralUtility::trimExplode(',', $this->settings['mediaAlbumsUids']);
 		}
 
 		if ($mediaAlbum) {
@@ -285,7 +285,7 @@ class MediaAlbumController extends ActionController {
 	 * @return void
 	 */
 	public function randomAssetAction() {
-		$filterByUids = GeneralUtility::trimExplode(',', $this->settings['mediaAlbums'], TRUE);
+		$filterByUids = GeneralUtility::trimExplode(',', $this->settings['mediaAlbumsUids'], TRUE);
 		$mediaAlbum = $this->mediaAlbumRepository->findRandom(NULL, $filterByUids, !empty($this->settings['useAlbumFilterAsExclude']));
 		$this->view->assign('mediaAlbum', $mediaAlbum);
 	}

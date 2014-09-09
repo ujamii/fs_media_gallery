@@ -162,7 +162,7 @@ They are set by :typoscript:`plugin.tx_news.settings.<property>`
    Property                             Data type                         :ref:`t3tsref:stdwrap`  Default
    ==================================== ================================= ======================= ===================================================================================
    `allowedAssetMimeTypes`_             :ref:`t3tsref:data-type-list`     no                      :typoscript:`{$plugin.tx_fsmediagallery.settings.allowedAssetMimeTypes}`
-   `mediaAlbums`_                       :ref:`t3tsref:data-type-list`     no
+   `mediaAlbumsUids`_                   :ref:`t3tsref:data-type-list`     no
    `overrideFlexformSettingsIfEmpty`_   :ref:`t3tsref:data-type-list`     no                      :typoscript:`{$plugin.tx_fsmediagallery.settings.overrideFlexformSettingsIfEmpty}`
    `useAlbumFilterAsExclude`_           :ref:`t3tsref:data-type-boolean`  no                      :code:`0`
    ==================================== ================================= ======================= ===================================================================================
@@ -191,12 +191,12 @@ allowedAssetMimeTypes
 Comma separated list of mime types (if empty, all files are included)
 
 
-.. _plugin.tx_fsmediagallery.settings.mediaAlbums:
+.. _plugin.tx_fsmediagallery.settings.mediaAlbumsUids:
 
-mediaAlbums
-"""""""""""
+mediaAlbumsUids
+"""""""""""""""
 
-:typoscript:`plugin.tx_fsmediagallery.settings.mediaAlbums =` :ref:`t3tsref:data-type-list`
+:typoscript:`plugin.tx_fsmediagallery.settings.mediaAlbumsUids =` :ref:`t3tsref:data-type-list`
 
 Album selection for ``nestedList`` and ``randomAsset`` views of the plugin (see :ref:`Display Mode <flexforms.mediagallery.tabs.general.mediaAlbums>`).
 
@@ -206,10 +206,10 @@ Album selection for ``nestedList`` and ``randomAsset`` views of the plugin (see 
 useAlbumFilterAsExclude
 """""""""""""""""""""""
 
-:typoscript:`plugin.tx_fsmediagallery.settings.mediaAlbums =` :ref:`t3tsref:data-type-boolean`
+:typoscript:`plugin.tx_fsmediagallery.settings.useAlbumFilterAsExclude =` :ref:`t3tsref:data-type-boolean`
 
-| :code:`0` = Show only items defined in :ref:`settings.mediaAlbums <plugin.tx_fsmediagallery.settings.mediaAlbums>`
-| :code:`1` = Exclude items defined in :ref:`settings.mediaAlbums <plugin.tx_fsmediagallery.settings.mediaAlbums>`
+| :code:`0` = Show only items defined in :ref:`settings.mediaAlbums <plugin.tx_fsmediagallery.settings.mediaAlbumsUids>`
+| :code:`1` = Exclude items defined in :ref:`settings.mediaAlbums <plugin.tx_fsmediagallery.settings.mediaAlbumsUids>`
 
 
 .. _plugin.tx_fsmediagallery.settings.list:

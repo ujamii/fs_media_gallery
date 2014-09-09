@@ -92,7 +92,7 @@
 				<source>Album to display</source>
 				<target>Anzuzeigendes Album</target>
 			</trans-unit>
-			<trans-unit id="flexforms.mediagallery.mediaAlbums">
+			<trans-unit id="flexforms.mediagallery.mediaAlbumsUids">
 				<source>Albums to display</source>
 				<target>Anzuzeigende Alben</target>
 			</trans-unit>
