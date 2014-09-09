@@ -154,7 +154,7 @@ General properties
 ------------------
 
 The following table describes general settings for the plugin.
-They are set by :typoscript:`plugin.tx_news.settings.<property>`
+They are set by :typoscript:`plugin.tx_fsmediagallery.settings.<property>`
 
 .. container:: ts-properties
 
@@ -218,7 +218,7 @@ Properties for list view
 ------------------------
 
 The following table describes the settings for the *list* view.
-They are set by :typoscript:`plugin.tx_news.settings.list.<property>`
+They are set by :typoscript:`plugin.tx_fsmediagallery.settings.list.<property>`
 
 .. container:: ts-properties
 
@@ -390,7 +390,7 @@ Properties for album view
 -------------------------
 
 The following table describes the settings for the *album* view.
-They are set by :typoscript:`plugin.tx_news.settings.album.<property>`
+They are set by :typoscript:`plugin.tx_fsmediagallery.settings.album.<property>`
 
 .. container:: ts-properties
 
@@ -594,7 +594,7 @@ Properties for detail view
 --------------------------
 
 The following table describes the settings for the *detail* view.
-They are set by :typoscript:`plugin.tx_news.settings.detail.<property>`
+They are set by :typoscript:`plugin.tx_fsmediagallery.settings.detail.<property>`
 
 .. container:: ts-properties
 
@@ -649,7 +649,7 @@ Properties for random view
 --------------------------
 
 The following table describes the settings for the *random* view.
-They are set by :typoscript:`plugin.tx_news.settings.random.<property>`
+They are set by :typoscript:`plugin.tx_fsmediagallery.settings.random.<property>`
 
 .. container:: ts-properties
 
@@ -717,7 +717,7 @@ thumb.resizeMode
 Other Properties
 ----------------
 
-They properties in the following table are set by :typoscript:`plugin.tx_news.settings.<property>`
+They properties in the following table are set by :typoscript:`plugin.tx_fsmediagallery.settings.<property>`
 
 .. container:: ts-properties
 

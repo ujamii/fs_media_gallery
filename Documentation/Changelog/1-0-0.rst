@@ -161,9 +161,9 @@ The following table lists all alterations to TypoScript.
 All settings are defined by using :typoscript:`plugin.tx_fsmediagallery.<property>`.
 
 
-========================================== ======================== ============================================================================================================== ==============
-Property in 0.0.6                          Alteration               Property in 1.0.0                                                                                              Proposal
-========================================== ======================== ============================================================================================================== ==============
+========================================== ======================== ==============================================================================================================
+Property in 0.0.6                          Alteration               Property in 1.0.0
+========================================== ======================== ==============================================================================================================
 view.templateRootPaths.100                 not changed              view.\
                                                                     :ref:`templateRootPaths.100 <plugin.tx_fsmediagallery.view.templateRootPaths.100>`
 view.partialRootPaths.100                  not changed              view.\
@@ -188,7 +188,7 @@ settings.album.thumb.maxWidth              moved, renamed,          settings.lis
                                            value altered            :ref:`width <plugin.tx_fsmediagallery.settings.list.thumb.width>`
 settings.album.thumb.maxHeight             moved, renamed,          settings.list.thumb.\
                                            value altered            :ref:`height <plugin.tx_fsmediagallery.settings.list.thumb.height>`
-.                                          new                      settings.list.thumb.\                                                                                          rename to ``scaleMode``
+.                                          new                      settings.list.thumb.\
                                                                     :ref:`resizeMode <plugin.tx_fsmediagallery.settings.list.thumb.resizeMode>`
 .                                          new                      settings.list.\
                                                                     :ref:`hideEmptyAlbums <plugin.tx_fsmediagallery.settings.list.hideEmptyAlbums>`
@@ -204,7 +204,7 @@ settings.image.thumb.maxWidth              moved, renamed,          settings.alb
                                            value altered            :ref:`width <plugin.tx_fsmediagallery.settings.album.thumb.width>`
 settings.image.thumb.maxHeight             moved, renamed,          settings.album.thumb.\
                                            value altered            :ref:`height <plugin.tx_fsmediagallery.settings.album.thumb.height>`
-.                                          new                      settings.album.thumb.\                                                                                         rename to ``scaleMode``
+.                                          new                      settings.album.thumb.\
                                                                     :ref:`resizeMode <plugin.tx_fsmediagallery.settings.album.thumb.resizeMode>`
 settings.enableLightbox                    renamed, moved           settings.album.lightbox.\
                                                                     :ref:`enable <plugin.tx_fsmediagallery.settings.album.lightbox.enable>`
@@ -218,13 +218,13 @@ settings.image.lightbox.maxWidth           moved, renamed,          settings.alb
                                            value altered            :ref:`width <plugin.tx_fsmediagallery.settings.album.lightbox.asset.width>`
 settings.image.lightbox.maxHeight          moved, renamed,          settings.album.lightbox.asset.\
                                            value altered            :ref:`height <plugin.tx_fsmediagallery.settings.album.lightbox.asset.height>`
-.                                          new                      settings.album.lightbox.asset.\                                                                                rename to ``scaleMode``
+.                                          new                      settings.album.lightbox.asset.\
                                                                     :ref:`resizeMode <plugin.tx_fsmediagallery.settings.album.lightbox.asset.resizeMode>`
 settings.image.maxWidth                    moved, renamed,          settings.detail.asset.\
                                            value altered            :ref:`width <plugin.tx_fsmediagallery.settings.detail.asset.width>`
 settings.image.maxHeight                   moved, renamed,          settings.detail.asset.\
                                            value altered            :ref:`height <plugin.tx_fsmediagallery.settings.detail.asset.height>`
-.                                          new                      settings.detail.asset.\                                                                                        rename to ``scaleMode``
+.                                          new                      settings.detail.asset.\
                                                                     :ref:`resizeMode <plugin.tx_fsmediagallery.settings.detail.asset.resizeMode>`
 settings.galleryPid                        moved, renamed           settings.random.\
                                                                     :ref:`targetPid <plugin.tx_fsmediagallery.settings.random.targetPid>`
@@ -232,7 +232,7 @@ settings.random.thumb.maxWidth             renamed, value altered   settings.ran
                                                                     :ref:`width <plugin.tx_fsmediagallery.settings.random.thumb.width>`
 settings.random.thumb.maxHeight            renamed, value altered   settings.random.thumb.\
                                                                     :ref:`height <plugin.tx_fsmediagallery.settings.random.thumb.height>`
-.                                          new                      settings.random.thumb.\                                                                                        rename to ``scaleMode``
+.                                          new                      settings.random.thumb.\
                                                                     :ref:`resizeMode <plugin.tx_fsmediagallery.settings.random.thumb.resizeMode>`
 settings.pagination.insertAbove            splitted (moved,         settings.list.pagination.\
                                            renamed)                 :ref:`insertAbove <plugin.tx_fsmediagallery.settings.list.pagination.insertAbove>`,
@@ -254,6 +254,8 @@ settings.pagination.maximumNumberOfLinks   splitted (moved,         settings.lis
                                            renamed), value altered  :ref:`maximumNumberOfLinks <plugin.tx_fsmediagallery.settings.list.pagination.maximumNumberOfLinks>`,
                                                                     settings.album.pagination.\
                                                                     :ref:`maximumNumberOfLinks <plugin.tx_fsmediagallery.settings.album.pagination.maximumNumberOfLinks>`
-settings.features.skipDefaultArguments     no change                settings.features.\                                                                                            `Extbase feature <https://forge.typo3.org/projects/typo3v4-mvc/wiki/Skip_default_arguments_in_URIs>`_ that can't be changed
+settings.features.skipDefaultArguments     no change                settings.features.\
                                                                     :ref:`skipDefaultArguments <plugin.tx_fsmediagallery.settings.features.skipDefaultArguments>`
-========================================== ======================== ============================================================================================================== ==============
+
+                                                                    `Default Extbase feature <https://forge.typo3.org/projects/typo3v4-mvc/wiki/Skip_default_arguments_in_URIs>`_
+========================================== ======================== ==============================================================================================================
