@@ -33,20 +33,23 @@ class FileTitleViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewH
 	/**
 	 * Get title of a File
 	 *
-	 * @param /TYPO3\CMS\Core\Resource/File|/TYPO3\CMS\Core\Resource/FileReference $file
-	 * @return bool
+	 * @param \TYPO3\CMS\Core\Resource\FileInterface|\TYPO3\CMS\Extbase\Domain\Model\File|\TYPO3\CMS\Extbase\Domain\Model\FileReference $file
+	 * @return string|NULL
 	 */
 	public function render($file) {
+		if (is_callable(array($file, 'getOriginalResource'))) {
+			// Get the original file from the Extbase model
+			$file = $file->getOriginalResource();
+		}
 
-		if (is_callable(array($file, 'getOriginalFile'))) {
-			// Get the original file from the file reference
-			$file = $file->getOriginalFile();
+		if (!$file instanceof \TYPO3\CMS\Core\Resource\FileInterface) {
+			return NULL;
 		}
 
 		if ($file->getProperty('title')) {
 			return $file->getProperty('title');
 		} else {
-			return str_ireplace(array('_', '.'.$file->getExtension()), array(' ',''), $file->getName());
+			return str_ireplace('_', ' ', $file->getNameWithoutExtension());
 		}
 	}
 }
