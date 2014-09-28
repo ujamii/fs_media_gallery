@@ -181,3 +181,17 @@ Resize mode                        randomAsset            .. _flexforms.mediagal
                                                           Defines how thumbnails of random media assets are scaled.
 
 ================================== ====================== ================================================================================================== ===================
+
+
+.. _flexforms.mediagallery.hide.field:
+
+Hide flexform fields for editors
+--------------------------------
+
+Through some UserTs and/or PageTs settings you are able to hide flexform fields for editors.
+
+.. container:: ts-properties
+
+	TCEFORM.tt_content.pi_flexform.fsmediagallery_mediagallery.general.settings\.useAlbumFilterAsExclude.disabled = 1
+	TCEFORM.tt_content.pi_flexform.fsmediagallery_mediagallery.general.settings\.list\.orderBy.disabled = 1
+	TCEFORM.tt_content.pi_flexform.fsmediagallery_mediagallery.general.settings\.list\.orderDirection.disabled = 1
