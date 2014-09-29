@@ -63,7 +63,7 @@ class RealUrlAutoConfiguration {
 								),
 							),
 							array(
-								'GETvar' => 'tx_fsmediagallery_mediagallery[@widget_0][currentPage]',
+								'GETvar' => 'tx_fsmediagallery_mediagallery[@widget_assets][currentPage]',
 							),
 						)
 					)

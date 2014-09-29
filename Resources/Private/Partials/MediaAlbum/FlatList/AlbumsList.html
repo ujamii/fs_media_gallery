@@ -8,7 +8,7 @@
 
 	<f:section name="AlbumsList">
 		<div class="albums-list">
-			<mf:widget.paginate objects="{mediaAlbums}" as="paginatedAlbums" configuration="{itemsPerPage:settings.list.pagination.itemsPerPage, insertAbove:settings.list.pagination.insertAbove, insertBelow:settings.list.pagination.insertBelow, maximumNumberOfLinks:settings.list.pagination.maximumNumberOfLinks, pagesBefore:settings.list.pagination.pagesBefore, pagesAfter:settings.list.pagination.pagesAfter}">
+			<mf:widget.paginate objects="{mediaAlbums}" as="paginatedAlbums" widgetId="album" configuration="{itemsPerPage:settings.list.pagination.itemsPerPage, insertAbove:settings.list.pagination.insertAbove, insertBelow:settings.list.pagination.insertBelow, maximumNumberOfLinks:settings.list.pagination.maximumNumberOfLinks, pagesBefore:settings.list.pagination.pagesBefore, pagesAfter:settings.list.pagination.pagesAfter}">
 				<f:if condition="{paginatedAlbums}">
 					<f:then>
 						<div class="thumbs thumbs-albums clearfix">

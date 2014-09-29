@@ -28,8 +28,7 @@ namespace MiniFranske\FsMediaGallery\ViewHelpers\Widget;
 /**
  * Class PaginateViewHelper
  */
-class PaginateViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Widget\PaginateViewHelper {
-
+class PaginateViewHelper extends AbstractWidgetViewHelper {
 
 	/**
 	 * @var \MiniFranske\FsMediaGallery\ViewHelpers\Widget\Controller\PaginateController
@@ -52,9 +51,10 @@ class PaginateViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Widget\PaginateVie
 	 * @param string|null $itemsBefore
 	 * @param string|null $itemsAfter
 	 * @param array $configuration
+	 * @param string $widgetId
 	 * @return string|\TYPO3\CMS\Extbase\Mvc\ResponseInterface
 	 */
-	public function render($objects, $as, $itemsBefore = NULL, $itemsAfter = NULL, array $configuration = array('itemsPerPage' => 10, 'insertAbove' => FALSE, 'insertBelow' => TRUE, 'maximumNumberOfLinks' => 99)) {
+	public function render($objects, $as, $itemsBefore = NULL, $itemsAfter = NULL, array $configuration = array('itemsPerPage' => 10, 'insertAbove' => FALSE, 'insertBelow' => TRUE, 'maximumNumberOfLinks' => 99), $widgetId = NULL) {
 		return $this->initiateSubRequest();
 	}
 }
