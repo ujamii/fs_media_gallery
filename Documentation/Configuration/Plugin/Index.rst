@@ -86,6 +86,12 @@ Recursive           all               .. _flexforms.mediagallery.tabs.general.re
 Tab "Albums list"
 -----------------
 
+.. figure:: ../../Images/Configuration/Plugin/flexforms.mediagallery.tabs.list.png
+   :width: 716px
+   :alt: Tab "Album list" of plugin"
+
+   **Image 2:** Tab "Album list" of plugin"
+
 ================================== ====================== ================================================================================================== ===================
 Field                              Display Modes          Description                                                                                        TSref
 ================================== ====================== ================================================================================================== ===================
@@ -111,6 +117,13 @@ Hide empty albums                  nestedList, flatList   .. _flexforms.mediagal
 
 Tab "Album view"
 ----------------
+
+.. figure:: ../../Images/Configuration/Plugin/flexforms.mediagallery.tabs.album.png
+   :width: 716px
+   :alt: Tab "Album view" of plugin"
+
+   **Image 3:** Tab "Album view" of plugin"
+
 
 ================================== ====================== ================================================================================================== ===================
 Field                              Display Modes          Description                                                                                        TSref
@@ -138,6 +151,12 @@ of detail view                     showAlbumByParam,
 Tab "Detail view"
 -----------------
 
+.. figure:: ../../Images/Configuration/Plugin/flexforms.mediagallery.tabs.detail.png
+   :width: 716px
+   :alt: Tab "Detail view" of plugin"
+
+   **Image 4:** Tab "Detail view" of plugin"
+
 ================================== ====================== ================================================================================================== ===================
 Field                              Display Modes          Description                                                                                        TSref
 ================================== ====================== ================================================================================================== ===================
@@ -158,6 +177,12 @@ Resize mode                        nestedList, flatList,  .. _flexforms.mediagal
 
 Tab "Random asset"
 ------------------
+
+.. figure:: ../../Images/Configuration/Plugin/flexforms.mediagallery.tabs.random.png
+   :width: 716px
+   :alt: Tab "Random view" of plugin"
+
+   **Image 5:** Tab "Random view" of plugin"
 
 ================================== ====================== ================================================================================================== ===================
 Field                              Display Modes          Description                                                                                        TSref
