@@ -6,10 +6,10 @@
 .. include:: ../Includes.txt
 
 
-.. _known_problems:
+.. _support:
 
-Known Problems
-==============
+FAQ/Support
+===========
 
 
 Frequently Asked Questions
@@ -25,7 +25,8 @@ This is something we need to make the albums manageable.
 I inserted a "Media Gallery" plugin but I see no images in FE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Did you set the :ref:`Startingpoint <flexforms.mediagallery.tabs.general.startingpoint>` to the "Storage Folder" which holds the album records?
+* Did you include the static template :ref:`*Media Gallery (fs_media_gallery)* <users_manual>`?
+* Did you set the :ref:`Startingpoint <flexforms.mediagallery.tabs.general.startingpoint>` to the "Storage Folder" which holds the album records?
 
 
 Multiple "Media Gallery" plugins on one page won't work properly

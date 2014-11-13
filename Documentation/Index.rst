@@ -56,7 +56,7 @@
 
     Introduction/Index
     UsersManual/Index
-    Administration/Index
+    Installation/Index
     Configuration/Index
-    KnownProblems/Index
+    Support/Index
     Changelog/Index

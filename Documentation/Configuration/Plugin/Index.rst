@@ -34,7 +34,7 @@ Every setting can also be set by using :ref:`TypoScript <configuration-typoscrip
 Tab "General"
 -------------
 
-.. figure:: ../../Images/Configuration/Plugin/flexforms.mediagallery.tabs.general.nested.png
+.. figure:: ../../Images/Configuration/Plugin/flexforms_mediagallery_tabs_general_nested.png
    :width: 716px
    :alt: Tab "General" of plugin in display mode "Selected albums (nested)"
 
@@ -86,7 +86,7 @@ Recursive           all               .. _flexforms.mediagallery.tabs.general.re
 Tab "Albums list"
 -----------------
 
-.. figure:: ../../Images/Configuration/Plugin/flexforms.mediagallery.tabs.list.png
+.. figure:: ../../Images/Configuration/Plugin/flexforms_mediagallery_tabs_list.png
    :width: 716px
    :alt: Tab "Album list" of plugin"
 
@@ -118,7 +118,7 @@ Hide empty albums                  nestedList, flatList   .. _flexforms.mediagal
 Tab "Album view"
 ----------------
 
-.. figure:: ../../Images/Configuration/Plugin/flexforms.mediagallery.tabs.album.png
+.. figure:: ../../Images/Configuration/Plugin/flexforms_mediagallery_tabs_album.png
    :width: 716px
    :alt: Tab "Album view" of plugin"
 
@@ -151,7 +151,7 @@ of detail view                     showAlbumByParam,
 Tab "Detail view"
 -----------------
 
-.. figure:: ../../Images/Configuration/Plugin/flexforms.mediagallery.tabs.detail.png
+.. figure:: ../../Images/Configuration/Plugin/flexforms_mediagallery_tabs_detail.png
    :width: 716px
    :alt: Tab "Detail view" of plugin"
 
@@ -178,7 +178,7 @@ Resize mode                        nestedList, flatList,  .. _flexforms.mediagal
 Tab "Random asset"
 ------------------
 
-.. figure:: ../../Images/Configuration/Plugin/flexforms.mediagallery.tabs.random.png
+.. figure:: ../../Images/Configuration/Plugin/flexforms_mediagallery_tabs_random.png
    :width: 716px
    :alt: Tab "Random view" of plugin"
 

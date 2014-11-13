@@ -8,8 +8,8 @@
 
 .. _administration:
 
-Administration
-==============
+Installation/updating
+=====================
 
 Target group: **Administrators**
 
@@ -32,7 +32,7 @@ To install the extension, perform the following steps:
 
 #. Go to the Extension Manager
 #. Install the extension
-#. Include the static template *Media Gallery (fs_media_gallery)*
+#. Include the static template :ref:`*Media Gallery (fs_media_gallery)* <users_manual>`
 
 To use the latest version from the `code repository <https://bitbucket.org/franssaris/fs_media_gallery>`_ install the extension from command line:
 
