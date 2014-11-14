@@ -16,7 +16,7 @@ Target group: **Editors**
 How to create a new media album
 -------------------------------
 
-#. Make sure the the static template *Media Gallery (fs_media_gallery)* is included
+#. Make sure the static template *Media Gallery (fs_media_gallery)* is included
 
    .. figure:: ../Images/UserManual/include-static-template.png
       :width: 400px
@@ -24,15 +24,15 @@ How to create a new media album
 
       **Image 1:** Include static template *Media Gallery (fs_media_gallery)*
 
-#. Create a "Storage Folder" in your page-tree that's gonna hold your albums
+#. Create a *"<Storage Folder>"* in your page-tree that's gonna hold your albums
 
    .. figure:: ../Images/UserManual/create-storage-folder.png
       :width: 200px
-      :alt: Create a "Storage Folder" to hold your albums
+      :alt: Create a *"<Storage Folder>"* to hold your albums
 
-      **Image 2:** Create a "Storage Folder" to hold your albums
+      **Image 2:** Create a *"<Storage Folder>"* to hold your albums
 
-#. Tell TYPO3 that the "Storage Folder" holds media albums by setting "Contains Plugin" to "MediaGalleries"
+#. Tell TYPO3 that the *"<Storage Folder>"* holds media albums by setting "Contains Plugin" to "MediaGalleries"
 
    .. figure:: ../Images/UserManual/create-media-albums-storage-folder.png
       :width: 300px
@@ -40,7 +40,7 @@ How to create a new media album
 
       **Image 3:** Set "Contains Plugin" to "MediaGalleries"
 
-#. Go to *Filelist* and open the folder you want to turn into a album (the folder should contain some media assets like e.g. images).
+#. Go to *Filelist* and open the folder you want to turn into a album (the folder should contain some media assets like e.g. images)
 #. In *Filelist* click on the *Create new album in "<Storage Folder>"* icon in top toolbar or use *Create new album in "<Storage Folder>"* from the context menu in file list
 
    .. figure:: ../Images/UserManual/create-new-media-album-from-folder.png
@@ -58,7 +58,9 @@ How to create a new media album
 
       **Image 5:** Add media album plugin
 
-#. Set the :ref:`Startingpoint <flexforms.mediagallery.tabs.general.startingpoint>` to the *<Storage Folder>*
+#. Choose a "Display mode" for instance "Selected albums (nested)" see :ref:`Plugin settings<flexforms.mediagallery.tabs.general>`
+
+#. Set the :ref:`Startingpoint <flexforms.mediagallery.tabs.general.startingpoint>` to the *"<Storage Folder>"*
    you created the album in for more configuration options see :ref:`plugin <configuration-plugin>`
 
    .. figure:: ../Images/UserManual/configure-media-album-plugin.png
