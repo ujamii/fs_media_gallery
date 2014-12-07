@@ -30,3 +30,4 @@ Every setting can also be set using :ref:`TypoScript <configuration-typoscript>`
    Plugin/Index
    Reference/Index
    ExtensionManager/Index
+   Integrations/Index

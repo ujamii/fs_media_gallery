@@ -118,17 +118,8 @@ plugin.tx_news {
 		detail {
 			fsmediaalbum {
 				targetPid = {$plugin.tx_fsmediagallery.settings.targetPid}
-				lightbox {
-					enable < plugin.tx_fsmediagallery.settings.album.lightbox.enable
-					styleClass < plugin.tx_fsmediagallery.settings.album.lightbox.styleClass
-					relPrefix < plugin.tx_fsmediagallery.settings.album.lightbox.relPrefix
-					jsPlugin < plugin.tx_fsmediagallery.settings.album.lightbox.jsPlugin
-					asset {
-						width < plugin.tx_fsmediagallery.settings.detail.asset.width
-						height < plugin.tx_fsmediagallery.settings.detail.asset.height
-						resizeMode < plugin.tx_fsmediagallery.settings.detail.asset.resizeMode
-					}
-				}
+				# Thumbnail view
+				thumb < plugin.tx_fsmediagallery.settings.random.thumb
 			}
 		}
 	}
