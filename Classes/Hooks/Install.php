@@ -52,7 +52,9 @@ class Install {
 	 * @return array
 	 */
 	public function tablesDefinitionIsBeingBuiltForExtension(array $sqlString, $extensionKey) {
-		if ($extensionKey === 'news') {
+		if ($extensionKey === 'news'
+			|| ($extensionKey === 'fs_media_gallery' && !empty($GLOBALS['TYPO3_LOADED_EXT']['news']))
+		) {
 			$sqlString[] = $this->getExtraTableDefinitions();
 		}
 		return array('sqlString' => $sqlString, 'extensionKey' => $extensionKey);
