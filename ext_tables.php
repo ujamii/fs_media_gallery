@@ -14,8 +14,8 @@ $boot = function($packageKey) {
 	);
 
 	$pluginSignature = strtolower($extensionName) . '_mediagallery';
-	$TCA['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'layout,select_key,pages,recursive';
-	$TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+	$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'layout,select_key,pages,recursive';
+	$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($pluginSignature,
 		'FILE:EXT:' . $packageKey . '/Configuration/FlexForms/flexform_mediaalbum.xml');
 
@@ -48,7 +48,7 @@ $boot = function($packageKey) {
 	), 'fs_media_gallery');
 
 	// Add module icon for Folder
-	$TCA['pages']['columns']['module']['config']['items'][] = array(
+	$GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = array(
 		'MediaGalleries',
 		'mediagal',
 		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($packageKey) . 'Resources/Public/Icons/mediagallery.png'
