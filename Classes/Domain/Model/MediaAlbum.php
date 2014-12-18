@@ -297,11 +297,20 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		}
 	}
 
+        /**
+	 * @return \TYPO3\CMS\Core\Resource\File
+	 */
+        public function getAlbumThumbnail()
+        {
+            return $this->getAssetByUid($this->getAssetsUids()[0]);
+        }
+        
 	/**
 	 * @return \TYPO3\CMS\Core\Resource\File
 	 */
 	public function getRandomAsset() {
 		$assets = $this->getAssets();
+                
 		// if there is an asset, return it
 		if (count($assets)) {
 			return $assets[rand(1, count($assets)) - 1];
