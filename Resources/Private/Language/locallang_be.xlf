@@ -22,6 +22,15 @@
 			<trans-unit id="flexforms.general.I.inherit">
 				<source>Inherit (TypoScript)</source>
 			</trans-unit>
+                        <trans-unit id="flexforms.general.randomThumbnail">
+				<source>Random thumbnail</source>
+			</trans-unit>
+                        <trans-unit id="flexforms.general.randomThumbnail.I.true">
+				<source>True</source>
+			</trans-unit>
+                        <trans-unit id="flexforms.general.randomThumbnail.I.false">
+				<source>False</source>
+			</trans-unit>
 			<trans-unit id="flexforms.general.resizeMode">
 				<source>Resize mode</source>
 			</trans-unit>
