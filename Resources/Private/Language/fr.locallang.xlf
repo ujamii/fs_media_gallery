@@ -9,35 +9,35 @@
 			</trans-unit>
 			<trans-unit id="media_album">
 				<source>Media Album</source>
-				<target>Media Album</target>
+				<target>Album</target>
 			</trans-unit>
 			<trans-unit id="media_albums">
 				<source>Media Albums</source>
-				<target>Media Albums</target>
+				<target>Albums</target>
 			</trans-unit>
 			<trans-unit id="asset">
 				<source>asset</source>
-				<target>asset</target>
+				<target>image</target>
 			</trans-unit>
 			<trans-unit id="assets">
 				<source>assets</source>
-				<target>assets</target>
+				<target>images</target>
 			</trans-unit>
 			<trans-unit id="no_albums_found">
 				<source>No albums found</source>
-				<target>No albums found</target>
+				<target>Aucun album trouvé</target>
 			</trans-unit>
 			<trans-unit id="no_album_found">
 				<source>Album not found</source>
-				<target>Album not found</target>
+				<target>Album introuvable</target>
 			</trans-unit>
 			<trans-unit id="no_assets_found">
 				<source>No assets found</source>
-				<target>No assets found</target>
+				<target>Aucune image trouvée</target>
 			</trans-unit>
 			<trans-unit id="asset_not_found">
 				<source>Asset not found</source>
-				<target>Asset not found</target>
+				<target>Image introuvable</target>
 			</trans-unit>
 			<trans-unit id="back_to_album">
 				<source>Back to album</source>
@@ -45,7 +45,7 @@
 			</trans-unit>
 			<trans-unit id="back_to_%s">
 				<source>Back to %s</source>
-				<target>Back to %s</target>
+				<target>Retour à %s</target>
 			</trans-unit>
 			<trans-unit id="back_to_albums_list">
 				<source>Back to albums list</source>
@@ -53,11 +53,11 @@
 			</trans-unit>
 			<trans-unit id="lightbox_current">
 				<source>image {current} of {total}</source>
-				<target>image {current} of {total}</target>
+				<target>image {current} sur {total}</target>
 			</trans-unit>
 			<trans-unit id="link_to_album">
 				<source>Show album '%s'</source>
-				<target>Show album '%s'</target>
+				<target>Afficher album '%s'</target>
 			</trans-unit>
 		</body>
 	</file>
