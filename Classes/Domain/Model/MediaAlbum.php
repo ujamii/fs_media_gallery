@@ -300,9 +300,9 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
         /**
 	 * @return \TYPO3\CMS\Core\Resource\File
 	 */
-        public function getAlbumThumbnail()
-        {
-            return $this->getAssetByUid($this->getAssetsUids()[0]);
+        public function getMainAsset() {
+            $assets = $this->getAssets();
+            return $assets !== array() ? $assets[0] : NULL;
         }
         
 	/**
