@@ -22,6 +22,8 @@ plugin.tx_fsmediagallery {
 		mediaAlbumsUids =
 		# Option to exclude given album uids (settings.mediaAlbums)
 		useAlbumFilterAsExclude = 0
+                # if 0, always get first image of album as thumbnail
+                randomThumbnail = 1
 		# Settings for album lists (both nested and flat)
 		list {
 			thumb {

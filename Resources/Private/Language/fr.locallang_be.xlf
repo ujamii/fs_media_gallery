@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2013-01-27T20:37:07Z" product-name="fs_media_gallery">
+	<file source-language="en" target-lanuage="fr" datatype="plaintext" original="messages" date="2013-01-27T20:37:07Z" product-name="fs_media_gallery">
 		<header/>
 		<body>
 			<!--
@@ -9,9 +9,11 @@
 
 			<trans-unit id="mediagallery.title">
 				<source>Media Album</source>
+				<target>Galerie photos</target>
 			</trans-unit>
 			<trans-unit id="mediagallery.description">
 				<source>Show your assets from your local or remote storage as a gallery of albums.</source>
+				<target>Afficher vos images sous forme de galerie.</target>
 			</trans-unit>
 
 			<!--
@@ -21,142 +23,186 @@
 			<!-- flexforms.general -->
 			<trans-unit id="flexforms.general.I.inherit">
 				<source>Inherit (TypoScript)</source>
-			</trans-unit>
-                        <trans-unit id="flexforms.general.randomThumbnail">
-				<source>Random thumbnail</source>
-			</trans-unit>
-                        <trans-unit id="flexforms.general.randomThumbnail.I.true">
-				<source>Yes</source>
-			</trans-unit>
-                        <trans-unit id="flexforms.general.randomThumbnail.I.false">
-				<source>No</source>
+				<target>Hériter (TypoScript)</target>
 			</trans-unit>
 			<trans-unit id="flexforms.general.resizeMode">
 				<source>Resize mode</source>
+				<target>Mode de redimensionnement</target>
 			</trans-unit>
 			<trans-unit id="flexforms.general.resizeMode.I.m">
 				<source>resize proportional</source>
+				<target>Proportionnel</target>
 			</trans-unit>
 			<trans-unit id="flexforms.general.resizeMode.I.c">
 				<source>crop</source>
+				<target>Recadrer</target>
 			</trans-unit>
 			<trans-unit id="flexforms.general.resizeMode.I.s">
 				<source>squeeze (unproportional exact fit)</source>
+				<target>Taille exacte (non proportionnelle)</target>
 			</trans-unit>
 			<!--
 				flexforms.mediagallery
 			-->
 			<trans-unit id="flexforms.mediagallery.tabs.general">
 				<source>General</source>
+				<target>Général</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.tabs.list">
 				<source>Albums list</source>
+				<target>Liste d'albums</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.tabs.album">
 				<source>Album view</source>
+				<target>Album</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.tabs.detail">
 				<source>Detail view</source>
+				<target>Vue détaillée</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.tabs.random">
 				<source>Random asset</source>
+				<target>Album aléatoire</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.switchableControllerActions">
 				<source>Display mode</source>
+				<target>Mode d'affichage</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.nestedList">
 				<source>Selected albums (nested)</source>
+				<target>Sélection d'albums (imbriqués)</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.flatList">
 				<source>Albums list (flattened)</source>
+				<target>Liste d'albums (à plat)</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.showAlbumByParam">
 				<source>Single album (URL handover enabled)</source>
+				<target>Album seul</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.showAlbumByConfig">
 				<source>Single album (URL handover disabled)</source>
+				<target>Album seul (URL-Übergabe deaktiviert)</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.randomAsset">
 				<source>Random media asset</source>
+				<target>Album aléatoire</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.mediaAlbum">
 				<source>Album to display</source>
+				<target>Album à afficher</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.mediaAlbumsUids">
 				<source>Albums to display</source>
+				<target>Albums à afficher</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.useAlbumFilterAsExclude">
 				<source>Album selection filter (if no items are selected all are shown)</source>
+				<target>Filtre de sélection d'album (s'il n'y a pas de sélection, ils seront tous affichés)</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.useAlbumFilterAsExclude.I.0">
 				<source>Show only selected items</source>
+				<target>Afficher seulement les items sélectionnés</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.useAlbumFilterAsExclude.I.1">
 				<source>Exclude selected items</source>
+				<target>Exclure les items sélectionnés</target>
 			</trans-unit>
 			<!-- flexforms.mediagallery.list (both nested and flat) -->
 			<trans-unit id="flexforms.mediagallery.list.hideEmptyAlbums">
 				<source>Hide empty albums</source>
+				<target>Cacher les albums vide</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.list.pagination.itemsPerPage">
 				<source>Max. thumbs to display per page</source>
+				<target>Nombre d'albums par page</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.list.thumb.width">
 				<source>Thumbnail width</source>
+				<target>Largeur des aperçus</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.list.thumb.height">
 				<source>Thumbnail height</source>
+				<target>Hauteur des aperçus</target>
+			</trans-unit>
+                        <trans-unit id="flexforms.general.randomThumbnail">
+				<source>Random thumbnail</source>
+                                <target>Vignette d'aperçu aléatoire</target>
+			</trans-unit>
+                        <trans-unit id="flexforms.general.randomThumbnail.I.true">
+				<source>Yes</source>
+                                <target>Oui</target>
+			</trans-unit>
+                        <trans-unit id="flexforms.general.randomThumbnail.I.false">
+				<source>No</source>
+                                <target>Non</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.list.orderBy">
 				<source>Sort albums list by</source>
+				<target>Trier les albums par</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.list.orderBy.I.datetime">
 				<source>Given date</source>
+				<target>Date d'album</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.list.orderBy.I.crdate">
 				<source>Creation date</source>
+				<target>Date de création</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.list.orderBy.I.sorting">
 				<source>Given sort order</source>
+				<target>Ordre manuel</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.list.orderDirection">
 				<source>Sort direction for albums list</source>
+				<target>Direction de tri des albums</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.list.orderDirection.I.asc">
 				<source>Ascending (old to new/low to high)</source>
+				<target>Ascendant</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.list.orderDirection.I.desc">
 				<source>Descending (new to old/high to low)</source>
+				<target>Descendant</target>
 			</trans-unit>
 			<!-- flexforms.mediagallery.album -->
 			<trans-unit id="flexforms.mediagallery.album.pagination.itemsPerPage">
 				<source>Max. thumbs to display per page</source>
+				<target>Nombre d'images par page</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.album.thumb.width">
 				<source>Thumbnail width</source>
+				<target>Largeur des miniatures</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.album.thumb.height">
 				<source>Thumbnail height</source>
+				<target>Hauteur des miniatures</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.album.lightbox.enable">
 				<source>Use LightBox/Colorbox instead of detail view</source>
+				<target>Utiliser LightBox/Colorbox à la place de la vue détaillée</target>
 			</trans-unit>
 			<!-- flexforms.mediagallery.detail -->
 			<trans-unit id="flexforms.mediagallery.detail.asset.width">
 				<source>Media width</source>
+				<target>Largeur des images</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.detail.asset.height">
 				<source>Media height</source>
+				<target>Hauteur des images</target>
 			</trans-unit>
 			<!-- flexforms.mediagallery.random -->
 			<trans-unit id="flexforms.mediagallery.random.targetPid">
 				<source>Album page</source>
+				<target>Page de l'album</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.random.thumb.width">
 				<source>Thumbnail width</source>
+				<target>Largeur des miniatures</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.random.thumb.height">
 				<source>Thumbnail height</source>
+				<target>Hauteur des miniatures</target>
 			</trans-unit>
 
 			<!--
@@ -164,9 +210,11 @@
 			-->
 			<trans-unit id="extmng.allowedActionsInFlexforms">
 				<source>Plugin actions shown in flexforms: Comma separated list of controller actions which could be selected as plugin action in flexforms. Available actions are nestedList,flatList,showAlbumByParam,showAlbumByConfig,randomAsset. If no action is defined, all available actions are selectable.</source>
+				<target>Actions du plugin à afficher dans le flexform : Liste séparée par des virgules des actions du controller. Si aucune action n'est définie, elles seront toutes affichées.</target>
 			</trans-unit>
 			<trans-unit id="extmng.list.orderOptions">
 				<source>Sort options for albums lists in flexforms: Comma separated list of sort options for field "Sort albums list by" which could be selected in flexforms. Available options are datetime,crdate,sorting.</source>
+				<target>Options de tri dans le flexform pour les albums : Liste séparée par des virgules des champs sur lequel le tri peut s'effectuer. Les options disponible sont datetime, crdate et sorting.</target>
 			</trans-unit>
 
 			<!--
@@ -175,15 +223,19 @@
 
 			<trans-unit id="module.buttons.createAlbum">
 				<source>Create album</source>
+				<target>Créer un album</target>
 			</trans-unit>
 			<trans-unit id="module.buttons.createAlbumIn">
 				<source>Create album in "%s"</source>
+				<target>Créer un album dans "%s"</target>
 			</trans-unit>
 			<trans-unit id="module.buttons.editAlbum">
 				<source>Edit album "%s"</source>
+				<target>Éditer l'album "%s"</target>
 			</trans-unit>
 			<trans-unit id="module.alerts.firstCreateStorageFolder">
 				<source>You must first create a storage folder for your media albums!</source>
+				<target>Vous devez au préalable créer un dossier de stockage pour vos albums !</target>
 			</trans-unit>
 
 		</body>
