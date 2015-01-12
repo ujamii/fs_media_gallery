@@ -428,6 +428,24 @@
 							</config>
 						</TCEforms>
 					</settings.album.lightbox.enable>
+                                        <settings.album.displayTitle>
+						<TCEforms>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.album.displayTitle</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.album.displayTitle.I.true</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.album.displayTitle.I.false</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</settings.album.displayTitle>
 				</el>
 			</ROOT>
 		</album>

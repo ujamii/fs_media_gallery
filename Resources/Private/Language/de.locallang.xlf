@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-lanuage="de" datatype="plaintext" original="messages" date="2014-08-06T00:00:00Z" product-name="fs_media_gallery">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-08-06T00:00:00Z" product-name="fs_media_gallery">
 		<header/>
 		<body>
 			<trans-unit id="date_format">
