@@ -56,8 +56,8 @@ plugin.tx_fsmediagallery {
 		}
 		# Settings for album view (list of images)
 		album {
-                        # if 0, the album title won't be displayed
-                        displayTitle = 1
+                	# if 0, the album title won't be displayed
+			displayTitle = 1
 			thumb {
 				width = 120
 				height = 70
