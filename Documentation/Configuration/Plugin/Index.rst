@@ -104,6 +104,9 @@ Thumb width                        nestedList, flatList   .. _flexforms.mediagal
 Thumb height                       nestedList, flatList   .. _flexforms.mediagallery.tabs.list.thumb.height:                                                 :ref:`settings.list.thumb.height <plugin.tx_fsmediagallery.settings.list.thumb.height>`
 
                                                           Width of thumbnail images.
+Random thumbnail                   nestedList, flatList   .. _flexforms.mediagallery.tabs.list.thumb.random:                                                 :ref:`settings.list.thumb.resizeMode <plugin.tx_fsmediagallery.settings.list.thumb.random>`
+
+                                                          Defines if a random thumbnail or the first found should be used.
 Resize mode                        nestedList, flatList   .. _flexforms.mediagallery.tabs.list.thumb.resizeMode:                                             :ref:`settings.list.thumb.resizeMode <plugin.tx_fsmediagallery.settings.list.thumb.resizeMode>`
 
                                                           Defines how thumbnails in list view are scaled.
@@ -130,20 +133,23 @@ Field                              Display Modes          Description           
 ================================== ====================== ================================================================================================== ===================
 Max. thumbs to display per page    nestedList, flatList,  .. _flexforms.mediagallery.tabs.album.itemsPerPage:                                                :ref:`settings.album.pagination.itemsPerPage <plugin.tx_fsmediagallery.settings.album.pagination.itemsPerPage>`
                                    showAlbumByParam,
-                                   showAlbumByParam       Define how many items are shown on one album page.
+                                   showAlbumByConfig      Define how many items are shown on one album page.
 Thumb width                        nestedList, flatList,  .. _flexforms.mediagallery.tabs.album.thumb.width:                                                 :ref:`settings.album.thumb.width <plugin.tx_fsmediagallery.settings.album.thumb.width>`
                                    showAlbumByParam,
-                                   showAlbumByParam       Height of thumbnail images in album view.
+                                   showAlbumByConfig      Height of thumbnail images in album view.
 Thumb height                       nestedList, flatList,  .. _flexforms.mediagallery.tabs.album.thumb.height:                                                :ref:`settings.album.thumb.height <plugin.tx_fsmediagallery.settings.album.thumb.height>`
                                    showAlbumByParam,
-                                   showAlbumByParam       Width of thumbnail images in album view.
+                                   showAlbumByConfig      Width of thumbnail images in album view.
 Resize mode                        nestedList, flatList,  .. _flexforms.mediagallery.tabs.album.thumb.resizeMode:                                            :ref:`settings.album.thumb.resizeMode <plugin.tx_fsmediagallery.settings.album.thumb.resizeMode>`
                                    showAlbumByParam,
-                                   showAlbumByParam       Defines how thumbnails in album view are scaled.
+                                   showAlbumByConfig      Defines how thumbnails in album view are scaled.
 Use LightBox/Colorbox instead      nestedList, flatList,  .. _flexforms.mediagallery.tabs.album.lightbox.enable:                                             :ref:`settings.album.lightbox.enable <plugin.tx_fsmediagallery.settings.album.lightbox.enable>`
 of detail view                     showAlbumByParam,
-                                   showAlbumByParam       Option to do not link to detail view from album list but display media assets using a
+                                   showAlbumByConfig      Option to do not link to detail view from album list but display media assets using a
                                                           lightbox/colorbox.
+Display title                      nestedList, flatList,  .. _flexforms.mediagallery.tabs.album.displayTitle:                                                :ref:`settings.album.displayTitle <plugin.tx_fsmediagallery.settings.album.displayTitle>`
+                                   showAlbumByParam,
+                                   showAlbumByConfig      Option to hide albums title.
 ================================== ====================== ================================================================================================== ===================
 
 .. _flexforms.mediagallery.tabs.detail:
@@ -162,15 +168,15 @@ Field                              Display Modes          Description           
 ================================== ====================== ================================================================================================== ===================
 Media width                        nestedList, flatList,  .. _flexforms.mediagallery.tabs.detail.asset.width:                                                :ref:`settings.detail.asset.width <plugin.tx_fsmediagallery.settings.detail.asset.width>`
                                    showAlbumByParam,
-                                   showAlbumByParam       Height of media asset in detail view.
+                                   showAlbumByConfig      Height of media asset in detail view.
 
 Media height                       nestedList, flatList,  .. _flexforms.mediagallery.tabs.detail.asset.height:                                               :ref:`settings.detail.asset.height <plugin.tx_fsmediagallery.settings.detail.asset.height>`
                                    showAlbumByParam,
-                                   showAlbumByParam       Width of media asset in detail view.
+                                   showAlbumByConfig      Width of media asset in detail view.
 
 Resize mode                        nestedList, flatList,  .. _flexforms.mediagallery.tabs.detail.asset.resizeMode:                                           :ref:`settings.detail.asset.resizeMode <plugin.tx_fsmediagallery.settings.detail.asset.resizeMode>`
                                    showAlbumByParam,
-                                   showAlbumByParam       Defines how media assets in detail view are scaled.
+                                   showAlbumByConfig      Defines how media assets in detail view are scaled.
 ================================== ====================== ================================================================================================== ===================
 
 .. _flexforms.mediagallery.tabs.random:
@@ -213,9 +219,7 @@ Resize mode                        randomAsset            .. _flexforms.mediagal
 Hide flexform fields for editors
 --------------------------------
 
-Through some UserTs and/or PageTs settings you are able to hide flexform fields for editors.
-
-.. container:: ts-properties
+Through some UserTs and/or PageTs settings you are able to hide flexform fields for editors. ::
 
 	TCEFORM.tt_content.pi_flexform.fsmediagallery_mediagallery.general.settings\.useAlbumFilterAsExclude.disabled = 1
 	TCEFORM.tt_content.pi_flexform.fsmediagallery_mediagallery.general.settings\.list\.orderBy.disabled = 1

@@ -125,17 +125,9 @@
 				<source>Thumbnail height</source>
 				<target>Hauteur des aperçus</target>
 			</trans-unit>
-                        <trans-unit id="flexforms.general.randomThumbnail">
+			<trans-unit id="flexforms.mediagallery.list.thumb.random">
 				<source>Random thumbnail</source>
-                                <target>Vignette d'aperçu aléatoire</target>
-			</trans-unit>
-                        <trans-unit id="flexforms.general.randomThumbnail.I.true">
-				<source>Yes</source>
-                                <target>Oui</target>
-			</trans-unit>
-                        <trans-unit id="flexforms.general.randomThumbnail.I.false">
-				<source>No</source>
-                                <target>Non</target>
+				<target>Vignette d'aperçu aléatoire</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.list.orderBy">
 				<source>Sort albums list by</source>
@@ -182,17 +174,9 @@
 				<source>Use LightBox/Colorbox instead of detail view</source>
 				<target>Utiliser LightBox/Colorbox à la place de la vue détaillée</target>
 			</trans-unit>
-                        <trans-unit id="flexforms.mediagallery.album.displayTitle">
+			<trans-unit id="flexforms.mediagallery.album.displayTitle">
 				<source>Display title</source>
-                                <target>Afficher le titre</target>
-			</trans-unit>
-                        <trans-unit id="flexforms.mediagallery.album.displayTitle.I.true">
-				<source>Yes</source>
-                                <target>Oui</target>
-			</trans-unit>
-                        <trans-unit id="flexforms.mediagallery.album.displayTitle.I.false">
-				<source>No</source>
-                                <target>Non</target>
+				<target>Afficher le titre</target>
 			</trans-unit>
 			<!-- flexforms.mediagallery.detail -->
 			<trans-unit id="flexforms.mediagallery.detail.asset.width">

@@ -31,33 +31,7 @@
 		<f:if condition="{0:0, 1:1} == {0:mediaAlbum.assetsCount, 1:settings.list.hideEmptyAlbums}">
 			<f:else>
 				<div class="img-thumbnail">
-					<f:link.action controller="MediaAlbum" arguments="{mediaAlbum: mediaAlbum}">
-						<f:if condition="{mediaAlbum.randomAsset}">
-							<f:then>
-								<f:image
-									image="{mediaAlbum.randomAsset}"
-									alt="{mediaAlbum.title}"
-									height="{settings.list.thumb.height}{settings.list.thumb.resizeMode}"
-									width="{settings.list.thumb.width}{settings.list.thumb.resizeMode}"
-									/>
-							</f:then>
-							<f:else>
-								<div class="dummy" style="height:{settings.list.thumb.height}px;width:{settings.list.thumb.width}px;"></div>
-							</f:else>
-						</f:if>
-					</f:link.action>
-					<h4 class="name">
-						<f:link.action controller="MediaAlbum" arguments="{mediaAlbum: mediaAlbum}">{mediaAlbum.title}</f:link.action>
-					</h4>
-					<div class="description">
-						<f:if condition="{mediaAlbum.webdescription}">
-							<span class="teaser">
-								<f:format.crop maxCharacters="17" append="&nbsp;...">{mediaAlbum.webdescription}</f:format.crop>
-							</span>
-						</f:if>
-						<span class="asset-count">{mediaAlbum.assetsCount} <f:translate key="assets">assets</f:translate></span>
-						<span class="date"><f:format.date date="{mediaAlbum.datetime}" format="d.m.Y" /></span>
-					</div>
+					<f:render partial="MediaAlbum/Thumb" section="Thumb" arguments="{mediaAlbum:mediaAlbum, random:settings.list.thumb.random, width:settings.list.thumb.width, height:settings.list.thumb.height, resizeMode:settings.list.thumb.resizeMode}" />
 				</div>
 			</f:else>
 		</f:if>

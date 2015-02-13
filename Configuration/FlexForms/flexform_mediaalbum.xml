@@ -270,24 +270,28 @@
 							</config>
 						</TCEforms>
 					</settings.list.thumb.height>
-                                        <settings.randomThumbnail>
+					<settings.list.thumb.random>
 						<TCEforms>
-							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.randomThumbnail</label>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.thumb.random</label>
 							<config>
 								<type>select</type>
 								<items type="array">
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.randomThumbnail.I.true</numIndex>
-										<numIndex index="1">1</numIndex>
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
+										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.randomThumbnail.I.false</numIndex>
+										<numIndex index="0">LLL:EXT:lang/locallang_common.xlf:yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">LLL:EXT:lang/locallang_common.xlf:no</numIndex>
 										<numIndex index="1">0</numIndex>
 									</numIndex>
 								</items>
 							</config>
 						</TCEforms>
-					</settings.randomThumbnail>
+					</settings.list.thumb.random>
 					<settings.list.thumb.resizeMode>
 						<TCEforms>
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.resizeMode</label>
@@ -428,22 +432,22 @@
 							</config>
 						</TCEforms>
 					</settings.album.lightbox.enable>
-                                        <settings.album.displayTitle>
+					<settings.album.displayTitle>
 						<TCEforms>
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.album.displayTitle</label>
 							<config>
 								<type>select</type>
 								<items type="array">
-                                                                        <numIndex index="1" type="array">
+									<numIndex index="1" type="array">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
 										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.album.displayTitle.I.true</numIndex>
+										<numIndex index="0">LLL:EXT:lang/locallang_common.xlf:yes</numIndex>
 										<numIndex index="1">1</numIndex>
 									</numIndex>
 									<numIndex index="3" type="array">
-										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.album.displayTitle.I.false</numIndex>
+										<numIndex index="0">LLL:EXT:lang/locallang_common.xlf:no</numIndex>
 										<numIndex index="1">0</numIndex>
 									</numIndex>
 								</items>

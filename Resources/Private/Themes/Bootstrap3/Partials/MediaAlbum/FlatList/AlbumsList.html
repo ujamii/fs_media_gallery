@@ -36,21 +36,7 @@
 		<f:if condition="{0:0, 1:1} == {0:mediaAlbum.assetsCount, 1:settings.list.hideEmptyAlbums}">
 			<f:else>
 				<div class="img-thumbnail">
-					<f:link.action controller="MediaAlbum" arguments="{mediaAlbum: mediaAlbum}">
-						<f:render partial="MediaAsset/Detail" section="Detail" arguments="{alt:mediaAlbum.title,title:mediaAlbum.title,mediaAsset:mediaAlbum.randomAsset,width:settings.list.thumb.width,height:settings.list.thumb.height,resizeMode:settings.list.thumb.resizeMode}" />
-					</f:link.action>
-					<h4 class="name">
-						<f:link.action controller="MediaAlbum" arguments="{mediaAlbum: mediaAlbum}">{mediaAlbum.title}</f:link.action>
-					</h4>
-					<div class="description">
-						<f:if condition="{mediaAlbum.webdescription}">
-							<span class="teaser">
-								<f:format.crop maxCharacters="17" append="&nbsp;...">{mediaAlbum.webdescription}</f:format.crop>
-							</span>
-						</f:if>
-						<span class="asset-count">{mediaAlbum.assetsCount} <f:translate key="assets">assets</f:translate></span>
-						<span class="date"><f:format.date date="{mediaAlbum.datetime}" format="d.m.Y" /></span>
-					</div>
+					<f:render partial="MediaAlbum/Thumb" section="Thumb" arguments="{mediaAlbum:mediaAlbum, random:settings.list.thumb.random, width:settings.list.thumb.width, height:settings.list.thumb.height, resizeMode:settings.list.thumb.resizeMode}" />
 				</div>
 			</f:else>
 		</f:if>

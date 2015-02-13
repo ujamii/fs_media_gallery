@@ -15,7 +15,7 @@
 						<div class="row">
 							<f:for each="{paginatedAlbums}" as="mediaAlbum">
 								<div class="thumb col-xs-6 col-sm-4 col-md-3 col-lg-2">
-									<f:render partial="MediaAlbum/Thumb" section="Thumb" arguments="{mediaAlbum:mediaAlbum,width:settings.list.thumb.width,height:settings.list.thumb.height,resizeMode:settings.list.thumb.resizeMode}" />
+									<f:render partial="MediaAlbum/Thumb" section="Thumb" arguments="{mediaAlbum:mediaAlbum, random:settings.list.thumb.random, width:settings.list.thumb.width, height:settings.list.thumb.height, resizeMode:settings.list.thumb.resizeMode}" />
 								</div>
 							</f:for>
 						</div>

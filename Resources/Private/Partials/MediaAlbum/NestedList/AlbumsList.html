@@ -12,7 +12,9 @@
 				<f:then>
 					<div class="thumbs thumbs-albums clearfix">
 						<f:for each="{paginatedAlbums}" as="mediaAlbum">
-							<f:render partial="MediaAlbum/Thumb" section="Thumb" arguments="{mediaAlbum:mediaAlbum, width:settings.list.thumb.width, height:settings.list.thumb.height, resizeMode:settings.list.thumb.resizeMode}" />
+							<div class="thumb">
+								<f:render partial="MediaAlbum/Thumb" section="Thumb" arguments="{mediaAlbum:mediaAlbum, random:settings.list.thumb.random, width:settings.list.thumb.width, height:settings.list.thumb.height, resizeMode:settings.list.thumb.resizeMode}" />
+							</div>
 						</f:for>
 					</div>
 				</f:then>

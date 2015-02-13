@@ -22,8 +22,7 @@ plugin.tx_fsmediagallery {
 		mediaAlbumsUids =
 		# Option to exclude given album uids (settings.mediaAlbums)
 		useAlbumFilterAsExclude = 0
-                # if 0, always get first image of album as thumbnail
-                randomThumbnail = 1
+
 		# Settings for album lists (both nested and flat)
 		list {
 			thumb {
@@ -31,6 +30,8 @@ plugin.tx_fsmediagallery {
 				height = 100
 				# Resize assets: m=resize proportional, c=crop, ''=squeeze (unproportional exact fit)
 				resizeMode = m
+				#if 0, always get first image of album as thumbnail
+				random = 1
 			}
 			hideEmptyAlbums = 1
 			# Sort albums list by: datetime|crdate|sorting
@@ -56,13 +57,15 @@ plugin.tx_fsmediagallery {
 		}
 		# Settings for album view (list of images)
 		album {
-                	# if 0, the album title won't be displayed
+			# if 0, the album title won't be displayed
 			displayTitle = 1
 			thumb {
 				width = 120
 				height = 70
 				# Resize assets: m=resize proportional, c=crop, ''=squeeze (unproportional exact fit)
 				resizeMode = m
+				#if 0, always get first image of album as thumbnail
+				random = 1
 			}
 			lightbox {
 				enable = 1

@@ -238,6 +238,7 @@ They are set by :typoscript:`plugin.tx_fsmediagallery.settings.list.<property>`
    :ref:`thumb.width <plugin.tx_fsmediagallery.settings.list.thumb.width>`                                          :ref:`t3tsref:data-type-pixels`                                no                      :code:`180`
    :ref:`thumb.height <plugin.tx_fsmediagallery.settings.list.thumb.height>`                                        :ref:`t3tsref:data-type-pixels`                                no                      :code:`100`
    :ref:`thumb.resizeMode <plugin.tx_fsmediagallery.settings.list.thumb.resizeMode>`                                :ref:`t3tsref:data-type-string` ``[m|c|s]``                    no                      :code:`m`
+   :ref:`thumb.random <plugin.tx_fsmediagallery.settings.list.thumb.random>`                                        :ref:`t3tsref:data-type-boolean`                               no                      :code:`1`
    ================================================================================================================ ============================================================== ======================= =================
 
 
@@ -275,6 +276,16 @@ thumb.resizeMode
 | :code:`m` = resize proportional; the proportions will be preserved and thus width/height are treated as maximum dimensions for the image. The image will be scaled to fit into width/height rectangle.
 | :code:`c` = crop; the proportions will be preserved and the image will be scaled to fit around a rectangle with width/height dimensions. Then, a centered portion from inside of the image (size defined by width/height) will be cut out.
 | :code:`s` = squeeze (unproportional exact fit); the proportions will *not* be preserved and the image will be unproportional scaled.
+
+
+.. _plugin.tx_fsmediagallery.settings.list.thumb.random:
+
+thumb.random
+""""""""""""
+
+:typoscript:`plugin.tx_fsmediagallery.settings.list.thumb.random =` :ref:`t3tsref:data-type-boolean`
+
+If :code:`1` (:code:`TRUE`) a random album thumbnail will be shown, else the first found.
 
 
 .. _plugin.tx_fsmediagallery.settings.list.hideEmptyAlbums:
@@ -413,6 +424,7 @@ They are set by :typoscript:`plugin.tx_fsmediagallery.settings.album.<property>`
    :ref:`thumb.width <plugin.tx_fsmediagallery.settings.album.thumb.width>`                                          :ref:`t3tsref:data-type-pixels`                     no                      :code:`120`
    :ref:`thumb.height <plugin.tx_fsmediagallery.settings.album.thumb.height>`                                        :ref:`t3tsref:data-type-pixels`                     no                      :code:`70`
    :ref:`thumb.resizeMode <plugin.tx_fsmediagallery.settings.album.thumb.resizeMode>`                                :ref:`t3tsref:data-type-string` ``[m|c|s]``         no                      :code:`m`
+   :ref:`displayTitle <plugin.tx_fsmediagallery.settings.album.displayTitle>`                                        :ref:`t3tsref:data-type-boolean`                    no                      :code:`1`
    ================================================================================================================= =================================================== ======================= =================
 
 
@@ -525,6 +537,16 @@ lightbox.asset.resizeMode
 | :code:`m` = resize proportional; the proportions will be preserved and thus width/height are treated as maximum dimensions for the image. The image will be scaled to fit into width/height rectangle.
 | :code:`c` = crop; the proportions will be preserved and the image will be scaled to fit around a rectangle with width/height dimensions. Then, a centered portion from inside of the image (size defined by width/height) will be cut out.
 | :code:`s` = squeeze (unproportional exact fit); the proportions will *not* be preserved and the image will be unproportional scaled.
+
+
+.. _plugin.tx_fsmediagallery.settings.album.displayTitle:
+
+displayTitle
+""""""""""""
+
+:typoscript:`plugin.tx_fsmediagallery.settings.album.displayTitle =` :ref:`t3tsref:data-type-boolean`
+
+Set it to ``1`` (``TRUE``) or ``0`` (``FALSE``) to either show or hide the album title.
 
 
 .. _plugin.tx_fsmediagallery.settings.album.pagination.insertAbove:

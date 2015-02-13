@@ -125,6 +125,10 @@
 				<source>Thumbnail height</source>
 				<target>Höhe der Vorschaubilder</target>
 			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.list.thumb.random">
+				<source>Random thumbnail</source>
+				<target>Zufälliges Vorschaubild</target>
+			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.list.orderBy">
 				<source>Sort albums list by</source>
 				<target>Albenliste sortieren nach</target>
@@ -169,6 +173,10 @@
 			<trans-unit id="flexforms.mediagallery.album.lightbox.enable">
 				<source>Use LightBox/Colorbox instead of detail view</source>
 				<target>LightBox/Colorbox anstatt Detailansicht verwenden</target>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.album.displayTitle">
+				<source>Display title</source>
+				<target>Titelanzeige</target>
 			</trans-unit>
 			<!-- flexforms.mediagallery.detail -->
 			<trans-unit id="flexforms.mediagallery.detail.asset.width">
