@@ -186,13 +186,33 @@ class MediaAlbumController extends ActionController {
 			}
 		}
 
-		$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $this->settings['list']['hideEmptyAlbums'], $this->settings['list']['orderBy'], $this->settings['list']['orderDirection']);
+		/**
+		 * No album selected and album restriction set, find all "root" albums
+		 * Albums without parent or with parent not selected as allowed
+		 */
+		if ($mediaAlbum === NULL && $this->mediaAlbumRepository->getAlbumUids() !== array()) {
+			$mediaAlbums = array();
+			$all = $this->mediaAlbumRepository->findAll((bool)$this->settings['list']['hideEmptyAlbums']);
+			/** @var MediaAlbum $album */
+			foreach ($all as $album) {
+				$parent = $album->getParentalbum();
+				if ($parent === NULL || !in_array($parent->getUid(), $this->mediaAlbumRepository->getAlbumUids())) {
+					$mediaAlbums[] = $album;
+				}
+			}
+		} else {
+			$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $this->settings['list']['hideEmptyAlbums'], $this->settings['list']['orderBy'], $this->settings['list']['orderDirection']);
+		}
 
 		// when only 1 album skip gallery view
 		if ($mediaAlbum === NULL && !empty($this->settings['list']['skipListWhenOnlyOneAlbum']) && count($mediaAlbums) === 1) {
 			$mediaAlbum = $mediaAlbums[0];
 			$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $this->settings['list']['hideEmptyAlbums'], $this->settings['list']['orderBy'], $this->settings['list']['orderDirection']);
 			$showBackLink = FALSE;
+		}
+
+		if ($mediaAlbum && $mediaAlbum->getParentalbum() && in_array($mediaAlbum->getParentalbum()->getUid(), $this->mediaAlbumRepository->getAlbumUids())) {
+			$this->view->assign('parentAlbum', $mediaAlbum->getParentalbum());
 		}
 
 		$this->view->assign('showBackLink', $showBackLink);
