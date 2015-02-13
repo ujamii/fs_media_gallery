@@ -22,7 +22,7 @@ To make these album visible in the detail view of a news item you need to adjust
 Example fluid template snippet that could be added to ext:news/Resources/Private/Templates/News/Detail.html
 -----------------------------------------------------------------------------------------------------------
 
-.. code::
+Render related albums ::
 
    <f:if condition="{newsItem.relatedFsmediaalbums}">
        <h4>Related albums</h4>
@@ -47,3 +47,5 @@ Example fluid template snippet that could be added to ext:news/Resources/Private
    </f:if>
 
 Make sure to set typoscript constant :typoscript:`plugin.tx_fsmediagallery.settings.targetPid` so the shown thumbnails link to the real album.
+
+Have a look at `Changing & editing templates <http://docs.typo3.org/typo3cms/extensions/news/Templating/Start/Index.html>`_ it you do not know how to adjust ext:news templates.
