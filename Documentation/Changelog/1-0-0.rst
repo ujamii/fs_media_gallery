@@ -7,8 +7,8 @@
 
 .. _changelog_1-0-0:
 
-Version 1.0.0 - 2014/00/00
-==========================
+v1.0.0 - 2014/12/07
+===================
 
 This is a major upgrade introducing lots of new features.
 Read and follow the section :ref:`Upgrade procedure <upgrade_procedure_1-0-0>` carefully!
