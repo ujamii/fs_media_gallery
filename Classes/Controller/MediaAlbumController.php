@@ -31,6 +31,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -137,6 +138,18 @@ class MediaAlbumController extends ActionController {
 	}
 
 	/**
+	 * Set album uid restrictions as defined in settings
+	 *
+	 * By setting this in the repository also the MediaAlbum::getAlbums()
+	 * and MediaAlbum::getRandomAlbum() is restricted to these uids.
+	 */
+	protected function setAlbumUidRestrictions() {
+		$mediaAlbumsUids = GeneralUtility::trimExplode(',', $this->settings['mediaAlbumsUids'], TRUE);
+		$this->mediaAlbumRepository->setAlbumUids($mediaAlbumsUids);
+		$this->mediaAlbumRepository->setUseAlbumUidsAsExclude(!empty($this->settings['useAlbumFilterAsExclude']));
+	}
+
+	/**
 	 * Index Action
 	 *
 	 * As switchableControllerActions can be limited in EM this function
@@ -160,34 +173,25 @@ class MediaAlbumController extends ActionController {
 	public function nestedListAction($mediaAlbum = 0) {
 		$mediaAlbums = NULL;
 		$mediaAlbum = (int)$mediaAlbum ?: NULL;
-		$mediaAlbumsUids = array();
-		$useAlbumFilterAsExclude = !empty($this->settings['useAlbumFilterAsExclude']);
 		$showBackLink = TRUE;
 
-		if (!empty($this->settings['mediaAlbumsUids'])) {
-			$mediaAlbumsUids = GeneralUtility::trimExplode(',', $this->settings['mediaAlbumsUids']);
-		}
+		$this->setAlbumUidRestrictions();
 
+		// Single view
 		if ($mediaAlbum) {
 			/** @var MediaAlbum $mediaAlbum */
 			$mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum);
-			if ($mediaAlbum && $mediaAlbumsUids !== array() && !$useAlbumFilterAsExclude && !in_array($mediaAlbum->getUid(), $mediaAlbumsUids)) {
-				$mediaAlbum = NULL;
-			}
-			if ($mediaAlbum && $mediaAlbumsUids !== array() && $useAlbumFilterAsExclude && in_array($mediaAlbum->getUid(), $mediaAlbumsUids)) {
-				$mediaAlbum = NULL;
-			}
 			if (!$mediaAlbum) {
 				$this->pageNotFound(LocalizationUtility::translate('no_album_found', $this->extensionName));
 			}
 		}
 
-		$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $mediaAlbumsUids, $useAlbumFilterAsExclude, $this->settings['list']['hideEmptyAlbums'], $this->settings['list']['orderBy'], $this->settings['list']['orderDirection']);
+		$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $this->settings['list']['hideEmptyAlbums'], $this->settings['list']['orderBy'], $this->settings['list']['orderDirection']);
 
 		// when only 1 album skip gallery view
 		if ($mediaAlbum === NULL && !empty($this->settings['list']['skipListWhenOnlyOneAlbum']) && count($mediaAlbums) === 1) {
 			$mediaAlbum = $mediaAlbums[0];
-			$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $mediaAlbumsUids, $useAlbumFilterAsExclude, $this->settings['list']['hideEmptyAlbums'], $this->settings['list']['orderBy'], $this->settings['list']['orderDirection']);
+			$mediaAlbums = $this->mediaAlbumRepository->findByParentalbum($mediaAlbum, $this->settings['list']['hideEmptyAlbums'], $this->settings['list']['orderBy'], $this->settings['list']['orderDirection']);
 			$showBackLink = FALSE;
 		}
 
@@ -285,8 +289,10 @@ class MediaAlbumController extends ActionController {
 	 * @return void
 	 */
 	public function randomAssetAction() {
-		$filterByUids = GeneralUtility::trimExplode(',', $this->settings['mediaAlbumsUids'], TRUE);
-		$mediaAlbum = $this->mediaAlbumRepository->findRandom(NULL, $filterByUids, !empty($this->settings['useAlbumFilterAsExclude']));
+
+		$this->setAlbumUidRestrictions();
+
+		$mediaAlbum = $this->mediaAlbumRepository->findRandom();
 		$this->view->assign('mediaAlbum', $mediaAlbum);
 	}
 

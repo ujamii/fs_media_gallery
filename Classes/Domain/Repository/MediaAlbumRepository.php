@@ -46,6 +46,16 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	protected $allowedAssetMimeTypes = array();
 
 	/**
+	 * @var array
+	 */
+	protected $albumUids = array();
+
+	/**
+	 * @var bool
+	 */
+	protected $useAlbumUidsAsExclude = FALSE;
+
+	/**
 	 * Set allowedAssetMimeTypes
 	 *
 	 * @param array $allowedAssetMimeTypes
@@ -64,14 +74,48 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	}
 
 	/**
+	 * Get allowedAlbumUids
+	 *
+	 * @return array
+	 */
+	public function getAlbumUids() {
+		return $this->albumUids;
+	}
+
+	/**
+	 * Set allowedAlbumUids
+	 *
+	 * @param array $albumUids
+	 */
+	public function setAlbumUids($albumUids) {
+		$this->albumUids = $albumUids;
+	}
+
+	/**
+	 * Get useAlbumUidsAsExclude
+	 *
+	 * @return boolean
+	 */
+	public function getUseAlbumUidsAsExclude() {
+		return $this->useAlbumUidsAsExclude;
+	}
+
+	/**
+	 * Set useAlbumUidsAsExclude
+	 *
+	 * @param boolean $useAlbumUidsAsExclude
+	 */
+	public function setUseAlbumUidsAsExclude($useAlbumUidsAsExclude) {
+		$this->useAlbumUidsAsExclude = $useAlbumUidsAsExclude;
+	}
+
+	/**
 	 * Get random sub album
 	 *
 	 * @param MediaAlbum|bool $parent parent MediaAlbum, FALSE for parent = 0 or NULL for no restriction by parent
-	 * @param array $filterByUids filter possible result by given uids
-	 * @param bool $useAlbumFilterAsExclude
 	 * @return \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum|NULL
 	 */
-	public function findRandom($parent = NULL, array $filterByUids = array(), $useAlbumFilterAsExclude = FALSE) {
+	public function findRandom($parent = NULL) {
 
 		/** @var \TYPO3\CMS\Extbase\Persistence\Generic\Query $query */
 		$query = $this->createQuery();
@@ -83,12 +127,12 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		}
 
 		// restrict by given uids
-		if ($filterByUids !== array()) {
+		if ($this->albumUids !== array()) {
 			$uids = array();
-			foreach ($filterByUids as $uid) {
+			foreach ($this->albumUids as $uid) {
 				$uids[] = (int)$uid;
 			}
-			$where[] = 'uid ' . ($useAlbumFilterAsExclude ? 'NOT ' : '') . 'IN (' . implode(',', $uids) . ')';
+			$where[] = 'uid ' . ($this->useAlbumUidsAsExclude ? 'NOT ' : '') . 'IN (' . implode(',', $uids) . ')';
 		}
 
 		$statement = 'SELECT * FROM sys_file_collection WHERE ' .
@@ -115,25 +159,25 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * Find albums by parent album
 	 *
 	 * @param MediaAlbum $parentAlbum
-	 * @param array $filterByUids filter possible result by given uids
-	 * @param boolean $useAlbumFilterAsExclude
 	 * @param boolean $excludeEmptyAlbums
 	 * @param string $orderBy Sort albums by: datetime|crdate|sorting
 	 * @param string $orderDirection Sort order: asc|desc
 	 * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
 	 */
-	public function findByParentAlbum(MediaAlbum $parentAlbum = NULL, array $filterByUids = array(), $useAlbumFilterAsExclude = FALSE, $excludeEmptyAlbums = TRUE, $orderBy = 'sorting', $orderDirection = 'desc') {
+	public function findByParentAlbum(MediaAlbum $parentAlbum = NULL, $excludeEmptyAlbums = TRUE, $orderBy = 'sorting', $orderDirection = 'desc') {
 		$excludeEmptyAlbums = filter_var($excludeEmptyAlbums, FILTER_VALIDATE_BOOLEAN);
 		$query = $this->createQuery();
 		$constraints = array();
 		$constraints[] = $query->equals('parentalbum', $parentAlbum ?: 0);
-		if (count($filterByUids)) {
-			if ($useAlbumFilterAsExclude) {
-				$constraints[] = $query->logicalNot($query->in('uid', $filterByUids));
+
+		if ($this->albumUids !== array()) {
+			if ($this->useAlbumUidsAsExclude) {
+				$constraints[] = $query->logicalNot($query->in('uid', $this->albumUids));
 			} else {
-				$constraints[] = $query->in('uid', $filterByUids);
+				$constraints[] = $query->in('uid', $this->albumUids);
 			}
 		}
+
 		$query->matching($query->logicalAnd($constraints));
 		$query->setOrderings($this->getOrderingsSettings($orderBy, $orderDirection));
 		$mediaAlbums = $query->execute();
@@ -165,8 +209,18 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			$query->getQuerySettings()->setRespectStoragePage(FALSE);
 		}
 
+		$constraints = array($query->equals('uid', (int)$uid));
+
+		if ($this->albumUids !== array()) {
+			if ($this->useAlbumUidsAsExclude) {
+				$constraints[] = $query->logicalNot($query->in('uid', $this->albumUids));
+			} else {
+				$constraints[] = $query->in('uid', $this->albumUids);
+			}
+		}
+
 		/** @var $mediaAlbum \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum */
-		$mediaAlbum = $query->matching($query->equals('uid', (int)$uid))->execute()->getFirst();
+		$mediaAlbum = $query->matching($query->logicalAnd($constraints))->execute()->getFirst();
 
 		if ($mediaAlbum) {
 			// set allowed asset mime types
@@ -188,6 +242,15 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$excludeEmptyAlbums = filter_var($excludeEmptyAlbums, FILTER_VALIDATE_BOOLEAN);
 		$query = $this->createQuery();
 		$query->setOrderings($this->getOrderingsSettings($orderBy, $orderDirection));
+
+		if ($this->albumUids !== array()) {
+			if ($this->useAlbumUidsAsExclude) {
+				$query->matching($query->logicalNot($query->in('uid', $this->albumUids)));
+			} else {
+				$query->matching($query->in('uid', $this->albumUids));
+			}
+		}
+
 		$mediaAlbums = $query->execute();
 
 		foreach ($mediaAlbums as $key => $mediaAlbum) {
