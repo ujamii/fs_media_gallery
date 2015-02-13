@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-lanuage="fr" datatype="plaintext" original="messages" date="2013-01-27T20:37:07Z" product-name="fs_media_gallery">
+	<file source-language="en" target-language="fr" datatype="plaintext" original="messages" date="2013-01-27T20:37:07Z" product-name="fs_media_gallery">
 		<header/>
 		<body>
 			<!--
@@ -78,11 +78,11 @@
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.showAlbumByParam">
 				<source>Single album (URL handover enabled)</source>
-				<target>Album seul</target>
+				<target>Album seul (Surcharge activée)</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.showAlbumByConfig">
 				<source>Single album (URL handover disabled)</source>
-				<target>Album seul (URL-Übergabe deaktiviert)</target>
+				<target>Album seul (Surcharge désactivée)</target>
 			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.switchableControllerActions.I.randomAsset">
 				<source>Random media asset</source>
@@ -181,6 +181,18 @@
 			<trans-unit id="flexforms.mediagallery.album.lightbox.enable">
 				<source>Use LightBox/Colorbox instead of detail view</source>
 				<target>Utiliser LightBox/Colorbox à la place de la vue détaillée</target>
+			</trans-unit>
+                        <trans-unit id="flexforms.mediagallery.album.displayTitle">
+				<source>Display title</source>
+                                <target>Afficher le titre</target>
+			</trans-unit>
+                        <trans-unit id="flexforms.mediagallery.album.displayTitle.I.true">
+				<source>Yes</source>
+                                <target>Oui</target>
+			</trans-unit>
+                        <trans-unit id="flexforms.mediagallery.album.displayTitle.I.false">
+				<source>No</source>
+                                <target>Non</target>
 			</trans-unit>
 			<!-- flexforms.mediagallery.detail -->
 			<trans-unit id="flexforms.mediagallery.detail.asset.width">

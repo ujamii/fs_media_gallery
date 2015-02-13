@@ -141,6 +141,15 @@
 			<trans-unit id="flexforms.mediagallery.album.lightbox.enable">
 				<source>Use LightBox/Colorbox instead of detail view</source>
 			</trans-unit>
+                        <trans-unit id="flexforms.mediagallery.album.displayTitle">
+				<source>Display title</source>
+			</trans-unit>
+                        <trans-unit id="flexforms.mediagallery.album.displayTitle.I.true">
+				<source>Yes</source>
+			</trans-unit>
+                        <trans-unit id="flexforms.mediagallery.album.displayTitle.I.false">
+				<source>No</source>
+			</trans-unit>
 			<!-- flexforms.mediagallery.detail -->
 			<trans-unit id="flexforms.mediagallery.detail.asset.width">
 				<source>Media width</source>
