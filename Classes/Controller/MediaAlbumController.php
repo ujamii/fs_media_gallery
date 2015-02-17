@@ -196,7 +196,10 @@ class MediaAlbumController extends ActionController {
 			/** @var MediaAlbum $album */
 			foreach ($all as $album) {
 				$parent = $album->getParentalbum();
-				if ($parent === NULL || !in_array($parent->getUid(), $this->mediaAlbumRepository->getAlbumUids())) {
+				if ($parent === NULL
+					|| (!$this->mediaAlbumRepository->getUseAlbumUidsAsExclude() && !in_array($parent->getUid(), $this->mediaAlbumRepository->getAlbumUids()))
+					|| ($this->mediaAlbumRepository->getUseAlbumUidsAsExclude() && in_array($parent->getUid(), $this->mediaAlbumRepository->getAlbumUids()))
+				) {
 					$mediaAlbums[] = $album;
 				}
 			}
@@ -211,7 +214,11 @@ class MediaAlbumController extends ActionController {
 			$showBackLink = FALSE;
 		}
 
-		if ($mediaAlbum && $mediaAlbum->getParentalbum() && in_array($mediaAlbum->getParentalbum()->getUid(), $this->mediaAlbumRepository->getAlbumUids())) {
+		if ($mediaAlbum && $mediaAlbum->getParentalbum() && (
+			(!$this->mediaAlbumRepository->getUseAlbumUidsAsExclude() && in_array($mediaAlbum->getParentalbum()->getUid(), $this->mediaAlbumRepository->getAlbumUids()))
+			||
+			($this->mediaAlbumRepository->getUseAlbumUidsAsExclude() && !in_array($mediaAlbum->getParentalbum()->getUid(), $this->mediaAlbumRepository->getAlbumUids()))
+		)) {
 			$this->view->assign('parentAlbum', $mediaAlbum->getParentalbum());
 		}
 
