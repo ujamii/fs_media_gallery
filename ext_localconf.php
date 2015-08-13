@@ -38,6 +38,9 @@ $boot = function($packageKey) {
 	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration'][$packageKey] =
 		'EXT:' . $packageKey . '/Classes/Hooks/RealUrlAutoConfiguration.php:MiniFranske\FsMediaGallery\Hooks\RealUrlAutoConfiguration->addNewsConfig';
 
+	// EXT:news >= 3.2.0 support
+	$GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['classes']['Domain/Model/News'][] = $packageKey;
+
 	$signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher');
 	$signalSlotDispatcher->connect(
 		'TYPO3\\CMS\\Core\\Resource\\ResourceStorage',
