@@ -25,7 +25,8 @@ namespace MiniFranske\FsMediaGallery\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\CMS\Core\Resource\ResourceFactory;
+use TYPO3\CMS\Core\Resource\File;
+use TYPO3\CMS\Core\Resource\FileReference;
 
 /**
  * Media album
@@ -94,6 +95,13 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @lazy
 	 */
 	protected $parentalbum;
+
+	/**
+	 * Main asset
+	 *
+	 * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+	 */
+	protected $mainAsset;
 
 	/**
 	 * Child albums
@@ -298,15 +306,21 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * @return \TYPO3\CMS\Core\Resource\File
+	 * @return File|FileReference
 	 */
 	public function getMainAsset() {
-		$assets = $this->getAssets();
-		return $assets !== array() ? $assets[0] : NULL;
+		$mainAsset = NULL;
+		if ($this->mainAsset) {
+			$mainAsset = $this->mainAsset->getOriginalResource();
+		} else {
+			$assets = $this->getAssets();
+			$mainAsset = $assets !== array() ? $assets[0] : NULL;
+		}
+		return $mainAsset;
 	}
 
 	/**
-	 * @return \TYPO3\CMS\Core\Resource\File
+	 * @return File|FileReference
 	 */
 	public function getRandomAsset() {
 		$assets = $this->getAssets();

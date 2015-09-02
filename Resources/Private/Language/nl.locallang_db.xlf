@@ -19,6 +19,14 @@
 				<source>Parent album</source>
 				<target>Hoofd album</target>
 			</trans-unit>
+			<trans-unit id="tx_fsmediagallery_domain_model_mediaalbum.main_asset">
+				<source>Main asset/image for album</source>
+				<target>Hoofd media/afbeelding voor het album</target>
+			</trans-unit>
+			<trans-unit id="tx_fsmediagallery_domain_model_mediaalbum.main_asset.add">
+				<source>Add asset/image</source>
+				<target>Media/afbeelding toevoegen</target>
+			</trans-unit>
 			<trans-unit id="tx_news_domain_model_news.related_fsmediaalbums">
 				<source>Related Media Albums</source>
 				<target>Gerelateerde albums</target>

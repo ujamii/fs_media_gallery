@@ -66,6 +66,21 @@ $additionalColumns = array(
 			'maxitems' => 1
 		)
 	),
+	'main_asset' => array(
+		'exclude' => 1,
+		'l10n_mode' => 'mergeIfNotBlank',
+		'label' => 'LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_db.xlf:tx_fsmediagallery_domain_model_mediaalbum.main_asset',
+		'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+			'images',
+			array(
+				'appearance' => array(
+					'createNewRelationLinkTitle' => 'LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_db.xlf:tx_fsmediagallery_domain_model_mediaalbum.main_asset.add'
+				),
+				'maxitems' => 1,
+			),
+			$GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+		)
+	)
 );
 
 foreach ($GLOBALS['TCA']['sys_file_collection']['types'] as $type => $tmp) {
@@ -76,11 +91,14 @@ foreach ($GLOBALS['TCA']['sys_file_collection']['types'] as $type => $tmp) {
 	} else {
 		$GLOBALS['TCA']['sys_file_collection']['types'][$type]['showitem'] .= ',datetime';
 	}
-	$GLOBALS['TCA']['sys_file_collection']['types'][$type]['showitem'] .= ',parentalbum,webdescription';
+	$GLOBALS['TCA']['sys_file_collection']['types'][$type]['showitem'] .= ',parentalbum,main_asset,webdescription';
 }
 
 // enable manual sorting
 $GLOBALS['TCA']['sys_file_collection']['ctrl']['sortby'] = 'sorting';
 $GLOBALS['TCA']['sys_file_collection']['ctrl']['default_sortby'] = 'ORDER BY sorting ASC, crdate DESC';
+
+// enable main asset preview in list module
+$GLOBALS['TCA']['sys_file_collection']['ctrl']['thumbnail'] = 'main_asset';
 
 \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule($GLOBALS['TCA']['sys_file_collection']['columns'], $additionalColumns);
