@@ -27,6 +27,7 @@ namespace MiniFranske\FsMediaGallery\Domain\Model;
 
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Resource\FileReference;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Media album
@@ -61,7 +62,7 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Assets
-	 * An array of \TYPO3\CMS\Core\Resource\File
+	 * An array of File or FileReference
 	 * @var array
 	 */
 	protected $assets;
@@ -209,7 +210,7 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * @return array<\TYPO3\CMS\Core\Resource\File>
+	 * @return File[]|FileReference[]
 	 */
 	public function getAssets() {
 		if ($this->assetCache === NULL) {
@@ -221,7 +222,7 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 				// check if file has right mimeType
 				if (count($this->allowedMimeTypes) > 0) {
 					foreach ($files as $key => $fileObject) {
-						/** @var $fileObject \TYPO3\CMS\Core\Resource\File */
+						/** @var $fileObject File|FileReference */
 						if (!in_array($fileObject->getMimeType(), $this->allowedMimeTypes)) {
 							unset($files[$key]);
 						}
@@ -241,24 +242,30 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * @param integer $assetUid
-	 * @return mixed array<\TYPO3\CMS\Core\Resource\File> or NULL
+	 * Get asset by uid
+	 *
+	 * @param int $assetUid
+	 * @return File|FileReference|NULL
 	 */
 	public function getAssetByUid($assetUid) {
-		$assetsUids = $this->getAssetsUids();
-		if (in_array($assetUid, $assetsUids)) {
-			return ResourceFactory::getInstance()->getFileObject($assetUid);
+		foreach ($assets = $this->getAssets() as $asset) {
+			/** @var $asset File|FileReference */
+			if ((int)$assetUid === $asset->getUid()) {
+				return $asset;
+			}
 		}
 		return NULL;
 	}
 
 	/**
 	 * @return array
+	 * @deprecated Will be removed in next major version 2.*
 	 */
 	public function getAssetsUids() {
+		GeneralUtility::deprecationLog('MediaAlbum::getAssetsUid is deprecated and will be removed with next major version 2.*. Use getAssets() as this method can not handle static file collections');
 		$assetsUids = array();
 		foreach ($assets = $this->getAssets() as $asset) {
-			/** @var $asset \TYPO3\CMS\Core\Resource\File */
+			/** @var $asset \TYPO3\CMS\Core\Resource\FileInterface */
 			$assetsUids[] = $asset->getUid();
 		}
 		return $assetsUids;
@@ -342,7 +349,7 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Get datetime
 	 *
-	 * @return DateTime
+	 * @return \DateTime
 	 */
 	public function getDatetime() {
 		return $this->datetime;
@@ -351,7 +358,7 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Set date time
 	 *
-	 * @param DateTime $datetime datetime
+	 * @param \DateTime $datetime datetime
 	 * @return void
 	 */
 	public function setDatetime($datetime) {
