@@ -58,6 +58,11 @@ $boot = function($packageKey) {
 	// Add Theme 'Bootstrap3'
 	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($packageKey, 'Configuration/TypoScript/Themes/Bootstrap3', 'Media Gallery Theme \'Bootstrap3\'');
 
+	// Show albums in page module
+	$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cms']['db_layout']['addTables']['sys_file_collection'][0] = [
+		'fList' => 'title, datetime, parentalbum, main_asset',
+		'icon' => TRUE
+	];
 };
 $boot($_EXTKEY);
 unset($boot);
