@@ -250,7 +250,7 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function getAssetByUid($assetUid) {
 		foreach ($assets = $this->getAssets() as $asset) {
 			/** @var $asset File|FileReference */
-			if ((int)$assetUid === $asset->getUid()) {
+			if ((int)$assetUid === (int)$asset->getUid()) {
 				return $asset;
 			}
 		}
