@@ -78,6 +78,13 @@ $boot = function($packageKey) {
 		'MiniFranske\\FsMediaGallery\\Hooks\\FolderChangedSlot',
 		'postFolderRename'
 	);
+	// File tree icon adjustments for TYPO3 => 7.5
+	$signalSlotDispatcher->connect(
+		'TYPO3\\CMS\\Core\\Imaging\\IconFactory',
+		'buildIconForResourceSignal',
+		'MiniFranske\\FsMediaGallery\\Hooks\\IconUtilityHook',
+		'buildIconForResource'
+	);
 
 	if (TYPO3_MODE === 'BE') {
 		$signalSlotDispatcher->connect(

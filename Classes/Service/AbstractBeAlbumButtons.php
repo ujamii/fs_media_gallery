@@ -24,6 +24,7 @@ namespace MiniFranske\FsMediaGallery\Service;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Backend\Utility\IconUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -77,7 +78,7 @@ abstract class AbstractBeAlbumButtons {
 						sprintf($this->sL('module.buttons.editAlbum'), $collection['title']),
 						sprintf($this->sL('module.buttons.editAlbum'), $charsetConverter->crop('utf-8', $collection['title'], 12, '...')),
 						IconUtility::getSpriteIcon('extensions-fs_media_gallery-edit-album'),
-						"alt_doc.php?edit[sys_file_collection][" . $collection['uid'] . "]=edit"
+						$this->buildEditUrl($collection['uid'])
 					);
 				}
 
@@ -100,13 +101,13 @@ abstract class AbstractBeAlbumButtons {
 							sprintf($this->sL('module.buttons.createAlbumIn'), $title),
 							sprintf($this->sL('module.buttons.createAlbumIn'), $charsetConverter->crop('utf-8', $title, 12, '...')),
 							IconUtility::getSpriteIcon('extensions-fs_media_gallery-add-album'),
-							"alt_doc.php?edit[sys_file_collection][" . $uid . "]=new&defVals[sys_file_collection][parentalbum]=" . $parentUid . "&defVals[sys_file_collection][title]=" . ucfirst(trim(str_replace('_', ' ', $folder->getName()))) . "&defVals[sys_file_collection][storage]=" . $folder->getStorage()->getUid() . "&defVals[sys_file_collection][folder]=" . $folder->getIdentifier() . "&defVals[sys_file_collection][type]=folder"
+							$this->buildAddUrl($uid, $parentUid, $folder)
 						);
 					}
 				}
 
-			// show hint button for admin users
-			// todo: make this better so it can also be used for editors with enough rights to create a storageFolder
+				// show hint button for admin users
+				// todo: make this better so it can also be used for editors with enough rights to create a storageFolder
 			} elseif ($GLOBALS['BE_USER']->isAdmin()) {
 				$buttons[] = $this->createLink(
 					$this->sL('module.buttons.createAlbum'),
@@ -118,6 +119,59 @@ abstract class AbstractBeAlbumButtons {
 			}
 		}
 		return $buttons;
+	}
+
+	/**
+	 * Build edit url
+	 *
+	 * @param int $uid Media album uid
+	 * @return string
+	 */
+	protected function buildEditUrl($uid) {
+		if (!GeneralUtility::compat_version('7.4')) {
+			return 'alt_doc.php?edit[sys_file_collection][' . $uid . ']=edit';
+		} else {
+			return BackendUtility::getModuleUrl('record_edit', array(
+				'edit' => array(
+					'sys_file_collection' => array(
+						$uid => 'edit'
+					)
+				),
+				'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI')
+			));
+		}
+	}
+
+	/**
+	 * Build Add new media album url
+	 *
+	 * @param int $pid
+	 * @param int $parentAlbumUid
+	 * @param Folder $folder
+	 * @return string
+	 */
+	protected function buildAddUrl($pid, $parentAlbumUid, Folder $folder) {
+		if (!GeneralUtility::compat_version('7.4')) {
+			return 'alt_doc.php?edit[sys_file_collection][' . (int)$pid . ']=new&defVals[sys_file_collection][parentalbum]=' . (int)$parentAlbumUid . '&defVals[sys_file_collection][title]=' . ucfirst(trim(str_replace('_', ' ', $folder->getName()))) . '&defVals[sys_file_collection][storage]=' . $folder->getStorage()->getUid() . '&defVals[sys_file_collection][folder]=' . $folder->getIdentifier() . '&defVals[sys_file_collection][type]=folder';
+		} else {
+			return BackendUtility::getModuleUrl('record_edit', array(
+				'edit' => array(
+					'sys_file_collection' => array(
+						$pid => 'new'
+					)
+				),
+				'defVals' => array(
+					'sys_file_collection' => array(
+						'parentalbum' => $parentAlbumUid,
+						'title' => ucfirst(trim(str_replace('_', ' ', $folder->getName()))),
+						'storage' => $folder->getStorage()->getUid(),
+						'folder' => $folder->getIdentifier(),
+						'type' => 'folder',
+					)
+				),
+				'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI')
+			));
+		}
 	}
 
 	/**

@@ -27,14 +27,16 @@ $additionalColumns = array(
 		'config' => array(
 			'type' => 'text',
 			'cols' => 40,
-			'rows' => 15,
+			'rows' => 5,
 			'eval' => 'trim',
 			'wizards' => array(
 				'RTE' => array(
 					'icon' => 'wizard_rte2.gif',
 					'notNewRecords' => 1,
 					'RTEonly' => 1,
-					'script' => 'wizard_rte.php',
+					'module' => array(
+						'name' => 'wizard_rte',
+					),
 					'title' => 'LLL:EXT:cms/locallang_ttc.:bodytext.W.RTE',
 					'type' => 'script'
 				)
