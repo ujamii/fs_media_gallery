@@ -51,7 +51,7 @@
 					<settings.mediaAlbumsUids>
 						<TCEforms>
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.mediaAlbumsUids</label>
-							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->randomAsset</displayCond>
+							<displayCond>FIELD:switchableControllerActions:IN:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->randomAsset</displayCond>
 							<config>
 								<type>select</type>
 								<renderMode>tree</renderMode>
@@ -76,7 +76,7 @@
 					<settings.useAlbumFilterAsExclude>
 						<TCEforms>
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.useAlbumFilterAsExclude</label>
-							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->randomAsset</displayCond>
+							<displayCond>FIELD:switchableControllerActions:IN:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->randomAsset</displayCond>
 							<config>
 								<type>select</type>
 								<items type="array">
@@ -101,7 +101,7 @@
 					<settings.mediaAlbum>
 						<TCEforms>
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.mediaAlbum</label>
-							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->showAlbum;MediaAlbum->showAsset,MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset</displayCond>
+							<displayCond>FIELD:switchableControllerActions:IN:MediaAlbum->showAlbum;MediaAlbum->showAsset,MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset</displayCond>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -121,7 +121,7 @@
 					<settings.list.orderBy>
 						<TCEforms>
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.orderBy</label>
-							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset</displayCond>
+							<displayCond>FIELD:switchableControllerActions:IN:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset</displayCond>
 							<config>
 								<type>select</type>
 								<itemsProcFunc>MiniFranske\FsMediaGallery\Hooks\ItemsProcFuncHook->getItemsForListOrderBy</itemsProcFunc>
@@ -149,7 +149,7 @@
 					<settings.list.orderDirection>
 						<TCEforms>
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.orderDirection</label>
-							<displayCond>FIELD:switchableControllerActions:=:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset</displayCond>
+							<displayCond>FIELD:switchableControllerActions:IN:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset</displayCond>
 							<config>
 								<type>select</type>
 								<items>
@@ -235,7 +235,7 @@
 			<ROOT>
 				<TCEforms>
 					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.tabs.list</sheetTitle>
-					<displayCond>FIELD:general.switchableControllerActions:=:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset</displayCond>
+					<displayCond>FIELD:general.switchableControllerActions:IN:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset</displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>
@@ -347,7 +347,7 @@
 			<ROOT>
 				<TCEforms>
 					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.tabs.album</sheetTitle>
-					<displayCond>FIELD:general.switchableControllerActions:=:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset,MediaAlbum->showAlbum;MediaAlbum->showAsset,MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset</displayCond>
+					<displayCond>FIELD:general.switchableControllerActions:IN:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset,MediaAlbum->showAlbum;MediaAlbum->showAsset,MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset</displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>
@@ -461,7 +461,7 @@
 			<ROOT>
 				<TCEforms>
 					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.tabs.detail</sheetTitle>
-					<displayCond>FIELD:general.switchableControllerActions:=:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset,MediaAlbum->showAlbum;MediaAlbum->showAsset,MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset</displayCond>
+					<displayCond>FIELD:general.switchableControllerActions:IN:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset,MediaAlbum->showAlbum;MediaAlbum->showAsset,MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset</displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>
@@ -520,7 +520,7 @@
 			<ROOT>
 				<TCEforms>
 					<sheetTitle>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.tabs.random</sheetTitle>
-					<displayCond>FIELD:general.switchableControllerActions:=:MediaAlbum->randomAsset</displayCond>
+					<displayCond>FIELD:general.switchableControllerActions:IN:MediaAlbum->randomAsset</displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>
