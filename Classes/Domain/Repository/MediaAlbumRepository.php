@@ -205,6 +205,8 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	public function findByUid($uid, $respectStorage = TRUE) {
 
 		$query = $this->createQuery();
+		$query->getQuerySettings()->setRespectSysLanguage(FALSE);
+
 		if (!$respectStorage) {
 			$query->getQuerySettings()->setRespectStoragePage(FALSE);
 		}
