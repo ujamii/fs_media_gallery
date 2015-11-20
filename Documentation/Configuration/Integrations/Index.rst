@@ -8,8 +8,8 @@
 
 .. _configuration-integrations:
 
-Integrate in EXT:news
-=========================================
+Integrate in EXT:news => v3.2.0
+===============================
 
 Target group: **Developers**
 

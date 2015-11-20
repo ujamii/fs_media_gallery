@@ -29,5 +29,5 @@ Features
 * Comes with a basic automatic RealURL configuration
 * Supports LightBox/Colorbox
 * Fully configurable by TypoScript
-* Smoothly integrates into `EXT:news <http://typo3.org/extensions/repository/view/news>`_
+* Smoothly integrates into `EXT:news <http://typo3.org/extensions/repository/view/news>`_ => v3.2.0
 * Media Assets (images) can be protected with `EXT:fal_secure_download <http://typo3.org/extensions/repository/view/fal_securedownload>`_ or `EXT:naw_securedl <http://typo3.org/extensions/repository/view/naw_securedl>`_
