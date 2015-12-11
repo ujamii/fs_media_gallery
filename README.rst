@@ -23,7 +23,7 @@ Requirements
 Quick install notes
 ===================
 
-- Install extension through Extension Manager
+- Install extension through Extension Manager or composer ``composer require MiniFranske/fs-media-gallery``
 - Include Static Template "Media Galley (fs_media_gallery)"
 - Create a StoragePage and set "Contains Plugin" to "Media Galleries"
 - Go to file module and open the folder you want to turn into a album
@@ -43,6 +43,6 @@ Known issues
    - Did you set the "Record Storage Page" of the plugin to the "StoragePage" with your albums?
 
 - The images shown in the lightbox don't have the max size but are resized to max 1400px * 1400px
-   - These limits are set in the typoscript template of the extension and are there to prevent that to big images are used in FE. These max values can be overruled by setting your own values in your typoscript template.  
+   - These limits are set in the typoscript template of the extension and are there to prevent that to big images are used in FE. These max values can be overruled by setting your own values in your typoscript template.
    plugin.tx_fsmediagallery.settings.image.lightbox.maxWidth
    plugin.tx_fsmediagallery.settings.image.lightbox.maxHeight
