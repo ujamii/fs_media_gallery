@@ -28,33 +28,48 @@ namespace MiniFranske\FsMediaGallery\ViewHelpers\Widget;
 /**
  * Class PaginateViewHelper
  */
-class PaginateViewHelper extends AbstractWidgetViewHelper {
+class PaginateViewHelper extends AbstractWidgetViewHelper
+{
 
-	/**
-	 * @var \MiniFranske\FsMediaGallery\ViewHelpers\Widget\Controller\PaginateController
-	 */
-	protected $controller;
+    /**
+     * @var \MiniFranske\FsMediaGallery\ViewHelpers\Widget\Controller\PaginateController
+     */
+    protected $controller;
 
-	/**
-	 * @param \MiniFranske\FsMediaGallery\ViewHelpers\Widget\Controller\PaginateController $controller
-	 * @return void
-	 */
-	public function injectController(\MiniFranske\FsMediaGallery\ViewHelpers\Widget\Controller\PaginateController $controller) {
-		$this->controller = $controller;
-	}
+    /**
+     * @param \MiniFranske\FsMediaGallery\ViewHelpers\Widget\Controller\PaginateController $controller
+     * @return void
+     */
+    public function injectController(
+        \MiniFranske\FsMediaGallery\ViewHelpers\Widget\Controller\PaginateController $controller
+    ) {
+        $this->controller = $controller;
+    }
 
-	/**
-	 * main render function
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryResultInterface $objects
-	 * @param string $as
-	 * @param string|null $itemsBefore
-	 * @param string|null $itemsAfter
-	 * @param array $configuration
-	 * @param string $widgetId
-	 * @return string|\TYPO3\CMS\Extbase\Mvc\ResponseInterface
-	 */
-	public function render($objects, $as, $itemsBefore = NULL, $itemsAfter = NULL, array $configuration = array('itemsPerPage' => 10, 'insertAbove' => FALSE, 'insertBelow' => TRUE, 'maximumNumberOfLinks' => 99), $widgetId = NULL) {
-		return $this->initiateSubRequest();
-	}
+    /**
+     * main render function
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryResultInterface $objects
+     * @param string $as
+     * @param string|null $itemsBefore
+     * @param string|null $itemsAfter
+     * @param array $configuration
+     * @param string $widgetId
+     * @return string|\TYPO3\CMS\Extbase\Mvc\ResponseInterface
+     */
+    public function render(
+        $objects,
+        $as,
+        $itemsBefore = null,
+        $itemsAfter = null,
+        array $configuration = array(
+            'itemsPerPage' => 10,
+            'insertAbove' => false,
+            'insertBelow' => true,
+            'maximumNumberOfLinks' => 99
+        ),
+        $widgetId = null
+    ) {
+        return $this->initiateSubRequest();
+    }
 }

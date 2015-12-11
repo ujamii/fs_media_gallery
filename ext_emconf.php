@@ -5,29 +5,27 @@
  ***************************************************************/
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'Media Gallery',
-	'description' => 'A media gallery based on the FAL integration of TYPO3.
+    'title' => 'Media Gallery',
+    'description' => 'A media gallery based on the FAL integration of TYPO3.
 Show your media assets from your local or remote storage as a gallery of albums.',
-	'category' => 'plugin',
-	'author' => 'Frans Saris',
-	'author_email' => 'franssaris@gmail.com',
-	'author_company' => '',
-	'shy' => '',
-	'priority' => '',
-	'module' => '',
-	'state' => 'stable',
-	'uploadfolder' => FALSE,
-	'createDirs' => '',
-	'clearCacheOnLoad' => 1,
-	'lockType' => '',
-	'version' => '1.2.0-dev',
-	'constraints' => array(
-		'depends' => array(
-			'typo3' => '6.2.2 - 7.99.99',
-		),
-		'conflicts' => array(
-		),
-		'suggests' => array(
-		),
-	),
+    'category' => 'plugin',
+    'author' => 'Frans Saris',
+    'author_email' => 'franssaris@gmail.com',
+    'author_company' => '',
+    'shy' => '',
+    'priority' => '',
+    'module' => '',
+    'state' => 'stable',
+    'uploadfolder' => false,
+    'createDirs' => '',
+    'clearCacheOnLoad' => 1,
+    'lockType' => '',
+    'version' => '1.2.0-dev',
+    'constraints' => array(
+        'depends' => array(
+            'typo3' => '6.2.2 - 7.99.99',
+        ),
+        'conflicts' => array(),
+        'suggests' => array(),
+    ),
 );

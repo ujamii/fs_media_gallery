@@ -4,7 +4,7 @@ namespace MiniFranske\FsMediaGallery\Hooks;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 20014 Frans Saris <franssaris@gmail.com>
+ *  (c) 2014 Frans Saris <franssaris@gmail.com>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -23,50 +23,53 @@ namespace MiniFranske\FsMediaGallery\Hooks;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Class that holds slots that are called during install
  */
-class Install {
+class Install
+{
 
-	/**
-	 * Add fields to ext:news table when ext:news is installed
-	 *
-	 * @param array $sqlString
-	 * @return array
-	 */
-	public function tablesDefinitionIsBeingBuiltSlot(array $sqlString) {
+    /**
+     * Add fields to ext:news table when ext:news is installed
+     *
+     * @param array $sqlString
+     * @return array
+     */
+    public function tablesDefinitionIsBeingBuiltSlot(array $sqlString)
+    {
 
-		if (!empty($GLOBALS['TYPO3_LOADED_EXT']['news'])) {
-			$sqlString[] = $this->getExtraTableDefinitions();
-		}
+        if (!empty($GLOBALS['TYPO3_LOADED_EXT']['news'])) {
+            $sqlString[] = $this->getExtraTableDefinitions();
+        }
 
-		return array('sqlString' => $sqlString);
-	}
+        return array('sqlString' => $sqlString);
+    }
 
-	/**
-	 * Add extra sql table definitions if ext:news gets installed
-	 *
-	 * @param array $sqlString
-	 * @param $extensionKey
-	 * @return array
-	 */
-	public function tablesDefinitionIsBeingBuiltForExtension(array $sqlString, $extensionKey) {
-		if ($extensionKey === 'news'
-			|| ($extensionKey === 'fs_media_gallery' && !empty($GLOBALS['TYPO3_LOADED_EXT']['news']))
-		) {
-			$sqlString[] = $this->getExtraTableDefinitions();
-		}
-		return array('sqlString' => $sqlString, 'extensionKey' => $extensionKey);
-	}
+    /**
+     * Add extra sql table definitions if ext:news gets installed
+     *
+     * @param array $sqlString
+     * @param $extensionKey
+     * @return array
+     */
+    public function tablesDefinitionIsBeingBuiltForExtension(array $sqlString, $extensionKey)
+    {
+        if ($extensionKey === 'news'
+            || ($extensionKey === 'fs_media_gallery' && !empty($GLOBALS['TYPO3_LOADED_EXT']['news']))
+        ) {
+            $sqlString[] = $this->getExtraTableDefinitions();
+        }
+        return array('sqlString' => $sqlString, 'extensionKey' => $extensionKey);
+    }
 
-	/**
-	 * Extra sql table definitions for connecting extension with ext:news
-	 *
-	 * @return string
-	 */
-	protected function getExtraTableDefinitions() {
-		return "
+    /**
+     * Extra sql table definitions for connecting extension with ext:news
+     *
+     * @return string
+     */
+    protected function getExtraTableDefinitions()
+    {
+        return "
 #
 # Table structure for table 'tx_news_domain_model_news'
 #
@@ -86,6 +89,6 @@ CREATE TABLE tx_news_domain_model_news_fsmediaalbums_mm (
 );
 
 ";
-	}
+    }
 }
 

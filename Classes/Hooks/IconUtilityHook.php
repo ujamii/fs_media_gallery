@@ -4,7 +4,7 @@ namespace MiniFranske\FsMediaGallery\Hooks;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 20014 Frans Saris <frans@beech.it>
+ *  (c) 2014 Frans Saris <franssaris@gmail.com>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -31,107 +31,120 @@ use TYPO3\CMS\Core\Resource\Folder;
 /**
  * IconUtility Hook to add media gallery icon
  */
-class IconUtilityHook implements \TYPO3\CMS\Backend\Utility\IconUtilityOverrideResourceIconHookInterface {
+class IconUtilityHook implements \TYPO3\CMS\Backend\Utility\IconUtilityOverrideResourceIconHookInterface
+{
 
-	/**
-	 * @var array
-	 */
-	static protected $mediaFolders;
+    /**
+     * @var array
+     */
+    static protected $mediaFolders;
 
-	/**
-	 * @param \TYPO3\CMS\Core\Resource\ResourceInterface $folderObject
-	 * @param $iconName
-	 * @param array $options
-	 * @param array $overlays
-	 */
-	public function overrideResourceIcon(\TYPO3\CMS\Core\Resource\ResourceInterface $folderObject, &$iconName, array &$options, array &$overlays) {
+    /**
+     * @param \TYPO3\CMS\Core\Resource\ResourceInterface $folderObject
+     * @param $iconName
+     * @param array $options
+     * @param array $overlays
+     */
+    public function overrideResourceIcon(
+        \TYPO3\CMS\Core\Resource\ResourceInterface $folderObject,
+        &$iconName,
+        array &$options,
+        array &$overlays
+    ) {
 
-		if ($folderObject && $folderObject instanceof Folder
-			&& in_array($folderObject->getRole(), array(Folder::ROLE_DEFAULT, Folder::ROLE_USERUPLOAD))
-		) {
+        if ($folderObject && $folderObject instanceof Folder &&
+            in_array($folderObject->getRole(), array(Folder::ROLE_DEFAULT, Folder::ROLE_USERUPLOAD))
+        ) {
 
-			$mediaFolders = self::getMediaFolders();
+            $mediaFolders = self::getMediaFolders();
 
-			if (count($mediaFolders)) {
+            if (count($mediaFolders)) {
 
-				/** @var \MiniFranske\FsMediaGallery\Service\Utility $utility */
-				$utility = GeneralUtility::makeInstance('MiniFranske\\FsMediaGallery\\Service\\Utility');
-				$collections = $utility->findFileCollectionRecordsForFolder(
-					$folderObject->getStorage()->getUid(),
-					$folderObject->getIdentifier(),
-					array_keys($mediaFolders)
-				);
+                /** @var \MiniFranske\FsMediaGallery\Service\Utility $utility */
+                $utility = GeneralUtility::makeInstance('MiniFranske\\FsMediaGallery\\Service\\Utility');
+                $collections = $utility->findFileCollectionRecordsForFolder(
+                    $folderObject->getStorage()->getUid(),
+                    $folderObject->getIdentifier(),
+                    array_keys($mediaFolders)
+                );
 
-				if ($collections) {
-					$iconName = 'tcarecords-sys_file_collection-folder';
-					$hidden = TRUE;
-					foreach ($collections as $collection) {
-						if ((int)$collection['hidden'] === 0) {
-							$hidden = FALSE;
-							break;
-						}
-					}
-					if ($hidden) {
-						$overlays['status-overlay-hidden'] = array();
-					}
-				}
-			}
-		}
-	}
+                if ($collections) {
+                    $iconName = 'tcarecords-sys_file_collection-folder';
+                    $hidden = true;
+                    foreach ($collections as $collection) {
+                        if ((int)$collection['hidden'] === 0) {
+                            $hidden = false;
+                            break;
+                        }
+                    }
+                    if ($hidden) {
+                        $overlays['status-overlay-hidden'] = array();
+                    }
+                }
+            }
+        }
+    }
 
-	/**
-	 * @param ResourceInterface $folderObject
-	 * @param string $size
-	 * @param array $options
-	 * @param string $iconIdentifier
-	 * @param string $overlayIdentifier
-	 * @return array
-	 */
-	public function buildIconForResource(ResourceInterface $folderObject, $size, array $options, $iconIdentifier, $overlayIdentifier) {
-		if ($folderObject && $folderObject instanceof Folder
-			&& in_array($folderObject->getRole(), array(Folder::ROLE_DEFAULT, Folder::ROLE_USERUPLOAD))
-		) {
+    /**
+     * @param ResourceInterface $folderObject
+     * @param string $size
+     * @param array $options
+     * @param string $iconIdentifier
+     * @param string $overlayIdentifier
+     * @return array
+     */
+    public function buildIconForResource(
+        ResourceInterface $folderObject,
+        $size,
+        array $options,
+        $iconIdentifier,
+        $overlayIdentifier
+    ) {
+        if ($folderObject && $folderObject instanceof Folder
+            && in_array($folderObject->getRole(), array(Folder::ROLE_DEFAULT, Folder::ROLE_USERUPLOAD))
+        ) {
 
-			$mediaFolders = self::getMediaFolders();
+            $mediaFolders = self::getMediaFolders();
 
-			if (count($mediaFolders)) {
+            if (count($mediaFolders)) {
 
-				/** @var \MiniFranske\FsMediaGallery\Service\Utility $utility */
-				$utility = GeneralUtility::makeInstance('MiniFranske\\FsMediaGallery\\Service\\Utility');
-				$collections = $utility->findFileCollectionRecordsForFolder(
-					$folderObject->getStorage()->getUid(),
-					$folderObject->getIdentifier(),
-					array_keys($mediaFolders)
-				);
+                /** @var \MiniFranske\FsMediaGallery\Service\Utility $utility */
+                $utility = GeneralUtility::makeInstance('MiniFranske\\FsMediaGallery\\Service\\Utility');
+                $collections = $utility->findFileCollectionRecordsForFolder(
+                    $folderObject->getStorage()->getUid(),
+                    $folderObject->getIdentifier(),
+                    array_keys($mediaFolders)
+                );
 
-				if ($collections) {
-					$iconIdentifier = 'tcarecords-sys_file_collection-folder';
-					$hidden = TRUE;
-					foreach ($collections as $collection) {
-						if ((int)$collection['hidden'] === 0) {
-							$hidden = FALSE;
-							break;
-						}
-					}
-					if ($hidden) {
-						$overlayIdentifier = 'overlay-hidden';
-					}
-				}
-			}
-		}
-		return array($folderObject, $size, $options, $iconIdentifier, $overlayIdentifier);
-	}
+                if ($collections) {
+                    $iconIdentifier = 'tcarecords-sys_file_collection-folder';
+                    $hidden = true;
+                    foreach ($collections as $collection) {
+                        if ((int)$collection['hidden'] === 0) {
+                            $hidden = false;
+                            break;
+                        }
+                    }
+                    if ($hidden) {
+                        $overlayIdentifier = 'overlay-hidden';
+                    }
+                }
+            }
+        }
+        return array($folderObject, $size, $options, $iconIdentifier, $overlayIdentifier);
+    }
 
-	/**
-	 * Get media folders
-	 */
-	protected static function getMediaFolders() {
-		if (self::$mediaFolders === NULL) {
-			/** @var \MiniFranske\FsMediaGallery\Service\Utility $utility */
-			$utility = GeneralUtility::makeInstance('MiniFranske\\FsMediaGallery\\Service\\Utility');
-			self::$mediaFolders = $utility->getStorageFolders();
-		}
-		return self::$mediaFolders;
-	}
+    /**
+     * Get media folders
+     */
+    protected static function getMediaFolders()
+    {
+        if (self::$mediaFolders === null) {
+            /** @var \MiniFranske\FsMediaGallery\Service\Utility $utility */
+            $utility = GeneralUtility::makeInstance('MiniFranske\\FsMediaGallery\\Service\\Utility');
+            self::$mediaFolders = $utility->getStorageFolders();
+        }
+        return self::$mediaFolders;
+    }
 
 }

@@ -16,73 +16,76 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * ItemsProcFuncHook
  */
-class ItemsProcFuncHook {
+class ItemsProcFuncHook
+{
 
-	/**
-	 * Sets the available actions for settings.switchableControllerActions
-	 *
-	 * @param array &$config
-	 * @return void
-	 */
-	public function getItemsForSwitchableControllerActions(array &$config) {
-		$availableActions = array(
-			'nestedList'		=> 'MediaAlbum->nestedList;MediaAlbum->showAsset',
-			'flatList'			=> 'MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset',
-			'showAlbumByParam'	=> 'MediaAlbum->showAlbum;MediaAlbum->showAsset',
-			'showAlbumByConfig'	=> 'MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset',
-			'randomAsset'		=> 'MediaAlbum->randomAsset',
-		);
-		$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['fs_media_gallery']);
-		$allowedActions = array(
-			// index action is always allowed
-			// this is needed to make sure the correct tabs/fields are shown in
-			// flexform when a new plugin is added
-			'index'				=> 'MediaAlbum->index',
-		);
-		$allowedActionsFromExtConf = array();
-		if (!empty($extConf['allowedActionsInFlexforms'])) {
-			$allowedActionsFromExtConf = GeneralUtility::trimExplode(',', $extConf['allowedActionsInFlexforms']);
-		}
-		foreach ($allowedActionsFromExtConf as $allowedActionFromExtConf) {
-			if (!empty($availableActions[$allowedActionFromExtConf])) {
-				$allowedActions[$allowedActionFromExtConf] = $availableActions[$allowedActionFromExtConf];
-			}
-		}
-		// check items; allow all actions if something went wrong (no action except of "indexAction" is allowed)
-		if (count($allowedActions) > 1) {
-			foreach ($config['items'] as $key => $item) {
-				if (!in_array($item[1], $allowedActions)) {
-					unset($config['items'][$key]);
-				}
-			}
-		}
-	}
+    /**
+     * Sets the available actions for settings.switchableControllerActions
+     *
+     * @param array &$config
+     * @return void
+     */
+    public function getItemsForSwitchableControllerActions(array &$config)
+    {
+        $availableActions = array(
+            'nestedList' => 'MediaAlbum->nestedList;MediaAlbum->showAsset',
+            'flatList' => 'MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset',
+            'showAlbumByParam' => 'MediaAlbum->showAlbum;MediaAlbum->showAsset',
+            'showAlbumByConfig' => 'MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset',
+            'randomAsset' => 'MediaAlbum->randomAsset',
+        );
+        $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['fs_media_gallery']);
+        $allowedActions = array(
+            // index action is always allowed
+            // this is needed to make sure the correct tabs/fields are shown in
+            // flexform when a new plugin is added
+            'index' => 'MediaAlbum->index',
+        );
+        $allowedActionsFromExtConf = array();
+        if (!empty($extConf['allowedActionsInFlexforms'])) {
+            $allowedActionsFromExtConf = GeneralUtility::trimExplode(',', $extConf['allowedActionsInFlexforms']);
+        }
+        foreach ($allowedActionsFromExtConf as $allowedActionFromExtConf) {
+            if (!empty($availableActions[$allowedActionFromExtConf])) {
+                $allowedActions[$allowedActionFromExtConf] = $availableActions[$allowedActionFromExtConf];
+            }
+        }
+        // check items; allow all actions if something went wrong (no action except of "indexAction" is allowed)
+        if (count($allowedActions) > 1) {
+            foreach ($config['items'] as $key => $item) {
+                if (!in_array($item[1], $allowedActions)) {
+                    unset($config['items'][$key]);
+                }
+            }
+        }
+    }
 
-	/**
-	 * Sets the available options for settings.list.orderBy
-	 *
-	 * @param array &$config
-	 * @return void
-	 */
-	public function getItemsForListOrderBy(array &$config) {
-		$availableOptions = array('datetime', 'crdate', 'sorting');
-		$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['fs_media_gallery']);
-		$allowedOptions = array();
-		$allowedOptionsFromExtConf = array();
-		if (!empty($extConf['list.']['orderOptions'])) {
-			$allowedOptionsFromExtConf = GeneralUtility::trimExplode(',', $extConf['list.']['orderOptions']);
-		}
-		foreach ($allowedOptionsFromExtConf as $allowedOptionFromExtConf) {
-			if (in_array($allowedOptionFromExtConf, $availableOptions)) {
-				$allowedOptions[] = $allowedOptionFromExtConf;
-			}
-		}
-		foreach ($config['items'] as $key => $item) {
-			// check items; empty value (inherit from TS) is always allowed
-			if (!empty($item[1]) && !in_array($item[1], $allowedOptions)) {
-				unset($config['items'][$key]);
-			}
-		}
-	}
+    /**
+     * Sets the available options for settings.list.orderBy
+     *
+     * @param array &$config
+     * @return void
+     */
+    public function getItemsForListOrderBy(array &$config)
+    {
+        $availableOptions = array('datetime', 'crdate', 'sorting');
+        $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['fs_media_gallery']);
+        $allowedOptions = array();
+        $allowedOptionsFromExtConf = array();
+        if (!empty($extConf['list.']['orderOptions'])) {
+            $allowedOptionsFromExtConf = GeneralUtility::trimExplode(',', $extConf['list.']['orderOptions']);
+        }
+        foreach ($allowedOptionsFromExtConf as $allowedOptionFromExtConf) {
+            if (in_array($allowedOptionFromExtConf, $availableOptions)) {
+                $allowedOptions[] = $allowedOptionFromExtConf;
+            }
+        }
+        foreach ($config['items'] as $key => $item) {
+            // check items; empty value (inherit from TS) is always allowed
+            if (!empty($item[1]) && !in_array($item[1], $allowedOptions)) {
+                unset($config['items'][$key]);
+            }
+        }
+    }
 
 }

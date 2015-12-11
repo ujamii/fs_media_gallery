@@ -1,10 +1,10 @@
 <?php
-namespace  MiniFranske\FsMediaGallery\Hooks;
+namespace MiniFranske\FsMediaGallery\Hooks;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 20014 Frans Saris <frans@beech.it>
+ *  (c) 2014 Frans Saris <franssaris@gmail.com>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -27,48 +27,50 @@ namespace  MiniFranske\FsMediaGallery\Hooks;
 /**
  * RealUrl AutoConfiguration
  */
-class RealUrlAutoConfiguration {
+class RealUrlAutoConfiguration
+{
 
-	/**
-	 * Generates additional RealURL configuration and merges it with provided configuration
-	 *
-	 * @param array $params Default configuration
-	 * @param tx_realurl_autoconfgen $pObj parent object
-	 * @return array Updated configuration
-	 */
-	public function addNewsConfig($params, &$pObj) {
+    /**
+     * Generates additional RealURL configuration and merges it with provided configuration
+     *
+     * @param array $params Default configuration
+     * @param tx_realurl_autoconfgen $pObj parent object
+     * @return array Updated configuration
+     */
+    public function addNewsConfig($params, &$pObj)
+    {
 
-		return array_merge_recursive($params['config'], array(
-				'postVarSets' => array(
-					'_DEFAULT' => array(
-						'album' => array(
-							array(
-								'GETvar' => 'tx_fsmediagallery_mediagallery[mediaAlbum]',
-								'lookUpTable' => array(
-									'table' => 'sys_file_collection',
-									'id_field' => 'uid',
-									'alias_field' => 'title',
-									'addWhereClause' => ' AND NOT deleted',
-									'useUniqueCache' => 1,
-									'useUniqueCache_conf' => array(
-										'strtolower' => 1,
-										'spaceCharacter' => '_',
-									),
-									'languageGetVar' => 'L',
-									'languageExceptionUids' => '',
-									'languageField' => 'sys_language_uid',
-									'transOrigPointerField' => 'l10n_parent',
-									'autoUpdate' => 1,
-									'expireDays' => 700,
-								),
-							),
-							array(
-								'GETvar' => 'tx_fsmediagallery_mediagallery[@widget_assets][currentPage]',
-							),
-						)
-					)
-				)
-			)
-		);
-	}
+        return array_merge_recursive($params['config'], array(
+                'postVarSets' => array(
+                    '_DEFAULT' => array(
+                        'album' => array(
+                            array(
+                                'GETvar' => 'tx_fsmediagallery_mediagallery[mediaAlbum]',
+                                'lookUpTable' => array(
+                                    'table' => 'sys_file_collection',
+                                    'id_field' => 'uid',
+                                    'alias_field' => 'title',
+                                    'addWhereClause' => ' AND NOT deleted',
+                                    'useUniqueCache' => 1,
+                                    'useUniqueCache_conf' => array(
+                                        'strtolower' => 1,
+                                        'spaceCharacter' => '_',
+                                    ),
+                                    'languageGetVar' => 'L',
+                                    'languageExceptionUids' => '',
+                                    'languageField' => 'sys_language_uid',
+                                    'transOrigPointerField' => 'l10n_parent',
+                                    'autoUpdate' => 1,
+                                    'expireDays' => 700,
+                                ),
+                            ),
+                            array(
+                                'GETvar' => 'tx_fsmediagallery_mediagallery[@widget_assets][currentPage]',
+                            ),
+                        )
+                    )
+                )
+            )
+        );
+    }
 }

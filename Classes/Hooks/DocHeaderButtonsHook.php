@@ -4,7 +4,7 @@ namespace MiniFranske\FsMediaGallery\Hooks;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 20014 Frans Saris <franssaris@gmail.com>
+ *  (c) 2014 Frans Saris <franssaris@gmail.com>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -29,46 +29,49 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * Hook to add extra button to DocHeaderButtons in file list
  */
-class DocHeaderButtonsHook extends \MiniFranske\FsMediaGallery\Service\AbstractBeAlbumButtons {
+class DocHeaderButtonsHook extends \MiniFranske\FsMediaGallery\Service\AbstractBeAlbumButtons
+{
 
-	/**
-	 * @param array $params ['buttons' => $buttons, 'markers' => &$markers, 'pObj' => &$this]
-	 */
-	public function addMediaGalleryButton(array $params) {
+    /**
+     * @param array $params ['buttons' => $buttons, 'markers' => &$markers, 'pObj' => &$this]
+     */
+    public function addMediaGalleryButton(array $params)
+    {
 
-		// only add button to file list module
-		if ($params['pObj']->scriptID === 'ext/filelist/mod1/index.php') {
-			$extraButtons = $this->generateButtons(GeneralUtility::_GP('id'));
-			if (count($extraButtons)) {
-				$params['markers']['BUTTONLIST_LEFT'] =
-					preg_replace(
-						'`</div>$`',
-						implode('', $extraButtons) . '</div>',
-						$params['markers']['BUTTONLIST_LEFT']
-					);
-			}
-		}
-	}
+        // only add button to file list module
+        if ($params['pObj']->scriptID === 'ext/filelist/mod1/index.php') {
+            $extraButtons = $this->generateButtons(GeneralUtility::_GP('id'));
+            if (count($extraButtons)) {
+                $params['markers']['BUTTONLIST_LEFT'] =
+                    preg_replace(
+                        '`</div>$`',
+                        implode('', $extraButtons) . '</div>',
+                        $params['markers']['BUTTONLIST_LEFT']
+                    );
+            }
+        }
+    }
 
-	/**
-	 * Create button
-	 *
-	 * @param string $title
-	 * @param string $shortTitle
-	 * @param string $icon
-	 * @param string $url
-	 * @param bool $addReturnUrl
-	 * @return string
-	 */
-	protected function createLink($title, $shortTitle, $icon, $url, $addReturnUrl = TRUE) {
-		if (strpos($url, 'alert') === 0) {
-			$url = 'javascript:' . $url;
-		}
-		$link = '';
-		$link .= '<a href=\'' . $url . ($addReturnUrl ? '&returnUrl=' . rawurlencode($_SERVER['REQUEST_URI']) : '') . '\'';
-		$link .= ' title="' . htmlspecialchars($title) . '">';
-		$link .= $icon;
-		$link .= '</a>';
-		return $link;
-	}
+    /**
+     * Create button
+     *
+     * @param string $title
+     * @param string $shortTitle
+     * @param string $icon
+     * @param string $url
+     * @param bool $addReturnUrl
+     * @return string
+     */
+    protected function createLink($title, $shortTitle, $icon, $url, $addReturnUrl = true)
+    {
+        if (strpos($url, 'alert') === 0) {
+            $url = 'javascript:' . $url;
+        }
+        $link = '';
+        $link .= '<a href=\'' . $url . ($addReturnUrl ? '&returnUrl=' . rawurlencode($_SERVER['REQUEST_URI']) : '') . '\'';
+        $link .= ' title="' . htmlspecialchars($title) . '">';
+        $link .= $icon;
+        $link .= '</a>';
+        return $link;
+    }
 }

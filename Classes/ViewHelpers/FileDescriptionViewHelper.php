@@ -28,26 +28,28 @@ namespace MiniFranske\FsMediaGallery\ViewHelpers;
 /**
  * File title viewHelper
  */
-class FileDescriptionViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class FileDescriptionViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
-	/**
-	 * Get title of a File
-	 *
-	 * @param \TYPO3\CMS\Core\Resource\FileInterface|\TYPO3\CMS\Extbase\Domain\Model\File|\TYPO3\CMS\Extbase\Domain\Model\FileReference $file
-	 * @return string|NULL
-	 */
-	public function render($file) {
-		if (is_callable(array($file, 'getOriginalResource'))) {
-			// Get the original file from the Extbase model
-			$file = $file->getOriginalResource();
-		}
+    /**
+     * Get title of a File
+     *
+     * @param \TYPO3\CMS\Core\Resource\FileInterface|\TYPO3\CMS\Extbase\Domain\Model\File|\TYPO3\CMS\Extbase\Domain\Model\FileReference $file
+     * @return string|NULL
+     */
+    public function render($file)
+    {
+        if (is_callable(array($file, 'getOriginalResource'))) {
+            // Get the original file from the Extbase model
+            $file = $file->getOriginalResource();
+        }
 
-		if (!$file instanceof \TYPO3\CMS\Core\Resource\FileInterface) {
-			return NULL;
-		}
+        if (!$file instanceof \TYPO3\CMS\Core\Resource\FileInterface) {
+            return null;
+        }
 
-		if ($file->getProperty('description')) {
-			return $file->getProperty('description');
-		}
-	}
+        if ($file->getProperty('description')) {
+            return $file->getProperty('description');
+        }
+    }
 }

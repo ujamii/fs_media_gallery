@@ -4,7 +4,7 @@ namespace MiniFranske\FsMediaGallery\Service;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 20014 Frans Saris <franssaris@gmail.com>
+ *  (c) 2014 Frans Saris <franssaris@gmail.com>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -27,57 +27,60 @@ namespace MiniFranske\FsMediaGallery\Service;
 /**
  * Add extra options to ClickMenu
  */
-class ClickMenuOptions extends AbstractBeAlbumButtons {
+class ClickMenuOptions extends AbstractBeAlbumButtons
+{
 
-	/**
-	 * @var \TYPO3\CMS\Backend\ClickMenu\ClickMenu
-	 */
-	protected $parentObject;
+    /**
+     * @var \TYPO3\CMS\Backend\ClickMenu\ClickMenu
+     */
+    protected $parentObject;
 
-	/**
-	 * Add create sys_file_collection icon to file click menu
-	 *
-	 * @param \TYPO3\CMS\Backend\ClickMenu\ClickMenu $parentObject Back-reference to the calling object
-	 * @param array $menuItems Current list of menu items
-	 * @param string $combinedIdentifier The combined identifier
-	 * @param integer $uid Id of the clicked on item
-	 * @return array Modified list of menu items
-	 */
-	public function main(\TYPO3\CMS\Backend\ClickMenu\ClickMenu $parentObject, $menuItems, $combinedIdentifier, $uid) {
+    /**
+     * Add create sys_file_collection icon to file click menu
+     *
+     * @param \TYPO3\CMS\Backend\ClickMenu\ClickMenu $parentObject Back-reference to the calling object
+     * @param array $menuItems Current list of menu items
+     * @param string $combinedIdentifier The combined identifier
+     * @param integer $uid Id of the clicked on item
+     * @return array Modified list of menu items
+     */
+    public function main(\TYPO3\CMS\Backend\ClickMenu\ClickMenu $parentObject, $menuItems, $combinedIdentifier, $uid)
+    {
 
-		if (!$parentObject->isDBmenu) {
-			$this->parentObject = $parentObject;
-			$combinedIdentifier = rawurldecode($combinedIdentifier);
+        if (!$parentObject->isDBmenu) {
+            $this->parentObject = $parentObject;
+            $combinedIdentifier = rawurldecode($combinedIdentifier);
 
-			$extraMenuItems = $this->generateButtons($combinedIdentifier);
-			if (count($extraMenuItems)) {
-				$menuItems[] = 'spacer';
-				$menuItems = array_merge($menuItems, $extraMenuItems);
-			}
-		}
-		return $menuItems;
-	}
+            $extraMenuItems = $this->generateButtons($combinedIdentifier);
+            if (count($extraMenuItems)) {
+                $menuItems[] = 'spacer';
+                $menuItems = array_merge($menuItems, $extraMenuItems);
+            }
+        }
+        return $menuItems;
+    }
 
-	/**
-	 * Create click menu item
-	 *
-	 * @param string $title
-	 * @param string $shortTitle
-	 * @param string $icon
-	 * @param string $url
-	 * @param bool $addReturnUrl
-	 * @return string
-	 */
-	protected function createLink($title, $shortTitle, $icon, $url, $addReturnUrl = TRUE) {
+    /**
+     * Create click menu item
+     *
+     * @param string $title
+     * @param string $shortTitle
+     * @param string $icon
+     * @param string $url
+     * @param bool $addReturnUrl
+     * @return string
+     */
+    protected function createLink($title, $shortTitle, $icon, $url, $addReturnUrl = true)
+    {
 
-		if (strpos($url, 'alert') !== 0) {
-			$url = $this->parentObject->urlRefForCM($url, $addReturnUrl ? 'returnUrl' : '');
-		}
+        if (strpos($url, 'alert') !== 0) {
+            $url = $this->parentObject->urlRefForCM($url, $addReturnUrl ? 'returnUrl' : '');
+        }
 
-		return $this->parentObject->linkItem(
-			'<span title="' . htmlspecialchars($title) . '">' . $shortTitle . '</span>',
-			$this->parentObject->excludeIcon($icon),
-			$url
-		);
-	}
+        return $this->parentObject->linkItem(
+            '<span title="' . htmlspecialchars($title) . '">' . $shortTitle . '</span>',
+            $this->parentObject->excludeIcon($icon),
+            $url
+        );
+    }
 }
