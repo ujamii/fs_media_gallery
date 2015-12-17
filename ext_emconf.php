@@ -23,7 +23,8 @@ Show your media assets from your local or remote storage as a gallery of albums.
     'version' => '1.2.0-dev',
     'constraints' => array(
         'depends' => array(
-            'typo3' => '6.2.2 - 7.99.99',
+            'php' => '5.5',
+            'typo3' => '6.2.14 - 7.6.99',
         ),
         'conflicts' => array(),
         'suggests' => array(),

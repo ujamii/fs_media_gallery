@@ -25,6 +25,9 @@ $boot = function ($packageKey) {
     // Add mediagallery icon to docheader of filelist
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['typo3/template.php']['docHeaderButtonsHook']['FsMediaGallery'] =
         'MiniFranske\\FsMediaGallery\\Hooks\\DocHeaderButtonsHook->addMediaGalleryButton';
+    // TYPO3 >= 7.6 module header bar buttons
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['Backend\Template\Components\ButtonBar']['getButtonsHook']['FsMediaGallery'] =
+        'MiniFranske\\FsMediaGallery\\Hooks\\DocHeaderButtonsHook->moduleTemplateDocHeaderGetButtons';
 
     // refresh file tree after changen in media album recored (sys_file_collection)
     $GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] =

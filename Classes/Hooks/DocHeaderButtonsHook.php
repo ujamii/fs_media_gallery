@@ -24,6 +24,7 @@ namespace MiniFranske\FsMediaGallery\Hooks;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -33,11 +34,12 @@ class DocHeaderButtonsHook extends \MiniFranske\FsMediaGallery\Service\AbstractB
 {
 
     /**
+     * Add media folder button to top bar of file list
+     *
      * @param array $params ['buttons' => $buttons, 'markers' => &$markers, 'pObj' => &$this]
      */
     public function addMediaGalleryButton(array $params)
     {
-
         // only add button to file list module
         if ($params['pObj']->scriptID === 'ext/filelist/mod1/index.php') {
             $extraButtons = $this->generateButtons(GeneralUtility::_GP('id'));
@@ -60,18 +62,50 @@ class DocHeaderButtonsHook extends \MiniFranske\FsMediaGallery\Service\AbstractB
      * @param string $icon
      * @param string $url
      * @param bool $addReturnUrl
-     * @return string
+     * @return string|array
      */
     protected function createLink($title, $shortTitle, $icon, $url, $addReturnUrl = true)
     {
-        if (strpos($url, 'alert') === 0) {
-            $url = 'javascript:' . $url;
+        if (!GeneralUtility::compat_version('7.4')) {
+            if (strpos($url, 'alert') === 0) {
+                $url = 'javascript:' . $url;
+            }
+            $link = '';
+            $link .= '<a href=\'' . $url . ($addReturnUrl ? '&returnUrl=' . rawurlencode($_SERVER['REQUEST_URI']) : '') . '\'';
+            $link .= ' title="' . htmlspecialchars($title) . '">';
+            $link .= $icon;
+            $link .= '</a>';
+        } else {
+            $link = [
+                'title' => $title,
+                'icon' => $icon,
+                'url' => $url . ($addReturnUrl ? '&returnUrl=' . rawurlencode($_SERVER['REQUEST_URI']) : '')
+            ];
         }
-        $link = '';
-        $link .= '<a href=\'' . $url . ($addReturnUrl ? '&returnUrl=' . rawurlencode($_SERVER['REQUEST_URI']) : '') . '\'';
-        $link .= ' title="' . htmlspecialchars($title) . '">';
-        $link .= $icon;
-        $link .= '</a>';
         return $link;
+    }
+
+    /**
+     * Get buttons
+     *
+     * @param array $params
+     * @param ButtonBar $buttonBar
+     * @return array
+     */
+    public function moduleTemplateDocHeaderGetButtons($params, ButtonBar $buttonBar)
+    {
+        $buttons = $params['buttons'];
+
+        if (GeneralUtility::_GP('M') === 'file_FilelistList') {
+            foreach ($this->generateButtons(GeneralUtility::_GP('id')) as $buttonInfo) {
+                $button = $buttonBar->makeLinkButton();
+                $button->setIcon($buttonInfo['icon']);
+                $button->setTitle($buttonInfo['title']);
+                $button->setHref($buttonInfo['url']);
+                $buttons['left'][2][] = $button;
+            }
+        }
+
+        return $buttons;
     }
 }

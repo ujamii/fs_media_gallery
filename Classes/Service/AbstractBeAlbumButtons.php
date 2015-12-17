@@ -25,6 +25,8 @@ namespace MiniFranske\FsMediaGallery\Service;
  ***************************************************************/
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Imaging\Icon;
+use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Backend\Utility\IconUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -55,12 +57,12 @@ abstract class AbstractBeAlbumButtons
             $folder = null;
         }
 
-        if ($folder && $folder instanceof Folder && in_array(
+        if ($folder && $folder instanceof Folder &&
+            in_array(
                 $folder->getRole(),
                 array(Folder::ROLE_DEFAULT, Folder::ROLE_USERUPLOAD)
             )
         ) {
-
             /** @var \MiniFranske\FsMediaGallery\Service\Utility $utility */
             $utility = GeneralUtility::makeInstance('MiniFranske\\FsMediaGallery\\Service\\Utility');
             $mediaFolders = $utility->getStorageFolders();
@@ -77,17 +79,17 @@ abstract class AbstractBeAlbumButtons
                 foreach ($collections as $collection) {
                     $buttons[] = $this->createLink(
                         sprintf($this->sL('module.buttons.editAlbum'), $collection['title']),
-                        sprintf($this->sL('module.buttons.editAlbum'),
-                            $charsetConverter->crop('utf-8', $collection['title'], 12, '...')),
-                        IconUtility::getSpriteIcon('extensions-fs_media_gallery-edit-album'),
+                        sprintf(
+                            $this->sL('module.buttons.editAlbum'),
+                            $charsetConverter->crop('utf-8', $collection['title'], 12, '...')
+                        ),
+                        $this->getIcon('edit-album'),
                         $this->buildEditUrl($collection['uid'])
                     );
                 }
 
                 if (!count($collections)) {
-
                     foreach ($mediaFolders as $uid => $title) {
-
                         // find parent album for auto setting parent album
                         $parentUid = 0;
                         $parents = $utility->findFileCollectionRecordsForFolder(
@@ -101,21 +103,23 @@ abstract class AbstractBeAlbumButtons
                         }
                         $buttons[] = $this->createLink(
                             sprintf($this->sL('module.buttons.createAlbumIn'), $title),
-                            sprintf($this->sL('module.buttons.createAlbumIn'),
-                                $charsetConverter->crop('utf-8', $title, 12, '...')),
-                            IconUtility::getSpriteIcon('extensions-fs_media_gallery-add-album'),
+                            sprintf(
+                                $this->sL('module.buttons.createAlbumIn'),
+                                $charsetConverter->crop('utf-8', $title, 12, '...')
+                            ),
+                            $this->getIcon('add-album'),
                             $this->buildAddUrl($uid, $parentUid, $folder)
                         );
                     }
                 }
 
-                // show hint button for admin users
-                // todo: make this better so it can also be used for editors with enough rights to create a storageFolder
+            // show hint button for admin users
+            // todo: make this better so it can also be used for editors with enough rights to create a storageFolder
             } elseif ($GLOBALS['BE_USER']->isAdmin()) {
                 $buttons[] = $this->createLink(
                     $this->sL('module.buttons.createAlbum'),
                     $this->sL('module.buttons.createAlbum'),
-                    IconUtility::getSpriteIcon('extensions-fs_media_gallery-add-album'),
+                    $this->getIcon('add-album'),
                     'alert("' . GeneralUtility::slashJS($this->sL('module.alerts.firstCreateStorageFolder')) . '");',
                     false
                 );
@@ -157,9 +161,13 @@ abstract class AbstractBeAlbumButtons
     protected function buildAddUrl($pid, $parentAlbumUid, Folder $folder)
     {
         if (!GeneralUtility::compat_version('7.4')) {
-            return 'alt_doc.php?edit[sys_file_collection][' . (int)$pid . ']=new&defVals[sys_file_collection][parentalbum]=' . (int)$parentAlbumUid . '&defVals[sys_file_collection][title]=' . ucfirst(trim(str_replace('_',
-                ' ',
-                $folder->getName()))) . '&defVals[sys_file_collection][storage]=' . $folder->getStorage()->getUid() . '&defVals[sys_file_collection][folder]=' . $folder->getIdentifier() . '&defVals[sys_file_collection][type]=folder';
+            return 'alt_doc.php?edit[sys_file_collection][' . (int)$pid . ']=new' .
+                '&defVals[sys_file_collection][parentalbum]=' . (int)$parentAlbumUid .
+                '&defVals[sys_file_collection][title]=' .
+                ucfirst(trim(str_replace('_', ' ', $folder->getName()))) .
+                '&defVals[sys_file_collection][storage]=' . $folder->getStorage()->getUid() .
+                '&defVals[sys_file_collection][folder]=' . $folder->getIdentifier() .
+                '&defVals[sys_file_collection][type]=folder';
         } else {
             return BackendUtility::getModuleUrl('record_edit', array(
                 'edit' => array(
@@ -192,6 +200,22 @@ abstract class AbstractBeAlbumButtons
      * @return string
      */
     abstract protected function createLink($title, $shortTitle, $icon, $url, $addReturnUrl = true);
+
+    /**
+     * @param string $name
+     * @return string|Icon
+     */
+    protected function getIcon($name)
+    {
+        if (!GeneralUtility::compat_version('7.4')) {
+            $icon = IconUtility::getSpriteIcon('extensions-fs_media_gallery-' . $name);
+        } else {
+            $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
+            $icon = $iconFactory->getIcon('action-' . $name, Icon::SIZE_SMALL);
+        }
+
+        return $icon;
+    }
 
     /**
      * @return \TYPO3\CMS\Lang\LanguageService
