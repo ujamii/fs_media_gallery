@@ -101,7 +101,11 @@ class DocHeaderButtonsHook extends \MiniFranske\FsMediaGallery\Service\AbstractB
                 $button = $buttonBar->makeLinkButton();
                 $button->setIcon($buttonInfo['icon']);
                 $button->setTitle($buttonInfo['title']);
-                $button->setHref($buttonInfo['url']);
+                if (strpos($buttonInfo['url'], 'alert') === 0) {
+                    $button->setOnClick($buttonInfo['url'] . ';return false;');
+                } else {
+                    $button->setHref($buttonInfo['url']);
+                }
                 $buttons['left'][2][] = $button;
             }
         }
