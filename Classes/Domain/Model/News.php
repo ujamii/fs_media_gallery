@@ -14,8 +14,7 @@ namespace MiniFranske\FsMediaGallery\Domain\Model;
 /**
  * News
  */
-class News extends \GeorgRinger\News\Domain\Model\News
-{
+class News extends \GeorgRinger\News\Domain\Model\News {
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum>
