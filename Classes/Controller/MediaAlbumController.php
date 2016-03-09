@@ -227,6 +227,8 @@ class MediaAlbumController extends ActionController
         }
 
         if ($mediaAlbum && $mediaAlbum->getParentalbum() && (
+                $this->mediaAlbumRepository->getAlbumUids() === array()
+                ||
                 (!$this->mediaAlbumRepository->getUseAlbumUidsAsExclude() && in_array($mediaAlbum->getParentalbum()->getUid(),
                         $this->mediaAlbumRepository->getAlbumUids()))
                 ||
