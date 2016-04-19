@@ -64,6 +64,13 @@ $boot = function ($packageKey) {
                 'source' => 'EXT:' . $packageKey . '/Resources/Public/Icons/mediagallery-add.svg',
             )
         );
+        $iconRegistry->registerIcon(
+            'content-mediagallery',
+            \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
+            array(
+                'source' => 'EXT:' . $packageKey . '/Resources/Public/Icons/mediagallery_ce_wiz.png',
+            )
+        );
         $GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-mediagal'] =
             'apps-pagetree-folder-contains-mediagal';
 

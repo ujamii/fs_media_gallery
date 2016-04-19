@@ -19,8 +19,10 @@ $boot = function ($packageKey) {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:' . $packageKey . '/Configuration/TSConfig/Page.ts">');
 
     // Resource Icon hook
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_iconworks.php']['overrideResourceIcon']['FsMediaGallery'] =
-        'MiniFranske\\FsMediaGallery\\Hooks\\IconUtilityHook';
+    if (\TYPO3\CMS\Core\Utility\GeneralUtility::compat_version('6.2')) {
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_iconworks.php']['overrideResourceIcon']['FsMediaGallery'] =
+            'MiniFranske\\FsMediaGallery\\Hooks\\IconUtilityHook';
+    }
 
     // Add mediagallery icon to docheader of filelist
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['typo3/template.php']['docHeaderButtonsHook']['FsMediaGallery'] =
@@ -83,7 +85,7 @@ $boot = function ($packageKey) {
     $signalSlotDispatcher->connect(
         'TYPO3\\CMS\\Core\\Imaging\\IconFactory',
         'buildIconForResourceSignal',
-        'MiniFranske\\FsMediaGallery\\Hooks\\IconUtilityHook',
+        'MiniFranske\\FsMediaGallery\\Hooks\\IconFactory',
         'buildIconForResource'
     );
 

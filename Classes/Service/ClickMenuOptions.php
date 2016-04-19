@@ -79,7 +79,7 @@ class ClickMenuOptions extends AbstractBeAlbumButtons
 
         return $this->parentObject->linkItem(
             '<span title="' . htmlspecialchars($title) . '">' . $shortTitle . '</span>',
-            $this->parentObject->excludeIcon($icon),
+            $icon,
             $url
         );
     }

@@ -21,6 +21,9 @@ namespace MiniFranske\FsMediaGallery\ViewHelpers\Widget;
 	 *                                                                        *
 	 * The TYPO3 project - inspiring people to share!                         *
 	 *                                                                        */
+use TYPO3Fluid\Fluid\Core\Compiler\TemplateCompiler;
+use TYPO3Fluid\Fluid\Core\Parser\SyntaxTree\ViewHelperNode;
+
 /**
  * @api
  */
@@ -60,6 +63,11 @@ abstract class AbstractWidgetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper
      * @inject
      */
     protected $extensionService;
+
+    /**
+     * @var bool
+     */
+    protected $escapeOutput = false;
 
     /**
      * @var \TYPO3\CMS\Fluid\Core\Widget\WidgetContext
@@ -109,8 +117,8 @@ abstract class AbstractWidgetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper
         $this->widgetContext->setWidgetConfiguration($this->getWidgetConfiguration());
         $this->initializeWidgetIdentifier();
         $this->widgetContext->setControllerObjectName(get_class($this->controller));
-        $extensionName = $this->controllerContext->getRequest()->getControllerExtensionName();
-        $pluginName = $this->controllerContext->getRequest()->getPluginName();
+        $extensionName = $this->renderingContext->getControllerContext()->getRequest()->getControllerExtensionName();
+        $pluginName = $this->renderingContext->getControllerContext()->getRequest()->getPluginName();
         $this->widgetContext->setParentExtensionName($extensionName);
         $this->widgetContext->setParentPluginName($pluginName);
         $pluginNamespace = $this->extensionService->getPluginNamespace($extensionName, $pluginName);
@@ -220,5 +228,18 @@ abstract class AbstractWidgetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper
                 'nextWidgetNumber', $widgetCounter + 1);
         }
         $this->widgetContext->setWidgetIdentifier($widgetIdentifier);
+    }
+
+    /**
+     * @param string $argumentsName
+     * @param string $closureName
+     * @param string $initializationPhpCode
+     * @param ViewHelperNode $node
+     * @param TemplateCompiler $compiler
+     */
+    public function compile($argumentsName, $closureName, &$initializationPhpCode, ViewHelperNode $node, TemplateCompiler $compiler)
+    {
+        $compiler->disable();
+        return '\'\'';
     }
 }

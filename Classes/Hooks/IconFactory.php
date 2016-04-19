@@ -4,7 +4,7 @@ namespace MiniFranske\FsMediaGallery\Hooks;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 Frans Saris <franssaris@gmail.com>
+ *  (c) 2016 Frans Saris <franssaris@gmail.com>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,13 +24,14 @@ namespace MiniFranske\FsMediaGallery\Hooks;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Resource\ResourceInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Resource\Folder;
 
 /**
- * IconUtility Hook to add media gallery icon
+ * Class IconFactory
  */
-class IconUtilityHook implements \TYPO3\CMS\Backend\Utility\IconUtilityOverrideResourceIconHookInterface
+class IconFactory
 {
     /**
      * @var array
@@ -38,20 +39,22 @@ class IconUtilityHook implements \TYPO3\CMS\Backend\Utility\IconUtilityOverrideR
     static protected $mediaFolders;
 
     /**
-     * @param \TYPO3\CMS\Core\Resource\ResourceInterface $folderObject
-     * @param $iconName
+     * @param ResourceInterface $folderObject
+     * @param string $size
      * @param array $options
-     * @param array $overlays
+     * @param string $iconIdentifier
+     * @param string $overlayIdentifier
+     * @return array
      */
-    public function overrideResourceIcon(
-        \TYPO3\CMS\Core\Resource\ResourceInterface $folderObject,
-        &$iconName,
-        array &$options,
-        array &$overlays
+    public function buildIconForResource(
+        ResourceInterface $folderObject,
+        $size,
+        array $options,
+        $iconIdentifier,
+        $overlayIdentifier
     ) {
-
-        if ($folderObject && $folderObject instanceof Folder &&
-            in_array($folderObject->getRole(), array(Folder::ROLE_DEFAULT, Folder::ROLE_USERUPLOAD))
+        if ($folderObject && $folderObject instanceof Folder
+            && in_array($folderObject->getRole(), array(Folder::ROLE_DEFAULT, Folder::ROLE_USERUPLOAD))
         ) {
             $mediaFolders = self::getMediaFolders();
 
@@ -65,7 +68,7 @@ class IconUtilityHook implements \TYPO3\CMS\Backend\Utility\IconUtilityOverrideR
                 );
 
                 if ($collections) {
-                    $iconName = 'tcarecords-sys_file_collection-folder';
+                    $iconIdentifier = 'tcarecords-sys_file_collection-folder';
                     $hidden = true;
                     foreach ($collections as $collection) {
                         if ((int)$collection['hidden'] === 0) {
@@ -74,11 +77,12 @@ class IconUtilityHook implements \TYPO3\CMS\Backend\Utility\IconUtilityOverrideR
                         }
                     }
                     if ($hidden) {
-                        $overlays['status-overlay-hidden'] = array();
+                        $overlayIdentifier = 'overlay-hidden';
                     }
                 }
             }
         }
+        return array($folderObject, $size, $options, $iconIdentifier, $overlayIdentifier);
     }
 
     /**

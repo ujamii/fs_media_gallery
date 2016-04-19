@@ -11,6 +11,9 @@ namespace MiniFranske\FsMediaGallery\ViewHelpers\Embed;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use TYPO3\CMS\Core\Page\PageRenderer;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -62,8 +65,11 @@ class JavaScriptViewHelper extends AbstractViewHelper
 
         if (!empty($this->arguments['moveToFooter']) && TYPO3_MODE === 'FE') {
             // add JS inline code to footer
-            $GLOBALS['TSFE']->getPageRenderer()->addJsFooterInlineCode($blockName, $content,
-                $GLOBALS['TSFE']->config['config']['compressJs']);
+            $this->getPageRenderer()->addJsFooterInlineCode(
+                $blockName,
+                $content,
+                $GLOBALS['TSFE']->config['config']['compressJs']
+            );
             return '';
         } else {
             $lb = "\n";
@@ -72,4 +78,17 @@ class JavaScriptViewHelper extends AbstractViewHelper
         }
     }
 
+    /**
+     * @return PageRenderer
+     */
+    protected function getPageRenderer() {
+        if (method_exists($GLOBALS['TSFE'], 'getPageRenderer')) {
+            $pageRenderer = $GLOBALS['TSFE']->getPageRenderer();
+        } else {
+            $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
+            $pageRenderer->setTemplateFile('EXT:frontend/Resources/Private/Templates/MainPage.html');
+            $pageRenderer->setBackPath(TYPO3_mainDir);
+        }
+        return $pageRenderer;
+    }
 }
