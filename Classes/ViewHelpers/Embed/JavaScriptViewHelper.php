@@ -86,8 +86,6 @@ class JavaScriptViewHelper extends AbstractViewHelper
             $pageRenderer = $GLOBALS['TSFE']->getPageRenderer();
         } else {
             $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
-            $pageRenderer->setTemplateFile('EXT:frontend/Resources/Private/Templates/MainPage.html');
-            $pageRenderer->setBackPath(TYPO3_mainDir);
         }
         return $pageRenderer;
     }
