@@ -19,7 +19,14 @@
 			</div>
 		</div>
 		<div class="navigation">
+			<f:if condition="{previousAsset}">
+				<f:link.action class="btn btn-default" action="showAsset" arguments="{mediaAlbum:mediaAlbum,mediaAssetUid:previousAsset.uid}" title="{mf:fileTitle(file:previousAsset)} - {mediaAlbum.title}">&lt; {mf:fileTitle(file:previousAsset)}</f:link.action>
+			</f:if>
 			<f:link.action class="btn btn-default" controller="MediaAlbum" arguments="{mediaAlbum:mediaAlbum}"><f:translate id="back_to_%s" arguments="{0: mediaAlbum.title}">Back to %s</f:translate></f:link.action>
+
+			<f:if condition="{nextAsset}">
+				<f:link.action class="btn btn-default" action="showAsset" arguments="{mediaAlbum:mediaAlbum,mediaAssetUid:nextAsset.uid}" title="{mf:fileTitle(file:nextAsset)} - {mediaAlbum.title}">{mf:fileTitle(file:nextAsset)} &gt;</f:link.action>
+			</f:if>
 		</div>
 	</f:section>
 

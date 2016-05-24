@@ -272,6 +272,31 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Get pevious, current and next asset by assetUid
+     *
+     * @param $assetUid
+     * @return FileReference[]
+     */
+    public function getPreviousCurrentAndNext($assetUid) {
+        $previous = $last = $current = $next = null;
+
+        foreach ($assets = $this->getAssets() as $asset) {
+            if ($current !== null) {
+                $next = $asset;
+                break;
+            }
+            $previous = $last;
+            $last = $asset;
+            /** @var $asset File|FileReference */
+            if ((int)$assetUid === (int)$asset->getUid()) {
+                $current = $asset;
+            }
+        }
+
+        return [$previous, $current, $next];
+    }
+
+    /**
      * @return array
      * @deprecated Will be removed in next major version 2.*
      */

@@ -323,13 +323,15 @@ class MediaAlbumController extends ActionController
      */
     public function showAssetAction(MediaAlbum $mediaAlbum, $mediaAssetUid)
     {
-        /** @var $mediaAsset \TYPO3\CMS\Core\Resource\File */
-        if (!$mediaAsset = $mediaAlbum->getAssetByUid($mediaAssetUid)) {
+        list($previousAsset, $mediaAsset, $nextAsset) = $mediaAlbum->getPreviousCurrentAndNext($mediaAssetUid);
+        if (!$mediaAsset) {
             $message = LocalizationUtility::translate('asset_not_found', $this->extensionName);
             $this->pageNotFound((empty($message) ? 'Asset not found.' : $message));
         }
-        $this->view->assign('mediaAlbum', $mediaAlbum);
+        $this->view->assign('previousAsset', $previousAsset);
+        $this->view->assign('nextAsset', $nextAsset);
         $this->view->assign('mediaAsset', $mediaAsset);
+        $this->view->assign('mediaAlbum', $mediaAlbum);
     }
 
     /**
