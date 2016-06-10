@@ -23,7 +23,7 @@ Requirements
 Quick install notes
 ===================
 
-- Install extension through Extension Manager or composer ``composer require MiniFranske/fs-media-gallery``
+- Install extension through Extension Manager or composer ``composer require minifranske/fs-media-gallery``
 - Include Static Template "Media Galley (fs_media_gallery)"
 - Create a StoragePage and set "Contains Plugin" to "Media Galleries"
 - Go to file module and open the folder you want to turn into a album
