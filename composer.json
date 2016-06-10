@@ -2,7 +2,7 @@
   "name": "minifranske/fs-media-gallery",
   "description": "A FAL based media gallery for TYPO3. Show your assets from your local or remote storage as a gallery of albums.",
   "type": "typo3-cms-extension",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "dist": {
     "url": "git@bitbucket.org:franssaris/fs_media_gallery.git",
     "type": "git"
