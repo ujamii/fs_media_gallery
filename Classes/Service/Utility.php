@@ -3,24 +3,19 @@ namespace MiniFranske\FsMediaGallery\Service;
 
 /***************************************************************
  *  Copyright notice
- *
  *  (c) 2014 Frans Saris <franssaris@gmail.com>
  *  All rights reserved
- *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2 of the License, or
  *  (at your option) any later version.
- *
  *  The GNU General Public License can be found at
  *  http://www.gnu.org/copyleft/gpl.html.
- *
  *  This script is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
@@ -55,6 +50,7 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
                 }
             }
         }
+
         return $pages;
     }
 
@@ -97,6 +93,30 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
                 'deleted' => 1
             )
         );
+    }
+
+    /**
+     * Creates a folderRecord (sys_file_collection)
+     *
+     * @param string $title The title of the folder(album_name)
+     * @param int $collectionStoragePid The pid of the collection/mediaStorage
+     * @param int $storageUid The uid of the storage (fileStorage)
+     * @param string $identifier The identifier of the folder
+     * @param int $parentAlbum The uid of the parentAlbum
+     */
+    public function createFolderRecord($title, $collectionStoragePid, $storageUid, $identifier, $parentAlbum = 0)
+    {
+        $folderRecord = [
+            'pid' => (int)$collectionStoragePid,
+            'deleted' => 0,
+            'hidden' => 0,
+            'type' => 'folder',
+            'storage' => (int)$storageUid,
+            'folder' => $identifier,
+            'title' => $title,
+            'parentalbum' => (int)$parentAlbum
+        ];
+        $this->getDatabaseConnection()->exec_INSERTquery('sys_file_collection', $folderRecord);
     }
 
     /**
