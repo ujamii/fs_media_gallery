@@ -165,7 +165,7 @@ class MediaAlbumController extends ActionController
      */
     public function indexAction()
     {
-        return '';
+        return '<i>Please select a display mode in the plugin.</i>';
     }
 
     /**

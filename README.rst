@@ -30,6 +30,7 @@ Quick install notes
    - Click on the "Create new album..." in context menu or top toolbar
    - Save your new album
 - Insert plugin on page and select "Media Gallery" as plugin type
+- Adjust the "Display mode" to the preferred gallery
 - Set the "Record Storage Page" to the "StoragePage" you just created
 - Open FE and admire your album :)
 
@@ -41,6 +42,7 @@ Known issues
 
 - I inserted a "Media Gallery" plugin but I see no images in FE
    - Did you set the "Record Storage Page" of the plugin to the "StoragePage" with your albums?
+   - Did you set the "Display mode" in the plugin?
 
 - The images shown in the lightbox don't have the max size but are resized to max 1400px * 1400px
    - These limits are set in the typoscript template of the extension and are there to prevent that to big images are used in FE. These max values can be overruled by setting your own values in your typoscript template.
