@@ -28,6 +28,12 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
 {
 
     /**
+     * @var \TYPO3\CMS\Extbase\Service\CacheService
+     * @inject
+     */
+    protected $cacheService;
+
+    /**
      * Get storage folders marked as media gallery
      *
      * @return array
@@ -52,6 +58,37 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
         }
 
         return $pages;
+    }
+
+    /**
+     * Gets all pages with an active media gallery plugin
+     *
+     * @return array
+     */
+    public function getMediaGalleryPluginPages()
+    {
+        $pagesWithPlugin = [];
+        $res = $this->getDatabaseConnection()->exec_SELECTquery(
+            'uid, pid',
+            'tt_content',
+            'deleted = 0 AND hidden = 0 AND CType = "list" AND list_type="fsmediagallery_mediagallery"'
+        );
+        while ($row = $this->getDatabaseConnection()->sql_fetch_assoc($res)) {
+            $pagesWithPlugin[] = $row;
+        }
+
+        return $pagesWithPlugin;
+    }
+
+    /**
+     * Clear all pageCache of the pages containing the mediaGalleryPlugin
+     */
+    public function clearMediaGalleryPageCache()
+    {
+        $pagesWithPlugin = $this->getMediaGalleryPluginPages();
+        foreach ($pagesWithPlugin as $page) {
+            $this->cacheService->clearPageCache($page);
+        }
     }
 
     /**

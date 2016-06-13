@@ -19,12 +19,9 @@ namespace MiniFranske\FsMediaGallery\Hooks;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum;
 use TYPO3\CMS\Core\Resource\Folder;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\Repository;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Slots that pick up signals after (re)moving folders to update mediagallery record (sys_file_collection)
@@ -130,6 +127,7 @@ class FolderChangedSlot implements \TYPO3\CMS\Core\SingletonInterface
         foreach ($this->folderMapping[$folder->getCombinedIdentifier()] as $folderInfo) {
             $this->utilityService->deleteFolderRecord($storageUid, $folderInfo[1]);
         }
+        $this->utilityService->clearMediaGalleryPageCache();
     }
 
     /**
@@ -173,6 +171,7 @@ class FolderChangedSlot implements \TYPO3\CMS\Core\SingletonInterface
                     $newMapping[$key][1]
                 );
             }
+            $this->utilityService->clearMediaGalleryPageCache();
         }
     }
 
@@ -198,6 +197,7 @@ class FolderChangedSlot implements \TYPO3\CMS\Core\SingletonInterface
                         $folder->getIdentifier(),
                         $parentUid
                     );
+                    $this->utilityService->clearMediaGalleryPageCache();
                 }
             }
         }
