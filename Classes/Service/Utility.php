@@ -36,12 +36,6 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
 {
 
     /**
-     * @var \TYPO3\CMS\Extbase\Service\CacheService
-     * @inject
-     */
-    protected $cacheService;
-
-    /**
      * Get storage folders marked as media gallery
      *
      * @return array
