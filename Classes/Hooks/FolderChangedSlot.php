@@ -130,7 +130,7 @@ class FolderChangedSlot implements \TYPO3\CMS\Core\SingletonInterface
         foreach ($this->folderMapping[$folder->getCombinedIdentifier()] as $folderInfo) {
             $this->utilityService->deleteFolderRecord($storageUid, $folderInfo[1]);
         }
-        $this->utilityService->clearMediaGalleryPageCache();
+        $this->utilityService->clearMediaGalleryPageCache($folder);
     }
 
     /**
@@ -174,7 +174,7 @@ class FolderChangedSlot implements \TYPO3\CMS\Core\SingletonInterface
                     $newMapping[$key][1]
                 );
             }
-            $this->utilityService->clearMediaGalleryPageCache();
+            $this->utilityService->clearMediaGalleryPageCache($folder);
         }
     }
 
@@ -200,7 +200,7 @@ class FolderChangedSlot implements \TYPO3\CMS\Core\SingletonInterface
                         $folder->getIdentifier(),
                         $parentUid
                     );
-                    $this->utilityService->clearMediaGalleryPageCache();
+                    $this->utilityService->clearMediaGalleryPageCache($folder);
                 }
             }
         }

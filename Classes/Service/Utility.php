@@ -25,7 +25,9 @@ namespace MiniFranske\FsMediaGallery\Service;
  ***************************************************************/
 
 use \TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Resource\Folder;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Utility class
@@ -67,33 +69,28 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
     }
 
     /**
-     * Gets all pages with an active media gallery plugin
+     * Clear pageCache defined at the storage of the collection/album
      *
-     * @return array
+     * @param Folder $folder
      */
-    public function getMediaGalleryPluginPages()
+    public function clearMediaGalleryPageCache(Folder $folder)
     {
-        $pagesWithPlugin = [];
-        $res = $this->getDatabaseConnection()->exec_SELECTquery(
-            'uid, pid',
-            'tt_content',
-            'deleted = 0 AND hidden = 0 AND CType = "list" AND list_type="fsmediagallery_mediagallery"'
+        /** @var DataHandler $tce */
+        $tce = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');
+
+        $collections = $this->findFileCollectionRecordsForFolder(
+            $folder->getStorage()->getUid(),
+            $folder->getIdentifier(),
+            array_keys($this->getStorageFolders())
         );
-        while ($row = $this->getDatabaseConnection()->sql_fetch_assoc($res)) {
-            $pagesWithPlugin[] = $row;
-        }
 
-        return $pagesWithPlugin;
-    }
-
-    /**
-     * Clear all pageCache of the pages containing the mediaGalleryPlugin
-     */
-    public function clearMediaGalleryPageCache()
-    {
-        $pagesWithPlugin = $this->getMediaGalleryPluginPages();
-        foreach ($pagesWithPlugin as $page) {
-            $this->cacheService->clearPageCache($page);
+        if (count($collections)) {
+            foreach ($collections as $collection) {
+                $pageConfig = BackendUtility::getPagesTSconfig($collection['pid']);
+                if (!empty($pageConfig['TCEMAIN.']['clearCacheCmd'])) {
+                    $tce->clear_cacheCmd($pageConfig['TCEMAIN.']['clearCacheCmd']);
+                }
+            }
         }
     }
 
