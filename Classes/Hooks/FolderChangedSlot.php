@@ -40,20 +40,6 @@ class FolderChangedSlot implements \TYPO3\CMS\Core\SingletonInterface
     protected $utilityService;
 
     /**
-     * mediaAlbumRepository
-     *
-     * @var \MiniFranske\FsMediaGallery\Domain\Repository\MediaAlbumRepository
-     * @inject
-     */
-    protected $mediaAlbumRepository;
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
-     * @inject
-     */
-    protected $objectManager;
-
-    /**
      * __contruct
      */
     public function __construct()
