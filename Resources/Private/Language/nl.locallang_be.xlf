@@ -217,6 +217,11 @@
 				<target>Sta toe dat er bij het creëren van een nieuwe folder, onder een bestaand album, een nieuw album wordt aangemaakt.</target>
 			</trans-unit>
 
+			<trans-unit id="extmng.clearCacheAfterFileChange">
+				<source>Clears the cache of the album after a file change.</source>
+				<source>Leeg de cache van het album na een bestandsactie.</source>
+			</trans-unit>
+
 			<!--
 				BE MODULE
 			-->

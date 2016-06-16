@@ -168,6 +168,9 @@
 			<trans-unit id="extmng.enableAutoCreateFileCollection">
 				<source>Enable auto creation of fileCollections/albums when a new folder is created beneath an existing album.</source>
 			</trans-unit>
+			<trans-unit id="extmng.clearCacheAfterFileChange">
+				<source>Clears the cache of the album after a file change.</source>
+			</trans-unit>
 
 			<!--
 				BE MODULE

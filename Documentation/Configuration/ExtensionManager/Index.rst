@@ -26,6 +26,7 @@ To set this configuration, switch to the Extension Manager, search for the exten
    :ref:`allowedActionsInFlexforms <extConf.tx_fsmedia_gallery.allowedActionsInFlexforms>`           :ref:`t3tsref:data-type-list`    nestedList,flatList,showAlbumByParam,showAlbumByConfig,randomAsset
    :ref:`list.orderOptions <extConf.tx_fsmedia_gallery.list.orderOptions>`                           :ref:`t3tsref:data-type-list`    datetime,crdate,sorting
    :ref:`enableAutoCreateFileCollection <extConf.tx_fsmedia_gallery.enableAutoCreateFileCollection>` :ref:`t3tsref:data-type-boolean` true
+   :ref:`clearCacheAfterFileChange <extConf.tx_fsmedia_gallery.clearCacheAfterFileChange>`           :ref:`t3tsref:data-type-boolean` false
    ================================================================================================= ===============================  ===================================================================
 
 
@@ -70,6 +71,16 @@ enableAutoCreateFileCollection
 """"""""""""""""""""""""""""""
 
 Enables auto creation of fileCollection(s)/album(s) of a folder when a new folder is created beneath an existing fileCollection/album.
+
+":ref:`Display mode <flexforms.mediagallery.tabs.general.displayMode>`" in flexforms.
+
+.. _extConf.tx_fsmedia_gallery.clearCacheAfterFileChange:
+
+clearCacheAfterFileChange
+"""""""""""""""""""""""""
+
+Clears the cache of the album after a file change. Set on false by default due that the cache will be cleared multiple times
+if more files will be added.
 
 ":ref:`Display mode <flexforms.mediagallery.tabs.general.displayMode>`" in flexforms.
 
