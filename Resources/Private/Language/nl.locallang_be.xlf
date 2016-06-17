@@ -218,7 +218,7 @@
 			</trans-unit>
 
 			<trans-unit id="extmng.clearCacheAfterFileChange">
-				<source>Clears the cache of the album after a file change.</source>
+				<source>Clear the cache of the album after a file change.</source>
 				<source>Leeg de cache van het album na een bestandsactie.</source>
 			</trans-unit>
 

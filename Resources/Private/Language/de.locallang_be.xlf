@@ -217,7 +217,7 @@
 				<target>Aktivieren Sie die automatische Erstellung von Dateien Collections / Alben, wenn ein neuer Ordner unter einem bestehenden Album erstellt wird.</target>
 			</trans-unit>
 			<trans-unit id="extmng.clearCacheAfterFileChange">
-				<source>Clears the cache of the album after a file change.</source>
+				<source>Clear the cache of the album after a file change.</source>
 				<target>Löscht den Cache des Albums nach einer Datei zu ändern.</target>
 			</trans-unit>
 
