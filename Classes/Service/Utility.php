@@ -27,6 +27,7 @@ namespace MiniFranske\FsMediaGallery\Service;
 use \TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Resource\Folder;
+use TYPO3\CMS\Core\Resource\FolderInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -65,9 +66,9 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
     /**
      * Clear pageCache defined at the storage of the collection/album
      *
-     * @param Folder $folder
+     * @param FolderInterface $folder
      */
-    public function clearMediaGalleryPageCache(Folder $folder)
+    public function clearMediaGalleryPageCache(FolderInterface $folder)
     {
         /** @var DataHandler $tce */
         $tce = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');

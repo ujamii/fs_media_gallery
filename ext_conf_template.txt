@@ -5,3 +5,6 @@ list.orderOptions = datetime,crdate,sorting
 
 # cat=basic/enable/3; type=boolean; label=LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:extmng.enableAutoCreateFileCollection
 enableAutoCreateFileCollection = true
+
+# cat=basic/enable/3; type=boolean; label=LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:extmng.clearCacheAfterFileChange
+clearCacheAfterFileChange = false
