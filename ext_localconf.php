@@ -81,6 +81,16 @@ $boot = function ($packageKey) {
         'MiniFranske\\FsMediaGallery\\Hooks\\FolderChangedSlot',
         'postFolderRename'
     );
+
+    $conf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$packageKey]);
+    if (!empty($conf['enableAutoCreateFileCollection']) && $conf['enableAutoCreateFileCollection']) {
+        $signalSlotDispatcher->connect(
+            'TYPO3\\CMS\\Core\\Resource\\ResourceStorage',
+            \TYPO3\CMS\Core\Resource\ResourceStorageInterface::SIGNAL_PostFolderAdd,
+            'MiniFranske\\FsMediaGallery\\Hooks\\FolderChangedSlot',
+            'postFolderAdd'
+        );
+    }
     // File tree icon adjustments for TYPO3 => 7.5
     $signalSlotDispatcher->connect(
         'TYPO3\\CMS\\Core\\Imaging\\IconFactory',

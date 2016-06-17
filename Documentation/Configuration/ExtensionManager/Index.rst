@@ -20,12 +20,13 @@ To set this configuration, switch to the Extension Manager, search for the exten
 
 .. container:: ts-properties
 
-   ======================================================================================== ============================== ===================================================================
-   Property                                                                                 Data type                      Default
-   ======================================================================================== ============================== ===================================================================
-   :ref:`allowedActionsInFlexforms <extConf.tx_fsmedia_gallery.allowedActionsInFlexforms>`  :ref:`t3tsref:data-type-list`  nestedList,flatList,showAlbumByParam,showAlbumByConfig,randomAsset
-   :ref:`list.orderOptions <extConf.tx_fsmedia_gallery.list.orderOptions>`                  :ref:`t3tsref:data-type-list`  datetime,crdate,sorting
-   ======================================================================================== ============================== ===================================================================
+   ================================================================================================= =================================== ===================================================================
+   Property                                                                                          Data type                        Default
+   ================================================================================================= ===============================  ===================================================================
+   :ref:`allowedActionsInFlexforms <extConf.tx_fsmedia_gallery.allowedActionsInFlexforms>`           :ref:`t3tsref:data-type-list`    nestedList,flatList,showAlbumByParam,showAlbumByConfig,randomAsset
+   :ref:`list.orderOptions <extConf.tx_fsmedia_gallery.list.orderOptions>`                           :ref:`t3tsref:data-type-list`    datetime,crdate,sorting
+   :ref:`enableAutoCreateFileCollection <extConf.tx_fsmedia_gallery.enableAutoCreateFileCollection>` :ref:`t3tsref:data-type-boolean` true
+   ================================================================================================= ===============================  ===================================================================
 
 
 Property details
@@ -63,4 +64,17 @@ Available actions are:
 * sorting
 
 
-.. todo: add screenshot of EM config
+.. _extConf.tx_fsmedia_gallery.enableAutoCreateFileCollection:
+
+enableAutoCreateFileCollection
+""""""""""""""""""""""""""""""
+
+Enables auto creation of fileCollection(s)/album(s) of a folder when a new folder is created beneath an existing fileCollection/album.
+
+":ref:`Display mode <flexforms.mediagallery.tabs.general.displayMode>`" in flexforms.
+
+.. figure:: ../../Images/Configuration/ExtensionManager/extension_manager.png
+   :width: 716px
+   :alt: General extensionmanager settings
+
+       **Image 1:** General extensionmanager settings

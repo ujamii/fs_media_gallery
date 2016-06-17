@@ -25,6 +25,9 @@ namespace MiniFranske\FsMediaGallery\Service;
  ***************************************************************/
 
 use \TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\DataHandling\DataHandler;
+use TYPO3\CMS\Core\Resource\Folder;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Utility class
@@ -55,7 +58,60 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
                 }
             }
         }
+
         return $pages;
+    }
+
+    /**
+     * Clear pageCache defined at the storage of the collection/album
+     *
+     * @param Folder $folder
+     */
+    public function clearMediaGalleryPageCache(Folder $folder)
+    {
+        /** @var DataHandler $tce */
+        $tce = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');
+
+        $collections = $this->findFileCollectionRecordsForFolder(
+            $folder->getStorage()->getUid(),
+            $folder->getIdentifier(),
+            array_keys($this->getStorageFolders())
+        );
+
+        if (count($collections)) {
+            foreach ($collections as $collection) {
+                $pageConfig = BackendUtility::getPagesTSconfig($collection['pid']);
+                if (!empty($pageConfig['TCEMAIN.']['clearCacheCmd'])) {
+                    $tce->clear_cacheCmd($pageConfig['TCEMAIN.']['clearCacheCmd']);
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the first parentCollections of the given folder and mediaFolderUid(storagepid)
+     *
+     * @param Folder $folder
+     * @param $mediaFolderUid
+     * @return array|null
+     */
+    public function getFirstParentCollections(Folder $folder, $mediaFolderUid)
+    {
+        $parentCollection = [];
+        if ($folder->getParentFolder() == $folder) {
+            return $parentCollection;
+        } else {
+            $parentCollection = $this->findFileCollectionRecordsForFolder(
+                $folder->getStorage()->getUid(),
+                $folder->getParentFolder()->getIdentifier(),
+                $mediaFolderUid
+            );
+            if (!count($parentCollection)) {
+                $parentCollection = $this->getFirstParentCollections($folder->getParentFolder(), $mediaFolderUid);
+            }
+        }
+
+        return $parentCollection;
     }
 
     /**
@@ -97,6 +153,30 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
                 'deleted' => 1
             )
         );
+    }
+
+    /**
+     * Creates a folderRecord (sys_file_collection)
+     *
+     * @param string $title The title of the folder(album_name)
+     * @param int $collectionStoragePid The pid of the collection/mediaStorage
+     * @param int $storageUid The uid of the storage (fileStorage)
+     * @param string $identifier The identifier of the folder
+     * @param int $parentAlbum The uid of the parentAlbum
+     */
+    public function createFolderRecord($title, $collectionStoragePid, $storageUid, $identifier, $parentAlbum = 0)
+    {
+        $folderRecord = [
+            'pid' => (int)$collectionStoragePid,
+            'deleted' => 0,
+            'hidden' => 0,
+            'type' => 'folder',
+            'storage' => (int)$storageUid,
+            'folder' => $identifier,
+            'title' => $title,
+            'parentalbum' => (int)$parentAlbum
+        ];
+        $this->getDatabaseConnection()->exec_INSERTquery('sys_file_collection', $folderRecord);
     }
 
     /**

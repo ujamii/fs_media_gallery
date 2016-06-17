@@ -165,6 +165,9 @@
 			<trans-unit id="extmng.list.orderOptions">
 				<source>Sort options for albums lists in flexforms: Comma separated list of sort options for field "Sort albums list by" which could be selected in flexforms. Available options are datetime,crdate,sorting.</source>
 			</trans-unit>
+			<trans-unit id="extmng.enableAutoCreateFileCollection">
+				<source>Enable auto creation of fileCollections/albums when a new folder is created beneath an existing album.</source>
+			</trans-unit>
 
 			<!--
 				BE MODULE

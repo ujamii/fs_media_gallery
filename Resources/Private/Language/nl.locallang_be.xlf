@@ -212,6 +212,10 @@
 				<source>Sort options for albums lists in flexforms: Comma separated list of sort options for field "Sort albums list by" which could be selected in flexforms. Available options are datetime,crdate,sorting.</source>
 				<target>Sorteer mogelijkheden voor album lijst in flexform: Komma gescheiden lijst van sorteer opties voor het veld "Sorteer richting voor albums lijst" in het plugin flexform. Beschikbare opties zijn; datetime,crdate,sorting.</target>
 			</trans-unit>
+			<trans-unit id="extmng.enableAutoCreateFileCollection">
+				<source>Enable auto creation of fileCollections/albums when a new folder is created beneath an existing album.</source>
+				<target>Sta toe dat er bij het creëren van een nieuwe folder, onder een bestaand album, een nieuw album wordt aangemaakt.</target>
+			</trans-unit>
 
 			<!--
 				BE MODULE

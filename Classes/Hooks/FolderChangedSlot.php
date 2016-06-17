@@ -116,6 +116,7 @@ class FolderChangedSlot implements \TYPO3\CMS\Core\SingletonInterface
         foreach ($this->folderMapping[$folder->getCombinedIdentifier()] as $folderInfo) {
             $this->utilityService->deleteFolderRecord($storageUid, $folderInfo[1]);
         }
+        $this->utilityService->clearMediaGalleryPageCache($folder);
     }
 
     /**
@@ -159,6 +160,35 @@ class FolderChangedSlot implements \TYPO3\CMS\Core\SingletonInterface
                     $newMapping[$key][1]
                 );
             }
+            $this->utilityService->clearMediaGalleryPageCache($folder);
+        }
+    }
+
+    /**
+     * Auto creates a file collection to the first parentCollection found of the current folder, when no collection is
+     * fount nothing is created
+     *
+     * @param Folder $folder
+     */
+    public function postFolderAdd(Folder $folder)
+    {
+        $mediaFolders = $this->utilityService->getStorageFolders();
+        if (count($mediaFolders)) {
+            foreach ($mediaFolders as $uid => $title) {
+                $parents = $this->utilityService->getFirstParentCollections($folder, $uid);
+                if (count($parents)) {
+                    //take the first parent found
+                    $parentUid = $parents[0]['uid'];
+                    $this->utilityService->createFolderRecord(
+                        ucfirst(trim(str_replace('_', ' ', $folder->getName()))),
+                        $uid,
+                        $folder->getStorage()->getUid(),
+                        $folder->getIdentifier(),
+                        $parentUid
+                    );
+                    $this->utilityService->clearMediaGalleryPageCache($folder);
+                }
+            }
         }
     }
 
@@ -175,6 +205,7 @@ class FolderChangedSlot implements \TYPO3\CMS\Core\SingletonInterface
             $folderIdentifiers[] = array($subFolder->getHashedIdentifier(), $subFolder->getIdentifier());
             $folderIdentifiers = array_merge($folderIdentifiers, $this->getSubFolderIdentifiers($subFolder));
         }
+
         return $folderIdentifiers;
     }
 }
