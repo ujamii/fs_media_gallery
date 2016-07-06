@@ -103,6 +103,11 @@ $GLOBALS['TCA']['sys_file_collection']['ctrl']['default_sortby'] = 'ORDER BY sor
 // enable main asset preview in list module
 $GLOBALS['TCA']['sys_file_collection']['ctrl']['thumbnail'] = 'main_asset';
 
+// Compatibility with 6.2
+if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(\TYPO3\CMS\Core\Utility\VersionNumberUtility::getNumericTypo3Version()) < 7000000) {
+    $$additionalColumns['webdescription']['config']['wizards']['RTE']['icon'] = 'wizard_rte2.gif';
+}
+
 \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule(
     $GLOBALS['TCA']['sys_file_collection']['columns'],
     $additionalColumns
