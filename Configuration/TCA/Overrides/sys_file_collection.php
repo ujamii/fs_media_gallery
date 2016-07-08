@@ -48,9 +48,9 @@ $additionalColumns = array(
         'label' => 'LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_db.xlf:tx_fsmediagallery_domain_model_mediaalbum.parentalbum',
         'config' => array(
             'type' => 'select',
+            'renderType' => 'selectTree',
             'foreign_table' => 'sys_file_collection',
             'foreign_table_where' => ' AND (sys_file_collection.sys_language_uid = 0 OR sys_file_collection.l10n_parent = 0) AND sys_file_collection.pid = ###CURRENT_PID### AND sys_file_collection.uid != ###THIS_UID### ORDER BY sys_file_collection.sorting ASC, sys_file_collection.crdate DESC',
-            'renderMode' => 'tree',
             'subType' => 'db',
             'treeConfig' => array(
                 'parentField' => 'parentalbum',
@@ -105,7 +105,8 @@ $GLOBALS['TCA']['sys_file_collection']['ctrl']['thumbnail'] = 'main_asset';
 
 // Compatibility with 6.2
 if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(\TYPO3\CMS\Core\Utility\VersionNumberUtility::getNumericTypo3Version()) < 7000000) {
-    $$additionalColumns['webdescription']['config']['wizards']['RTE']['icon'] = 'wizard_rte2.gif';
+    $additionalColumns['webdescription']['config']['wizards']['RTE']['icon'] = 'wizard_rte2.gif';
+    $additionalColumns['parentalbum']['config']['renderMode'] = 'tree';
 }
 
 \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule(
