@@ -11,7 +11,7 @@
 			<f:if condition="{settings.album.displayTitle}">
 				<h3>{mediaAlbum.title}</h3>
 			</f:if>
-			<div class="description"><f:format.html>{mediaAlbum.description}</f:format.html></div>
+			<div class="description"><f:format.html>{mediaAlbum.webdescription}</f:format.html></div>
 			<mf:widget.paginate objects="{mediaAlbum.assets}" as="paginatedAssets" widgetId="assets" itemsBefore="before" itemsAfter="after" configuration="{itemsPerPage:settings.album.pagination.itemsPerPage, insertAbove:settings.album.pagination.insertAbove, insertBelow:settings.album.pagination.insertBelow, maximumNumberOfLinks:settings.album.pagination.maximumNumberOfLinks, pagesBefore:settings.album.pagination.pagesBefore, pagesAfter:settings.album.pagination.pagesAfter}">
 				<f:if condition="{settings.album.lightbox.enable}">
 					<f:if condition="{before}">
