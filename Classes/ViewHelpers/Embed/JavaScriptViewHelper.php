@@ -82,7 +82,7 @@ class JavaScriptViewHelper extends AbstractViewHelper
      * @return PageRenderer
      */
     protected function getPageRenderer() {
-        if(class_exists('PageRenderer')) {
+        if(class_exists('TYPO3\\CMS\\Core\\Page\\PageRenderer')) {
             $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
         } elseif (method_exists($GLOBALS['TSFE'], 'getPageRenderer')) {
             $pageRenderer = $GLOBALS['TSFE']->getPageRenderer();
