@@ -82,10 +82,12 @@ class JavaScriptViewHelper extends AbstractViewHelper
      * @return PageRenderer
      */
     protected function getPageRenderer() {
-        if (method_exists($GLOBALS['TSFE'], 'getPageRenderer')) {
+        if(class_exists('PageRenderer')) {
+            $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
+        } elseif (method_exists($GLOBALS['TSFE'], 'getPageRenderer')) {
             $pageRenderer = $GLOBALS['TSFE']->getPageRenderer();
         } else {
-            $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
+            $pageRenderer = null;
         }
         return $pageRenderer;
     }
