@@ -107,6 +107,7 @@ $GLOBALS['TCA']['sys_file_collection']['ctrl']['thumbnail'] = 'main_asset';
 if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(\TYPO3\CMS\Core\Utility\VersionNumberUtility::getNumericTypo3Version()) < 7000000) {
     $additionalColumns['webdescription']['config']['wizards']['RTE']['icon'] = 'wizard_rte2.gif';
     $additionalColumns['parentalbum']['config']['renderMode'] = 'tree';
+    $additionalColumns['datetime']['label'] = 'LLL:EXT:cms/locallang_ttc.xlf:date_formlabel';
 }
 
 \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule(
