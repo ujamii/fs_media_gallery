@@ -5,7 +5,7 @@ $additionalColumns = array(
     'datetime' => array(
         'exclude' => 1,
         'l10n_mode' => 'mergeIfNotBlank',
-        'label' => 'LLL:EXT:cms/locallang_ttc.xlf:date_formlabel',
+        'label' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:date_formlabel',
         'config' => array(
             'type' => 'input',
             'size' => 12,
@@ -107,6 +107,7 @@ $GLOBALS['TCA']['sys_file_collection']['ctrl']['thumbnail'] = 'main_asset';
 if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(\TYPO3\CMS\Core\Utility\VersionNumberUtility::getNumericTypo3Version()) < 7000000) {
     $additionalColumns['webdescription']['config']['wizards']['RTE']['icon'] = 'wizard_rte2.gif';
     $additionalColumns['parentalbum']['config']['renderMode'] = 'tree';
+    $additionalColumns['datetime']['label'] = 'LLL:EXT:cms/locallang_ttc.xlf:date_formlabel';
 }
 
 \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule(
