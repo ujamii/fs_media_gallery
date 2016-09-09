@@ -78,7 +78,7 @@ clearCacheAfterFileChange
 """""""""""""""""""""""""
 
 Clears the cache of the album after a file change. Set on false by default due that the cache will be cleared multiple times
-if more files will be added. Make sure `TCEMAIN.clearCacheCmd` is set as this value is used to define what cache should be cleared.
+if more files will be added. Make sure "`TCEMAIN.clearCacheCmd`" is set as this value is used to define what cache should be cleared.
 
 For more info about possible values see  `Docs » Page TSconfig » ->TCEMAIN <https://docs.typo3.org/typo3cms/TSconfigReference/PageTsconfig/TCEmain/Index.html#clearcachecmd>`_.
 
