@@ -72,6 +72,7 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
     {
         /** @var DataHandler $tce */
         $tce = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');
+        $tce->start([], []);
 
         $collections = $this->findFileCollectionRecordsForFolder(
             $folder->getStorage()->getUid(),
@@ -79,12 +80,10 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
             array_keys($this->getStorageFolders())
         );
 
-        if (count($collections)) {
-            foreach ($collections as $collection) {
-                $pageConfig = BackendUtility::getPagesTSconfig($collection['pid']);
-                if (!empty($pageConfig['TCEMAIN.']['clearCacheCmd'])) {
-                    $tce->clear_cacheCmd($pageConfig['TCEMAIN.']['clearCacheCmd']);
-                }
+        foreach ((array)$collections as $collection) {
+            $pageConfig = BackendUtility::getPagesTSconfig($collection['pid']);
+            if (!empty($pageConfig['TCEMAIN.']['clearCacheCmd'])) {
+                $tce->clear_cacheCmd($pageConfig['TCEMAIN.']['clearCacheCmd']);
             }
         }
     }

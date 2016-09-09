@@ -19,6 +19,7 @@ namespace MiniFranske\FsMediaGallery\Hooks;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Resource\FileInterface;
 use TYPO3\CMS\Core\Resource\Folder;
 
@@ -96,7 +97,9 @@ class FileChangedSlot implements \TYPO3\CMS\Core\SingletonInterface
      */
     public function postFileDelete(FileInterface $file)
     {
-        $this->utilityService->clearMediaGalleryPageCache($file->getParentFolder());
+        if ($file instanceof File) {
+            $this->utilityService->clearMediaGalleryPageCache($file->getParentFolder());
+        }
     }
 
     /**
@@ -107,7 +110,9 @@ class FileChangedSlot implements \TYPO3\CMS\Core\SingletonInterface
      */
     public function postFileRename(FileInterface $file, $sanitizedTargetFileName)
     {
-        $this->utilityService->clearMediaGalleryPageCache($file->getParentFolder());
+        if ($file instanceof File) {
+            $this->utilityService->clearMediaGalleryPageCache($file->getParentFolder());
+        }
     }
 
     /**
@@ -118,6 +123,8 @@ class FileChangedSlot implements \TYPO3\CMS\Core\SingletonInterface
      */
     public function postFileReplace(FileInterface $file, $localFilePath)
     {
-        $this->utilityService->clearMediaGalleryPageCache($file->getParentFolder());
+        if ($file instanceof File) {
+            $this->utilityService->clearMediaGalleryPageCache($file->getParentFolder());
+        }
     }
 }
