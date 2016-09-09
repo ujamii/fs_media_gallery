@@ -218,8 +218,8 @@
 			</trans-unit>
 
 			<trans-unit id="extmng.clearCacheAfterFileChange">
-				<source>Clear the cache of the album after a file change.</source>
-				<source>Leeg de cache van het album na een bestandsactie.</source>
+				<source>Clear the cache of the album after a file change: Make sure PageTS option TCEMAIN.clearCacheCmd is set, see documentation.</source>
+				<target>Leeg de cache van het album na een bestandsactie: Zorg ervoor dat PageTS optie TCEMAIN.clearCacheCmd gezet is, zie documentatie.</target>
 			</trans-unit>
 
 			<!--
