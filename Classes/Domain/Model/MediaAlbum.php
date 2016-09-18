@@ -26,6 +26,7 @@ namespace MiniFranske\FsMediaGallery\Domain\Model;
  ***************************************************************/
 
 use TYPO3\CMS\Core\Resource\File;
+use TYPO3\CMS\Core\Resource\FileInterface;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -60,6 +61,16 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var array
      */
     protected $allowedMimeTypes = array();
+
+    /**
+     * @var string
+     */
+    protected $assetsOrderBy = '';
+
+    /**
+     * @var string
+     */
+    protected $assetsOrderDirection = 'asc';
 
     /**
      * Assets
@@ -137,6 +148,46 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getAllowedMimeTypes()
     {
         return $this->allowedMimeTypes;
+    }
+
+    /**
+     * Get assetsOrderBy
+     *
+     * @return string
+     */
+    public function getAssetsOrderBy()
+    {
+        return $this->assetsOrderBy;
+    }
+
+    /**
+     * Set assetsOrderBy
+     *
+     * @param string $assetsOrderBy
+     */
+    public function setAssetsOrderBy($assetsOrderBy)
+    {
+        $this->assetsOrderBy = $assetsOrderBy;
+    }
+
+    /**
+     * Get assetsOrderDirection
+     *
+     * @return string
+     */
+    public function getAssetsOrderDirection()
+    {
+        return $this->assetsOrderDirection;
+    }
+
+    /**
+     * Set assetsOrderDirection
+     *
+     * @param string $assetsOrderDirection
+     */
+    public function setAssetsOrderDirection($assetsOrderDirection)
+    {
+        $this->assetsOrderDirection = strtolower($assetsOrderDirection);
     }
 
     /**
@@ -243,6 +294,9 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
                     // reset keys
                     $files = array_values($files);
                 }
+                if (trim($this->assetsOrderBy) !== '') {
+                    $files = $this->orderAssets($files, $this->assetsOrderBy, $this->assetsOrderDirection);
+                }
                 $this->assetCache = $files;
             } catch (\Exception $exception) {
                 // failing albums get disabled
@@ -275,9 +329,10 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Get pevious, current and next asset by assetUid
      *
      * @param $assetUid
-     * @return FileReference[]
+     * @return FileInterface[]
      */
-    public function getPreviousCurrentAndNext($assetUid) {
+    public function getPreviousCurrentAndNext($assetUid)
+    {
         $previous = $last = $current = $next = null;
 
         foreach ($assets = $this->getAssets() as $asset) {
@@ -305,7 +360,7 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         GeneralUtility::deprecationLog('MediaAlbum::getAssetsUid is deprecated and will be removed with next major version 2.*. Use getAssets() as this method can not handle static file collections');
         $assetsUids = array();
         foreach ($assets = $this->getAssets() as $asset) {
-            /** @var $asset \TYPO3\CMS\Core\Resource\FileInterface */
+            /** @var $asset FileInterface */
             $assetsUids[] = $asset->getUid();
         }
         return $assetsUids;
@@ -412,4 +467,25 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->datetime = $datetime;
     }
 
+    /**
+     * @param FileInterface[] $files
+     * @param string $orderBy
+     * @param string $direction
+     * @return FileInterface[]
+     */
+    protected function orderAssets($files, $orderBy, $direction)
+    {
+        usort($files, function ($a, $b) use ($orderBy, $direction) {
+            if ($orderBy === 'crdate') {
+                $compare = $a->getCreationTime() > $b->getCreationTime();
+            } elseif (in_array($orderBy, array('content_creation_date', 'content_modification_date'), true)) {
+                $compare = $a->getProperty($orderBy) > $b->getProperty($orderBy);
+            } else {
+                $compare = strcmp($a->getProperty($orderBy), $b->getProperty($orderBy));
+            }
+            return $direction === 'desc' ? !$compare : $compare;
+        });
+
+        return $files;
+    }
 }

@@ -57,6 +57,16 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     protected $useAlbumUidsAsExclude = false;
 
     /**
+     * @var string
+     */
+    protected $assetsOrderBy = '';
+
+    /**
+     * @var string
+     */
+    protected $assetsOrderDirection = 'asc';
+
+    /**
      * Set allowedAssetMimeTypes
      *
      * @param array $allowedAssetMimeTypes
@@ -117,6 +127,46 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     }
 
     /**
+     * Get assetsOrderBy
+     *
+     * @return string
+     */
+    public function getAssetsOrderBy()
+    {
+        return $this->assetsOrderBy;
+    }
+
+    /**
+     * Set assetsOrderBy
+     *
+     * @param string $assetsOrderBy
+     */
+    public function setAssetsOrderBy($assetsOrderBy)
+    {
+        $this->assetsOrderBy = $assetsOrderBy;
+    }
+
+    /**
+     * Get assetsOrderDirection
+     *
+     * @return string
+     */
+    public function getAssetsOrderDirection()
+    {
+        return $this->assetsOrderDirection;
+    }
+
+    /**
+     * Set assetsOrderDirection
+     *
+     * @param string $assetsOrderDirection
+     */
+    public function setAssetsOrderDirection($assetsOrderDirection)
+    {
+        $this->assetsOrderDirection = $assetsOrderDirection;
+    }
+
+    /**
      * Get random sub album
      *
      * @param MediaAlbum|bool $parent parent MediaAlbum, FALSE for parent = 0 or NULL for no restriction by parent
@@ -158,6 +208,9 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         if ($mediaAlbum) {
             // set allowed asset mime types
             $mediaAlbum->setAllowedMimeTypes($this->allowedAssetMimeTypes);
+            // set assets order
+            $mediaAlbum->setAssetsOrderBy($this->assetsOrderBy);
+            $mediaAlbum->setAssetsOrderDirection($this->assetsOrderDirection);
         }
 
         return $mediaAlbum;
@@ -199,6 +252,10 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             /** @var $mediaAlbum \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum */
             // set allowed asset mime types
             $mediaAlbum->setAllowedMimeTypes($this->allowedAssetMimeTypes);
+            // set assets order
+            $mediaAlbum->setAssetsOrderBy($this->assetsOrderBy);
+            $mediaAlbum->setAssetsOrderDirection($this->assetsOrderDirection);
+
             // exclude if album is empty
             if (true === $excludeEmptyAlbums && $mediaAlbum->getAssetsCount() < 1) {
                 unset($mediaAlbums[$key]);
@@ -241,6 +298,9 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         if ($mediaAlbum) {
             // set allowed asset mime types
             $mediaAlbum->setAllowedMimeTypes($this->allowedAssetMimeTypes);
+            // set assets order
+            $mediaAlbum->setAssetsOrderBy($this->assetsOrderBy);
+            $mediaAlbum->setAssetsOrderDirection($this->assetsOrderDirection);
         }
 
         return $mediaAlbum;
@@ -274,6 +334,10 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             /** @var $mediaAlbum \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum */
             // set allowed asset mime types
             $mediaAlbum->setAllowedMimeTypes($this->allowedAssetMimeTypes);
+            // set assets order
+            $mediaAlbum->setAssetsOrderBy($this->assetsOrderBy);
+            $mediaAlbum->setAssetsOrderDirection($this->assetsOrderDirection);
+
             // exclude if album is empty
             if (true === $excludeEmptyAlbums && $mediaAlbum->getAssetsCount() < 1) {
                 unset($mediaAlbums[$key]);

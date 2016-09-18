@@ -88,4 +88,42 @@ class ItemsProcFuncHook
         }
     }
 
+    /**
+     * Sets the available options for settings.album.assets.orderBy
+     *
+     * @param array &$config
+     * @return void
+     */
+    public function getItemsForAssetsOrderBy(array &$config)
+    {
+        // default set
+        $allowedOptions = array('name', 'crdate', 'title', 'content_creation_date', 'content_modification_date');
+        $availableOptions = array();
+        $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['fs_media_gallery']);
+
+        if (!empty($extConf['asset.']['orderOptions'])) {
+            $allowedOptions = GeneralUtility::trimExplode(',', $extConf['asset.']['orderOptions']);
+        }
+        // check if field exists in TCA of sys_file or sys_file_metadata
+        foreach ($allowedOptions as $key => $option) {
+            if (
+                $option === 'crdate'
+                ||
+                !empty($GLOBALS['TCA']['sys_file']['columns'][$option])
+                ||
+                !empty($GLOBALS['TCA']['sys_file_metadata']['columns'][$option])
+            ) {
+                $availableOptions[] = $option;
+            }
+        }
+        // @todo: add option to add custom options to the item list
+        //        use label from TCA
+        foreach ($config['items'] as $key => $item) {
+            // check items; empty value (inherit from TS) is always allowed
+            if (!empty($item[1]) && !in_array($item[1], $availableOptions)) {
+                unset($config['items'][$key]);
+            }
+        }
+    }
+
 }

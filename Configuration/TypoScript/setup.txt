@@ -80,6 +80,10 @@ plugin.tx_fsmediagallery {
 					resizeMode = m
 				}
 			}
+			assets {
+				orderBy =
+				orderDirection = asc
+			}
 			pagination {
 				itemsPerPage = 32
 				insertAbove = 0

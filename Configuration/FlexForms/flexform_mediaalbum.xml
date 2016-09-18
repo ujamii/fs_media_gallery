@@ -351,6 +351,63 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
+					<settings.album.assets.orderBy>
+						<TCEforms>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.assets.orderBy</label>
+							<config>
+								<type>select</type>
+								<itemsProcFunc>MiniFranske\FsMediaGallery\Hooks\ItemsProcFuncHook->getItemsForAssetsOrderBy</itemsProcFunc>
+								<items>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.assets.orderBy.I.name</numIndex>
+										<numIndex index="1">name</numIndex>
+									</numIndex>
+									<numIndex index="2">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.assets.orderBy.I.crdate</numIndex>
+										<numIndex index="1">crdate</numIndex>
+									</numIndex>
+									<numIndex index="3">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.assets.orderBy.I.title</numIndex>
+										<numIndex index="1">title</numIndex>
+									</numIndex>
+									<numIndex index="4">
+										<numIndex index="0">LLL:EXT:filemetadata/Resources/Private/Language/locallang_tca.xlf:sys_file_metadata.content_creation_date</numIndex>
+										<numIndex index="1">content_creation_date</numIndex>
+									</numIndex>
+									<numIndex index="5">
+										<numIndex index="0">LLL:EXT:filemetadata/Resources/Private/Language/locallang_tca.xlf:sys_file_metadata.content_modification_date</numIndex>
+										<numIndex index="1">content_modification_date</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</settings.album.assets.orderBy>
+					<settings.album.assets.orderDirection>
+						<TCEforms>
+							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.assets.orderDirection</label>
+							<config>
+								<type>select</type>
+								<items>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.assets.orderDirection.I.asc</numIndex>
+										<numIndex index="1">asc</numIndex>
+									</numIndex>
+									<numIndex index="2">
+										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.assets.orderDirection.I.desc</numIndex>
+										<numIndex index="1">desc</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</settings.album.assets.orderDirection>
 					<settings.album.pagination.itemsPerPage>
 						<TCEforms>
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.album.pagination.itemsPerPage</label>

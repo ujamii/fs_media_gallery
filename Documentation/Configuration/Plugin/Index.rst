@@ -131,9 +131,15 @@ Tab "Album view"
 ================================== ====================== ================================================================================================== ===================
 Field                              Display Modes          Description                                                                                        TSref
 ================================== ====================== ================================================================================================== ===================
+Sort media/files by                nestedList, flatList,  .. _flexforms.mediagallery.tabs.album.assets.orderBy:                                              :ref:`settings.album.assets.orderBy <plugin.tx_fsmediagallery.settings.album.assets.orderBy>`
+                                   showAlbumByParam,
+                                   showAlbumByConfig      Defines the sorting of the media/fiels shown in a album.
+Sort direction for media/files     nestedList, flatList,  .. _flexforms.mediagallery.tabs.album.assets.orderDirection:                                       :ref:`settings.album.assets.orderDirection <plugin.tx_fsmediagallery.settings.album.assets.orderDirection>`
+                                   showAlbumByParam,
+                                   showAlbumByConfig      Defines the sort direction (ascending/descending) of the media/files.
 Max. thumbs to display per page    nestedList, flatList,  .. _flexforms.mediagallery.tabs.album.itemsPerPage:                                                :ref:`settings.album.pagination.itemsPerPage <plugin.tx_fsmediagallery.settings.album.pagination.itemsPerPage>`
                                    showAlbumByParam,
-                                   showAlbumByConfig      Define how many items are shown on one album page.
+                                   showAlbumByConfig      Defines how many items are shown on one album page.
 Thumb width                        nestedList, flatList,  .. _flexforms.mediagallery.tabs.album.thumb.width:                                                 :ref:`settings.album.thumb.width <plugin.tx_fsmediagallery.settings.album.thumb.width>`
                                    showAlbumByParam,
                                    showAlbumByConfig      Height of thumbnail images in album view.

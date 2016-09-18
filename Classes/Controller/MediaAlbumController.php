@@ -140,6 +140,12 @@ class MediaAlbumController extends ActionController
             $this->mediaAlbumRepository->setAllowedAssetMimeTypes(GeneralUtility::trimExplode(',',
                 $this->settings['allowedAssetMimeTypes']));
         }
+        if (isset($this->settings['album']['assets']['orderBy'])) {
+            $this->mediaAlbumRepository->setAssetsOrderBy($this->settings['album']['assets']['orderBy']);
+        }
+        if (isset($this->settings['album']['assets']['orderDirection'])) {
+            $this->mediaAlbumRepository->setAssetsOrderDirection($this->settings['album']['assets']['orderDirection']);
+        }
     }
 
     /**
