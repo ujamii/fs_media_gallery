@@ -3,23 +3,6 @@ defined('TYPO3_MODE') || die();
 
 $boot = function ($packageKey) {
 
-    $extensionName = \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase($packageKey);
-
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-        $packageKey,
-        'Mediagallery',
-        'LLL:EXT:' . $packageKey . '/Resources/Private/Language/locallang_be.xlf:mediagallery.title'
-    );
-
-    $pluginSignature = strtolower($extensionName) . '_mediagallery';
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'layout,select_key,pages,recursive';
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-        $pluginSignature,
-        'FILE:EXT:' . $packageKey . '/Configuration/FlexForms/flexform_mediaalbum.xml'
-    );
-
     if (TYPO3_MODE === 'BE') {
         // Adding click menu item:
         $GLOBALS['TBE_MODULES_EXT']['xMOD_alt_clickmenu']['extendCMclasses'][] = array(
@@ -28,7 +11,7 @@ $boot = function ($packageKey) {
 
         // Add CSH
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
-            'tt_content.pi_flexform.' . $pluginSignature . '.list',
+            'tt_content.pi_flexform.fsmediagallery_mediagallery.list',
             'EXT:' . $packageKey . '/Resources/Private/Language/locallang_csh_flexforms.xlf'
         );
     }
