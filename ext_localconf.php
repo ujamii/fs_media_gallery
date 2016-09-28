@@ -46,6 +46,10 @@ $boot = function ($packageKey) {
     // EXT:news >= 3.2.0 support
     $GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['classes']['Domain/Model/News'][] = $packageKey;
 
+    // Page module hook
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['list_type_Info']['fsmediagallery_mediagallery']['fs_media_gallery'] =
+        'MiniFranske\\FsMediaGallery\\Hooks\\PageLayoutView->getExtensionSummary';
+
     $signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher');
     $signalSlotDispatcher->connect(
         'TYPO3\\CMS\\Core\\Resource\\ResourceStorage',
