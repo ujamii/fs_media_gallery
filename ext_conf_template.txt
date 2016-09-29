@@ -8,7 +8,7 @@ list.orderOptions = datetime,crdate,sorting
 asset.orderOptions = name,crdate,title,content_creation_date,content_modification_date
 
 # cat=basic/enable/4; type=boolean; label=LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:extmng.enableAutoCreateFileCollection
-enableAutoCreateFileCollection = true
+enableAutoCreateFileCollection = 1
 
 # cat=basic/enable/4; type=boolean; label=LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:extmng.clearCacheAfterFileChange
-clearCacheAfterFileChange = false
+clearCacheAfterFileChange =
