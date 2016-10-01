@@ -4,7 +4,6 @@ defined('TYPO3_MODE') || die();
 $additionalColumns = array(
     'datetime' => array(
         'exclude' => 1,
-        'l10n_mode' => 'mergeIfNotBlank',
         'label' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:date_formlabel',
         'config' => array(
             'type' => 'input',
@@ -44,7 +43,6 @@ $additionalColumns = array(
     ),
     'parentalbum' => array(
         'exclude' => 1,
-        'l10n_mode' => 'exclude',
         'label' => 'LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_db.xlf:tx_fsmediagallery_domain_model_mediaalbum.parentalbum',
         'config' => array(
             'type' => 'select',
@@ -68,7 +66,6 @@ $additionalColumns = array(
     ),
     'main_asset' => array(
         'exclude' => 1,
-        'l10n_mode' => 'mergeIfNotBlank',
         'label' => 'LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_db.xlf:tx_fsmediagallery_domain_model_mediaalbum.main_asset',
         'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
             'images',
