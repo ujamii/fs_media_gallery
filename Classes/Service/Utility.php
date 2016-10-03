@@ -83,7 +83,11 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
         foreach ((array)$collections as $collection) {
             $pageConfig = BackendUtility::getPagesTSconfig($collection['pid']);
             if (!empty($pageConfig['TCEMAIN.']['clearCacheCmd'])) {
-                $tce->clear_cacheCmd($pageConfig['TCEMAIN.']['clearCacheCmd']);
+                $clearCacheCommands = GeneralUtility::trimExplode(',', $pageConfig['TCEMAIN.']['clearCacheCmd'], true);
+                $clearCacheCommands = array_unique($clearCacheCommands);
+                foreach ($clearCacheCommands as $clearCacheCommand) {
+                    $tce->clear_cacheCmd($clearCacheCommand);
+                }
             }
         }
     }
