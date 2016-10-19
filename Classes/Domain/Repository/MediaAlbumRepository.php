@@ -223,7 +223,7 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param boolean $excludeEmptyAlbums
      * @param string $orderBy Sort albums by: datetime|crdate|sorting
      * @param string $orderDirection Sort order: asc|desc
-     * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
+     * @return MediaAlbum[]
      */
     public function findByParentAlbum(
         MediaAlbum $parentAlbum = null,
@@ -246,7 +246,7 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         $query->matching($query->logicalAnd($constraints));
         $query->setOrderings($this->getOrderingsSettings($orderBy, $orderDirection));
-        $mediaAlbums = $query->execute();
+        $mediaAlbums = $query->execute()->toArray();
 
         foreach ($mediaAlbums as $key => $mediaAlbum) {
             /** @var $mediaAlbum \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum */
@@ -255,14 +255,22 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             // set assets order
             $mediaAlbum->setAssetsOrderBy($this->assetsOrderBy);
             $mediaAlbum->setAssetsOrderDirection($this->assetsOrderDirection);
+            $mediaAlbum->setExcludeEmptyAlbums($excludeEmptyAlbums);
 
             // exclude if album is empty
-            if (true === $excludeEmptyAlbums && $mediaAlbum->getAssetsCount() < 1) {
+            if (
+                $excludeEmptyAlbums
+                &&
+                $mediaAlbum->getAssetsCount() === 0
+                &&
+                count($mediaAlbum->getAlbums()) === 0
+            ) {
                 unset($mediaAlbums[$key]);
             }
         }
 
-        return $mediaAlbums;
+        // Reset array keys and return albums
+        return array_values($mediaAlbums);
     }
 
     /**
@@ -312,7 +320,7 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param boolean $excludeEmptyAlbums
      * @param string $orderBy Sort albums by: datetime|crdate|sorting
      * @param string $orderDirection Sort order: asc|desc
-     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @return MediaAlbum[]
      */
     public function findAll($excludeEmptyAlbums = true, $orderBy = 'datetime', $orderDirection = 'desc')
     {
@@ -328,7 +336,7 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             }
         }
 
-        $mediaAlbums = $query->execute();
+        $mediaAlbums = $query->execute()->toArray();
 
         foreach ($mediaAlbums as $key => $mediaAlbum) {
             /** @var $mediaAlbum \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum */
@@ -337,14 +345,22 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             // set assets order
             $mediaAlbum->setAssetsOrderBy($this->assetsOrderBy);
             $mediaAlbum->setAssetsOrderDirection($this->assetsOrderDirection);
+            $mediaAlbum->setExcludeEmptyAlbums($excludeEmptyAlbums);
 
             // exclude if album is empty
-            if (true === $excludeEmptyAlbums && $mediaAlbum->getAssetsCount() < 1) {
+            if (
+                $excludeEmptyAlbums
+                &&
+                $mediaAlbum->getAssetsCount() === 0
+                &&
+                count($mediaAlbum->getAlbums()) === 0
+            ) {
                 unset($mediaAlbums[$key]);
             }
         }
 
-        return $mediaAlbums;
+        // Reset array keys and return albums
+        return array_values($mediaAlbums);
     }
 
     /**

@@ -73,6 +73,11 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $assetsOrderDirection = 'asc';
 
     /**
+     * @var bool
+     */
+    protected $excludeEmptyAlbums = false;
+
+    /**
      * Assets
      * An array of File or FileReference
      *
@@ -188,6 +193,26 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setAssetsOrderDirection($assetsOrderDirection)
     {
         $this->assetsOrderDirection = strtolower($assetsOrderDirection);
+    }
+
+    /**
+     * Get excludeEmptyAlbums
+     *
+     * @return bool
+     */
+    public function getExcludeEmptyAlbums()
+    {
+        return $this->excludeEmptyAlbums;
+    }
+
+    /**
+     * Set excludeEmptyAlbums
+     *
+     * @param bool $excludeEmptyAlbums
+     */
+    public function setExcludeEmptyAlbums($excludeEmptyAlbums)
+    {
+        $this->excludeEmptyAlbums = (bool)$excludeEmptyAlbums;
     }
 
     /**
@@ -387,7 +412,7 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getAlbums()
     {
         if ($this->albumCache === null) {
-            $this->albumCache = $this->mediaAlbumRepository->findByParentalbum($this);
+            $this->albumCache = $this->mediaAlbumRepository->findByParentalbum($this, $this->excludeEmptyAlbums);
         }
         return $this->albumCache;
     }
@@ -399,15 +424,8 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getRandomAlbum()
     {
-        // if albums are loaded use these
-        if ($this->albumCache !== null) {
-            $albums = $this->getAlbums();
-            return $albums[rand(0, count($albums) - 1)];
-
-            // else fetch random asset from repository
-        } else {
-            return $this->mediaAlbumRepository->findRandom($this);
-        }
+        $albums = $this->getAlbums();
+        return $albums[rand(0, count($albums) - 1)];
     }
 
     /**
