@@ -26,6 +26,7 @@ namespace MiniFranske\FsMediaGallery\Service;
 
 use \TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
+use TYPO3\CMS\Core\Resource\Exception\InsufficientFolderAccessPermissionsException;
 use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Core\Resource\FolderInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -102,17 +103,19 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
     public function getFirstParentCollections(Folder $folder, $mediaFolderUid)
     {
         $parentCollection = [];
-        if ($folder->getParentFolder() == $folder) {
-            return $parentCollection;
-        } else {
-            $parentCollection = $this->findFileCollectionRecordsForFolder(
-                $folder->getStorage()->getUid(),
-                $folder->getParentFolder()->getIdentifier(),
-                $mediaFolderUid
-            );
-            if (!count($parentCollection)) {
-                $parentCollection = $this->getFirstParentCollections($folder->getParentFolder(), $mediaFolderUid);
+        try {
+            if ($folder->getParentFolder() !== $folder) {
+                $parentCollection = $this->findFileCollectionRecordsForFolder(
+                    $folder->getStorage()->getUid(),
+                    $folder->getParentFolder()->getIdentifier(),
+                    $mediaFolderUid
+                );
+                if (!count($parentCollection)) {
+                    $parentCollection = $this->getFirstParentCollections($folder->getParentFolder(), $mediaFolderUid);
+                }
             }
+        } catch (InsufficientFolderAccessPermissionsException $e) {
+            // no permissions to access parent folder
         }
 
         return $parentCollection;
