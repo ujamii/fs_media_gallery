@@ -103,20 +103,21 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
     public function getFirstParentCollections(Folder $folder, $mediaFolderUid)
     {
         $parentCollection = [];
-        try {
-            if ($folder->getParentFolder() !== $folder) {
-                $parentCollection = $this->findFileCollectionRecordsForFolder(
-                    $folder->getStorage()->getUid(),
-                    $folder->getParentFolder()->getIdentifier(),
-                    $mediaFolderUid
-                );
-                if (!count($parentCollection)) {
-                    $parentCollection = $this->getFirstParentCollections($folder->getParentFolder(), $mediaFolderUid);
-                }
+        $evalPermissions = $folder->getStorage()->getEvaluatePermissions();
+        $folder->getStorage()->setEvaluatePermissions(false);
+
+        // If not root folder (for root folder parent === folder)
+        if ($folder->getParentFolder() !== $folder) {
+            $parentCollection = $this->findFileCollectionRecordsForFolder(
+                $folder->getStorage()->getUid(),
+                $folder->getParentFolder()->getIdentifier(),
+                $mediaFolderUid
+            );
+            if (!count($parentCollection)) {
+                $parentCollection = $this->getFirstParentCollections($folder->getParentFolder(), $mediaFolderUid);
             }
-        } catch (InsufficientFolderAccessPermissionsException $e) {
-            // no permissions to access parent folder
         }
+        $folder->getStorage()->setEvaluatePermissions($evalPermissions);
 
         return $parentCollection;
     }
