@@ -107,7 +107,7 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
         $folder->getStorage()->setEvaluatePermissions(false);
 
         // If not root folder (for root folder parent === folder)
-        if ($folder->getParentFolder() !== $folder) {
+        if ($folder->getParentFolder()->getIdentifier() !== $folder->getIdentifier()) {
             $parentCollection = $this->findFileCollectionRecordsForFolder(
                 $folder->getStorage()->getUid(),
                 $folder->getParentFolder()->getIdentifier(),
