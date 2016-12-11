@@ -146,19 +146,17 @@ class PageLayoutView
     /**
      * Render selected albums
      *
-     * @param bool $showCategoryMode show the category conjunction
      * @return void
      */
     public function getAlbumSelection()
     {
-        $albumUid = GeneralUtility::intExplode(',', $this->getFieldFromFlexform('settings.mediaAlbum'), true);
+        $albumUid = (int)$this->getFieldFromFlexform('settings.mediaAlbum');
         if ((int)$albumUid > 0) {
-
             // Album record
             $rowSysFileCollectionRecords = $this->databaseConnection->exec_SELECTgetRows(
                 '*',
                 'sys_file_collection',
-                'deleted=0 AND uid IN(' . (int)$albumUid . ')'
+                'deleted=0 AND uid =' . (int)$albumUid
             );
             $albums = array();
             foreach ((array)$rowSysFileCollectionRecords as $record) {
