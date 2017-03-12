@@ -202,8 +202,8 @@ class MediaAlbumController extends ActionController
          * No album selected and album restriction set, find all "root" albums
          * Albums without parent or with parent not selected as allowed
          */
-        if ($mediaAlbum === null && $this->mediaAlbumRepository->getAlbumUids() !== array()) {
-            $mediaAlbums = array();
+        if ($mediaAlbum === null && $this->mediaAlbumRepository->getAlbumUids() !== []) {
+            $mediaAlbums = [];
             $all = $this->mediaAlbumRepository->findAll((bool)$this->settings['list']['hideEmptyAlbums']);
             /** @var MediaAlbum $album */
             foreach ($all as $album) {
@@ -233,7 +233,7 @@ class MediaAlbumController extends ActionController
         }
 
         if ($mediaAlbum && $mediaAlbum->getParentalbum() && (
-                $this->mediaAlbumRepository->getAlbumUids() === array()
+                $this->mediaAlbumRepository->getAlbumUids() === []
                 ||
                 (!$this->mediaAlbumRepository->getUseAlbumUidsAsExclude() && in_array($mediaAlbum->getParentalbum()->getUid(),
                         $this->mediaAlbumRepository->getAlbumUids()))

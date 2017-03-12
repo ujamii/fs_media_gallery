@@ -32,7 +32,7 @@ use TYPO3\CMS\Core\Resource\Folder;
 class FolderChangedSlot implements \TYPO3\CMS\Core\SingletonInterface
 {
 
-    protected $folderMapping = array();
+    protected $folderMapping = [];
 
     /**
      * @var \MiniFranske\FsMediaGallery\Service\Utility
@@ -200,9 +200,9 @@ class FolderChangedSlot implements \TYPO3\CMS\Core\SingletonInterface
      */
     protected function getSubFolderIdentifiers(Folder $folder)
     {
-        $folderIdentifiers = array();
+        $folderIdentifiers = [];
         foreach ($folder->getSubfolders() as $subFolder) {
-            $folderIdentifiers[] = array($subFolder->getHashedIdentifier(), $subFolder->getIdentifier());
+            $folderIdentifiers[] = [$subFolder->getHashedIdentifier(), $subFolder->getIdentifier()];
             $folderIdentifiers = array_merge($folderIdentifiers, $this->getSubFolderIdentifiers($subFolder));
         }
 

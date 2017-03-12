@@ -39,7 +39,7 @@ class FileDescriptionViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstrac
      */
     public function render($file)
     {
-        if (is_callable(array($file, 'getOriginalResource'))) {
+        if (is_callable([$file, 'getOriginalResource'])) {
             // Get the original file from the Extbase model
             $file = $file->getOriginalResource();
         }

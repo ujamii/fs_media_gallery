@@ -46,7 +46,7 @@ abstract class AbstractBeAlbumButtons
      */
     protected function generateButtons($combinedIdentifier)
     {
-        $buttons = array();
+        $buttons = [];
 
         // In some folder copy/move actions in file list a invalid id is passed
         try {
@@ -60,7 +60,7 @@ abstract class AbstractBeAlbumButtons
         if ($folder && $folder instanceof Folder &&
             in_array(
                 $folder->getRole(),
-                array(Folder::ROLE_DEFAULT, Folder::ROLE_USERUPLOAD)
+                [Folder::ROLE_DEFAULT, Folder::ROLE_USERUPLOAD]
             )
         ) {
             /** @var \MiniFranske\FsMediaGallery\Service\Utility $utility */
@@ -139,14 +139,14 @@ abstract class AbstractBeAlbumButtons
         if (!GeneralUtility::compat_version('7.4')) {
             return 'alt_doc.php?edit[sys_file_collection][' . $uid . ']=edit';
         } else {
-            return BackendUtility::getModuleUrl('record_edit', array(
-                'edit' => array(
-                    'sys_file_collection' => array(
+            return BackendUtility::getModuleUrl('record_edit', [
+                'edit' => [
+                    'sys_file_collection' => [
                         $uid => 'edit'
-                    )
-                ),
+                    ]
+                ],
                 'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI')
-            ));
+            ]);
         }
     }
 
@@ -169,23 +169,23 @@ abstract class AbstractBeAlbumButtons
                 '&defVals[sys_file_collection][folder]=' . $folder->getIdentifier() .
                 '&defVals[sys_file_collection][type]=folder';
         } else {
-            return BackendUtility::getModuleUrl('record_edit', array(
-                'edit' => array(
-                    'sys_file_collection' => array(
+            return BackendUtility::getModuleUrl('record_edit', [
+                'edit' => [
+                    'sys_file_collection' => [
                         $pid => 'new'
-                    )
-                ),
-                'defVals' => array(
-                    'sys_file_collection' => array(
+                    ]
+                ],
+                'defVals' => [
+                    'sys_file_collection' => [
                         'parentalbum' => $parentAlbumUid,
                         'title' => ucfirst(trim(str_replace('_', ' ', $folder->getName()))),
                         'storage' => $folder->getStorage()->getUid(),
                         'folder' => $folder->getIdentifier(),
                         'type' => 'folder',
-                    )
-                ),
+                    ]
+                ],
                 'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI')
-            ));
+            ]);
         }
     }
 

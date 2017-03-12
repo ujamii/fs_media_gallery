@@ -8,13 +8,13 @@ $boot = function ($packageKey) {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'MiniFranske.' . $packageKey,
         'Mediagallery',
-        array(
+        [
             'MediaAlbum' => 'index,nestedList,flatList,showAlbum,showAlbumByConfig,showAsset,random',
-        ),
+        ],
         // non-cacheable actions
-        array(
+        [
             'MediaAlbum' => 'random',
-        )
+        ]
     );
 
     // Page TSConfig

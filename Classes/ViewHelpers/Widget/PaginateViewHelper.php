@@ -62,12 +62,12 @@ class PaginateViewHelper extends AbstractWidgetViewHelper
         $as,
         $itemsBefore = null,
         $itemsAfter = null,
-        array $configuration = array(
+        array $configuration = [
             'itemsPerPage' => 10,
             'insertAbove' => false,
             'insertBelow' => true,
             'maximumNumberOfLinks' => 99
-        ),
+        ],
         $widgetId = null
     ) {
         return $this->initiateSubRequest();

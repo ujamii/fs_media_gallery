@@ -27,21 +27,21 @@ class ItemsProcFuncHook
      */
     public function getItemsForSwitchableControllerActions(array &$config)
     {
-        $availableActions = array(
+        $availableActions = [
             'nestedList' => 'MediaAlbum->nestedList;MediaAlbum->showAsset',
             'flatList' => 'MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset',
             'showAlbumByParam' => 'MediaAlbum->showAlbum;MediaAlbum->showAsset',
             'showAlbumByConfig' => 'MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset',
             'randomAsset' => 'MediaAlbum->randomAsset',
-        );
+        ];
         $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['fs_media_gallery']);
-        $allowedActions = array(
+        $allowedActions = [
             // index action is always allowed
             // this is needed to make sure the correct tabs/fields are shown in
             // flexform when a new plugin is added
             'index' => 'MediaAlbum->index',
-        );
-        $allowedActionsFromExtConf = array();
+        ];
+        $allowedActionsFromExtConf = [];
         if (!empty($extConf['allowedActionsInFlexforms'])) {
             $allowedActionsFromExtConf = GeneralUtility::trimExplode(',', $extConf['allowedActionsInFlexforms']);
         }
@@ -68,10 +68,10 @@ class ItemsProcFuncHook
      */
     public function getItemsForListOrderBy(array &$config)
     {
-        $availableOptions = array('datetime', 'crdate', 'sorting');
+        $availableOptions = ['datetime', 'crdate', 'sorting'];
         $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['fs_media_gallery']);
-        $allowedOptions = array();
-        $allowedOptionsFromExtConf = array();
+        $allowedOptions = [];
+        $allowedOptionsFromExtConf = [];
         if (!empty($extConf['list.']['orderOptions'])) {
             $allowedOptionsFromExtConf = GeneralUtility::trimExplode(',', $extConf['list.']['orderOptions']);
         }
@@ -97,8 +97,8 @@ class ItemsProcFuncHook
     public function getItemsForAssetsOrderBy(array &$config)
     {
         // default set
-        $allowedOptions = array('name', 'crdate', 'title', 'content_creation_date', 'content_modification_date');
-        $availableOptions = array();
+        $allowedOptions = ['name', 'crdate', 'title', 'content_creation_date', 'content_modification_date'];
+        $availableOptions = [];
         $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['fs_media_gallery']);
 
         if (!empty($extConf['asset.']['orderOptions'])) {

@@ -51,7 +51,7 @@ class IconUtilityHook implements \TYPO3\CMS\Backend\Utility\IconUtilityOverrideR
     ) {
 
         if ($folderObject && $folderObject instanceof Folder &&
-            in_array($folderObject->getRole(), array(Folder::ROLE_DEFAULT, Folder::ROLE_USERUPLOAD))
+            in_array($folderObject->getRole(), [Folder::ROLE_DEFAULT, Folder::ROLE_USERUPLOAD])
         ) {
             $mediaFolders = self::getMediaFolders();
 
@@ -74,7 +74,7 @@ class IconUtilityHook implements \TYPO3\CMS\Backend\Utility\IconUtilityOverrideR
                         }
                     }
                     if ($hidden) {
-                        $overlays['status-overlay-hidden'] = array();
+                        $overlays['status-overlay-hidden'] = [];
                     }
                 }
             }

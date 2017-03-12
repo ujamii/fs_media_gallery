@@ -38,7 +38,7 @@ class ext_update
      *
      * @var array
      */
-    protected $messageArray = array();
+    protected $messageArray = [];
 
     /**
      * @var \TYPO3\CMS\Core\Database\DatabaseConnection
@@ -92,68 +92,68 @@ class ext_update
         /** @var \TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools $flexformTools */
         $flexformTools = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Configuration\\FlexForm\\FlexFormTools');
 
-        $migrations = array(
-            array(
-                'old' => array('general', 'settings.mediaAlbums'),
-                'new' => array('general', 'settings.mediaAlbumsUids')
-            ),
-            array(
-                'old' => array('general', 'settings.mediagalleries'),
-                'new' => array('general', 'settings.mediaAlbumsUids')
-            ),
-            array(
-                'old' => array('album', 'settings.album.itemsPerPage'),
-                'new' => array('list', 'settings.list.pagination.itemsPerPage')
-            ),
-            array(
-                'old' => array('album', 'settings.album.thumb.maxWidth'),
-                'new' => array('list', 'settings.list.thumb.width')
-            ),
-            array(
-                'old' => array('album', 'settings.album.thumb.maxHeight'),
-                'new' => array('list', 'settings.list.thumb.height')
-            ),
+        $migrations = [
+            [
+                'old' => ['general', 'settings.mediaAlbums'],
+                'new' => ['general', 'settings.mediaAlbumsUids']
+            ],
+            [
+                'old' => ['general', 'settings.mediagalleries'],
+                'new' => ['general', 'settings.mediaAlbumsUids']
+            ],
+            [
+                'old' => ['album', 'settings.album.itemsPerPage'],
+                'new' => ['list', 'settings.list.pagination.itemsPerPage']
+            ],
+            [
+                'old' => ['album', 'settings.album.thumb.maxWidth'],
+                'new' => ['list', 'settings.list.thumb.width']
+            ],
+            [
+                'old' => ['album', 'settings.album.thumb.maxHeight'],
+                'new' => ['list', 'settings.list.thumb.height']
+            ],
 
-            array(
-                'old' => array('image', 'settings.image.itemsPerPage'),
-                'new' => array('album', 'settings.album.pagination.itemsPerPage')
-            ),
-            array(
-                'old' => array('image', 'settings.image.thumb.maxWidth'),
-                'new' => array('album', 'settings.album.thumb.width')
-            ),
-            array(
-                'old' => array('image', 'settings.image.thumb.maxHeight'),
-                'new' => array('album', 'settings.album.thumb.height')
-            ),
+            [
+                'old' => ['image', 'settings.image.itemsPerPage'],
+                'new' => ['album', 'settings.album.pagination.itemsPerPage']
+            ],
+            [
+                'old' => ['image', 'settings.image.thumb.maxWidth'],
+                'new' => ['album', 'settings.album.thumb.width']
+            ],
+            [
+                'old' => ['image', 'settings.image.thumb.maxHeight'],
+                'new' => ['album', 'settings.album.thumb.height']
+            ],
 
-            array(
-                'old' => array('image', 'settings.enableLightbox'),
-                'new' => array('album', 'settings.album.lightbox.enable')
-            ),
-            array(
-                'old' => array('random', 'settings.galleryPid'),
-                'new' => array('random', 'settings.random.targetPid')
-            ),
+            [
+                'old' => ['image', 'settings.enableLightbox'],
+                'new' => ['album', 'settings.album.lightbox.enable']
+            ],
+            [
+                'old' => ['random', 'settings.galleryPid'],
+                'new' => ['random', 'settings.random.targetPid']
+            ],
 
-            array(
-                'old' => array('random', 'settings.random.thumb.maxWidth'),
-                'new' => array('random', 'settings.random.thumb.width')
-            ),
-            array(
-                'old' => array('random', 'settings.random.thumb.maxHeight'),
-                'new' => array('random', 'settings.random.thumb.height')
-            ),
+            [
+                'old' => ['random', 'settings.random.thumb.maxWidth'],
+                'new' => ['random', 'settings.random.thumb.width']
+            ],
+            [
+                'old' => ['random', 'settings.random.thumb.maxHeight'],
+                'new' => ['random', 'settings.random.thumb.height']
+            ],
 
-            array(
-                'old' => array('image', 'settings.image.maxWidth'),
-                'new' => array('detail', 'settings.detail.asset.width')
-            ),
-            array(
-                'old' => array('image', 'settings.image.maxHeight'),
-                'new' => array('detail', 'settings.detail.asset.height')
-            ),
-        );
+            [
+                'old' => ['image', 'settings.image.maxWidth'],
+                'new' => ['detail', 'settings.detail.asset.width']
+            ],
+            [
+                'old' => ['image', 'settings.image.maxHeight'],
+                'new' => ['detail', 'settings.detail.asset.height']
+            ],
+        ];
 
         while ($row = $this->databaseConnection->sql_fetch_assoc($res)) {
             $title = 'Update plugin "' . htmlspecialchars($row['header']) . '" pid: ' . $row['pid'] . ' uid: ' . $row['uid'];
@@ -212,11 +212,11 @@ class ext_update
                 }
 
                 if ($update) {
-                    $this->databaseConnection->exec_UPDATEquery('tt_content', 'uid=' . $row['uid'], array(
+                    $this->databaseConnection->exec_UPDATEquery('tt_content', 'uid=' . $row['uid'], [
                         'pages' => $row['pages'],
                         'recursive' => $row['recursive'],
                         'pi_flexform' => $flexformTools->flexArray2Xml($xmlArray)
-                    ));
+                    ]);
                     $message .= '<br /><strong>Plugin updated</strong>';
 
                 } else {
@@ -226,7 +226,7 @@ class ext_update
                 //$message .= '<pre>' . print_r($xmlArray, 1) . '</pre>';
             }
 
-            $this->messageArray[] = array($status, $title, $message);
+            $this->messageArray[] = [$status, $title, $message];
         }
     }
 

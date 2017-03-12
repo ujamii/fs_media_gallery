@@ -5,9 +5,9 @@ $boot = function ($packageKey) {
 
     if (TYPO3_MODE === 'BE') {
         // Adding click menu item:
-        $GLOBALS['TBE_MODULES_EXT']['xMOD_alt_clickmenu']['extendCMclasses'][] = array(
+        $GLOBALS['TBE_MODULES_EXT']['xMOD_alt_clickmenu']['extendCMclasses'][] = [
             'name' => 'MiniFranske\\FsMediaGallery\\Service\\ClickMenuOptions'
-        );
+        ];
 
         // Add CSH
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
@@ -22,37 +22,37 @@ $boot = function ($packageKey) {
         $iconRegistry->registerIcon(
             'apps-pagetree-folder-contains-mediagal',
             \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-            array(
+            [
                 'source' => 'EXT:' . $packageKey . '/Resources/Public/Icons/mediagallery.svg',
-            )
+            ]
         );
         $iconRegistry->registerIcon(
             'tcarecords-sys_file_collection-folder',
             \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-            array(
+            [
                 'source' => 'EXT:' . $packageKey . '/Resources/Public/Icons/mediagallery.svg',
-            )
+            ]
         );
         $iconRegistry->registerIcon(
             'action-edit-album',
             \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-            array(
+            [
                 'source' => 'EXT:' . $packageKey . '/Resources/Public/Icons/mediagallery-edit.svg',
-            )
+            ]
         );
         $iconRegistry->registerIcon(
             'action-add-album',
             \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-            array(
+            [
                 'source' => 'EXT:' . $packageKey . '/Resources/Public/Icons/mediagallery-add.svg',
-            )
+            ]
         );
         $iconRegistry->registerIcon(
             'content-mediagallery',
             \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
-            array(
+            [
                 'source' => 'EXT:' . $packageKey . '/Resources/Public/Icons/mediagallery_ce_wiz.png',
-            )
+            ]
         );
         $GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-mediagal'] =
             'apps-pagetree-folder-contains-mediagal';
@@ -70,18 +70,18 @@ $boot = function ($packageKey) {
             \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($packageKey) . 'Resources/Public/Icons/mediagallery.png'
         );
 
-        \TYPO3\CMS\Backend\Sprite\SpriteManager::addSingleIcons(array(
+        \TYPO3\CMS\Backend\Sprite\SpriteManager::addSingleIcons([
             'edit-album' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($packageKey) . 'Resources/Public/Icons/mediagallery-edit.png',
             'add-album' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($packageKey) . 'Resources/Public/Icons/mediagallery-add.png'
-        ), 'fs_media_gallery');
+        ], 'fs_media_gallery');
     }
 
     // Add module icon for Folder
-    $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = array(
+    $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = [
         'MediaGalleries',
         'mediagal',
         'EXT:fs_media_gallery/Resources/Public/Icons/mediagallery.png'
-    );
+    ];
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
         $packageKey,

@@ -29,7 +29,7 @@ use TYPO3\CMS\Core\Resource\Folder;
 class FileChangedSlot implements \TYPO3\CMS\Core\SingletonInterface
 {
 
-    protected $folderMapping = array();
+    protected $folderMapping = [];
 
     /**
      * @var \MiniFranske\FsMediaGallery\Service\Utility

@@ -28,14 +28,14 @@ class PageLayoutView
      *
      * @var array
      */
-    public $tableData = array();
+    public $tableData = [];
 
     /**
      * FlexForm information
      *
      * @var array
      */
-    public $flexFormData = array();
+    public $flexFormData = [];
 
     /**
      * @var  \TYPO3\CMS\Core\Database\DatabaseConnection
@@ -70,7 +70,7 @@ class PageLayoutView
 
         $result .= '<hr>';
 
-        if (in_array($action, array('showAlbum', 'showAlbumByConfig'), true)) {
+        if (in_array($action, ['showAlbum', 'showAlbumByConfig'], true)) {
             $this->getAlbumSelection();
         } else {
             $this->getAlbumsSelection();
@@ -158,7 +158,7 @@ class PageLayoutView
                 'sys_file_collection',
                 'deleted=0 AND uid =' . (int)$albumUid
             );
-            $albums = array();
+            $albums = [];
             foreach ((array)$rowSysFileCollectionRecords as $record) {
                 $albums[] = htmlspecialchars(BackendUtilityCore::getRecordTitle('sys_file_collection', $record));
             }
@@ -180,7 +180,7 @@ class PageLayoutView
     public function getAlbumsSelection()
     {
         $filterMode = '';
-        $albums = array();
+        $albums = [];
 
         $albumUids = GeneralUtility::intExplode(',', $this->getFieldFromFlexform('settings.mediaAlbumsUids'), true);
         if (count($albumUids) > 0) {
@@ -222,7 +222,7 @@ class PageLayoutView
         $value = $this->getFieldFromFlexform('settings.startingpoint');
 
         if (!empty($value)) {
-            $pagesOut = array();
+            $pagesOut = [];
             $rawPagesRecords = $this->databaseConnection->exec_SELECTgetRows(
                 '*',
                 'pages',

@@ -42,7 +42,7 @@ class Install
             $sqlString[] = $this->getExtraTableDefinitions();
         }
 
-        return array('sqlString' => $sqlString);
+        return ['sqlString' => $sqlString];
     }
 
     /**
@@ -59,7 +59,7 @@ class Install
         ) {
             $sqlString[] = $this->getExtraTableDefinitions();
         }
-        return array('sqlString' => $sqlString, 'extensionKey' => $extensionKey);
+        return ['sqlString' => $sqlString, 'extensionKey' => $extensionKey];
     }
 
     /**

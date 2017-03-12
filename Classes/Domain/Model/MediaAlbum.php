@@ -60,7 +60,7 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * @var array
      */
-    protected $allowedMimeTypes = array();
+    protected $allowedMimeTypes = [];
 
     /**
      * @var string
@@ -327,7 +327,7 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
                 // failing albums get disabled
                 $this->setHidden(true);
                 $this->mediaAlbumRepository->update($this);
-                $this->assetCache = array();
+                $this->assetCache = [];
             }
         }
         return $this->assetCache;
@@ -383,7 +383,7 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getAssetsUids()
     {
         GeneralUtility::deprecationLog('MediaAlbum::getAssetsUid is deprecated and will be removed with next major version 2.*. Use getAssets() as this method can not handle static file collections');
-        $assetsUids = array();
+        $assetsUids = [];
         foreach ($assets = $this->getAssets() as $asset) {
             /** @var $asset FileInterface */
             $assetsUids[] = $asset->getUid();
@@ -438,7 +438,7 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
             $mainAsset = $this->mainAsset->getOriginalResource();
         } else {
             $assets = $this->getAssets();
-            $mainAsset = $assets !== array() ? $assets[0] : null;
+            $mainAsset = $assets !== [] ? $assets[0] : null;
         }
         return $mainAsset;
     }
@@ -496,7 +496,7 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         usort($files, function ($a, $b) use ($orderBy, $direction) {
             if ($orderBy === 'crdate') {
                 $compare = $a->getCreationTime() > $b->getCreationTime();
-            } elseif (in_array($orderBy, array('content_creation_date', 'content_modification_date'), true)) {
+            } elseif (in_array($orderBy, ['content_creation_date', 'content_modification_date'], true)) {
                 $compare = $a->getProperty($orderBy) > $b->getProperty($orderBy);
             } else {
                 $compare = strcmp($a->getProperty($orderBy), $b->getProperty($orderBy));

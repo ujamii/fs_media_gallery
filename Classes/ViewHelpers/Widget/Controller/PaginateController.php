@@ -81,11 +81,11 @@ class PaginateController extends \TYPO3\CMS\Fluid\ViewHelpers\Widget\Controller\
                 }
             }
         }
-        $this->view->assign('contentArguments', array(
+        $this->view->assign('contentArguments', [
             $this->widgetConfiguration['itemsBefore'] => $itemsBefore,
             $this->widgetConfiguration['as'] => $modifiedObjects,
             $this->widgetConfiguration['itemsAfter'] => $itemsAfter
-        ));
+        ]);
         $this->view->assign('configuration', $this->configuration);
         $this->view->assign('pagination', $this->buildPagination());
     }

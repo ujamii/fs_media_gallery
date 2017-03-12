@@ -4,7 +4,7 @@
  * Extension Manager/Repository config file for ext: "fs_media_gallery"
  ***************************************************************/
 
-$EM_CONF[$_EXTKEY] = array(
+$EM_CONF[$_EXTKEY] = [
     'title' => 'Media Gallery',
     'description' => 'A media gallery based on the FAL integration of TYPO3.
 Show your media assets from your local or remote storage as a gallery of albums.',
@@ -21,12 +21,12 @@ Show your media assets from your local or remote storage as a gallery of albums.
     'clearCacheOnLoad' => 1,
     'lockType' => '',
     'version' => '1.4.4-dev',
-    'constraints' => array(
-        'depends' => array(
+    'constraints' => [
+        'depends' => [
             'php' => '5.5',
             'typo3' => '6.2.14 - 8.3.99',
-        ),
-        'conflicts' => array(),
-        'suggests' => array(),
-    ),
-);
+        ],
+        'conflicts' => [],
+        'suggests' => [],
+    ],
+];

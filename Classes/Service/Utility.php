@@ -44,7 +44,7 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
      */
     public function getStorageFolders()
     {
-        $pages = array();
+        $pages = [];
 
         if ($this->getBeUser()) {
             $res = $this->getDatabaseConnection()->exec_SELECTquery(
@@ -137,10 +137,10 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
             'sys_file_collection',
             'storage = ' . (int)$oldStorageUid . '
 			AND folder = ' . $this->getDatabaseConnection()->fullQuoteStr($oldIdentifier, 'sys_file_collection'),
-            array(
+            [
                 'storage' => $newStorageUid,
                 'folder' => $newIdentifier
-            ),
+            ],
             true
         );
     }
@@ -157,9 +157,9 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
             'sys_file_collection',
             'storage = ' . (int)$storageUid . '
 			AND folder = ' . $this->getDatabaseConnection()->fullQuoteStr($identifier, 'sys_file_collection'),
-            array(
+            [
                 'deleted' => 1
-            )
+            ]
         );
     }
 
@@ -197,10 +197,10 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
      */
     public function findFileCollectionRecordsForFolder($storageUid, $folder, $pids = null)
     {
-        $conditions = array(
+        $conditions = [
             '`storage`=' . $this->getDatabaseConnection()->fullQuoteStr($storageUid, 'sys_file_collection'),
             '`folder`=' . $this->getDatabaseConnection()->fullQuoteStr($folder, 'sys_file_collection'),
-        );
+        ];
 
         if (is_int($pids)) {
             $conditions[] = 'pid=' . intval($pids);
