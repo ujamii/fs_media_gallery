@@ -42,6 +42,15 @@
 			<trans-unit id="link_to_album">
 				<source>Show album '%s'</source>
 			</trans-unit>
+			<trans-unit id="widget.pagination.ellipsis">
+				<source>…</source>
+			</trans-unit>
+			<trans-unit id="widget.pagination.previous">
+				<source>«</source>
+			</trans-unit>
+			<trans-unit id="widget.pagination.next">
+				<source>»</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
