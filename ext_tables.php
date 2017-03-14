@@ -49,9 +49,9 @@ $boot = function ($packageKey) {
         );
         $iconRegistry->registerIcon(
             'content-mediagallery',
-            \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
+            \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
             [
-                'source' => 'EXT:' . $packageKey . '/Resources/Public/Icons/mediagallery_ce_wiz.png',
+                'source' => 'EXT:' . $packageKey . '/Resources/Public/Icons/mediagallery.svg',
             ]
         );
 
