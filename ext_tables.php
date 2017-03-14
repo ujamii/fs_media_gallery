@@ -54,8 +54,6 @@ $boot = function ($packageKey) {
                 'source' => 'EXT:' . $packageKey . '/Resources/Public/Icons/mediagallery_ce_wiz.png',
             ]
         );
-        $GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-mediagal'] =
-            'apps-pagetree-folder-contains-mediagal';
 
     // Fallback for < 7.6
     } else {
@@ -74,26 +72,8 @@ $boot = function ($packageKey) {
             'edit-album' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($packageKey) . 'Resources/Public/Icons/mediagallery-edit.png',
             'add-album' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($packageKey) . 'Resources/Public/Icons/mediagallery-add.png'
         ], 'fs_media_gallery');
+
     }
-
-    // Add module icon for Folder
-    $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = [
-        'MediaGalleries',
-        'mediagal',
-        'EXT:fs_media_gallery/Resources/Public/Icons/mediagallery.png'
-    ];
-
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
-        $packageKey,
-        'Configuration/TypoScript',
-        'Media Gallery'
-    );
-    // Add Theme 'Bootstrap3'
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
-        $packageKey,
-        'Configuration/TypoScript/Themes/Bootstrap3',
-        'Media Gallery Theme \'Bootstrap3\''
-    );
 
     // Show albums in page module
     $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cms']['db_layout']['addTables']['sys_file_collection'][0] = [
