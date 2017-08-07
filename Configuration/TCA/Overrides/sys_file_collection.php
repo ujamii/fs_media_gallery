@@ -10,6 +10,7 @@ $additionalColumns = [
             'size' => 12,
             'max' => 20,
             'eval' => 'datetime',
+            'default' => 0,
         ]
     ],
     'sorting' => [
@@ -61,7 +62,8 @@ $additionalColumns = [
             'size' => 10,
             'autoSizeMax' => 20,
             'minitems' => 0,
-            'maxitems' => 1
+            'maxitems' => 1,
+            'default' => 0,
         ]
     ],
     'main_asset' => [
