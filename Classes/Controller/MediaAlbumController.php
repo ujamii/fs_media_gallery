@@ -329,6 +329,15 @@ class MediaAlbumController extends ActionController
      */
     public function showAssetAction(MediaAlbum $mediaAlbum, $mediaAssetUid)
     {
+
+        if (isset($this->settings['album']['assets']['orderBy'])) {
+            $mediaAlbum->setAssetsOrderBy($this->settings['album']['assets']['orderBy']);
+        }
+
+        if (isset($this->settings['album']['assets']['orderDirection'])) {
+            $mediaAlbum->setAssetsOrderDirection($this->settings['album']['assets']['orderDirection']);
+        }
+
         list($previousAsset, $mediaAsset, $nextAsset) = $mediaAlbum->getPreviousCurrentAndNext($mediaAssetUid);
         if (!$mediaAsset) {
             $message = LocalizationUtility::translate('asset_not_found', $this->extensionName);
