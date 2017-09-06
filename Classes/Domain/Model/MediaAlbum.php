@@ -499,9 +499,9 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
             } elseif (in_array($orderBy, ['content_creation_date', 'content_modification_date'], true)) {
                 $compare = $a->getProperty($orderBy) > $b->getProperty($orderBy);
             } else {
-                $compare = strcmp($a->getProperty($orderBy), $b->getProperty($orderBy));
+                $compare = strnatcasecmp($a->getProperty($orderBy), $b->getProperty($orderBy));
             }
-            return $direction === 'desc' ? !$compare : $compare;
+            return $direction === 'desc' ? -1 * $compare : $compare;
         });
 
         return $files;
