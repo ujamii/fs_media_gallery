@@ -34,7 +34,7 @@ class FileDescriptionViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstrac
     /**
      * Get title of a File
      *
-     * @param \TYPO3\CMS\Core\Resource\FileInterface|\TYPO3\CMS\Extbase\Domain\Model\File|\TYPO3\CMS\Extbase\Domain\Model\FileReference $file
+     * @param object $file
      * @return string|NULL
      */
     public function render($file)
