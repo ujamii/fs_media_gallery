@@ -245,7 +245,7 @@ class ext_update
                 $messageItem[2],
                 $messageItem[1],
                 $messageItem[0]);
-            $output .= $flashMessage->render();
+            $output .= '<p>' . $flashMessage->__toString() . '</p>';
         }
         return $output;
     }
