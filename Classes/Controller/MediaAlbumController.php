@@ -204,7 +204,7 @@ class MediaAlbumController extends ActionController
          */
         if ($mediaAlbum === null && $this->mediaAlbumRepository->getAlbumUids() !== []) {
             $mediaAlbums = [];
-            $all = $this->mediaAlbumRepository->findAll((bool)$this->settings['list']['hideEmptyAlbums']);
+            $all = $this->mediaAlbumRepository->findAll((bool)$this->settings['list']['hideEmptyAlbums'], $this->settings['list']['orderBy'], $this->settings['list']['orderDirection']);
             /** @var MediaAlbum $album */
             foreach ($all as $album) {
                 $parent = $album->getParentalbum();
