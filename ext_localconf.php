@@ -21,7 +21,7 @@ $boot = function ($packageKey) {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:' . $packageKey . '/Configuration/TSConfig/Page.ts">');
 
     // Resource Icon hook
-    if (\TYPO3\CMS\Core\Utility\GeneralUtility::compat_version('6.2')) {
+    if (version_compare(TYPO3_branch, '6.2', '>=')) {
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_iconworks.php']['overrideResourceIcon']['FsMediaGallery'] =
             'MiniFranske\\FsMediaGallery\\Hooks\\IconUtilityHook';
     }
