@@ -31,13 +31,24 @@ namespace MiniFranske\FsMediaGallery\ViewHelpers;
 class FileDescriptionViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
 
+	/**
+     * Initialize arguments.
+     *
+     * @api
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+		$this->registerArgument('file', 'TYPO3\CMS\Core\Resource\File', 'File', true);
+    }
+
     /**
      * Get title of a File
      *
-     * @param object $file
      * @return string|NULL
      */
-    public function render($file)
+    public function render()
     {
         if (is_callable([$file, 'getOriginalResource'])) {
             // Get the original file from the Extbase model
