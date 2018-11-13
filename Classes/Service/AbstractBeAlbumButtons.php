@@ -136,7 +136,7 @@ abstract class AbstractBeAlbumButtons
      */
     protected function buildEditUrl($uid)
     {
-        if (!GeneralUtility::compat_version('7.4')) {
+        if (version_compare(TYPO3_branch, '7.4', '<')) {
             return 'alt_doc.php?edit[sys_file_collection][' . $uid . ']=edit';
         } else {
             return BackendUtility::getModuleUrl('record_edit', [
@@ -160,7 +160,7 @@ abstract class AbstractBeAlbumButtons
      */
     protected function buildAddUrl($pid, $parentAlbumUid, Folder $folder)
     {
-        if (!GeneralUtility::compat_version('7.4')) {
+        if (version_compare(TYPO3_branch, '7.4', '<')) {
             return 'alt_doc.php?edit[sys_file_collection][' . (int)$pid . ']=new' .
                 '&defVals[sys_file_collection][parentalbum]=' . (int)$parentAlbumUid .
                 '&defVals[sys_file_collection][title]=' .
@@ -207,7 +207,7 @@ abstract class AbstractBeAlbumButtons
      */
     protected function getIcon($name)
     {
-        if (!GeneralUtility::compat_version('7.4')) {
+        if (version_compare(TYPO3_branch, '7.4', '<')) {
             $icon = IconUtility::getSpriteIcon('extensions-fs_media_gallery-' . $name);
         } else {
             $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
