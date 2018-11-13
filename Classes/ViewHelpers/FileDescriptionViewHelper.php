@@ -31,7 +31,7 @@ namespace MiniFranske\FsMediaGallery\ViewHelpers;
 class FileDescriptionViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
 
-	/**
+    /**
      * Initialize arguments.
      *
      * @api
@@ -40,7 +40,7 @@ class FileDescriptionViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstrac
     public function initializeArguments()
     {
         parent::initializeArguments();
-		$this->registerArgument('file', 'TYPO3\CMS\Core\Resource\File', 'File', true);
+        $this->registerArgument('file', 'TYPO3\CMS\Core\Resource\File', 'File', true);
     }
 
     /**
