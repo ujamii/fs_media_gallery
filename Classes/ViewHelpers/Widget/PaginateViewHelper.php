@@ -45,31 +45,34 @@ class PaginateViewHelper extends AbstractWidgetViewHelper
     ) {
         $this->controller = $controller;
     }
+    
+    /**
+     * Initialize arguments.
+     *
+     * @api
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('objects', 'mixed', 'Object', true);
+        $this->registerArgument('as', 'string', 'as', true);
+        $this->registerArgument('itemsBefore', 'integer', 'itemsBefore', false, null);
+        $this->registerArgument('itemsAfter', 'integer', 'itemsBefore', false, null);
+        $this->registerArgument('configuration', 'array', 'configuration', false, array('itemsPerPage' => 10, 'insertAbove' => false, 'insertBelow' => true, 'maximumNumberOfLinks' => 99));
+        $this->registerArgument('widgetId', 'string', 'Widget-ID', true, null);
+    }
 
     /**
      * main render function
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\QueryResultInterface $objects
-     * @param string $as
-     * @param string|null $itemsBefore
-     * @param string|null $itemsAfter
-     * @param array $configuration
-     * @param string $widgetId
      * @return string|\TYPO3\CMS\Extbase\Mvc\ResponseInterface
      */
-    public function render(
-        $objects,
-        $as,
-        $itemsBefore = null,
-        $itemsAfter = null,
-        array $configuration = [
-            'itemsPerPage' => 10,
-            'insertAbove' => false,
-            'insertBelow' => true,
-            'maximumNumberOfLinks' => 99
-        ],
-        $widgetId = null
-    ) {
+    public function render() {
+        $objects = $this->arguments['objects'];
+        if (!($objects instanceof QueryResultInterface || $objects instanceof ObjectStorage || is_array($objects))) {
+            throw new \UnexpectedValueException('Supplied file object type ' . get_class($objects) . ' must be QueryResultInterface or ObjectStorage or be an array.', 1454510731);
+        }
         return $this->initiateSubRequest();
     }
 }

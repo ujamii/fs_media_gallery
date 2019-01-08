@@ -191,7 +191,7 @@ abstract class AbstractWidgetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper
      */
     private function passArgumentsToSubRequest(\TYPO3\CMS\Fluid\Core\Widget\WidgetRequest $subRequest)
     {
-        $arguments = $this->controllerContext->getRequest()->getArguments();
+        $arguments = $this->renderingContext->getControllerContext()->getRequest()->getArguments();
         $widgetIdentifier = $this->widgetContext->getWidgetIdentifier();
         if (isset($arguments[$widgetIdentifier])) {
             if (isset($arguments[$widgetIdentifier]['action'])) {

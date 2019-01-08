@@ -66,7 +66,7 @@ class DocHeaderButtonsHook extends \MiniFranske\FsMediaGallery\Service\AbstractB
      */
     protected function createLink($title, $shortTitle, $icon, $url, $addReturnUrl = true)
     {
-        if (!GeneralUtility::compat_version('7.4')) {
+        if (version_compare(TYPO3_branch, '7.4', '<')) {
             if (strpos($url, 'alert') === 0) {
                 $url = 'javascript:' . $url;
             }
@@ -96,7 +96,7 @@ class DocHeaderButtonsHook extends \MiniFranske\FsMediaGallery\Service\AbstractB
     {
         $buttons = $params['buttons'];
 
-        if (GeneralUtility::_GP('M') === 'file_FilelistList') {
+        if (GeneralUtility::_GP('M') === 'file_FilelistList' || GeneralUtility::_GP('route') === '/file/FilelistList/') {
             foreach ($this->generateButtons(GeneralUtility::_GP('id')) as $buttonInfo) {
                 $button = $buttonBar->makeLinkButton();
                 $button->setIcon($buttonInfo['icon']);
