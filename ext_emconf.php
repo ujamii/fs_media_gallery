@@ -20,11 +20,10 @@ Show your media assets from your local or remote storage as a gallery of albums.
     'createDirs' => '',
     'clearCacheOnLoad' => 1,
     'lockType' => '',
-    'version' => '1.4.8',
+    'version' => '2.0.0',
     'constraints' => [
         'depends' => [
-            'php' => '5.5',
-            'typo3' => '6.2.14 - 8.7.99',
+            'typo3' => '8.5.0-9.5.99',
         ],
         'conflicts' => [],
         'suggests' => [],

@@ -20,7 +20,7 @@
     "GPL-2.0+"
   ],
   "require": {
-    "typo3/cms-core": "^7.2.14 || ^8.3"
+    "typo3/cms-core": "^8.3 || ^9.5"
   },
   "autoload": {
     "psr-4": {
@@ -33,7 +33,7 @@
   },
   "extra": {
       "branch-alias": {
-          "dev-master": "1.4.x-dev"
+          "dev-master": "2.0.x-dev"
       }
   }
 }
