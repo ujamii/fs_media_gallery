@@ -4,11 +4,6 @@ defined('TYPO3_MODE') || die();
 $boot = function ($packageKey) {
 
     if (TYPO3_MODE === 'BE') {
-        // Adding click menu item:
-        $GLOBALS['TBE_MODULES_EXT']['xMOD_alt_clickmenu']['extendCMclasses'][] = [
-            'name' => 'MiniFranske\\FsMediaGallery\\Service\\ClickMenuOptions'
-        ];
-
         // Add CSH
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
             'tt_content.pi_flexform.fsmediagallery_mediagallery.list',

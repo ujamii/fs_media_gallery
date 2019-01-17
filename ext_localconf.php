@@ -159,6 +159,10 @@ $boot = function ($packageKey) {
     );
 
     if (TYPO3_MODE === 'BE') {
+
+        $GLOBALS['TYPO3_CONF_VARS']['BE']['ContextMenu']['ItemProviders'][1547740001] = \MiniFranske\FsMediaGallery\ContextMenu\ItemProviders\FsMediaGalleryProvider::class;
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['typo3/backend.php']['constructPostProcess'][] = \MiniFranske\FsMediaGallery\Hooks\BackendControllerHook::class . '->addJavaScript';
+
         $signalSlotDispatcher->connect(
             'TYPO3\\CMS\\Install\\Service\\SqlExpectedSchemaService',
             'tablesDefinitionIsBeingBuilt',
