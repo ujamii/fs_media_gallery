@@ -1,4 +1,5 @@
 <?php
+
 namespace MiniFranske\FsMediaGallery\Service;
 
 /***************************************************************
@@ -23,10 +24,12 @@ namespace MiniFranske\FsMediaGallery\Service;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Resource\Folder;
+use MiniFranske\FsMediaGallery\Utility\StringUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -111,14 +114,14 @@ abstract class AbstractBeAlbumButtons
                     }
                 }
 
-            // show hint button for admin users
-            // todo: make this better so it can also be used for editors with enough rights to create a storageFolder
+                // show hint button for admin users
+                // todo: make this better so it can also be used for editors with enough rights to create a storageFolder
             } elseif ($GLOBALS['BE_USER']->isAdmin()) {
                 $buttons[] = $this->createLink(
                     $this->sL('module.buttons.createAlbum'),
                     $this->sL('module.buttons.createAlbum'),
                     $this->getIcon('add-album'),
-                    'alert("' . GeneralUtility::slashJS($this->sL('module.alerts.firstCreateStorageFolder')) . '");',
+                    'alert("' . StringUtility::slashJS($this->sL('module.alerts.firstCreateStorageFolder')) . '");',
                     false
                 );
             }
