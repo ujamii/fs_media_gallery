@@ -50,14 +50,25 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
         $pages = [];
 
         if ($this->getBeUser()) {
-            $res = $this->getDatabaseConnection()->exec_SELECTquery(
-                'uid,title',
-                'pages',
-                'doktype = 254 AND module in (\'mediagal\')' . BackendUtility::deleteClause('pages'),
-                '',
-                'title'
-            );
-            while ($row = $this->getDatabaseConnection()->sql_fetch_assoc($res)) {
+
+            $q = $this->getDatabaseConnection()->createQueryBuilder();
+
+            $q->getRestrictions()
+                ->removeAll()
+                ->add(GeneralUtility::makeInstance(DeletedRestriction::class));
+
+            $q->select('uid', 'title')
+                ->from('pages')
+                ->where(
+                    $q->expr()->andX(
+                        $q->expr()->eq('doktype', 254),
+                        $q->expr()->in('module', ['mediagal'])
+                    )
+                )
+                ->orderBy('title');
+
+            $statement = $q->execute();
+            while ($row = $statement->fetch(\PDO::FETCH_ASSOC)) {
                 if (BackendUtility::readPageAccess($row['uid'], $this->getBeUser()->getPagePermsClause(1))) {
                     $pages[$row['uid']] = $row['title'];
                 }
