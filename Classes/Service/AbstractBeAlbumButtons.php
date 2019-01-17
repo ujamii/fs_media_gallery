@@ -23,12 +23,10 @@ namespace MiniFranske\FsMediaGallery\Service;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Resource\Folder;
-use TYPO3\CMS\Backend\Utility\IconUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -136,18 +134,14 @@ abstract class AbstractBeAlbumButtons
      */
     protected function buildEditUrl($uid)
     {
-        if (version_compare(TYPO3_branch, '7.4', '<')) {
-            return 'alt_doc.php?edit[sys_file_collection][' . $uid . ']=edit';
-        } else {
-            return BackendUtility::getModuleUrl('record_edit', [
-                'edit' => [
-                    'sys_file_collection' => [
-                        $uid => 'edit'
-                    ]
-                ],
-                'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI')
-            ]);
-        }
+        return BackendUtility::getModuleUrl('record_edit', [
+            'edit' => [
+                'sys_file_collection' => [
+                    $uid => 'edit'
+                ]
+            ],
+            'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI')
+        ]);
     }
 
     /**
@@ -160,33 +154,23 @@ abstract class AbstractBeAlbumButtons
      */
     protected function buildAddUrl($pid, $parentAlbumUid, Folder $folder)
     {
-        if (version_compare(TYPO3_branch, '7.4', '<')) {
-            return 'alt_doc.php?edit[sys_file_collection][' . (int)$pid . ']=new' .
-                '&defVals[sys_file_collection][parentalbum]=' . (int)$parentAlbumUid .
-                '&defVals[sys_file_collection][title]=' .
-                ucfirst(trim(str_replace('_', ' ', $folder->getName()))) .
-                '&defVals[sys_file_collection][storage]=' . $folder->getStorage()->getUid() .
-                '&defVals[sys_file_collection][folder]=' . $folder->getIdentifier() .
-                '&defVals[sys_file_collection][type]=folder';
-        } else {
-            return BackendUtility::getModuleUrl('record_edit', [
-                'edit' => [
-                    'sys_file_collection' => [
-                        $pid => 'new'
-                    ]
-                ],
-                'defVals' => [
-                    'sys_file_collection' => [
-                        'parentalbum' => $parentAlbumUid,
-                        'title' => ucfirst(trim(str_replace('_', ' ', $folder->getName()))),
-                        'storage' => $folder->getStorage()->getUid(),
-                        'folder' => $folder->getIdentifier(),
-                        'type' => 'folder',
-                    ]
-                ],
-                'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI')
-            ]);
-        }
+        return BackendUtility::getModuleUrl('record_edit', [
+            'edit' => [
+                'sys_file_collection' => [
+                    $pid => 'new'
+                ]
+            ],
+            'defVals' => [
+                'sys_file_collection' => [
+                    'parentalbum' => $parentAlbumUid,
+                    'title' => ucfirst(trim(str_replace('_', ' ', $folder->getName()))),
+                    'storage' => $folder->getStorage()->getUid(),
+                    'folder' => $folder->getIdentifier(),
+                    'type' => 'folder',
+                ]
+            ],
+            'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI')
+        ]);
     }
 
     /**
@@ -207,12 +191,8 @@ abstract class AbstractBeAlbumButtons
      */
     protected function getIcon($name)
     {
-        if (version_compare(TYPO3_branch, '7.4', '<')) {
-            $icon = IconUtility::getSpriteIcon('extensions-fs_media_gallery-' . $name);
-        } else {
-            $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
-            $icon = $iconFactory->getIcon('action-' . $name, Icon::SIZE_SMALL);
-        }
+        $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
+        $icon = $iconFactory->getIcon('action-' . $name, Icon::SIZE_SMALL);
 
         return $icon;
     }
