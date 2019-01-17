@@ -1,16 +1,21 @@
 <?php
+namespace MiniFranske\FsMediaGallery\Service;
+
+use TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
  *  Copyright notice
  *
  *  (c) 2014 Frans Saris <franssaris@gmail.com>
- *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
+ *  the Free Software Foundation; either version 2 of the License, or
  *  (at your option) any later version.
  *
  *  The GNU General Public License can be found at
@@ -24,69 +29,14 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-
-/**
- * Update class for the extension manager
- */
-class ext_update
+class MigrateFlexFormsService
 {
+    const TABLE_NAME = 'tt_content';
 
-    /**
-     * Array of flash messages (params) array[][status,title,message]
-     *
-     * @var array
-     */
-    protected $messageArray = [];
-
-    /**
-     * Main update function called by the extension manager.
-     *
-     * @return string
-     */
-    public function main()
+    protected function performUpdates()
     {
-        $this->updatePlugins();
-        return $this->generateOutput();
-    }
-
-    /**
-     * Called by the extension manager to determine if the update menu entry
-     * should by showed.
-     * Menu item does not exists anymore in 6.2 so default TRUE for now.
-     *
-     * @return bool
-     */
-    public function access()
-    {
-        return true;
-    }
-
-    /**
-     * Migrate old (flexform) plugin values to new
-     *
-     * @return void
-     */
-    protected function updatePlugins()
-    {
-       $q = $this->getDatabaseConnection()->createQueryBuilder();
-
-       $q->getRestrictions()
-           ->removeAll()
-           ->add(GeneralUtility::makeInstance(\TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction::class));
-
-       $q->select('uid', 'pid', 'header', 'pi_flexform', 'pages', 'recursive')
-           ->from('tt_content')
-           ->where(
-               $q->expr()->andX(
-                   $q->expr()->eq('CType', 'list'),
-                   $q->expr()->eq('list_type', 'fsmediagallery_mediagallery')
-               )
-           );
-
         /** @var \TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools $flexformTools */
-        $flexformTools = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools::class);
+        $flexformTools = GeneralUtility::makeInstance(FlexFormTools::class);
 
         $migrations = [
             [
@@ -151,8 +101,8 @@ class ext_update
             ],
         ];
 
-        $statement = $q->execute();
-        while ($row = $statement->fetch(\PDO::FETCH_ASSOC)) {
+        foreach ($res as $row) {
+
             $title = 'Update plugin "' . htmlspecialchars($row['header']) . '" pid: ' . $row['pid'] . ' uid: ' . $row['uid'];
             $update = false;
 
@@ -209,11 +159,11 @@ class ext_update
                 }
 
                 if ($update) {
-                    $this->getDatabaseConnection()->update('tt_content', [
+                    $this->databaseConnection->exec_UPDATEquery('tt_content', 'uid=' . $row['uid'], [
                         'pages' => $row['pages'],
                         'recursive' => $row['recursive'],
                         'pi_flexform' => $flexformTools->flexArray2Xml($xmlArray)
-                    ], ['uid', $row['uid']]);
+                    ]);
                     $message .= '<br /><strong>Plugin updated</strong>';
 
                 } else {
@@ -222,29 +172,9 @@ class ext_update
 
                 //$message .= '<pre>' . print_r($xmlArray, 1) . '</pre>';
             }
-
-            $this->messageArray[] = [$status, $title, $message];
         }
-    }
 
-    /**
-     * Generates output by using flash messages
-     *
-     * @return string
-     */
-    protected function generateOutput()
-    {
-        $output = '';
-        foreach ($this->messageArray as $messageItem) {
-            /** @var \TYPO3\CMS\Core\Messaging\FlashMessage $flashMessage */
-            $flashMessage = GeneralUtility::makeInstance(
-                FlashMessage::class,
-                $messageItem[2],
-                $messageItem[1],
-                $messageItem[0]);
-            $output .= '<p>' . $flashMessage->__toString() . '</p>';
-        }
-        return $output;
+        return $foundFlexformFields;
     }
 
     /**
@@ -252,6 +182,8 @@ class ext_update
      */
     protected function getDatabaseConnection()
     {
-        return GeneralUtility::makeInstance(\TYPO3\CMS\Core\Database\ConnectionPool::class)->getConnectionForTable('tt_content');
+        return GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tt_content');
     }
+
+
 }
