@@ -25,6 +25,9 @@ namespace MiniFranske\FsMediaGallery\Service;
  ***************************************************************/
 
 use \TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Resource\Exception\InsufficientFolderAccessPermissionsException;
 use TYPO3\CMS\Core\Resource\Folder;
@@ -47,14 +50,25 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
         $pages = [];
 
         if ($this->getBeUser()) {
-            $res = $this->getDatabaseConnection()->exec_SELECTquery(
-                'uid,title',
-                'pages',
-                'doktype = 254 AND module in (\'mediagal\')' . BackendUtility::deleteClause('pages'),
-                '',
-                'title'
-            );
-            while ($row = $this->getDatabaseConnection()->sql_fetch_assoc($res)) {
+
+            $q = $this->getDatabaseConnection()->createQueryBuilder();
+
+            $q->getRestrictions()
+                ->removeAll()
+                ->add(GeneralUtility::makeInstance(DeletedRestriction::class));
+
+            $q->select('uid', 'title')
+                ->from('pages')
+                ->where(
+                    $q->expr()->andX(
+                        $q->expr()->eq('doktype', 254),
+                        $q->expr()->in('module', ['mediagal'])
+                    )
+                )
+                ->orderBy('title');
+
+            $statement = $q->execute();
+            while ($row = $statement->fetch(\PDO::FETCH_ASSOC)) {
                 if (BackendUtility::readPageAccess($row['uid'], $this->getBeUser()->getPagePermsClause(1))) {
                     $pages[$row['uid']] = $row['title'];
                 }
@@ -132,16 +146,16 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
      */
     public function updateFolderRecord($oldStorageUid, $oldIdentifier, $newStorageUid, $newIdentifier)
     {
-
-        $this->getDatabaseConnection()->exec_UPDATEquery(
+        $this->getDatabaseConnection()->update(
             'sys_file_collection',
-            'storage = ' . (int)$oldStorageUid . '
-			AND folder = ' . $this->getDatabaseConnection()->fullQuoteStr($oldIdentifier, 'sys_file_collection'),
             [
                 'storage' => $newStorageUid,
                 'folder' => $newIdentifier
             ],
-            true
+            [
+                'storage' => (int)$oldStorageUid,
+                'folder' => $oldIdentifier,
+            ]
         );
     }
 
@@ -153,14 +167,11 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
      */
     public function deleteFolderRecord($storageUid, $identifier)
     {
-        $this->getDatabaseConnection()->exec_UPDATEquery(
-            'sys_file_collection',
-            'storage = ' . (int)$storageUid . '
-			AND folder = ' . $this->getDatabaseConnection()->fullQuoteStr($identifier, 'sys_file_collection'),
-            [
-                'deleted' => 1
-            ]
-        );
+       $this->getDatabaseConnection()->update(
+           'sys_file_collection',
+           ['deleted' => 1],
+           ['folder' => $identifier, 'storage' => $storageUid]
+       );
     }
 
     /**
@@ -184,7 +195,8 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
             'title' => $title,
             'parentalbum' => (int)$parentAlbum
         ];
-        $this->getDatabaseConnection()->exec_INSERTquery('sys_file_collection', $folderRecord);
+
+        $this->getDatabaseConnection()->insert('sys_file_collection', $folderRecord);
     }
 
     /**
@@ -197,33 +209,43 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
      */
     public function findFileCollectionRecordsForFolder($storageUid, $folder, $pids = null)
     {
-        $conditions = [
-            '`storage`=' . $this->getDatabaseConnection()->fullQuoteStr($storageUid, 'sys_file_collection'),
-            '`folder`=' . $this->getDatabaseConnection()->fullQuoteStr($folder, 'sys_file_collection'),
-        ];
+        $q = $this->getDatabaseConnection()->createQueryBuilder();
+
+        $q->getRestrictions()
+            ->removeAll()
+            ->add(GeneralUtility::makeInstance(DeletedRestriction::class));
+
+        $q->select('uid', 'pid', 'title', 'type', 'hidden')
+            ->from('sys_file_collection')
+            ->where(
+                $q->expr()->andX(
+                    $q->expr()->eq('storage', $q->createNamedParameter($storageUid, \PDO::PARAM_INT)),
+                    $q->expr()->eq('folder', $q->createNamedParameter($folder))
+                )
+            );
 
         if (is_int($pids)) {
-            $conditions[] = 'pid=' . intval($pids);
+            $q->andWhere(
+                $q->expr()->eq('pid', $q->createNamedParameter($pids, \PDO::PARAM_INT))
+            );
         } elseif (is_array($pids)) {
-            $conditions[] = 'pid IN (' . implode(',', $pids) . ') ';
+            $q->andWhere(
+                $q->expr()->in('pid', $pids)
+            );
         }
-        $conditionsWhereClause = implode(' AND ', $conditions);
 
-        return $this->getDatabaseConnection()->exec_SELECTgetRows(
-            'uid,pid,title,type,hidden',
-            'sys_file_collection',
-            $conditionsWhereClause . BackendUtility::deleteClause('sys_file_collection')
-        );
+        return $q->execute()->fetchAll();
     }
 
     /**
      * Gets the database connection object.
      *
-     * @return \TYPO3\CMS\Core\Database\DatabaseConnection
+     * @param string $table
+     * @return Connection
      */
-    protected function getDatabaseConnection()
+    protected function getDatabaseConnection(string $table = 'sys_file_collection')
     {
-        return $GLOBALS['TYPO3_DB'];
+        return GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($table);
     }
 
     /**

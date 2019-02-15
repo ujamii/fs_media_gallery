@@ -8,6 +8,8 @@ namespace MiniFranske\FsMediaGallery\Hooks;
  */
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
 use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -36,20 +38,6 @@ class PageLayoutView
      * @var array
      */
     public $flexFormData = [];
-
-    /**
-     * @var  \TYPO3\CMS\Core\Database\DatabaseConnection
-     */
-    protected $databaseConnection;
-
-    /**
-     * PageLayoutView constructor.
-     */
-    public function __construct()
-    {
-        /** @var \TYPO3\CMS\Core\Database\DatabaseConnection databaseConnection */
-        $this->databaseConnection = $GLOBALS['TYPO3_DB'];
-    }
 
     /**
      * Returns information about this extension's pi1 plugin
@@ -153,11 +141,11 @@ class PageLayoutView
         $albumUid = (int)$this->getFieldFromFlexform('settings.mediaAlbum');
         if ((int)$albumUid > 0) {
             // Album record
-            $rowSysFileCollectionRecords = $this->databaseConnection->exec_SELECTgetRows(
-                '*',
-                'sys_file_collection',
-                'deleted=0 AND uid =' . (int)$albumUid
-            );
+            $rowSysFileCollectionRecords = $this->getDatabaseConnection()->select(['*'], 'sys_file_collection', [
+                'uid' => (int)$albumUid,
+                'deleted' => 0,
+            ]);
+
             $albums = [];
             foreach ((array)$rowSysFileCollectionRecords as $record) {
                 $albums[] = htmlspecialchars(BackendUtilityCore::getRecordTitle('sys_file_collection', $record));
@@ -194,11 +182,19 @@ class PageLayoutView
             }
 
             // Album records
-            $rowSysFileCollectionRecords = $this->databaseConnection->exec_SELECTgetRows(
-                '*',
-                'sys_file_collection',
-                'deleted=0 AND uid IN(' . implode(',', $albumUids) . ')'
-            );
+            $q = $this->getDatabaseConnection()->createQueryBuilder();
+
+            $q->getRestrictions()
+                ->removeAll()
+                ->add(GeneralUtility::makeInstance(DeletedRestriction::class));
+
+            $q->select('*')
+                ->from('sys_file_collection')
+                ->where(
+                    $q->expr()->in('uid', $albumUids)
+                );
+
+            $rowSysFileCollectionRecords = $q->execute()->fetchAll();
 
             foreach ((array)$rowSysFileCollectionRecords as $record) {
                 $albums[] = htmlspecialchars(BackendUtilityCore::getRecordTitle('sys_file_collection', $record));
@@ -223,11 +219,17 @@ class PageLayoutView
 
         if (!empty($value)) {
             $pagesOut = [];
-            $rawPagesRecords = $this->databaseConnection->exec_SELECTgetRows(
-                '*',
-                'pages',
-                'deleted=0 AND uid IN(' . implode(',', GeneralUtility::intExplode(',', $value, true)) . ')'
-            );
+
+            $q = $this->getDatabaseConnection('pages')->createQueryBuilder();
+
+            $q->select('*')
+                ->from('pages')
+                ->where(
+                    $q->expr()->in('uid', GeneralUtility::intExplode(',', $value, true))
+                );
+
+            $rawPagesRecords = $q->execute()->fetchAll();
+
 
             foreach ((array)$rawPagesRecords as $page) {
                 $pagesOut[] = htmlspecialchars(BackendUtilityCore::getRecordTitle('pages',
@@ -283,5 +285,14 @@ class PageLayoutView
     public function getLanguageService()
     {
         return $GLOBALS['LANG'];
+    }
+
+    /**
+     * @param string $table
+     * @return \TYPO3\CMS\Core\Database\Connection
+     */
+    public function getDatabaseConnection(string $table = 'sys_file_collection')
+    {
+        return GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($table);
     }
 }

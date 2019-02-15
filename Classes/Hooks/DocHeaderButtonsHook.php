@@ -66,23 +66,11 @@ class DocHeaderButtonsHook extends \MiniFranske\FsMediaGallery\Service\AbstractB
      */
     protected function createLink($title, $shortTitle, $icon, $url, $addReturnUrl = true)
     {
-        if (version_compare(TYPO3_branch, '7.4', '<')) {
-            if (strpos($url, 'alert') === 0) {
-                $url = 'javascript:' . $url;
-            }
-            $link = '';
-            $link .= '<a href=\'' . $url . ($addReturnUrl ? '&returnUrl=' . rawurlencode($_SERVER['REQUEST_URI']) : '') . '\'';
-            $link .= ' title="' . htmlspecialchars($title) . '">';
-            $link .= $icon;
-            $link .= '</a>';
-        } else {
-            $link = [
-                'title' => $title,
-                'icon' => $icon,
-                'url' => $url . ($addReturnUrl ? '&returnUrl=' . rawurlencode($_SERVER['REQUEST_URI']) : '')
-            ];
-        }
-        return $link;
+        return [
+            'title' => $title,
+            'icon' => $icon,
+            'url' => $url . ($addReturnUrl ? '&returnUrl=' . rawurlencode($_SERVER['REQUEST_URI']) : '')
+        ];
     }
 
     /**
