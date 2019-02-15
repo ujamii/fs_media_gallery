@@ -11,6 +11,7 @@ use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Database\Connection;
 
 /**
  * Class PageLayoutView
@@ -188,10 +189,11 @@ class PageLayoutView
                 ->removeAll()
                 ->add(GeneralUtility::makeInstance(DeletedRestriction::class));
 
+            $quotedIdentifiers = $q->createNamedParameter($albumUids, Connection::PARAM_INT_ARRAY);
             $q->select('*')
                 ->from('sys_file_collection')
                 ->where(
-                    $q->expr()->in('uid', $albumUids)
+                    $q->expr()->in('uid', $quotedIdentifiers)
                 );
 
             $rowSysFileCollectionRecords = $q->execute()->fetchAll();
@@ -221,11 +223,12 @@ class PageLayoutView
             $pagesOut = [];
 
             $q = $this->getDatabaseConnection('pages')->createQueryBuilder();
+            $quotedIdentifiers = $q->createNamedParameter(GeneralUtility::intExplode(',', $value, true), Connection::PARAM_INT_ARRAY);
 
             $q->select('*')
                 ->from('pages')
                 ->where(
-                    $q->expr()->in('uid', GeneralUtility::intExplode(',', $value, true))
+                    $q->expr()->in('uid', $quotedIdentifiers)
                 );
 
             $rawPagesRecords = $q->execute()->fetchAll();

@@ -57,12 +57,14 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
                 ->removeAll()
                 ->add(GeneralUtility::makeInstance(DeletedRestriction::class));
 
+            $quotedIdentifiers = $q->createNamedParameter(['mediagal'], Connection::PARAM_STR_ARRAY);
+
             $q->select('uid', 'title')
                 ->from('pages')
                 ->where(
                     $q->expr()->andX(
                         $q->expr()->eq('doktype', 254),
-                        $q->expr()->in('module', ['mediagal'])
+                        $q->expr()->in('module', $quotedIdentifiers)
                     )
                 )
                 ->orderBy('title');
