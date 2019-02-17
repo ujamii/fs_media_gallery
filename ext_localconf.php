@@ -3,7 +3,14 @@ defined('TYPO3_MODE') || die();
 
 $boot = function ($packageKey) {
 
-    $conf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$packageKey]);
+    if (class_exists(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)) {
+        $conf = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+            \TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class
+        )->get($packageKey);
+    } else {
+        // Fallback for 8LTS
+        $conf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$packageKey]);
+    }
 
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'MiniFranske.' . $packageKey,
@@ -21,15 +28,10 @@ $boot = function ($packageKey) {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:' . $packageKey . '/Configuration/TSConfig/Page.ts">');
 
     // Resource Icon hook
-    if (version_compare(TYPO3_branch, '6.2', '>=')) {
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_iconworks.php']['overrideResourceIcon']['FsMediaGallery'] =
-            'MiniFranske\\FsMediaGallery\\Hooks\\IconUtilityHook';
-    }
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_iconworks.php']['overrideResourceIcon']['FsMediaGallery'] =
+        'MiniFranske\\FsMediaGallery\\Hooks\\IconUtilityHook';
 
-    // Add mediagallery icon to docheader of filelist
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['typo3/template.php']['docHeaderButtonsHook']['FsMediaGallery'] =
-        'MiniFranske\\FsMediaGallery\\Hooks\\DocHeaderButtonsHook->addMediaGalleryButton';
-    // TYPO3 >= 7.6 module header bar buttons
+    // Module header bar buttons
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['Backend\Template\Components\ButtonBar']['getButtonsHook']['FsMediaGallery'] =
         'MiniFranske\\FsMediaGallery\\Hooks\\DocHeaderButtonsHook->moduleTemplateDocHeaderGetButtons';
 
@@ -150,7 +152,8 @@ $boot = function ($packageKey) {
             'postFolderAdd'
         );
     }
-    // File tree icon adjustments for TYPO3 => 7.5
+
+    // File tree icon adjustments
     $signalSlotDispatcher->connect(
         'TYPO3\\CMS\\Core\\Imaging\\IconFactory',
         'buildIconForResourceSignal',

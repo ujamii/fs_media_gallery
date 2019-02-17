@@ -11,6 +11,7 @@ namespace MiniFranske\FsMediaGallery\Hooks;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -34,7 +35,7 @@ class ItemsProcFuncHook
             'showAlbumByConfig' => 'MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset',
             'randomAsset' => 'MediaAlbum->randomAsset',
         ];
-        $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['fs_media_gallery']);
+        $extConf = $this->getExtensionConfiguration();;
         $allowedActions = [
             // index action is always allowed
             // this is needed to make sure the correct tabs/fields are shown in
@@ -69,7 +70,7 @@ class ItemsProcFuncHook
     public function getItemsForListOrderBy(array &$config)
     {
         $availableOptions = ['datetime', 'crdate', 'sorting'];
-        $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['fs_media_gallery']);
+        $extConf = $this->getExtensionConfiguration();;
         $allowedOptions = [];
         $allowedOptionsFromExtConf = [];
         if (!empty($extConf['list.']['orderOptions'])) {
@@ -99,7 +100,7 @@ class ItemsProcFuncHook
         // default set
         $allowedOptions = ['name', 'crdate', 'title', 'content_creation_date', 'content_modification_date'];
         $availableOptions = [];
-        $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['fs_media_gallery']);
+        $extConf = $this->getExtensionConfiguration();;
 
         if (!empty($extConf['asset.']['orderOptions'])) {
             $allowedOptions = GeneralUtility::trimExplode(',', $extConf['asset.']['orderOptions']);
@@ -126,4 +127,20 @@ class ItemsProcFuncHook
         }
     }
 
+    /**
+     * Get extension configuration
+     */
+    protected function getExtensionConfiguration() {
+
+        if (class_exists(ExtensionConfiguration::class)) {
+            $conf = GeneralUtility::makeInstance(
+                ExtensionConfiguration::class
+            )->get('fs_media_gallery');
+        } else {
+            // Fallback for 8LTS
+            $conf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['fs_media_gallery']);
+        }
+
+        return $conf;
+    }
 }

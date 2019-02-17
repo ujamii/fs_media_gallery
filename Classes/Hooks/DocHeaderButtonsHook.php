@@ -34,27 +34,6 @@ class DocHeaderButtonsHook extends \MiniFranske\FsMediaGallery\Service\AbstractB
 {
 
     /**
-     * Add media folder button to top bar of file list
-     *
-     * @param array $params ['buttons' => $buttons, 'markers' => &$markers, 'pObj' => &$this]
-     */
-    public function addMediaGalleryButton(array $params)
-    {
-        // only add button to file list module
-        if ($params['pObj']->scriptID === 'ext/filelist/mod1/index.php') {
-            $extraButtons = $this->generateButtons(GeneralUtility::_GP('id'));
-            if (count($extraButtons)) {
-                $params['markers']['BUTTONLIST_LEFT'] =
-                    preg_replace(
-                        '`</div>$`',
-                        implode('', $extraButtons) . '</div>',
-                        $params['markers']['BUTTONLIST_LEFT']
-                    );
-            }
-        }
-    }
-
-    /**
      * Create button
      *
      * @param string $title

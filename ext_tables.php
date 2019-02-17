@@ -11,7 +11,7 @@ $boot = function ($packageKey) {
         );
     }
 
-    // Initiate
+    /** @var \TYPO3\CMS\Core\Imaging\IconRegistry $iconRegistry */
     $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
     $iconRegistry->registerIcon(
         'apps-pagetree-folder-contains-mediagal',
@@ -48,12 +48,6 @@ $boot = function ($packageKey) {
             'source' => 'EXT:' . $packageKey . '/Resources/Public/Icons/mediagallery.svg',
         ]
     );
-
-    // Show albums in page module
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cms']['db_layout']['addTables']['sys_file_collection'][0] = [
-        'fList' => 'title, datetime, parentalbum, main_asset',
-        'icon' => true
-    ];
 };
 $boot($_EXTKEY);
 unset($boot);
