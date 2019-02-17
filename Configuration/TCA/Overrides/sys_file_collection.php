@@ -27,18 +27,12 @@ $additionalColumns = [
             'cols' => 40,
             'rows' => 5,
             'eval' => 'trim',
-            'wizards' => [
-                'RTE' => [
-                    'notNewRecords' => 1,
-                    'RTEonly' => 1,
-                    'type' => 'script',
-                    'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
-                    'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
-                    'module' => [
-                        'name' => 'wizard_rte'
-                    ]
-                ]
-            ]
+            'enableRichtext' => true,
+            'fieldControl' => [
+                'fullScreenRichtext' => [
+                    'disabled' => false,
+                ],
+            ],
         ],
         'defaultExtras' => 'richtext[]',
     ],
@@ -102,13 +96,6 @@ $GLOBALS['TCA']['sys_file_collection']['ctrl']['default_sortby'] = 'ORDER BY sor
 // enable main asset preview in list module
 $GLOBALS['TCA']['sys_file_collection']['ctrl']['thumbnail'] = 'main_asset';
 
-// Compatibility with 6.2
-if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(\TYPO3\CMS\Core\Utility\VersionNumberUtility::getNumericTypo3Version()) < 7000000) {
-    $additionalColumns['webdescription']['config']['wizards']['RTE']['icon'] = 'wizard_rte2.gif';
-    $additionalColumns['webdescription']['config']['wizards']['RTE']['title'] = 'LLL:EXT:cms/locallang_ttc.xlf:bodytext.W.RTE';
-    $additionalColumns['parentalbum']['config']['renderMode'] = 'tree';
-    $additionalColumns['datetime']['label'] = 'LLL:EXT:cms/locallang_ttc.xlf:date_formlabel';
-}
 
 \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule(
     $GLOBALS['TCA']['sys_file_collection']['columns'],
