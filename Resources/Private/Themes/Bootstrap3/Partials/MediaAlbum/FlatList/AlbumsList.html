@@ -14,9 +14,9 @@
 					<f:then>
 						<div class="container-fluid">
 							<div class="row">
-								<f:for each="{paginatedAlbums}" as="mediaAlbum">
+								<f:for each="{paginatedAlbums}" as="pagedMediaAlbum">
 									<div class="thumb col-xs-6 col-sm-4 col-md-3 col-lg-2">
-										<f:render section="AlbumPreview" arguments="{mediaAlbum:mediaAlbum}" />
+										<f:render section="AlbumPreview" arguments="{mediaAlbum:pagedMediaAlbum}" />
 									</div>
 								</f:for>
 							</div>
