@@ -60,7 +60,7 @@ class PaginateViewHelper extends AbstractWidgetViewHelper
         $this->registerArgument('itemsBefore', 'integer', 'itemsBefore', false, null);
         $this->registerArgument('itemsAfter', 'integer', 'itemsBefore', false, null);
         $this->registerArgument('configuration', 'array', 'configuration', false, array('itemsPerPage' => 10, 'insertAbove' => false, 'insertBelow' => true, 'maximumNumberOfLinks' => 99));
-        $this->registerArgument('widgetId', 'string', 'Widget-ID', true, null);
+        $this->registerArgument('widgetId', 'string', 'Widget-ID');
     }
 
     /**
