@@ -230,7 +230,7 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
             $q->andWhere(
                 $q->expr()->eq('pid', $q->createNamedParameter($pids, \PDO::PARAM_INT))
             );
-        } elseif (is_array($pids)) {
+        } elseif (is_array($pids) && count($pids) > 0) {
             $q->andWhere(
                 $q->expr()->in('pid', $pids)
             );
