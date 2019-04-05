@@ -145,7 +145,7 @@ class PageLayoutView
             $rowSysFileCollectionRecords = $this->getDatabaseConnection()->select(['*'], 'sys_file_collection', [
                 'uid' => (int)$albumUid,
                 'deleted' => 0,
-            ]);
+            ])->fetchAll();
 
             $albums = [];
             foreach ((array)$rowSysFileCollectionRecords as $record) {
