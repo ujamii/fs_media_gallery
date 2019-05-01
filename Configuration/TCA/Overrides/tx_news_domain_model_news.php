@@ -2,12 +2,12 @@
 defined('TYPO3_MODE') || die();
 
 if (isset($GLOBALS['TCA']['tx_news_domain_model_news'])) {
-    $additionalColumns = array(
-        'related_fsmediaalbums' => array(
+    $additionalColumns = [
+        'related_fsmediaalbums' => [
             'exclude' => 1,
             'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_db.xlf:tx_news_domain_model_news.related_fsmediaalbums',
-            'config' => array(
+            'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'sys_file_collection',
@@ -18,14 +18,14 @@ if (isset($GLOBALS['TCA']['tx_news_domain_model_news'])) {
                 'size' => 5,
                 'minitems' => 0,
                 'maxitems' => 5,
-                'wizards' => array(
-                    'suggest' => array(
+                'wizards' => [
+                    'suggest' => [
                         'type' => 'suggest',
-                    ),
-                ),
-            ),
-        ),
-    );
+                    ],
+                ],
+            ],
+        ],
+    ];
 
     foreach ($GLOBALS['TCA']['tx_news_domain_model_news']['types'] as $type => $tmp) {
         $GLOBALS['TCA']['tx_news_domain_model_news']['types'][$type]['showitem'] .= ',--div--;LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_db.xlf:tx_fsmediagallery_domain_model_mediaalbum';

@@ -9,7 +9,6 @@
     "images"
   ],
   "type": "typo3-cms-extension",
-  "version": "1.2.7",
   "authors": [
     {
       "name": "Frans Saris",
@@ -21,7 +20,7 @@
     "GPL-2.0+"
   ],
   "require": {
-    "typo3/cms-core": ">=7.2.14,<8.0"
+    "typo3/cms-core": "^8.3 || ^9.5"
   },
   "autoload": {
     "psr-4": {
@@ -31,5 +30,10 @@
   "replace": {
     "fs_media_gallery": "self.version",
     "typo3-ter/fs-media-gallery": "self.version"
+  },
+  "extra": {
+      "branch-alias": {
+          "dev-master": "2.0.x-dev"
+      }
   }
 }

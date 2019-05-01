@@ -3,31 +3,35 @@ defined('TYPO3_MODE') || die();
 
 $boot = function ($packageKey) {
 
+    if (class_exists(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)) {
+        $conf = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+            \TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class
+        )->get($packageKey);
+    } else {
+        // Fallback for 8LTS
+        $conf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$packageKey]);
+    }
+
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'MiniFranske.' . $packageKey,
         'Mediagallery',
-        array(
+        [
             'MediaAlbum' => 'index,nestedList,flatList,showAlbum,showAlbumByConfig,showAsset,random',
-        ),
+        ],
         // non-cacheable actions
-        array(
+        [
             'MediaAlbum' => 'random',
-        )
+        ]
     );
 
     // Page TSConfig
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:' . $packageKey . '/Configuration/TSConfig/Page.ts">');
 
     // Resource Icon hook
-    if (\TYPO3\CMS\Core\Utility\GeneralUtility::compat_version('6.2')) {
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_iconworks.php']['overrideResourceIcon']['FsMediaGallery'] =
-            'MiniFranske\\FsMediaGallery\\Hooks\\IconUtilityHook';
-    }
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_iconworks.php']['overrideResourceIcon']['FsMediaGallery'] =
+        'MiniFranske\\FsMediaGallery\\Hooks\\IconUtilityHook';
 
-    // Add mediagallery icon to docheader of filelist
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['typo3/template.php']['docHeaderButtonsHook']['FsMediaGallery'] =
-        'MiniFranske\\FsMediaGallery\\Hooks\\DocHeaderButtonsHook->addMediaGalleryButton';
-    // TYPO3 >= 7.6 module header bar buttons
+    // Module header bar buttons
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['Backend\Template\Components\ButtonBar']['getButtonsHook']['FsMediaGallery'] =
         'MiniFranske\\FsMediaGallery\\Hooks\\DocHeaderButtonsHook->moduleTemplateDocHeaderGetButtons';
 
@@ -43,6 +47,10 @@ $boot = function ($packageKey) {
 
     // EXT:news >= 3.2.0 support
     $GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['classes']['Domain/Model/News'][] = $packageKey;
+
+    // Page module hook
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['list_type_Info']['fsmediagallery_mediagallery']['fs_media_gallery'] =
+        'MiniFranske\\FsMediaGallery\\Hooks\\PageLayoutView->getExtensionSummary';
 
     $signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher');
     $signalSlotDispatcher->connect(
@@ -81,7 +89,71 @@ $boot = function ($packageKey) {
         'MiniFranske\\FsMediaGallery\\Hooks\\FolderChangedSlot',
         'postFolderRename'
     );
-    // File tree icon adjustments for TYPO3 => 7.5
+
+    // *** Register file signals to clear the cache when enabled in extension setteings ***
+    if (!empty($conf['clearCacheAfterFileChange']) && $conf['clearCacheAfterFileChange']) {
+
+        $signalSlotDispatcher->connect(
+            'TYPO3\\CMS\\Core\\Resource\\ResourceStorage',
+            \TYPO3\CMS\Core\Resource\ResourceStorageInterface::SIGNAL_PostFileAdd,
+            'MiniFranske\\FsMediaGallery\\Hooks\\FileChangedSlot',
+            'postFileAdd'
+        );
+
+        $signalSlotDispatcher->connect(
+            'TYPO3\\CMS\\Core\\Resource\\ResourceStorage',
+            \TYPO3\CMS\Core\Resource\ResourceStorageInterface::SIGNAL_PostFileCreate,
+            'MiniFranske\\FsMediaGallery\\Hooks\\FileChangedSlot',
+            'postFileCreate'
+        );
+
+        $signalSlotDispatcher->connect(
+            'TYPO3\\CMS\\Core\\Resource\\ResourceStorage',
+            \TYPO3\CMS\Core\Resource\ResourceStorageInterface::SIGNAL_PostFileCopy,
+            'MiniFranske\\FsMediaGallery\\Hooks\\FileChangedSlot',
+            'postFileCopy'
+        );
+
+        $signalSlotDispatcher->connect(
+            'TYPO3\\CMS\\Core\\Resource\\ResourceStorage',
+            \TYPO3\CMS\Core\Resource\ResourceStorageInterface::SIGNAL_PostFileMove,
+            'MiniFranske\\FsMediaGallery\\Hooks\\FileChangedSlot',
+            'postFileMove'
+        );
+
+        $signalSlotDispatcher->connect(
+            'TYPO3\\CMS\\Core\\Resource\\ResourceStorage',
+            \TYPO3\CMS\Core\Resource\ResourceStorageInterface::SIGNAL_PostFileDelete,
+            'MiniFranske\\FsMediaGallery\\Hooks\\FileChangedSlot',
+            'postFileDelete'
+        );
+
+        $signalSlotDispatcher->connect(
+            'TYPO3\\CMS\\Core\\Resource\\ResourceStorage',
+            \TYPO3\CMS\Core\Resource\ResourceStorageInterface::SIGNAL_PostFileRename,
+            'MiniFranske\\FsMediaGallery\\Hooks\\FileChangedSlot',
+            'postFileRename'
+        );
+
+        $signalSlotDispatcher->connect(
+            'TYPO3\\CMS\\Core\\Resource\\ResourceStorage',
+            \TYPO3\CMS\Core\Resource\ResourceStorageInterface::SIGNAL_PostFileReplace,
+            'MiniFranske\\FsMediaGallery\\Hooks\\FileChangedSlot',
+            'postFileReplace'
+        );
+    }
+
+
+    if (!empty($conf['enableAutoCreateFileCollection']) && $conf['enableAutoCreateFileCollection']) {
+        $signalSlotDispatcher->connect(
+            'TYPO3\\CMS\\Core\\Resource\\ResourceStorage',
+            \TYPO3\CMS\Core\Resource\ResourceStorageInterface::SIGNAL_PostFolderAdd,
+            'MiniFranske\\FsMediaGallery\\Hooks\\FolderChangedSlot',
+            'postFolderAdd'
+        );
+    }
+
+    // File tree icon adjustments
     $signalSlotDispatcher->connect(
         'TYPO3\\CMS\\Core\\Imaging\\IconFactory',
         'buildIconForResourceSignal',
@@ -90,6 +162,10 @@ $boot = function ($packageKey) {
     );
 
     if (TYPO3_MODE === 'BE') {
+
+        $GLOBALS['TYPO3_CONF_VARS']['BE']['ContextMenu']['ItemProviders'][1547740001] = \MiniFranske\FsMediaGallery\ContextMenu\ItemProviders\FsMediaGalleryProvider::class;
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['typo3/backend.php']['constructPostProcess'][] = \MiniFranske\FsMediaGallery\Hooks\BackendControllerHook::class . '->addJavaScript';
+
         $signalSlotDispatcher->connect(
             'TYPO3\\CMS\\Install\\Service\\SqlExpectedSchemaService',
             'tablesDefinitionIsBeingBuilt',

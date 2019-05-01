@@ -54,7 +54,7 @@ class IconFactory
         $overlayIdentifier
     ) {
         if ($folderObject && $folderObject instanceof Folder
-            && in_array($folderObject->getRole(), array(Folder::ROLE_DEFAULT, Folder::ROLE_USERUPLOAD))
+            && in_array($folderObject->getRole(), [Folder::ROLE_DEFAULT, Folder::ROLE_USERUPLOAD])
         ) {
             $mediaFolders = self::getMediaFolders();
 
@@ -82,7 +82,7 @@ class IconFactory
                 }
             }
         }
-        return array($folderObject, $size, $options, $iconIdentifier, $overlayIdentifier);
+        return [$folderObject, $size, $options, $iconIdentifier, $overlayIdentifier];
     }
 
     /**

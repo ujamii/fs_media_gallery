@@ -20,12 +20,14 @@ To set this configuration, switch to the Extension Manager, search for the exten
 
 .. container:: ts-properties
 
-   ======================================================================================== ============================== ===================================================================
-   Property                                                                                 Data type                      Default
-   ======================================================================================== ============================== ===================================================================
-   :ref:`allowedActionsInFlexforms <extConf.tx_fsmedia_gallery.allowedActionsInFlexforms>`  :ref:`t3tsref:data-type-list`  nestedList,flatList,showAlbumByParam,showAlbumByConfig,randomAsset
-   :ref:`list.orderOptions <extConf.tx_fsmedia_gallery.list.orderOptions>`                  :ref:`t3tsref:data-type-list`  datetime,crdate,sorting
-   ======================================================================================== ============================== ===================================================================
+   ================================================================================================= ================================ ===================================================================
+   Property                                                                                          Data type                        Default
+   ================================================================================================= ================================ ===================================================================
+   :ref:`allowedActionsInFlexforms <extConf.tx_fsmedia_gallery.allowedActionsInFlexforms>`           :ref:`t3tsref:data-type-list`    nestedList,flatList,showAlbumByParam,showAlbumByConfig,randomAsset
+   :ref:`list.orderOptions <extConf.tx_fsmedia_gallery.list.orderOptions>`                           :ref:`t3tsref:data-type-list`    datetime,crdate,sorting
+   :ref:`enableAutoCreateFileCollection <extConf.tx_fsmedia_gallery.enableAutoCreateFileCollection>` :ref:`t3tsref:data-type-boolean` true
+   :ref:`clearCacheAfterFileChange <extConf.tx_fsmedia_gallery.clearCacheAfterFileChange>`           :ref:`t3tsref:data-type-boolean` false
+   ================================================================================================= ================================ ===================================================================
 
 
 Property details
@@ -63,4 +65,26 @@ Available actions are:
 * sorting
 
 
-.. todo: add screenshot of EM config
+.. _extConf.tx_fsmedia_gallery.enableAutoCreateFileCollection:
+
+enableAutoCreateFileCollection
+""""""""""""""""""""""""""""""
+
+Enables auto creation of fileCollection(s)/album(s) of a folder when a new folder is created beneath an existing fileCollection/album.
+
+.. _extConf.tx_fsmedia_gallery.clearCacheAfterFileChange:
+
+clearCacheAfterFileChange
+"""""""""""""""""""""""""
+
+Clears the cache of the album after a file change. Set on false by default due that the cache will be cleared multiple times
+if more files will be added. Make sure "`TCEMAIN.clearCacheCmd`" is set as this value is used to define what cache should be cleared.
+
+For more info about possible values see  `Docs » Page TSconfig » ->TCEMAIN <https://docs.typo3.org/typo3cms/TSconfigReference/PageTsconfig/TCEmain/Index.html#clearcachecmd>`_.
+
+
+.. figure:: ../../Images/Configuration/ExtensionManager/extension_manager.png
+   :width: 716px
+   :alt: General extensionmanager settings
+
+       **Image 1:** General extensionmanager settings

@@ -405,31 +405,61 @@ They are set by :typoscript:`plugin.tx_fsmediagallery.settings.album.<property>`
 
 .. container:: ts-properties
 
-   ================================================================================================================= =================================================== ======================= =================
-   Property                                                                                                          Data type                                           :ref:`t3tsref:stdwrap`  Default
-   ================================================================================================================= =================================================== ======================= =================
-   :ref:`lightbox.enable <plugin.tx_fsmediagallery.settings.album.lightbox.enable>`                                  :ref:`t3tsref:data-type-boolean`                    no                      :code:`1`
-   :ref:`lightbox.jsPlugin <plugin.tx_fsmediagallery.settings.album.lightbox.jsPlugin>`                              :ref:`t3tsref:data-type-string`                     no                      :code:`colorbox`
-   :ref:`lightbox.relPrefix <plugin.tx_fsmediagallery.settings.album.lightbox.relPrefix>`                            :ref:`t3tsref:data-type-string`                     no                      :code:`albm_`
-   :ref:`lightbox.styleClass <plugin.tx_fsmediagallery.settings.album.lightbox.styleClass>`                          :ref:`t3tsref:data-type-string`                     no                      :code:`lightbox`
-   :ref:`lightbox.asset.width <plugin.tx_fsmediagallery.settings.album.lightbox.asset.width>`                        :ref:`t3tsref:data-type-pixels`                     no                      :code:`1920`
-   :ref:`lightbox.asset.height <plugin.tx_fsmediagallery.settings.album.lightbox.asset.height>`                      :ref:`t3tsref:data-type-pixels`                     no                      :code:`1080`
-   :ref:`lightbox.asset.resizeMode <plugin.tx_fsmediagallery.settings.album.lightbox.asset.resizeMode>`              :ref:`t3tsref:data-type-string` ``[m|c|s]``         no                      :code:`m`
-   :ref:`pagination.insertAbove <plugin.tx_fsmediagallery.settings.album.pagination.insertAbove>`                    :ref:`t3tsref:data-type-boolean`                    no                      :code:`0`
-   :ref:`pagination.insertBelow <plugin.tx_fsmediagallery.settings.album.pagination.insertBelow>`                    :ref:`t3tsref:data-type-boolean`                    no                      :code:`1`
-   :ref:`pagination.itemsPerPage <plugin.tx_fsmediagallery.settings.album.pagination.itemsPerPage>`                  :ref:`t3tsref:data-type-positive-integer`           no                      :code:`32`
-   :ref:`pagination.pagesBefore <plugin.tx_fsmediagallery.settings.album.pagination.pagesBefore>`                    :ref:`t3tsref:data-type-positive-integer` or ``0``  no                      :code:`4`
-   :ref:`pagination.pagesAfter <plugin.tx_fsmediagallery.settings.album.pagination.pagesAfter>`                      :ref:`t3tsref:data-type-positive-integer` or ``0``  no                      :code:`4`
-   :ref:`pagination.maximumNumberOfLinks <plugin.tx_fsmediagallery.settings.album.pagination.maximumNumberOfLinks>`  :ref:`t3tsref:data-type-positive-integer`           no                      :code:`9`
-   :ref:`thumb.width <plugin.tx_fsmediagallery.settings.album.thumb.width>`                                          :ref:`t3tsref:data-type-pixels`                     no                      :code:`120`
-   :ref:`thumb.height <plugin.tx_fsmediagallery.settings.album.thumb.height>`                                        :ref:`t3tsref:data-type-pixels`                     no                      :code:`70`
-   :ref:`thumb.resizeMode <plugin.tx_fsmediagallery.settings.album.thumb.resizeMode>`                                :ref:`t3tsref:data-type-string` ``[m|c|s]``         no                      :code:`m`
-   :ref:`displayTitle <plugin.tx_fsmediagallery.settings.album.displayTitle>`                                        :ref:`t3tsref:data-type-boolean`                    no                      :code:`1`
-   ================================================================================================================= =================================================== ======================= =================
+   ================================================================================================================= ========================================================= ======================= =================
+   Property                                                                                                          Data type                                                 :ref:`t3tsref:stdwrap`  Default
+   ================================================================================================================= ========================================================= ======================= =================
+   :ref:`assets.orderBy <plugin.tx_fsmediagallery.settings.album.assets.orderBy>`                                    :ref:`t3tsref:data-type-string` ``[|name|crdate|title]``  no                      :code:``
+   :ref:`assets.orderDirection <plugin.tx_fsmediagallery.settings.album.assets.orderDirection>`                      :ref:`t3tsref:data-type-string` ``[asc|desc]``            no                      :code:`asc`
+   :ref:`lightbox.enable <plugin.tx_fsmediagallery.settings.album.lightbox.enable>`                                  :ref:`t3tsref:data-type-boolean`                          no                      :code:`1`
+   :ref:`lightbox.jsPlugin <plugin.tx_fsmediagallery.settings.album.lightbox.jsPlugin>`                              :ref:`t3tsref:data-type-string`                           no                      :code:`colorbox`
+   :ref:`lightbox.relPrefix <plugin.tx_fsmediagallery.settings.album.lightbox.relPrefix>`                            :ref:`t3tsref:data-type-string`                           no                      :code:`albm_`
+   :ref:`lightbox.styleClass <plugin.tx_fsmediagallery.settings.album.lightbox.styleClass>`                          :ref:`t3tsref:data-type-string`                           no                      :code:`lightbox`
+   :ref:`lightbox.asset.width <plugin.tx_fsmediagallery.settings.album.lightbox.asset.width>`                        :ref:`t3tsref:data-type-pixels`                           no                      :code:`1920`
+   :ref:`lightbox.asset.height <plugin.tx_fsmediagallery.settings.album.lightbox.asset.height>`                      :ref:`t3tsref:data-type-pixels`                           no                      :code:`1080`
+   :ref:`lightbox.asset.resizeMode <plugin.tx_fsmediagallery.settings.album.lightbox.asset.resizeMode>`              :ref:`t3tsref:data-type-string` ``[m|c|s]``               no                      :code:`m`
+   :ref:`pagination.insertAbove <plugin.tx_fsmediagallery.settings.album.pagination.insertAbove>`                    :ref:`t3tsref:data-type-boolean`                          no                      :code:`0`
+   :ref:`pagination.insertBelow <plugin.tx_fsmediagallery.settings.album.pagination.insertBelow>`                    :ref:`t3tsref:data-type-boolean`                          no                      :code:`1`
+   :ref:`pagination.itemsPerPage <plugin.tx_fsmediagallery.settings.album.pagination.itemsPerPage>`                  :ref:`t3tsref:data-type-positive-integer`                 no                      :code:`32`
+   :ref:`pagination.pagesBefore <plugin.tx_fsmediagallery.settings.album.pagination.pagesBefore>`                    :ref:`t3tsref:data-type-positive-integer` or ``0``        no                      :code:`4`
+   :ref:`pagination.pagesAfter <plugin.tx_fsmediagallery.settings.album.pagination.pagesAfter>`                      :ref:`t3tsref:data-type-positive-integer` or ``0``        no                      :code:`4`
+   :ref:`pagination.maximumNumberOfLinks <plugin.tx_fsmediagallery.settings.album.pagination.maximumNumberOfLinks>`  :ref:`t3tsref:data-type-positive-integer`                 no                      :code:`9`
+   :ref:`thumb.width <plugin.tx_fsmediagallery.settings.album.thumb.width>`                                          :ref:`t3tsref:data-type-pixels`                           no                      :code:`120`
+   :ref:`thumb.height <plugin.tx_fsmediagallery.settings.album.thumb.height>`                                        :ref:`t3tsref:data-type-pixels`                           no                      :code:`70`
+   :ref:`thumb.resizeMode <plugin.tx_fsmediagallery.settings.album.thumb.resizeMode>`                                :ref:`t3tsref:data-type-string` ``[m|c|s]``               no                      :code:`m`
+   :ref:`displayTitle <plugin.tx_fsmediagallery.settings.album.displayTitle>`                                        :ref:`t3tsref:data-type-boolean`                          no                      :code:`1`
+   ================================================================================================================= ========================================================= ======================= =================
 
 
 Property details
 ^^^^^^^^^^^^^^^^
+
+
+.. _plugin.tx_fsmediagallery.settings.album.assets.orderBy:
+
+assets.orderBy
+""""""""""""""
+
+:typoscript:`plugin.tx_fsmediagallery.settings.album.assets.orderBy =` :ref:`t3tsref:data-type-string` ``[|name|crdate|title]``
+
+| Defines the sorting of the media/fiels shown in a album.
+| :code:`` = When not set (empty) the file system ordering is used
+| :code:`name` = Name of the file
+| :code:`crdate` = Creation date/time
+| :code:`title` = Title of the file (metadata)
+| :code:`content_creation_date` = Content Creation Date (ext:filemetadata)
+| :code:`content_modification_date` = Content Modification Date (ext:filemetadata)
+
+
+.. _plugin.tx_fsmediagallery.settings.album.assets.orderDirection:
+
+assets.orderDirection
+"""""""""""""""""""""
+
+:typoscript:`plugin.tx_fsmediagallery.settings.list.orderDirection =` :ref:`t3tsref:data-type-string` ``[asc|desc]``
+
+| Defines the sort direction of the media/files.
+| :code:`asc` = Ascending (old to new/low to high)
+| :code:`desc` = Descending (new to old/high to low)
 
 .. _plugin.tx_fsmediagallery.settings.album.thumb.width:
 

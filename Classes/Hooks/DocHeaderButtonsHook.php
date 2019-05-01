@@ -34,27 +34,6 @@ class DocHeaderButtonsHook extends \MiniFranske\FsMediaGallery\Service\AbstractB
 {
 
     /**
-     * Add media folder button to top bar of file list
-     *
-     * @param array $params ['buttons' => $buttons, 'markers' => &$markers, 'pObj' => &$this]
-     */
-    public function addMediaGalleryButton(array $params)
-    {
-        // only add button to file list module
-        if ($params['pObj']->scriptID === 'ext/filelist/mod1/index.php') {
-            $extraButtons = $this->generateButtons(GeneralUtility::_GP('id'));
-            if (count($extraButtons)) {
-                $params['markers']['BUTTONLIST_LEFT'] =
-                    preg_replace(
-                        '`</div>$`',
-                        implode('', $extraButtons) . '</div>',
-                        $params['markers']['BUTTONLIST_LEFT']
-                    );
-            }
-        }
-    }
-
-    /**
      * Create button
      *
      * @param string $title
@@ -66,23 +45,11 @@ class DocHeaderButtonsHook extends \MiniFranske\FsMediaGallery\Service\AbstractB
      */
     protected function createLink($title, $shortTitle, $icon, $url, $addReturnUrl = true)
     {
-        if (!GeneralUtility::compat_version('7.4')) {
-            if (strpos($url, 'alert') === 0) {
-                $url = 'javascript:' . $url;
-            }
-            $link = '';
-            $link .= '<a href=\'' . $url . ($addReturnUrl ? '&returnUrl=' . rawurlencode($_SERVER['REQUEST_URI']) : '') . '\'';
-            $link .= ' title="' . htmlspecialchars($title) . '">';
-            $link .= $icon;
-            $link .= '</a>';
-        } else {
-            $link = [
-                'title' => $title,
-                'icon' => $icon,
-                'url' => $url . ($addReturnUrl ? '&returnUrl=' . rawurlencode($_SERVER['REQUEST_URI']) : '')
-            ];
-        }
-        return $link;
+        return [
+            'title' => $title,
+            'icon' => $icon,
+            'url' => $url . ($addReturnUrl ? '&returnUrl=' . rawurlencode($_SERVER['REQUEST_URI']) : '')
+        ];
     }
 
     /**
@@ -96,7 +63,7 @@ class DocHeaderButtonsHook extends \MiniFranske\FsMediaGallery\Service\AbstractB
     {
         $buttons = $params['buttons'];
 
-        if (GeneralUtility::_GP('M') === 'file_FilelistList') {
+        if (GeneralUtility::_GP('M') === 'file_FilelistList' || GeneralUtility::_GP('route') === '/file/FilelistList/') {
             foreach ($this->generateButtons(GeneralUtility::_GP('id')) as $buttonInfo) {
                 $button = $buttonBar->makeLinkButton();
                 $button->setIcon($buttonInfo['icon']);

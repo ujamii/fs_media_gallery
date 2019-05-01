@@ -17,7 +17,7 @@ Features
 Requirements
 ============
 
-- TYPO3 >= 6.2
+- TYPO3 >= 8 LTS
 
 
 Quick install notes

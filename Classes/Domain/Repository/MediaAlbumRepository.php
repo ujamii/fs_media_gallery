@@ -36,25 +36,35 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * @var array default ordering
      */
-    protected $defaultOrderings = array(
+    protected $defaultOrderings = [
         'sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
         'crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
-    );
+    ];
 
     /**
      * @var array
      */
-    protected $allowedAssetMimeTypes = array();
+    protected $allowedAssetMimeTypes = [];
 
     /**
      * @var array
      */
-    protected $albumUids = array();
+    protected $albumUids = [];
 
     /**
      * @var bool
      */
     protected $useAlbumUidsAsExclude = false;
+
+    /**
+     * @var string
+     */
+    protected $assetsOrderBy = '';
+
+    /**
+     * @var string
+     */
+    protected $assetsOrderDirection = 'asc';
 
     /**
      * Set allowedAssetMimeTypes
@@ -117,6 +127,46 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     }
 
     /**
+     * Get assetsOrderBy
+     *
+     * @return string
+     */
+    public function getAssetsOrderBy()
+    {
+        return $this->assetsOrderBy;
+    }
+
+    /**
+     * Set assetsOrderBy
+     *
+     * @param string $assetsOrderBy
+     */
+    public function setAssetsOrderBy($assetsOrderBy)
+    {
+        $this->assetsOrderBy = $assetsOrderBy;
+    }
+
+    /**
+     * Get assetsOrderDirection
+     *
+     * @return string
+     */
+    public function getAssetsOrderDirection()
+    {
+        return $this->assetsOrderDirection;
+    }
+
+    /**
+     * Set assetsOrderDirection
+     *
+     * @param string $assetsOrderDirection
+     */
+    public function setAssetsOrderDirection($assetsOrderDirection)
+    {
+        $this->assetsOrderDirection = $assetsOrderDirection;
+    }
+
+    /**
      * Get random sub album
      *
      * @param MediaAlbum|bool $parent parent MediaAlbum, FALSE for parent = 0 or NULL for no restriction by parent
@@ -127,7 +177,7 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         /** @var \TYPO3\CMS\Extbase\Persistence\Generic\Query $query */
         $query = $this->createQuery();
-        $where = array();
+        $where = [];
 
         // restrict by parent album
         if ($parent !== null) {
@@ -135,8 +185,8 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
 
         // restrict by given uids
-        if ($this->albumUids !== array()) {
-            $uids = array();
+        if ($this->albumUids !== []) {
+            $uids = [];
             foreach ($this->albumUids as $uid) {
                 $uids[] = (int)$uid;
             }
@@ -158,6 +208,9 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         if ($mediaAlbum) {
             // set allowed asset mime types
             $mediaAlbum->setAllowedMimeTypes($this->allowedAssetMimeTypes);
+            // set assets order
+            $mediaAlbum->setAssetsOrderBy($this->assetsOrderBy);
+            $mediaAlbum->setAssetsOrderDirection($this->assetsOrderDirection);
         }
 
         return $mediaAlbum;
@@ -170,7 +223,7 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param boolean $excludeEmptyAlbums
      * @param string $orderBy Sort albums by: datetime|crdate|sorting
      * @param string $orderDirection Sort order: asc|desc
-     * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
+     * @return MediaAlbum[]
      */
     public function findByParentAlbum(
         MediaAlbum $parentAlbum = null,
@@ -180,10 +233,10 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     ) {
         $excludeEmptyAlbums = filter_var($excludeEmptyAlbums, FILTER_VALIDATE_BOOLEAN);
         $query = $this->createQuery();
-        $constraints = array();
+        $constraints = [];
         $constraints[] = $query->equals('parentalbum', $parentAlbum ?: 0);
 
-        if ($this->albumUids !== array()) {
+        if ($this->albumUids !== []) {
             if ($this->useAlbumUidsAsExclude) {
                 $constraints[] = $query->logicalNot($query->in('uid', $this->albumUids));
             } else {
@@ -193,19 +246,31 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         $query->matching($query->logicalAnd($constraints));
         $query->setOrderings($this->getOrderingsSettings($orderBy, $orderDirection));
-        $mediaAlbums = $query->execute();
+        $mediaAlbums = $query->execute()->toArray();
 
         foreach ($mediaAlbums as $key => $mediaAlbum) {
             /** @var $mediaAlbum \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum */
             // set allowed asset mime types
             $mediaAlbum->setAllowedMimeTypes($this->allowedAssetMimeTypes);
+            // set assets order
+            $mediaAlbum->setAssetsOrderBy($this->assetsOrderBy);
+            $mediaAlbum->setAssetsOrderDirection($this->assetsOrderDirection);
+            $mediaAlbum->setExcludeEmptyAlbums($excludeEmptyAlbums);
+
             // exclude if album is empty
-            if (true === $excludeEmptyAlbums && $mediaAlbum->getAssetsCount() < 1) {
+            if (
+                $excludeEmptyAlbums
+                &&
+                $mediaAlbum->getAssetsCount() === 0
+                &&
+                count($mediaAlbum->getAlbums()) === 0
+            ) {
                 unset($mediaAlbums[$key]);
             }
         }
 
-        return $mediaAlbums;
+        // Reset array keys and return albums
+        return array_values($mediaAlbums);
     }
 
     /**
@@ -225,9 +290,9 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             $query->getQuerySettings()->setRespectStoragePage(false);
         }
 
-        $constraints = array($query->equals('uid', (int)$uid));
+        $constraints = [$query->equals('uid', (int)$uid)];
 
-        if ($this->albumUids !== array()) {
+        if ($this->albumUids !== []) {
             if ($this->useAlbumUidsAsExclude) {
                 $constraints[] = $query->logicalNot($query->in('uid', $this->albumUids));
             } else {
@@ -241,6 +306,9 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         if ($mediaAlbum) {
             // set allowed asset mime types
             $mediaAlbum->setAllowedMimeTypes($this->allowedAssetMimeTypes);
+            // set assets order
+            $mediaAlbum->setAssetsOrderBy($this->assetsOrderBy);
+            $mediaAlbum->setAssetsOrderDirection($this->assetsOrderDirection);
         }
 
         return $mediaAlbum;
@@ -252,7 +320,7 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param boolean $excludeEmptyAlbums
      * @param string $orderBy Sort albums by: datetime|crdate|sorting
      * @param string $orderDirection Sort order: asc|desc
-     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @return MediaAlbum[]
      */
     public function findAll($excludeEmptyAlbums = true, $orderBy = 'datetime', $orderDirection = 'desc')
     {
@@ -260,7 +328,7 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $query = $this->createQuery();
         $query->setOrderings($this->getOrderingsSettings($orderBy, $orderDirection));
 
-        if ($this->albumUids !== array()) {
+        if ($this->albumUids !== []) {
             if ($this->useAlbumUidsAsExclude) {
                 $query->matching($query->logicalNot($query->in('uid', $this->albumUids)));
             } else {
@@ -268,19 +336,31 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             }
         }
 
-        $mediaAlbums = $query->execute();
+        $mediaAlbums = $query->execute()->toArray();
 
         foreach ($mediaAlbums as $key => $mediaAlbum) {
             /** @var $mediaAlbum \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum */
             // set allowed asset mime types
             $mediaAlbum->setAllowedMimeTypes($this->allowedAssetMimeTypes);
+            // set assets order
+            $mediaAlbum->setAssetsOrderBy($this->assetsOrderBy);
+            $mediaAlbum->setAssetsOrderDirection($this->assetsOrderDirection);
+            $mediaAlbum->setExcludeEmptyAlbums($excludeEmptyAlbums);
+
             // exclude if album is empty
-            if (true === $excludeEmptyAlbums && $mediaAlbum->getAssetsCount() < 1) {
+            if (
+                $excludeEmptyAlbums
+                &&
+                $mediaAlbum->getAssetsCount() === 0
+                &&
+                count($mediaAlbum->getAlbums()) === 0
+            ) {
                 unset($mediaAlbums[$key]);
             }
         }
 
-        return $mediaAlbums;
+        // Reset array keys and return albums
+        return array_values($mediaAlbums);
     }
 
     /**
@@ -327,20 +407,20 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         // set $orderingsSettings by orderBy and orderDirection
         switch ($orderBy) {
             case 'datetime':
-                $orderingsSettings = array(
+                $orderingsSettings = [
                     'datetime' => $orderDirection,
                     'crdate' => $orderDirection
-                );
+                ];
                 break;
             case 'crdate':
-                $orderingsSettings = array('crdate' => $orderDirection);
+                $orderingsSettings = ['crdate' => $orderDirection];
                 break;
             default:
                 // sorting
-                $orderingsSettings = array(
+                $orderingsSettings = [
                     'sorting' => $orderDirection,
                     'crdate' => $orderDirection
-                );
+                ];
         }
 
         return $orderingsSettings;

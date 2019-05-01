@@ -9,10 +9,10 @@
 		<f:if condition="{mediaAlbum}">
 			<f:then>
 				<div class="album clearfix">
-                                        <f:if condition="{settings.album.displayTitle}">
-                                            <h3>{mediaAlbum.title}</h3>
-                                        </f:if>
-					<div class="description"><f:format.html>{mediaAlbum.description}</f:format.html></div>
+					<f:if condition="{settings.album.displayTitle}">
+						<h3>{mediaAlbum.title}</h3>
+					</f:if>
+					<div class="description"><f:format.html>{mediaAlbum.webdescription}</f:format.html></div>
 					<f:if condition="{mediaAlbums}">
 						<f:then>
 							<f:render partial="MediaAlbum/NestedList/AlbumsList" section="AlbumsList" arguments="{mediaAlbums:mediaAlbums}" />

@@ -24,6 +24,8 @@ How to create a new media album
 
       **Image 1:** Include static template *Media Gallery (fs_media_gallery)*
 
+   If you use `EXT:bootstrap_package <https://extensions.typo3.org/extension/bootstrap_package/>`_ include static template *Media Gallery Theme 'Bootstrap3' (fs_media_gallery)*.
+
 #. Create a *"<Storage Folder>"* in your page-tree that's gonna hold your albums
 
    .. figure:: ../Images/UserManual/create-storage-folder.png
@@ -70,3 +72,9 @@ How to create a new media album
       **Image 6:** Set starting point
 
 #. **Open FE and admire your album :)**
+
+Clear cache after a folder change
+---------------------------------
+
+Clearing the cache of a certain page can be set by adding the 'TCEMAIN.clearCacheCmd' in the pageTs of your MediaGallery storage.
+After a change in your folder the TCEMAIN.clearCacheCmd will be invoked and the cache of these pages will be flushed.

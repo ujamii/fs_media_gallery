@@ -11,9 +11,9 @@
 			<f:if condition="{paginatedAlbums}">
 				<f:then>
 					<div class="thumbs thumbs-albums clearfix">
-						<f:for each="{paginatedAlbums}" as="mediaAlbum">
+						<f:for each="{paginatedAlbums}" as="pagedMediaAlbum">
 							<div class="thumb">
-								<f:render partial="MediaAlbum/Thumb" section="Thumb" arguments="{mediaAlbum:mediaAlbum, random:settings.list.thumb.random, width:settings.list.thumb.width, height:settings.list.thumb.height, resizeMode:settings.list.thumb.resizeMode}" />
+								<f:render partial="MediaAlbum/Thumb" section="Thumb" arguments="{mediaAlbum:pagedMediaAlbum, random:settings.list.thumb.random, width:settings.list.thumb.width, height:settings.list.thumb.height, resizeMode:settings.list.thumb.resizeMode}" />
 							</div>
 						</f:for>
 					</div>

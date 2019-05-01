@@ -4,7 +4,6 @@ mod.wizards {
 			plugins {
 				elements {
 					fsmediagallery_mediagallery {
-						icon = ../typo3conf/ext/fs_media_gallery/Resources/Public/Icons/mediagallery_ce_wiz.png
 						iconIdentifier = content-mediagallery
 						title = LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery.title
 						description = LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:mediagallery.description

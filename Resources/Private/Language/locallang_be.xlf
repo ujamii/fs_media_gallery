@@ -126,6 +126,27 @@
 			<trans-unit id="flexforms.mediagallery.album.pagination.itemsPerPage">
 				<source>Max. thumbs to display per page</source>
 			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.assets.orderBy">
+				<source>Sort media/files by</source>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.assets.orderBy.I.name">
+				<source>Filename</source>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.assets.orderBy.I.crdate">
+				<source>Creation date</source>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.assets.orderBy.I.title">
+				<source>Title (metadata)</source>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.assets.orderDirection">
+				<source>Sort direction for media/files</source>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.assets.orderDirection.I.asc">
+				<source>Ascending (old to new/low to high)</source>
+			</trans-unit>
+			<trans-unit id="flexforms.mediagallery.assets.orderDirection.I.desc">
+				<source>Descending (new to old/high to low)</source>
+			</trans-unit>
 			<trans-unit id="flexforms.mediagallery.album.thumb.width">
 				<source>Thumbnail width</source>
 			</trans-unit>
@@ -164,6 +185,15 @@
 			</trans-unit>
 			<trans-unit id="extmng.list.orderOptions">
 				<source>Sort options for albums lists in flexforms: Comma separated list of sort options for field "Sort albums list by" which could be selected in flexforms. Available options are datetime,crdate,sorting.</source>
+			</trans-unit>
+			<trans-unit id="extmng.asset.orderOptions">
+				<source>Sort options for assets (files) in flexforms: Comma separated list of sort options for field "Sort files by" which could be selected in flexforms. Available options are sys_file and sys_file_metadata options.</source>
+			</trans-unit>
+			<trans-unit id="extmng.enableAutoCreateFileCollection">
+				<source>Enable auto creation of fileCollections/albums when a new folder is created beneath an existing album.</source>
+			</trans-unit>
+			<trans-unit id="extmng.clearCacheAfterFileChange">
+				<source>Clear the cache of the album after a file change: Make sure PageTS option TCEMAIN.clearCacheCmd is set, see documentation.</source>
 			</trans-unit>
 
 			<!--

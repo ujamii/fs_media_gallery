@@ -1,4 +1,5 @@
 <?php
+
 namespace MiniFranske\FsMediaGallery\Service;
 
 /***************************************************************
@@ -28,7 +29,7 @@ use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Resource\Folder;
-use TYPO3\CMS\Backend\Utility\IconUtility;
+use MiniFranske\FsMediaGallery\Utility\StringUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -46,7 +47,7 @@ abstract class AbstractBeAlbumButtons
      */
     protected function generateButtons($combinedIdentifier)
     {
-        $buttons = array();
+        $buttons = [];
 
         // In some folder copy/move actions in file list a invalid id is passed
         try {
@@ -60,7 +61,7 @@ abstract class AbstractBeAlbumButtons
         if ($folder && $folder instanceof Folder &&
             in_array(
                 $folder->getRole(),
-                array(Folder::ROLE_DEFAULT, Folder::ROLE_USERUPLOAD)
+                [Folder::ROLE_DEFAULT, Folder::ROLE_USERUPLOAD]
             )
         ) {
             /** @var \MiniFranske\FsMediaGallery\Service\Utility $utility */
@@ -113,14 +114,14 @@ abstract class AbstractBeAlbumButtons
                     }
                 }
 
-            // show hint button for admin users
-            // todo: make this better so it can also be used for editors with enough rights to create a storageFolder
+                // show hint button for admin users
+                // todo: make this better so it can also be used for editors with enough rights to create a storageFolder
             } elseif ($GLOBALS['BE_USER']->isAdmin()) {
                 $buttons[] = $this->createLink(
                     $this->sL('module.buttons.createAlbum'),
                     $this->sL('module.buttons.createAlbum'),
                     $this->getIcon('add-album'),
-                    'alert("' . GeneralUtility::slashJS($this->sL('module.alerts.firstCreateStorageFolder')) . '");',
+                    'alert("' . StringUtility::slashJS($this->sL('module.alerts.firstCreateStorageFolder')) . '");',
                     false
                 );
             }
@@ -136,18 +137,14 @@ abstract class AbstractBeAlbumButtons
      */
     protected function buildEditUrl($uid)
     {
-        if (!GeneralUtility::compat_version('7.4')) {
-            return 'alt_doc.php?edit[sys_file_collection][' . $uid . ']=edit';
-        } else {
-            return BackendUtility::getModuleUrl('record_edit', array(
-                'edit' => array(
-                    'sys_file_collection' => array(
-                        $uid => 'edit'
-                    )
-                ),
-                'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI')
-            ));
-        }
+        return BackendUtility::getModuleUrl('record_edit', [
+            'edit' => [
+                'sys_file_collection' => [
+                    $uid => 'edit'
+                ]
+            ],
+            'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI')
+        ]);
     }
 
     /**
@@ -160,33 +157,23 @@ abstract class AbstractBeAlbumButtons
      */
     protected function buildAddUrl($pid, $parentAlbumUid, Folder $folder)
     {
-        if (!GeneralUtility::compat_version('7.4')) {
-            return 'alt_doc.php?edit[sys_file_collection][' . (int)$pid . ']=new' .
-                '&defVals[sys_file_collection][parentalbum]=' . (int)$parentAlbumUid .
-                '&defVals[sys_file_collection][title]=' .
-                ucfirst(trim(str_replace('_', ' ', $folder->getName()))) .
-                '&defVals[sys_file_collection][storage]=' . $folder->getStorage()->getUid() .
-                '&defVals[sys_file_collection][folder]=' . $folder->getIdentifier() .
-                '&defVals[sys_file_collection][type]=folder';
-        } else {
-            return BackendUtility::getModuleUrl('record_edit', array(
-                'edit' => array(
-                    'sys_file_collection' => array(
-                        $pid => 'new'
-                    )
-                ),
-                'defVals' => array(
-                    'sys_file_collection' => array(
-                        'parentalbum' => $parentAlbumUid,
-                        'title' => ucfirst(trim(str_replace('_', ' ', $folder->getName()))),
-                        'storage' => $folder->getStorage()->getUid(),
-                        'folder' => $folder->getIdentifier(),
-                        'type' => 'folder',
-                    )
-                ),
-                'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI')
-            ));
-        }
+        return BackendUtility::getModuleUrl('record_edit', [
+            'edit' => [
+                'sys_file_collection' => [
+                    $pid => 'new'
+                ]
+            ],
+            'defVals' => [
+                'sys_file_collection' => [
+                    'parentalbum' => $parentAlbumUid,
+                    'title' => ucfirst(trim(str_replace('_', ' ', $folder->getName()))),
+                    'storage' => $folder->getStorage()->getUid(),
+                    'folder' => $folder->getIdentifier(),
+                    'type' => 'folder',
+                ]
+            ],
+            'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI')
+        ]);
     }
 
     /**
@@ -207,12 +194,8 @@ abstract class AbstractBeAlbumButtons
      */
     protected function getIcon($name)
     {
-        if (!GeneralUtility::compat_version('7.4')) {
-            $icon = IconUtility::getSpriteIcon('extensions-fs_media_gallery-' . $name);
-        } else {
-            $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
-            $icon = $iconFactory->getIcon('action-' . $name, Icon::SIZE_SMALL);
-        }
+        $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
+        $icon = $iconFactory->getIcon('action-' . $name, Icon::SIZE_SMALL);
 
         return $icon;
     }

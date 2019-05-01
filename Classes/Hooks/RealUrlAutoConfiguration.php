@@ -40,37 +40,37 @@ class RealUrlAutoConfiguration
     public function addNewsConfig($params, &$pObj)
     {
 
-        return array_merge_recursive($params['config'], array(
-                'postVarSets' => array(
-                    '_DEFAULT' => array(
-                        'album' => array(
-                            array(
+        return array_merge_recursive($params['config'], [
+                'postVarSets' => [
+                    '_DEFAULT' => [
+                        'album' => [
+                            [
                                 'GETvar' => 'tx_fsmediagallery_mediagallery[mediaAlbum]',
-                                'lookUpTable' => array(
+                                'lookUpTable' => [
                                     'table' => 'sys_file_collection',
                                     'id_field' => 'uid',
                                     'alias_field' => 'title',
                                     'addWhereClause' => ' AND NOT deleted',
                                     'useUniqueCache' => 1,
-                                    'useUniqueCache_conf' => array(
+                                    'useUniqueCache_conf' => [
                                         'strtolower' => 1,
                                         'spaceCharacter' => '_',
-                                    ),
+                                    ],
                                     'languageGetVar' => 'L',
                                     'languageExceptionUids' => '',
                                     'languageField' => 'sys_language_uid',
                                     'transOrigPointerField' => 'l10n_parent',
                                     'autoUpdate' => 1,
                                     'expireDays' => 700,
-                                ),
-                            ),
-                            array(
+                                ],
+                            ],
+                            [
                                 'GETvar' => 'tx_fsmediagallery_mediagallery[@widget_assets][currentPage]',
-                            ),
-                        )
-                    )
-                )
-            )
+                            ],
+                        ]
+                    ]
+                ]
+            ]
         );
     }
 }

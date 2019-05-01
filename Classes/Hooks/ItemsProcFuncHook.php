@@ -11,6 +11,7 @@ namespace MiniFranske\FsMediaGallery\Hooks;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -27,21 +28,21 @@ class ItemsProcFuncHook
      */
     public function getItemsForSwitchableControllerActions(array &$config)
     {
-        $availableActions = array(
+        $availableActions = [
             'nestedList' => 'MediaAlbum->nestedList;MediaAlbum->showAsset',
             'flatList' => 'MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset',
             'showAlbumByParam' => 'MediaAlbum->showAlbum;MediaAlbum->showAsset',
             'showAlbumByConfig' => 'MediaAlbum->showAlbumByConfig;MediaAlbum->showAsset',
             'randomAsset' => 'MediaAlbum->randomAsset',
-        );
-        $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['fs_media_gallery']);
-        $allowedActions = array(
+        ];
+        $extConf = $this->getExtensionConfiguration();;
+        $allowedActions = [
             // index action is always allowed
             // this is needed to make sure the correct tabs/fields are shown in
             // flexform when a new plugin is added
             'index' => 'MediaAlbum->index',
-        );
-        $allowedActionsFromExtConf = array();
+        ];
+        $allowedActionsFromExtConf = [];
         if (!empty($extConf['allowedActionsInFlexforms'])) {
             $allowedActionsFromExtConf = GeneralUtility::trimExplode(',', $extConf['allowedActionsInFlexforms']);
         }
@@ -68,10 +69,10 @@ class ItemsProcFuncHook
      */
     public function getItemsForListOrderBy(array &$config)
     {
-        $availableOptions = array('datetime', 'crdate', 'sorting');
-        $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['fs_media_gallery']);
-        $allowedOptions = array();
-        $allowedOptionsFromExtConf = array();
+        $availableOptions = ['datetime', 'crdate', 'sorting'];
+        $extConf = $this->getExtensionConfiguration();;
+        $allowedOptions = [];
+        $allowedOptionsFromExtConf = [];
         if (!empty($extConf['list.']['orderOptions'])) {
             $allowedOptionsFromExtConf = GeneralUtility::trimExplode(',', $extConf['list.']['orderOptions']);
         }
@@ -88,4 +89,58 @@ class ItemsProcFuncHook
         }
     }
 
+    /**
+     * Sets the available options for settings.album.assets.orderBy
+     *
+     * @param array &$config
+     * @return void
+     */
+    public function getItemsForAssetsOrderBy(array &$config)
+    {
+        // default set
+        $allowedOptions = ['name', 'crdate', 'title', 'content_creation_date', 'content_modification_date'];
+        $availableOptions = [];
+        $extConf = $this->getExtensionConfiguration();;
+
+        if (!empty($extConf['asset.']['orderOptions'])) {
+            $allowedOptions = GeneralUtility::trimExplode(',', $extConf['asset.']['orderOptions']);
+        }
+        // check if field exists in TCA of sys_file or sys_file_metadata
+        foreach ($allowedOptions as $key => $option) {
+            if (
+                $option === 'crdate'
+                ||
+                !empty($GLOBALS['TCA']['sys_file']['columns'][$option])
+                ||
+                !empty($GLOBALS['TCA']['sys_file_metadata']['columns'][$option])
+            ) {
+                $availableOptions[] = $option;
+            }
+        }
+        // @todo: add option to add custom options to the item list
+        //        use label from TCA
+        foreach ($config['items'] as $key => $item) {
+            // check items; empty value (inherit from TS) is always allowed
+            if (!empty($item[1]) && !in_array($item[1], $availableOptions)) {
+                unset($config['items'][$key]);
+            }
+        }
+    }
+
+    /**
+     * Get extension configuration
+     */
+    protected function getExtensionConfiguration() {
+
+        if (class_exists(ExtensionConfiguration::class)) {
+            $conf = GeneralUtility::makeInstance(
+                ExtensionConfiguration::class
+            )->get('fs_media_gallery');
+        } else {
+            // Fallback for 8LTS
+            $conf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['fs_media_gallery']);
+        }
+
+        return $conf;
+    }
 }

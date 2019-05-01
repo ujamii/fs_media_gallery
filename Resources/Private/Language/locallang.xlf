@@ -27,9 +27,6 @@
 			<trans-unit id="no_assets_found">
 				<source>No assets found</source>
 			</trans-unit>
-			<trans-unit id="asset_not_found">
-				<source>Asset not found</source>
-			</trans-unit>
 			<trans-unit id="back_to_album">
 				<source>Back to album</source>
 			</trans-unit>
@@ -44,6 +41,15 @@
 			</trans-unit>
 			<trans-unit id="link_to_album">
 				<source>Show album '%s'</source>
+			</trans-unit>
+			<trans-unit id="widget.pagination.ellipsis">
+				<source>…</source>
+			</trans-unit>
+			<trans-unit id="widget.pagination.previous">
+				<source>«</source>
+			</trans-unit>
+			<trans-unit id="widget.pagination.next">
+				<source>»</source>
 			</trans-unit>
 		</body>
 	</file>

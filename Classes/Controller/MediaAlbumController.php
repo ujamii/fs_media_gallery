@@ -140,6 +140,12 @@ class MediaAlbumController extends ActionController
             $this->mediaAlbumRepository->setAllowedAssetMimeTypes(GeneralUtility::trimExplode(',',
                 $this->settings['allowedAssetMimeTypes']));
         }
+        if (isset($this->settings['album']['assets']['orderBy'])) {
+            $this->mediaAlbumRepository->setAssetsOrderBy($this->settings['album']['assets']['orderBy']);
+        }
+        if (isset($this->settings['album']['assets']['orderDirection'])) {
+            $this->mediaAlbumRepository->setAssetsOrderDirection($this->settings['album']['assets']['orderDirection']);
+        }
     }
 
     /**
@@ -196,9 +202,9 @@ class MediaAlbumController extends ActionController
          * No album selected and album restriction set, find all "root" albums
          * Albums without parent or with parent not selected as allowed
          */
-        if ($mediaAlbum === null && $this->mediaAlbumRepository->getAlbumUids() !== array()) {
-            $mediaAlbums = array();
-            $all = $this->mediaAlbumRepository->findAll((bool)$this->settings['list']['hideEmptyAlbums']);
+        if ($mediaAlbum === null && $this->mediaAlbumRepository->getAlbumUids() !== []) {
+            $mediaAlbums = [];
+            $all = $this->mediaAlbumRepository->findAll((bool)$this->settings['list']['hideEmptyAlbums'], $this->settings['list']['orderBy'], $this->settings['list']['orderDirection']);
             /** @var MediaAlbum $album */
             foreach ($all as $album) {
                 $parent = $album->getParentalbum();
@@ -227,7 +233,7 @@ class MediaAlbumController extends ActionController
         }
 
         if ($mediaAlbum && $mediaAlbum->getParentalbum() && (
-                $this->mediaAlbumRepository->getAlbumUids() === array()
+                $this->mediaAlbumRepository->getAlbumUids() === []
                 ||
                 (!$this->mediaAlbumRepository->getUseAlbumUidsAsExclude() && in_array($mediaAlbum->getParentalbum()->getUid(),
                         $this->mediaAlbumRepository->getAlbumUids()))
@@ -323,6 +329,15 @@ class MediaAlbumController extends ActionController
      */
     public function showAssetAction(MediaAlbum $mediaAlbum, $mediaAssetUid)
     {
+
+        if (isset($this->settings['album']['assets']['orderBy'])) {
+            $mediaAlbum->setAssetsOrderBy($this->settings['album']['assets']['orderBy']);
+        }
+
+        if (isset($this->settings['album']['assets']['orderDirection'])) {
+            $mediaAlbum->setAssetsOrderDirection($this->settings['album']['assets']['orderDirection']);
+        }
+
         list($previousAsset, $mediaAsset, $nextAsset) = $mediaAlbum->getPreviousCurrentAndNext($mediaAssetUid);
         if (!$mediaAsset) {
             $message = LocalizationUtility::translate('asset_not_found', $this->extensionName);

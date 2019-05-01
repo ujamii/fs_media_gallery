@@ -21,8 +21,9 @@ namespace MiniFranske\FsMediaGallery\ViewHelpers\Widget;
 	 *                                                                        *
 	 * The TYPO3 project - inspiring people to share!                         *
 	 *                                                                        */
-use TYPO3Fluid\Fluid\Core\Compiler\TemplateCompiler;
-use TYPO3Fluid\Fluid\Core\Parser\SyntaxTree\ViewHelperNode;
+use TYPO3\CMS\Fluid\Core\Compiler\TemplateCompiler;
+use TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\ViewHelperNode;
+use TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\AbstractNode;
 
 /**
  * @api
@@ -190,7 +191,7 @@ abstract class AbstractWidgetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper
      */
     private function passArgumentsToSubRequest(\TYPO3\CMS\Fluid\Core\Widget\WidgetRequest $subRequest)
     {
-        $arguments = $this->controllerContext->getRequest()->getArguments();
+        $arguments = $this->renderingContext->getControllerContext()->getRequest()->getArguments();
         $widgetIdentifier = $this->widgetContext->getWidgetIdentifier();
         if (isset($arguments[$widgetIdentifier])) {
             if (isset($arguments[$widgetIdentifier]['action'])) {
@@ -237,7 +238,7 @@ abstract class AbstractWidgetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper
      * @param ViewHelperNode $node
      * @param TemplateCompiler $compiler
      */
-    public function compile($argumentsName, $closureName, &$initializationPhpCode, ViewHelperNode $node, TemplateCompiler $compiler)
+    public function compile($argumentsName, $closureName, &$initializationPhpCode, AbstractNode $node, TemplateCompiler $compiler)
     {
         $compiler->disable();
         return '\'\'';
