@@ -180,6 +180,12 @@ $boot = function ($packageKey) {
             'tablesDefinitionIsBeingBuiltForExtension'
         );
     }
+
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['realurlAliasMediaAlbumsSlug']
+        = \MiniFranske\FsMediaGallery\Updates\RealurlAliasMediaAlbumsSlug::class; // Recommended before 'populateMedialAlbumsSlug'
+
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['populateMedialAlbumsSlug']
+        = \MiniFranske\FsMediaGallery\Updates\PopulateMedialAlbumsSlug::class;
 };
 $boot($_EXTKEY);
 unset($boot);
