@@ -177,7 +177,7 @@ class SlugService
         if ($schemaManager->tablesExist(['tx_realurl_uniqalias']) === true) {
             /** @var Connection $connection */
             $connection = GeneralUtility::makeInstance(ConnectionPool::class)
-                ->getConnectionForTable('tx_news_domain_model_news');
+                ->getConnectionForTable($this->tableName);
             $queryBuilder = $connection->createQueryBuilder();
 
             // Get entries to update
