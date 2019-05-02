@@ -29,7 +29,7 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
-use TYPO3\CMS\Core\Resource\Exception\InsufficientFolderAccessPermissionsException;
+use TYPO3\CMS\Core\DataHandling\SlugHelper;
 use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Core\Resource\FolderInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -197,6 +197,18 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
             'title' => $title,
             'parentalbum' => (int)$parentAlbum
         ];
+
+        // Create slug
+        $slugTCAConfig = $GLOBALS['TCA']['sys_file_collection']['columns']['slug']['config'];
+        /** @var SlugHelper $slugHelper */
+        $slugHelper = GeneralUtility::makeInstance(
+            SlugHelper::class,
+            'sys_file_collection',
+            'slug',
+            $slugTCAConfig
+        );
+        $slug = $slugHelper->generate($folderRecord, $collectionStoragePid);
+        $folderRecord['slug'] = $slug;
 
         $this->getDatabaseConnection()->insert('sys_file_collection', $folderRecord);
     }
