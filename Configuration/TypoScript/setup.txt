@@ -117,7 +117,7 @@ plugin.tx_fsmediagallery {
 		}
 	}
 	# skip default arguments
-	features.skipDefaultArguments = 1
+	features.skipDefaultArguments = 0
 }
 
 # Include MediaGallery default styles

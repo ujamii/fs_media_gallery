@@ -76,6 +76,23 @@ $additionalColumns = [
     ]
 ];
 
+if (version_compare(TYPO3_branch, '9.5', '>=')) {
+    $additionalColumns['slug'] = [
+        'exclude' => true,
+        'label' => 'LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_db.xlf:tx_fsmediagallery_domain_model_mediaalbum.slug',
+        'config' => [
+            'type' => 'slug',
+            'generatorOptions' => [
+                'fields' => ['title'],
+                'fieldSeparator' => '/',
+                'prefixParentPageSlug' => false,
+            ],
+            'fallbackCharacter' => '-',
+            'eval' => 'uniqueInPid',
+        ],
+    ];
+}
+
 foreach ($GLOBALS['TCA']['sys_file_collection']['types'] as $type => $tmp) {
     $GLOBALS['TCA']['sys_file_collection']['types'][$type]['showitem'] .= ',--div--;LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_db.xlf:tx_fsmediagallery_domain_model_mediaalbum';
     // try to add field datetime before type (after title)
@@ -86,7 +103,7 @@ foreach ($GLOBALS['TCA']['sys_file_collection']['types'] as $type => $tmp) {
     } else {
         $GLOBALS['TCA']['sys_file_collection']['types'][$type]['showitem'] .= ',datetime';
     }
-    $GLOBALS['TCA']['sys_file_collection']['types'][$type]['showitem'] .= ',parentalbum,main_asset,webdescription';
+    $GLOBALS['TCA']['sys_file_collection']['types'][$type]['showitem'] .= ',slug,parentalbum,main_asset,webdescription';
 }
 
 // enable manual sorting
