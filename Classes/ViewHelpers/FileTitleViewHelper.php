@@ -40,7 +40,7 @@ class FileTitleViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewH
     public function initializeArguments()
     {
         parent::initializeArguments();
-        $this->registerArgument('file', 'TYPO3\CMS\Core\Resource\File', 'File', true);
+        $this->registerArgument('file', 'TYPO3\CMS\Core\Resource\FileInterface', 'File', true);
     }
 
     /**
