@@ -50,6 +50,8 @@ class FileTitleViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewH
      */
     public function render()
     {
+        $file = $this->arguments['file'];
+
         if (is_callable([$file, 'getOriginalResource'])) {
             // Get the original file from the Extbase model
             $file = $file->getOriginalResource();
