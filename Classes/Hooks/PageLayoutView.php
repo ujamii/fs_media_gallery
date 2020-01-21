@@ -148,7 +148,7 @@ class PageLayoutView
             ])->fetchAll();
 
             $albums = [];
-            foreach ((array)$rowSysFileCollectionRecords as $record) {
+            foreach ($rowSysFileCollectionRecords as $record) {
                 $albums[] = htmlspecialchars(BackendUtilityCore::getRecordTitle('sys_file_collection', $record));
             }
 
