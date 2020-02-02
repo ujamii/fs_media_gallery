@@ -25,6 +25,14 @@ class SlugService
     protected $slugFieldName = 'slug';
 
     /**
+     * @return bool
+     */
+    public function typo3SupportsSlugs(): bool
+    {
+        return class_exists(SlugHelper::class);
+    }
+
+    /**
      * @return int
      */
     public function countOfSlugUpdates(): int

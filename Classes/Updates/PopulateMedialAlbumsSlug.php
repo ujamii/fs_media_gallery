@@ -77,7 +77,7 @@ class PopulateMedialAlbumsSlug extends AbstractUpdate
      */
     public function checkForUpdate(&$description): bool
     {
-        if ($this->isWizardDone()) {
+        if (!$this->slugService->typo3SupportsSlugs() || $this->isWizardDone()) {
             return false;
         }
         $elementCount = $this->slugService->countOfSlugUpdates();
