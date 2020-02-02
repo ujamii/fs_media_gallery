@@ -49,9 +49,6 @@ class FileTitleViewHelper extends AbstractViewHelper
     /**
      * Get title of a File
      *
-     * @return string|NULL
-     */
-    /**
      * @param array $arguments
      * @param \Closure $renderChildrenClosure
      * @param RenderingContextInterface $renderingContext

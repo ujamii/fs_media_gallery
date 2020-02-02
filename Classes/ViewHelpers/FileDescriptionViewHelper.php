@@ -1,6 +1,9 @@
 <?php
 namespace MiniFranske\FsMediaGallery\ViewHelpers;
 
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -28,7 +31,7 @@ namespace MiniFranske\FsMediaGallery\ViewHelpers;
 /**
  * File title viewHelper
  */
-class FileDescriptionViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class FileDescriptionViewHelper extends AbstractViewHelper
 {
 
     /**
@@ -46,11 +49,14 @@ class FileDescriptionViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstrac
     /**
      * Get title of a File
      *
-     * @return string|NULL
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
+     * @return string
      */
-    public function render()
+    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
     {
-        $file = $this->arguments['file'];
+        $file = $arguments['file'];
 
         if (is_callable([$file, 'getOriginalResource'])) {
             // Get the original file from the Extbase model
