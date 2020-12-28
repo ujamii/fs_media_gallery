@@ -28,7 +28,7 @@
     }
   },
   "replace": {
-    "fs_media_gallery": "self.version",
+
     "typo3-ter/fs-media-gallery": "self.version"
   },
   "extra": {
