@@ -327,6 +327,7 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $excludeEmptyAlbums = filter_var($excludeEmptyAlbums, FILTER_VALIDATE_BOOLEAN);
         $query = $this->createQuery();
         $query->setOrderings($this->getOrderingsSettings($orderBy, $orderDirection));
+        $query->getQuerySettings()->setRespectSysLanguage(false);
 
         if ($this->albumUids !== []) {
             if ($this->useAlbumUidsAsExclude) {
