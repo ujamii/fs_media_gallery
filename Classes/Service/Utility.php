@@ -196,7 +196,8 @@ class Utility implements SingletonInterface
             'storage' => (int)$storageUid,
             'folder' => $identifier,
             'title' => $title,
-            'parentalbum' => (int)$parentAlbum
+            'parentalbum' => (int)$parentAlbum,
+            'webdescription' => '',
         ];
 
         // Create slug

@@ -23,11 +23,6 @@ $boot = function ($packageKey) {
     // Page TSConfig
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:' . $packageKey . '/Configuration/TSConfig/Page.ts">');
 
-    // Resource Icon hook
-    // @todo: check Deprecation-69057-DeprecateIconUtilityAndMoveMethodsIntoIconFactory.rst
-//    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_iconworks.php']['overrideResourceIcon']['FsMediaGallery'] =
-//        'MiniFranske\\FsMediaGallery\\Hooks\\IconUtilityHook';
-
     // Module header bar buttons
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['Backend\Template\Components\ButtonBar']['getButtonsHook']['FsMediaGallery'] =
         'MiniFranske\\FsMediaGallery\\Hooks\\DocHeaderButtonsHook->moduleTemplateDocHeaderGetButtons';
