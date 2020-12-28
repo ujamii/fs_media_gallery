@@ -24,6 +24,9 @@ namespace MiniFranske\FsMediaGallery\Hooks;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\DataHandling\DataHandler;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+
 /**
  * Hooks called after sys_file_collection is added/updated/deleted
  */
@@ -44,10 +47,10 @@ class ProcessDatamapHook
         $table,
         $id,
         array $fieldArray,
-        \TYPO3\CMS\Core\DataHandling\DataHandler $dataHandler
+        DataHandler $dataHandler
     ) {
         if ($table === 'sys_file_collection') {
-            \TYPO3\CMS\Backend\Utility\BackendUtility::setUpdateSignal('updateFolderTree');
+            BackendUtility::setUpdateSignal('updateFolderTree');
         }
     }
 
@@ -67,12 +70,12 @@ class ProcessDatamapHook
         $table,
         $id,
         $value,
-        \TYPO3\CMS\Core\DataHandling\DataHandler $dataHandler,
+        DataHandler $dataHandler,
         $pasteUpdate,
         array $pasteDatamap
     ) {
         if ($table === 'sys_file_collection') {
-            \TYPO3\CMS\Backend\Utility\BackendUtility::setUpdateSignal('updateFolderTree');
+            BackendUtility::setUpdateSignal('updateFolderTree');
         }
     }
 }

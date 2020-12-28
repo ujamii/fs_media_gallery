@@ -16,6 +16,7 @@
 							<onChange>reload</onChange>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<itemsProcFunc>MiniFranske\FsMediaGallery\Hooks\ItemsProcFuncHook->getItemsForSwitchableControllerActions</itemsProcFunc>
 								<items type="array">
 									<numIndex index="0">
@@ -54,7 +55,7 @@
 							<displayCond>FIELD:switchableControllerActions:IN:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->randomAsset</displayCond>
 							<config>
 								<type>select</type>
-								<renderMode>tree</renderMode>
+								<renderType>selectTree</renderType>
 								<treeConfig>
 									<parentField>parentalbum</parentField>
 									<appearance>
@@ -79,6 +80,7 @@
 							<displayCond>FIELD:switchableControllerActions:IN:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->randomAsset</displayCond>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items type="array">
 									<numIndex index="0" type="array">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
@@ -124,6 +126,7 @@
 							<displayCond>FIELD:switchableControllerActions:IN:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset</displayCond>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<itemsProcFunc>MiniFranske\FsMediaGallery\Hooks\ItemsProcFuncHook->getItemsForListOrderBy</itemsProcFunc>
 								<items>
 									<numIndex index="0" type="array">
@@ -152,6 +155,7 @@
 							<displayCond>FIELD:switchableControllerActions:IN:MediaAlbum->nestedList;MediaAlbum->showAsset,MediaAlbum->flatList;MediaAlbum->showAlbum;MediaAlbum->showAsset</displayCond>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items>
 									<numIndex index="0" type="array">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
@@ -172,7 +176,7 @@
 					<!-- startingpoint -->
 					<settings.startingpoint>
 						<TCEforms>
-							<label>LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.startingpoint</label>
+							<label>LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.startingpoint</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -192,9 +196,10 @@
 					<!-- recursive -->
 					<settings.recursive>
 						<TCEforms>
-							<label>LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.recursive</label>
+							<label>LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.recursive</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items type="array">
 									<numIndex index="1" type="array">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
@@ -275,17 +280,18 @@
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.thumb.random</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items type="array">
 									<numIndex index="1" type="array">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
 										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:lang/locallang_common.xlf:yes</numIndex>
+										<numIndex index="0">LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:yes</numIndex>
 										<numIndex index="1">1</numIndex>
 									</numIndex>
 									<numIndex index="3" type="array">
-										<numIndex index="0">LLL:EXT:lang/locallang_common.xlf:no</numIndex>
+										<numIndex index="0">LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:no</numIndex>
 										<numIndex index="1">0</numIndex>
 									</numIndex>
 								</items>
@@ -297,6 +303,7 @@
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.resizeMode</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items type="array">
 									<numIndex index="1" type="array">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
@@ -323,17 +330,18 @@
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.list.hideEmptyAlbums</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items type="array">
 									<numIndex index="1" type="array">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
 										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:lang/locallang_common.xlf:yes</numIndex>
+										<numIndex index="0">LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:yes</numIndex>
 										<numIndex index="1">1</numIndex>
 									</numIndex>
 									<numIndex index="3" type="array">
-										<numIndex index="0">LLL:EXT:lang/locallang_common.xlf:no</numIndex>
+										<numIndex index="0">LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:no</numIndex>
 										<numIndex index="1">0</numIndex>
 									</numIndex>
 								</items>
@@ -356,6 +364,7 @@
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.assets.orderBy</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<itemsProcFunc>MiniFranske\FsMediaGallery\Hooks\ItemsProcFuncHook->getItemsForAssetsOrderBy</itemsProcFunc>
 								<items>
 									<numIndex index="0" type="array">
@@ -391,6 +400,7 @@
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.assets.orderDirection</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items>
 									<numIndex index="0" type="array">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
@@ -446,6 +456,7 @@
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.resizeMode</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items type="array">
 									<numIndex index="1" type="array">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
@@ -472,17 +483,18 @@
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.album.lightbox.enable</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items type="array">
 									<numIndex index="1" type="array">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
 										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:lang/locallang_common.xlf:yes</numIndex>
+										<numIndex index="0">LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:yes</numIndex>
 										<numIndex index="1">1</numIndex>
 									</numIndex>
 									<numIndex index="3" type="array">
-										<numIndex index="0">LLL:EXT:lang/locallang_common.xlf:no</numIndex>
+										<numIndex index="0">LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:no</numIndex>
 										<numIndex index="1">0</numIndex>
 									</numIndex>
 								</items>
@@ -494,17 +506,18 @@
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.mediagallery.album.displayTitle</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items type="array">
 									<numIndex index="1" type="array">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
 										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:lang/locallang_common.xlf:yes</numIndex>
+										<numIndex index="0">LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:yes</numIndex>
 										<numIndex index="1">1</numIndex>
 									</numIndex>
 									<numIndex index="3" type="array">
-										<numIndex index="0">LLL:EXT:lang/locallang_common.xlf:no</numIndex>
+										<numIndex index="0">LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:no</numIndex>
 										<numIndex index="1">0</numIndex>
 									</numIndex>
 								</items>
@@ -549,6 +562,7 @@
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.resizeMode</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items type="array">
 									<numIndex index="1" type="array">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>
@@ -627,6 +641,7 @@
 							<label>LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.resizeMode</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items type="array">
 									<numIndex index="1" type="array">
 										<numIndex index="0">LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_be.xlf:flexforms.general.I.inherit</numIndex>

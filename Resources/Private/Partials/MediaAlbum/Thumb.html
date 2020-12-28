@@ -20,7 +20,7 @@
 
 		<div class="description">
 			<span class="teaser">
-				<f:format.crop maxCharacters="17" append="&nbsp;...">{mediaAlbum.webdescription}</f:format.crop>
+				<f:format.crop maxCharacters="17" append="&nbsp;...">{mediaAlbum.webdescription -> f:format.stripTags()}</f:format.crop>
 			</span>
 			<span class="asset-count">{mediaAlbum.assetsCount} <f:translate key="assets">assets</f:translate></span>
 			<span class="date"><f:format.date date="{mediaAlbum.datetime}" format="d.m.Y" /></span>

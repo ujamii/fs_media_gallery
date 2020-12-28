@@ -13,8 +13,8 @@ namespace MiniFranske\FsMediaGallery\ViewHelpers\Embed;
 
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /**
  * Embed JavaScript view helper.
@@ -24,9 +24,13 @@ class JavaScriptViewHelper extends AbstractViewHelper
 
     /**
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-     * @inject
      */
     protected $configurationManager;
+
+    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager): void
+    {
+        $this->configurationManager = $configurationManager;
+    }
 
     /**
      * Initialize arguments
@@ -82,7 +86,7 @@ class JavaScriptViewHelper extends AbstractViewHelper
      * @return PageRenderer
      */
     protected function getPageRenderer() {
-        if(class_exists('TYPO3\\CMS\\Core\\Page\\PageRenderer')) {
+        if(class_exists(\TYPO3\CMS\Core\Page\PageRenderer::class)) {
             $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
         } elseif (method_exists($GLOBALS['TSFE'], 'getPageRenderer')) {
             $pageRenderer = $GLOBALS['TSFE']->getPageRenderer();

@@ -25,20 +25,22 @@ namespace MiniFranske\FsMediaGallery\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum;
 
 /**
  * MediaAlbumRepository
  */
-class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class MediaAlbumRepository extends Repository
 {
 
     /**
      * @var array default ordering
      */
     protected $defaultOrderings = [
-        'sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
-        'crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
+        'sorting' => QueryInterface::ORDER_ASCENDING,
+        'crdate' => QueryInterface::ORDER_DESCENDING,
     ];
 
     /**
@@ -177,35 +179,30 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         /** @var \TYPO3\CMS\Extbase\Persistence\Generic\Query $query */
         $query = $this->createQuery();
-        $where = [];
+        $constraints = [];
 
         // restrict by parent album
         if ($parent !== null) {
-            $where[] = 'parentalbum = ' . ($parent ? $parent->getUid() : 0);
+            $constraints[] = $query->equals('parentalbum', $parent ? $parent->getUid() : 0);
         }
 
         // restrict by given uids
         if ($this->albumUids !== []) {
-            $uids = [];
-            foreach ($this->albumUids as $uid) {
-                $uids[] = (int)$uid;
+            if ($this->useAlbumUidsAsExclude) {
+                $constraints[] = $query->logicalNot($query->in('uid', $this->albumUids));
+            } else {
+                $constraints[] = $query->in('uid', $this->albumUids);
             }
-            $where[] = 'uid ' . ($this->useAlbumUidsAsExclude ? 'NOT ' : '') . 'IN (' . implode(',', $uids) . ')';
         }
+        $query->matching($query->logicalAnd($constraints));
+        $mediaAlbums = $query->execute()->toArray();
 
-        $statement = 'SELECT * FROM sys_file_collection WHERE ' .
-            (count($where) ? implode(' AND ', $where) : '1=1') .
-            $this->getWhereClauseForEnabledFields() .
-            ' ORDER BY RAND(NOW()) LIMIT 1';
-
-        $query->statement($statement);
-        $result = $query->execute();
-
-        // todo: getFirst() might return an empty album
         /** @var \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum $mediaAlbum */
-        $mediaAlbum = $result->getFirst();
+        $mediaAlbum = null;
 
-        if ($mediaAlbum) {
+        if ($mediaAlbums) {
+            $mediaAlbum = $mediaAlbums[array_rand($mediaAlbums, 1)];
+
             // set allowed asset mime types
             $mediaAlbum->setAllowedMimeTypes($this->allowedAssetMimeTypes);
             // set assets order
@@ -364,26 +361,6 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     }
 
     /**
-     * get the WHERE clause for the enabled fields of this TCA table
-     * depending on the context
-     *
-     * @return string the additional where clause, something like " AND deleted=0 AND hidden=0"
-     */
-    protected function getWhereClauseForEnabledFields()
-    {
-        if (TYPO3_MODE === 'FE' && $GLOBALS['TSFE']->sys_page) {
-            // frontend context
-            $whereClause = $GLOBALS['TSFE']->sys_page->enableFields('sys_file_collection');
-            $whereClause .= $GLOBALS['TSFE']->sys_page->deleteClause('sys_file_collection');
-        } else {
-            // backend context
-            $whereClause = \TYPO3\CMS\Backend\Utility\BackendUtility::BEenableFields('sys_file_collection');
-            $whereClause .= \TYPO3\CMS\Backend\Utility\BackendUtility::deleteClause('sys_file_collection');
-        }
-        return $whereClause;
-    }
-
-    /**
      * Get orderings settings. Returns an array like:
      * array(
      *  'foo' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
@@ -399,9 +376,9 @@ class MediaAlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         // check orderDirection
         if ($orderDirection === 'asc') {
-            $orderDirection = \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING;
+            $orderDirection = QueryInterface::ORDER_ASCENDING;
         } else {
-            $orderDirection = \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING;
+            $orderDirection = QueryInterface::ORDER_DESCENDING;
         }
 
         // set $orderingsSettings by orderBy and orderDirection

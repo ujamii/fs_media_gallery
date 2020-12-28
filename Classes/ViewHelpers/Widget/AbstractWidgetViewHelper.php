@@ -1,8 +1,9 @@
 <?php
+
 namespace MiniFranske\FsMediaGallery\ViewHelpers\Widget;
 
 
-	/*                                                                        *
+/*                                                                        *
 	 * This script is backported from the TYPO3 Flow package "TYPO3.Fluid".   *
 	 *                                                                        *
 	 * It is free software; you can redistribute it and/or modify it under    *
@@ -21,19 +22,30 @@ namespace MiniFranske\FsMediaGallery\ViewHelpers\Widget;
 	 *                                                                        *
 	 * The TYPO3 project - inspiring people to share!                         *
 	 *                                                                        */
-use TYPO3\CMS\Fluid\Core\Compiler\TemplateCompiler;
-use TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\ViewHelperNode;
-use TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\AbstractNode;
+
+use TYPO3Fluid\Fluid\Core\Parser\SyntaxTree\RootNode;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\ViewHelperInterface;
+use TYPO3\CMS\Fluid\Core\Widget\AjaxWidgetContextHolder;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+use TYPO3\CMS\Fluid\Core\Widget\WidgetContext;
+use TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetController;
+use TYPO3\CMS\Fluid\Core\Widget\Exception\MissingControllerException;
+use TYPO3\CMS\Fluid\Core\Widget\WidgetRequest;
+use TYPO3\CMS\Extbase\Mvc\Web\Response;
+use TYPO3\CMS\Extbase\Service\ExtensionService;
+use TYPO3Fluid\Fluid\Core\Compiler\TemplateCompiler;
+use TYPO3Fluid\Fluid\Core\Parser\SyntaxTree\ViewHelperNode;
 
 /**
  * @api
  */
-abstract class AbstractWidgetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper implements \TYPO3\CMS\Fluid\Core\ViewHelper\Facets\ChildNodeAccessInterface
+abstract class AbstractWidgetViewHelper extends AbstractViewHelper implements ViewHelperInterface
 {
 
     /**
      * The Controller associated to this widget.
-     * This needs to be filled by the individual subclass by an @inject
+     * This needs to be filled by the individual subclass by an `@TYPO3\CMS\Extbase\Annotation\Inject`
      * annotation.
      *
      * @var \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetController
@@ -61,7 +73,6 @@ abstract class AbstractWidgetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper
 
     /**
      * @var \TYPO3\CMS\Extbase\Service\ExtensionService
-     * @inject
      */
     protected $extensionService;
 
@@ -80,8 +91,9 @@ abstract class AbstractWidgetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper
      * @return void
      */
     public function injectAjaxWidgetContextHolder(
-        \TYPO3\CMS\Fluid\Core\Widget\AjaxWidgetContextHolder $ajaxWidgetContextHolder
-    ) {
+        AjaxWidgetContextHolder $ajaxWidgetContextHolder
+    )
+    {
         $this->ajaxWidgetContextHolder = $ajaxWidgetContextHolder;
     }
 
@@ -89,10 +101,10 @@ abstract class AbstractWidgetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper
      * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
      * @return void
      */
-    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
+    public function injectObjectManager(ObjectManagerInterface $objectManager)
     {
         $this->objectManager = $objectManager;
-        $this->widgetContext = $this->objectManager->get('TYPO3\\CMS\\Fluid\\Core\\Widget\\WidgetContext');
+        $this->widgetContext = $this->objectManager->get(WidgetContext::class);
     }
 
     /**
@@ -139,7 +151,7 @@ abstract class AbstractWidgetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper
      */
     public function setChildNodes(array $childNodes)
     {
-        $rootNode = $this->objectManager->get('TYPO3\\CMS\\Fluid\\Core\\Parser\\SyntaxTree\\RootNode');
+        $rootNode = $this->objectManager->get(RootNode::class);
         foreach ($childNodes as $childNode) {
             $rootNode->addChildNode($childNode);
         }
@@ -167,18 +179,18 @@ abstract class AbstractWidgetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper
      */
     protected function initiateSubRequest()
     {
-        if (!$this->controller instanceof \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetController) {
+        if (!$this->controller instanceof AbstractWidgetController) {
             if (isset($this->controller)) {
-                throw new \TYPO3\CMS\Fluid\Core\Widget\Exception\MissingControllerException('initiateSubRequest() can not be called if there is no valid controller extending TYPO3\\CMS\\Fluid\\Core\\Widget\\AbstractWidgetController. Got "' . get_class($this->controller) . '" in class "' . get_class($this) . '".',
+                throw new MissingControllerException('initiateSubRequest() can not be called if there is no valid controller extending TYPO3\\CMS\\Fluid\\Core\\Widget\\AbstractWidgetController. Got "' . get_class($this->controller) . '" in class "' . get_class($this) . '".',
                     1289422564);
             }
-            throw new \TYPO3\CMS\Fluid\Core\Widget\Exception\MissingControllerException('initiateSubRequest() can not be called if there is no controller inside $this->controller. Make sure to add a corresponding injectController method to your WidgetViewHelper class "' . get_class($this) . '".',
+            throw new MissingControllerException('initiateSubRequest() can not be called if there is no controller inside $this->controller. Make sure to add a corresponding injectController method to your WidgetViewHelper class "' . get_class($this) . '".',
                 1284401632);
         }
-        $subRequest = $this->objectManager->get('TYPO3\\CMS\\Fluid\\Core\\Widget\\WidgetRequest');
+        $subRequest = $this->objectManager->get(WidgetRequest::class);
         $subRequest->setWidgetContext($this->widgetContext);
         $this->passArgumentsToSubRequest($subRequest);
-        $subResponse = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Response');
+        $subResponse = $this->objectManager->get(Response::class);
         $this->controller->processRequest($subRequest, $subResponse);
         return $subResponse;
     }
@@ -189,7 +201,7 @@ abstract class AbstractWidgetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper
      * @param \TYPO3\CMS\Fluid\Core\Widget\WidgetRequest $subRequest
      * @return void
      */
-    private function passArgumentsToSubRequest(\TYPO3\CMS\Fluid\Core\Widget\WidgetRequest $subRequest)
+    private function passArgumentsToSubRequest(WidgetRequest $subRequest)
     {
         $arguments = $this->renderingContext->getControllerContext()->getRequest()->getArguments();
         $widgetIdentifier = $this->widgetContext->getWidgetIdentifier();
@@ -206,26 +218,26 @@ abstract class AbstractWidgetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper
      * The widget identifier is unique on the current page, and is used
      * in the URI as a namespace for the widget's arguments.
      *
-     * @todo clean up, and make it somehow more routing compatible.
      * @return string the widget identifier for this widget
      * @return void
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException
+     * @throws \TYPO3Fluid\Fluid\Core\Exception
+     * @todo clean up, and make it somehow more routing compatible.
      */
     private function initializeWidgetIdentifier()
     {
         if ($this->hasArgument('widgetId')) {
             $widgetIdentifier = '@widget_' . $this->arguments['widgetId'];
         } else {
-            if (!$this->viewHelperVariableContainer->exists('TYPO3\\CMS\\Fluid\\Core\\Widget\\AbstractWidgetViewHelper',
+            if (!$this->viewHelperVariableContainer->exists(\TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetViewHelper::class,
                 'nextWidgetNumber')
             ) {
                 $widgetCounter = 0;
             } else {
-                $widgetCounter = $this->viewHelperVariableContainer->get('TYPO3\\CMS\\Fluid\\Core\\Widget\\AbstractWidgetViewHelper',
+                $widgetCounter = $this->viewHelperVariableContainer->get(\TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetViewHelper::class,
                     'nextWidgetNumber');
             }
             $widgetIdentifier = '@widget_' . $widgetCounter;
-            $this->viewHelperVariableContainer->addOrUpdate('TYPO3\\CMS\\Fluid\\Core\\Widget\\AbstractWidgetViewHelper',
+            $this->viewHelperVariableContainer->addOrUpdate(\TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetViewHelper::class,
                 'nextWidgetNumber', $widgetCounter + 1);
         }
         $this->widgetContext->setWidgetIdentifier($widgetIdentifier);
@@ -235,12 +247,17 @@ abstract class AbstractWidgetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper
      * @param string $argumentsName
      * @param string $closureName
      * @param string $initializationPhpCode
-     * @param ViewHelperNode $node
-     * @param TemplateCompiler $compiler
+     * @param \TYPO3Fluid\Fluid\Core\Parser\SyntaxTree\ViewHelperNode $node
+     * @param \TYPO3Fluid\Fluid\Core\Compiler\TemplateCompiler $compiler
      */
-    public function compile($argumentsName, $closureName, &$initializationPhpCode, AbstractNode $node, TemplateCompiler $compiler)
+    public function compile($argumentsName, $closureName, &$initializationPhpCode, ViewHelperNode $node, TemplateCompiler $compiler)
     {
         $compiler->disable();
         return '\'\'';
+    }
+
+    public function injectExtensionService(ExtensionService $extensionService): void
+    {
+        $this->extensionService = $extensionService;
     }
 }

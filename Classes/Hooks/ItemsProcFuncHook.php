@@ -131,16 +131,8 @@ class ItemsProcFuncHook
      * Get extension configuration
      */
     protected function getExtensionConfiguration() {
-
-        if (class_exists(ExtensionConfiguration::class)) {
-            $conf = GeneralUtility::makeInstance(
-                ExtensionConfiguration::class
-            )->get('fs_media_gallery');
-        } else {
-            // Fallback for 8LTS
-            $conf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['fs_media_gallery']);
-        }
-
-        return $conf;
+        return GeneralUtility::makeInstance(
+            ExtensionConfiguration::class
+        )->get('fs_media_gallery');
     }
 }

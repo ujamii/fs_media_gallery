@@ -19,6 +19,9 @@ namespace MiniFranske\FsMediaGallery\Hooks;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use MiniFranske\FsMediaGallery\Service\Utility;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Resource\FileInterface;
 use TYPO3\CMS\Core\Resource\Folder;
@@ -26,7 +29,7 @@ use TYPO3\CMS\Core\Resource\Folder;
 /**
  * Slots that pick up signals after (re)moving folders to update mediagallery record (sys_file_collection)
  */
-class FileChangedSlot implements \TYPO3\CMS\Core\SingletonInterface
+class FileChangedSlot implements SingletonInterface
 {
 
     protected $folderMapping = [];
@@ -41,7 +44,7 @@ class FileChangedSlot implements \TYPO3\CMS\Core\SingletonInterface
      */
     public function __construct()
     {
-        $this->utilityService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('MiniFranske\\FsMediaGallery\\Service\\Utility');
+        $this->utilityService = GeneralUtility::makeInstance(Utility::class);
     }
 
     /**

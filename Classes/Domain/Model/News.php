@@ -18,7 +18,7 @@ class News extends \GeorgRinger\News\Domain\Model\News {
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum>
-     * @lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $relatedFsmediaalbums;
 

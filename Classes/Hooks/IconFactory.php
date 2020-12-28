@@ -24,6 +24,7 @@ namespace MiniFranske\FsMediaGallery\Hooks;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use MiniFranske\FsMediaGallery\Service\Utility;
 use TYPO3\CMS\Core\Resource\ResourceInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Resource\Folder;
@@ -60,7 +61,7 @@ class IconFactory
 
             if (count($mediaFolders)) {
                 /** @var \MiniFranske\FsMediaGallery\Service\Utility $utility */
-                $utility = GeneralUtility::makeInstance('MiniFranske\\FsMediaGallery\\Service\\Utility');
+                $utility = GeneralUtility::makeInstance(Utility::class);
                 $collections = $utility->findFileCollectionRecordsForFolder(
                     $folderObject->getStorage()->getUid(),
                     $folderObject->getIdentifier(),
@@ -92,7 +93,7 @@ class IconFactory
     {
         if (self::$mediaFolders === null) {
             /** @var \MiniFranske\FsMediaGallery\Service\Utility $utility */
-            $utility = GeneralUtility::makeInstance('MiniFranske\\FsMediaGallery\\Service\\Utility');
+            $utility = GeneralUtility::makeInstance(Utility::class);
             self::$mediaFolders = $utility->getStorageFolders();
         }
         return self::$mediaFolders;

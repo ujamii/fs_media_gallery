@@ -24,6 +24,7 @@ namespace MiniFranske\FsMediaGallery\Hooks;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Controller\BackendController;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -43,7 +44,7 @@ class BackendControllerHook
     {
         $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
         /** @var \TYPO3\CMS\Backend\Routing\UriBuilder $uriBuilder */
-        $uriBuilder = GeneralUtility::makeInstance(\TYPO3\CMS\Backend\Routing\UriBuilder::class);
+        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $pageRenderer->addInlineSetting('FileEdit', 'moduleUrl', (string)$uriBuilder->buildUriFromRoute('file_edit'));
         $pageRenderer->addInlineSetting('FileCreate', 'moduleUrl', (string)$uriBuilder->buildUriFromRoute('file_upload'));
     }

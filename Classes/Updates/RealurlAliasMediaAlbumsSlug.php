@@ -19,6 +19,8 @@ namespace MiniFranske\FsMediaGallery\Updates;
 use MiniFranske\FsMediaGallery\Service\SlugService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Install\Updates\AbstractUpdate;
+use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
+use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 /**
  * Migrate EXT:realurl unique alias into empty news slugs
@@ -30,10 +32,8 @@ use TYPO3\CMS\Install\Updates\AbstractUpdate;
  * Will only appear if missing slugs found between realurl and news, respecting language and expire date from realurl
  * Copies values from 'tx_realurl_uniqalias.value_alias' to 'tx_news_domain_model_news.path_segment'
  */
-class RealurlAliasMediaAlbumsSlug extends AbstractUpdate
+class RealurlAliasMediaAlbumsSlug implements UpgradeWizardInterface
 {
-
-
     /** @var SlugService */
     protected $slugService;
 
@@ -70,39 +70,39 @@ class RealurlAliasMediaAlbumsSlug extends AbstractUpdate
         return 'realurlAliasMediaAlbumsSlug';
     }
 
+    public function getPrerequisites(): array
+    {
+        return [
+            DatabaseUpdatedPrerequisite::class,
+        ];
+    }
+
     /**
      * Checks if an update is needed
      *
-     * @param string &$description The description for the update
      * @return bool Whether an update is needed (TRUE) or not (FALSE)
      */
-    public function checkForUpdate(&$description): bool
+    public function updateNecessary(): bool
     {
-        if (!$this->slugService->typo3SupportsSlugs() || $this->isWizardDone()) {
+        if (!$this->slugService->typo3SupportsSlugs()) {
             return false;
         }
         $elementCount = $this->slugService->countOfRealurlAliasMigrations();
-        if ($elementCount) {
-            $description = sprintf('%s albums records possible to be updated', $elementCount);
-        }
+
         return (bool)$elementCount;
     }
 
     /**
      * Performs the database update
-     *
-     * @param array &$databaseQueries Queries done in this update
-     * @param string &$customMessage Custom message
      * @return bool
      */
-    public function performUpdate(array &$databaseQueries, &$customMessage)
+    public function executeUpdate(): bool
     {
         $queries = $this->slugService->performRealurlAliasMigration();
         if (!empty($queries)) {
             foreach ($queries as $query) {
                 $databaseQueries[] = $query;
             }
-            $this->markWizardAsDone();
             return true;
         }
         return false;
