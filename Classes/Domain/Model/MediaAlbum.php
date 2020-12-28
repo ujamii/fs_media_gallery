@@ -135,6 +135,16 @@ class MediaAlbum extends AbstractEntity
      */
     protected $datetime;
 
+    public function injectFileCollectionRepository(FileCollectionRepository $fileCollectionRepository): void
+    {
+        $this->fileCollectionRepository = $fileCollectionRepository;
+    }
+
+    public function injectMediaAlbumRepository(MediaAlbumRepository $mediaAlbumRepository): void
+    {
+        $this->mediaAlbumRepository = $mediaAlbumRepository;
+    }
+
     /**
      * Set allowedMimeTypes
      *
@@ -505,15 +515,5 @@ class MediaAlbum extends AbstractEntity
         });
 
         return $files;
-    }
-
-    public function injectFileCollectionRepository(FileCollectionRepository $fileCollectionRepository): void
-    {
-        $this->fileCollectionRepository = $fileCollectionRepository;
-    }
-
-    public function injectMediaAlbumRepository(MediaAlbumRepository $mediaAlbumRepository): void
-    {
-        $this->mediaAlbumRepository = $mediaAlbumRepository;
     }
 }
