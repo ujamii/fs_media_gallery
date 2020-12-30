@@ -1,11 +1,9 @@
-==================
-(FS) Media Gallery
-==================
+# (FS) Media Gallery
+
 
 A FAL based media gallery for TYPO3. Show your assets from your local or remote storage as a gallery of albums.
 
-Features
-========
+## Features
 
 - Create a new album from a folder in the file module with only ONE button click
 - Manage your albums from within the file module
@@ -14,14 +12,12 @@ Features
 - Make a album from a static collection of files, a folder or selected by category (core file_collections)
 
 
-Requirements
-============
+## Requirements
 
-- TYPO3 >= 9 LTS
+- TYPO3 9 LTS or 10 LTS
 
 
-Quick install notes
-===================
+## Quick install notes
 
 - Install extension through Extension Manager or composer ``composer require minifranske/fs-media-gallery``
 - Include Static Template "Media Galley (fs_media_gallery)"
@@ -34,8 +30,7 @@ Quick install notes
 - Set the "Record Storage Page" to the "StoragePage" you just created
 - Open FE and admire your album :)
 
-Known issues
-============
+## Known issues
 
 - After installing fs_media_gallery the ordering of my exiting sys_file_collections changed
    - This is because fs_media_gallery enables manual sorting of sys_file_collections this is something we need to make the albums manageable.
@@ -48,3 +43,12 @@ Known issues
    - These limits are set in the typoscript template of the extension and are there to prevent that to big images are used in FE. These max values can be overruled by setting your own values in your typoscript template.
    plugin.tx_fsmediagallery.settings.image.lightbox.maxWidth
    plugin.tx_fsmediagallery.settings.image.lightbox.maxHeight
+
+
+### Help supporting further development
+
+I'm open for all PR's to improve and keeping this extension up-to-date
+
+### Sponsor this project
+Please considder supporting me by making a donation on paypal.com (https://paypal.me/franssaris/25) if you use this extension so we can keep the extension up-to-date
+
