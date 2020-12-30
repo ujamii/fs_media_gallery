@@ -48,8 +48,8 @@ You found a bug or miss something?
 Please file bug reports and request new features or suggest modifications to existing features
 in a constructive manner on `https://bitbucket.org/franssaris/fs_media_gallery <https://bitbucket.org/franssaris/fs_media_gallery>`_.
 
-Help supporting further development
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Help support further development
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 I'm open for all PR's to improve and keeping this extension up-to-date
 
 Sponsor this project

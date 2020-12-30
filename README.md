@@ -45,7 +45,7 @@ A FAL based media gallery for TYPO3. Show your assets from your local or remote 
    plugin.tx_fsmediagallery.settings.image.lightbox.maxHeight
 
 
-### Help supporting further development
+### Help support further development
 
 I'm open for all PR's to improve and keeping this extension up-to-date
 
