@@ -50,5 +50,5 @@ A FAL based media gallery for TYPO3. Show your assets from your local or remote 
 I'm open for all PR's to improve and keeping this extension up-to-date
 
 ### Sponsor this project
-Please considder supporting me by making a donation on paypal.com (https://paypal.me/franssaris/25) if you use this extension so we can keep the extension up-to-date
+Please consider supporting me by making a donation on paypal.com (https://paypal.me/franssaris/25) if you use this extension so we can keep the extension up-to-date
 

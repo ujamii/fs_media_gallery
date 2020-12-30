@@ -47,3 +47,12 @@ You found a bug or miss something?
 
 Please file bug reports and request new features or suggest modifications to existing features
 in a constructive manner on `https://bitbucket.org/franssaris/fs_media_gallery <https://bitbucket.org/franssaris/fs_media_gallery>`_.
+
+Help supporting further development
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+I'm open for all PR's to improve and keeping this extension up-to-date
+
+Sponsor this project
+--------------------
+Please consider supporting me by making a donation on paypal.com (https://paypal.me/franssaris/25) if you use this extension so we can keep the extension up-to-date
+
