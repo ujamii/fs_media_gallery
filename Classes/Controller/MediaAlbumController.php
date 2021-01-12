@@ -197,7 +197,7 @@ class MediaAlbumController extends ActionController
             /** @var MediaAlbum $mediaAlbum */
             $mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum);
             if (!$mediaAlbum) {
-                $this->pageNotFound(LocalizationUtility::translate('no_album_found', $this->extensionName));
+                $this->pageNotFound(LocalizationUtility::translate('no_album_found', 'fs_media_gallery'));
             }
         }
 
@@ -267,7 +267,7 @@ class MediaAlbumController extends ActionController
             // if an album is given, display it
             $mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum);
             if (!$mediaAlbum) {
-                $this->pageNotFound(LocalizationUtility::translate('no_album_found', $this->extensionName));
+                $this->pageNotFound(LocalizationUtility::translate('no_album_found', 'fs_media_gallery'));
             }
             $this->view->assign('displayMode', 'album');
             $this->view->assign('mediaAlbum', $mediaAlbum);
@@ -317,7 +317,7 @@ class MediaAlbumController extends ActionController
         }
         $mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum, $respectStorage);
         if (!$mediaAlbum) {
-            $this->pageNotFound(LocalizationUtility::translate('no_album_found', $this->extensionName));
+            $this->pageNotFound(LocalizationUtility::translate('no_album_found', 'fs_media_gallery');
         }
         $this->view->assign('mediaAlbum', $mediaAlbum);
         $this->view->assign('showBackLink', false);
@@ -343,7 +343,7 @@ class MediaAlbumController extends ActionController
 
         list($previousAsset, $mediaAsset, $nextAsset) = $mediaAlbum->getPreviousCurrentAndNext($mediaAssetUid);
         if (!$mediaAsset) {
-            $message = LocalizationUtility::translate('asset_not_found', $this->extensionName);
+            $message = LocalizationUtility::translate('asset_not_found', 'fs_media_gallery');
             $this->pageNotFound((empty($message) ? 'Asset not found.' : $message));
         }
         $this->view->assign('previousAsset', $previousAsset);
