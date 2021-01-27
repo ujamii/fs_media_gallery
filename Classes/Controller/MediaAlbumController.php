@@ -317,7 +317,7 @@ class MediaAlbumController extends ActionController
         }
         $mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum, $respectStorage);
         if (!$mediaAlbum) {
-            $this->pageNotFound(LocalizationUtility::translate('no_album_found', 'fs_media_gallery');
+            $this->pageNotFound(LocalizationUtility::translate('no_album_found', 'fs_media_gallery'));
         }
         $this->view->assign('mediaAlbum', $mediaAlbum);
         $this->view->assign('showBackLink', false);
