@@ -25,7 +25,9 @@ namespace MiniFranske\FsMediaGallery\Service;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Resource\ResourceFactory;
+use TYPO3\CMS\Core\Resource\Exception\ResourceDoesNotExistException;
+use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Resource\Folder;
@@ -52,9 +54,9 @@ abstract class AbstractBeAlbumButtons
         // In some folder copy/move actions in file list a invalid id is passed
         try {
             /** @var $file \TYPO3\CMS\Core\Resource\Folder */
-            $folder = \TYPO3\CMS\Core\Resource\ResourceFactory::getInstance()
+            $folder = GeneralUtility::makeInstance(ResourceFactory::class)
                 ->retrieveFileOrFolderObject($combinedIdentifier);
-        } catch (\TYPO3\CMS\Core\Resource\Exception\ResourceDoesNotExistException $exception) {
+        } catch (ResourceDoesNotExistException $exception) {
             $folder = null;
         }
 
@@ -65,12 +67,10 @@ abstract class AbstractBeAlbumButtons
             )
         ) {
             /** @var \MiniFranske\FsMediaGallery\Service\Utility $utility */
-            $utility = GeneralUtility::makeInstance('MiniFranske\\FsMediaGallery\\Service\\Utility');
+            $utility = GeneralUtility::makeInstance(Utility::class);
             $mediaFolders = $utility->getStorageFolders();
 
             if (count($mediaFolders)) {
-                /** @var \TYPO3\CMS\Core\Charset\CharsetConverter $charsetConverter */
-                $charsetConverter = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Charset\\CharsetConverter');
                 $collections = $utility->findFileCollectionRecordsForFolder(
                     $folder->getStorage()->getUid(),
                     $folder->getIdentifier(),
@@ -82,7 +82,7 @@ abstract class AbstractBeAlbumButtons
                         sprintf($this->sL('module.buttons.editAlbum'), $collection['title']),
                         sprintf(
                             $this->sL('module.buttons.editAlbum'),
-                            $charsetConverter->crop('utf-8', $collection['title'], 12, '...')
+                            mb_strimwidth($collection['title'], 0,12, '...')
                         ),
                         $this->getIcon('edit-album'),
                         $this->buildEditUrl($collection['uid'])
@@ -106,7 +106,7 @@ abstract class AbstractBeAlbumButtons
                             sprintf($this->sL('module.buttons.createAlbumIn'), $title),
                             sprintf(
                                 $this->sL('module.buttons.createAlbumIn'),
-                                $charsetConverter->crop('utf-8', $title, 12, '...')
+                                mb_strimwidth($title, 0, 12, '...')
                             ),
                             $this->getIcon('add-album'),
                             $this->buildAddUrl($uid, $parentUid, $folder)
@@ -137,7 +137,7 @@ abstract class AbstractBeAlbumButtons
      */
     protected function buildEditUrl($uid)
     {
-        return BackendUtility::getModuleUrl('record_edit', [
+        return GeneralUtility::makeInstance(UriBuilder::class)->buildUriFromRoute('record_edit', [
             'edit' => [
                 'sys_file_collection' => [
                     $uid => 'edit'
@@ -157,7 +157,7 @@ abstract class AbstractBeAlbumButtons
      */
     protected function buildAddUrl($pid, $parentAlbumUid, Folder $folder)
     {
-        return BackendUtility::getModuleUrl('record_edit', [
+        return GeneralUtility::makeInstance(UriBuilder::class)->buildUriFromRoute('record_edit', [
             'edit' => [
                 'sys_file_collection' => [
                     $pid => 'new'
@@ -201,7 +201,7 @@ abstract class AbstractBeAlbumButtons
     }
 
     /**
-     * @return \TYPO3\CMS\Lang\LanguageService
+     * @return \TYPO3\CMS\Core\Localization\LanguageService
      */
     protected function getLangService()
     {

@@ -25,6 +25,8 @@ namespace MiniFranske\FsMediaGallery\ViewHelpers\Widget\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
+
 /**
  * PaginateController
  */
@@ -54,7 +56,7 @@ class PaginateController extends \TYPO3\CMS\Fluid\ViewHelpers\Widget\Controller\
             if ($itemsPerPage < 1) {
                 $itemsPerPage = 1;
             }
-            if (is_a($this->objects, '\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult')) {
+            if (is_a($this->objects, QueryResult::class)) {
                 $query = $this->objects->getQuery();
                 $query->setLimit($itemsPerPage);
                 if ($this->currentPage > 1) {

@@ -23,6 +23,10 @@ namespace MiniFranske\FsMediaGallery\Hooks;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Package\PackageManager;
+
 /**
  * Class that holds slots that are called during install
  */
@@ -38,28 +42,11 @@ class Install
     public function tablesDefinitionIsBeingBuiltSlot(array $sqlString)
     {
 
-        if (!empty($GLOBALS['TYPO3_LOADED_EXT']['news'])) {
+        if (!empty(GeneralUtility::makeInstance(PackageManager::class)->getActivePackages()['news'])) {
             $sqlString[] = $this->getExtraTableDefinitions();
         }
 
         return ['sqlString' => $sqlString];
-    }
-
-    /**
-     * Add extra sql table definitions if ext:news gets installed
-     *
-     * @param array $sqlString
-     * @param $extensionKey
-     * @return array
-     */
-    public function tablesDefinitionIsBeingBuiltForExtension(array $sqlString, $extensionKey)
-    {
-        if ($extensionKey === 'news'
-            || ($extensionKey === 'fs_media_gallery' && !empty($GLOBALS['TYPO3_LOADED_EXT']['news']))
-        ) {
-            $sqlString[] = $this->getExtraTableDefinitions();
-        }
-        return ['sqlString' => $sqlString, 'extensionKey' => $extensionKey];
     }
 
     /**

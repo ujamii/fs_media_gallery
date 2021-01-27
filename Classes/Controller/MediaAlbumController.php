@@ -25,13 +25,16 @@ namespace MiniFranske\FsMediaGallery\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use MiniFranske\FsMediaGallery\Utility\TypoScriptUtility;
+use MiniFranske\FsMediaGallery\Domain\Repository\MediaAlbumRepository;
+use TYPO3\CMS\Frontend\Controller\ErrorController;
+use TYPO3\CMS\Core\Http\ImmediateResponseException;
 use MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum;
 use MiniFranske\FsMediaGallery\Utility\PageUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -69,7 +72,7 @@ class MediaAlbumController extends ActionController
         // merge Framework (TypoScript) and Flexform settings
         if (isset($frameworkSettings['settings']['overrideFlexformSettingsIfEmpty'])) {
             /** @var $typoScriptUtility \MiniFranske\FsMediaGallery\Utility\TypoScriptUtility */
-            $typoScriptUtility = GeneralUtility::makeInstance('MiniFranske\\FsMediaGallery\\Utility\\TypoScriptUtility');
+            $typoScriptUtility = GeneralUtility::makeInstance(TypoScriptUtility::class);
             $mergedSettings = $typoScriptUtility->override($flexformSettings, $frameworkSettings);
             $this->settings = $mergedSettings;
         } else {
@@ -133,7 +136,7 @@ class MediaAlbumController extends ActionController
      * @return void
      */
     public function injectMediaAlbumRepository(
-        \MiniFranske\FsMediaGallery\Domain\Repository\MediaAlbumRepository $mediaAlbumRepository
+        MediaAlbumRepository $mediaAlbumRepository
     ) {
         $this->mediaAlbumRepository = $mediaAlbumRepository;
         if (!empty($this->settings['allowedAssetMimeTypes'])) {
@@ -194,7 +197,7 @@ class MediaAlbumController extends ActionController
             /** @var MediaAlbum $mediaAlbum */
             $mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum);
             if (!$mediaAlbum) {
-                $this->pageNotFound(LocalizationUtility::translate('no_album_found', $this->extensionName));
+                $this->pageNotFound(LocalizationUtility::translate('no_album_found', 'fs_media_gallery'));
             }
         }
 
@@ -264,7 +267,7 @@ class MediaAlbumController extends ActionController
             // if an album is given, display it
             $mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum);
             if (!$mediaAlbum) {
-                $this->pageNotFound(LocalizationUtility::translate('no_album_found', $this->extensionName));
+                $this->pageNotFound(LocalizationUtility::translate('no_album_found', 'fs_media_gallery'));
             }
             $this->view->assign('displayMode', 'album');
             $this->view->assign('mediaAlbum', $mediaAlbum);
@@ -314,7 +317,7 @@ class MediaAlbumController extends ActionController
         }
         $mediaAlbum = $this->mediaAlbumRepository->findByUid($mediaAlbum, $respectStorage);
         if (!$mediaAlbum) {
-            $this->pageNotFound(LocalizationUtility::translate('no_album_found', $this->extensionName));
+            $this->pageNotFound(LocalizationUtility::translate('no_album_found', 'fs_media_gallery'));
         }
         $this->view->assign('mediaAlbum', $mediaAlbum);
         $this->view->assign('showBackLink', false);
@@ -325,7 +328,7 @@ class MediaAlbumController extends ActionController
      *
      * @param \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum $mediaAlbum
      * @param int $mediaAssetUid
-     * @ignorevalidation
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("")
      */
     public function showAssetAction(MediaAlbum $mediaAlbum, $mediaAssetUid)
     {
@@ -340,7 +343,7 @@ class MediaAlbumController extends ActionController
 
         list($previousAsset, $mediaAsset, $nextAsset) = $mediaAlbum->getPreviousCurrentAndNext($mediaAssetUid);
         if (!$mediaAsset) {
-            $message = LocalizationUtility::translate('asset_not_found', $this->extensionName);
+            $message = LocalizationUtility::translate('asset_not_found', 'fs_media_gallery');
             $this->pageNotFound((empty($message) ? 'Asset not found.' : $message));
         }
         $this->view->assign('previousAsset', $previousAsset);
@@ -383,7 +386,8 @@ class MediaAlbumController extends ActionController
     protected function pageNotFound($message)
     {
         if (!empty($GLOBALS['TSFE'])) {
-            $GLOBALS['TSFE']->pageNotFoundAndExit($message);
+            $response = GeneralUtility::makeInstance(ErrorController::class)->pageNotFoundAction($GLOBALS['TYPO3_REQUEST'], $message);
+            throw new ImmediateResponseException($response);
         } else {
             echo $message;
         }

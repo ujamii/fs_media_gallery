@@ -29,7 +29,7 @@
         fs_media_gallery, media gallery, media album, fal, file abstraction layer
 
     :Copyright:
-        2013-2014
+        2013-2021
 
     :Author:
         Frans Saris

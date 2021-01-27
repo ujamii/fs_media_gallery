@@ -2,6 +2,7 @@
 
 namespace MiniFranske\FsMediaGallery\ContextMenu\ItemProviders;
 
+use MiniFranske\FsMediaGallery\Service\Utility;
 use TYPO3\CMS\Backend\ContextMenu\ItemProviders\AbstractProvider;
 use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
@@ -38,7 +39,7 @@ class FsMediaGalleryProvider extends AbstractProvider
     protected function initialize()
     {
         parent::initialize();
-        $resource = ResourceFactory::getInstance()
+        $resource = GeneralUtility::makeInstance(ResourceFactory::class)
             ->retrieveFileOrFolderObject($this->identifier);
         if ($resource instanceof Folder
             && in_array(
@@ -65,7 +66,7 @@ class FsMediaGalleryProvider extends AbstractProvider
         }
 
         /** @var \MiniFranske\FsMediaGallery\Service\Utility $utility */
-        $utility = GeneralUtility::makeInstance(\MiniFranske\FsMediaGallery\Service\Utility::class);
+        $utility = GeneralUtility::makeInstance(Utility::class);
         $mediaFolders = $utility->getStorageFolders();
 
         if (count($mediaFolders) === 0) {

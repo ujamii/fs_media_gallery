@@ -6,7 +6,6 @@ namespace MiniFranske\FsMediaGallery\Hooks;
  * Date: 28-09-2016
  * All code (c) Beech Applications B.V. all rights reserved
  */
-use TYPO3\CMS\Backend\Template\DocumentTemplate;
 use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
@@ -54,7 +53,7 @@ class PageLayoutView
         $this->flexFormData = GeneralUtility::xml2array($row['pi_flexform']);
         $action = $this->getAction();
 
-        $result = '<strong>' . $pageLayoutView->linkEditContent($this->getLanguageService()->sL(self::LLPATH . 'mediagallery.title', true), $row) . '</strong><br>';
+        $result = '<strong>' . $pageLayoutView->linkEditContent($this->getLanguageService()->sL(self::LLPATH . 'mediagallery.title'), $row) . '</strong><br>';
         $result .= $this->getDisplayMode($action);
 
         $result .= '<hr>';
@@ -249,7 +248,7 @@ class PageLayoutView
 
             if (!empty($recursiveLevelText)) {
                 $recursiveLevelText = '<br />' .
-                    $this->getLanguageService()->sL('LLL:EXT:lang/locallang_general.xlf:LGL.recursive', true) . ' ' .
+                    $this->getLanguageService()->sL('LLL:EXT:lang/locallang_general.xlf:LGL.recursive') . ' ' .
                     $recursiveLevelText;
             }
 
@@ -283,7 +282,7 @@ class PageLayoutView
     /**
      * Return language service instance
      *
-     * @return \TYPO3\CMS\Lang\LanguageService
+     * @return \TYPO3\CMS\Core\Localization\LanguageService
      */
     public function getLanguageService()
     {

@@ -6,8 +6,8 @@
 		<f:if condition="{mediaAsset}">
 			<f:then>
 				<span class="image">
-					<f:image
-						image="{mediaAsset}"
+					<f:media
+						file="{mediaAsset}"
 						alt="{alt}"
 						title="{f:if(condition:title, then:title, else:'{mf:fileTitle(file:mediaAsset)}')}"
 						height="{height}{resizeMode}"

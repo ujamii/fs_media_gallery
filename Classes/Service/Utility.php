@@ -24,6 +24,7 @@ namespace MiniFranske\FsMediaGallery\Service;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\SingletonInterface;
 use \TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -37,7 +38,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * Utility class
  */
-class Utility implements \TYPO3\CMS\Core\SingletonInterface
+class Utility implements SingletonInterface
 {
 
     /**
@@ -88,7 +89,7 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
     public function clearMediaGalleryPageCache(FolderInterface $folder)
     {
         /** @var DataHandler $tce */
-        $tce = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');
+        $tce = GeneralUtility::makeInstance(\TYPO3\CMS\Core\DataHandling\DataHandler::class);
         $tce->start([], []);
 
         $collections = $this->findFileCollectionRecordsForFolder(
@@ -195,7 +196,8 @@ class Utility implements \TYPO3\CMS\Core\SingletonInterface
             'storage' => (int)$storageUid,
             'folder' => $identifier,
             'title' => $title,
-            'parentalbum' => (int)$parentAlbum
+            'parentalbum' => (int)$parentAlbum,
+            'webdescription' => '',
         ];
 
         // Create slug

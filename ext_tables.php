@@ -49,5 +49,5 @@ $boot = function ($packageKey) {
         ]
     );
 };
-$boot($_EXTKEY);
+$boot('fs_media_gallery');
 unset($boot);

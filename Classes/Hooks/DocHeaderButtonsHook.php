@@ -24,13 +24,14 @@ namespace MiniFranske\FsMediaGallery\Hooks;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use MiniFranske\FsMediaGallery\Service\AbstractBeAlbumButtons;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Hook to add extra button to DocHeaderButtons in file list
  */
-class DocHeaderButtonsHook extends \MiniFranske\FsMediaGallery\Service\AbstractBeAlbumButtons
+class DocHeaderButtonsHook extends AbstractBeAlbumButtons
 {
 
     /**

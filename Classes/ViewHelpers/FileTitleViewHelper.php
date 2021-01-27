@@ -2,9 +2,6 @@
 
 namespace MiniFranske\FsMediaGallery\ViewHelpers;
 
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
-
 /***************************************************************
  *  Copyright notice
  *
@@ -29,6 +26,10 @@ use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Resource\FileInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+
 /**
  * File title viewHelper
  */
@@ -43,7 +44,7 @@ class FileTitleViewHelper extends AbstractViewHelper
     public function initializeArguments()
     {
         parent::initializeArguments();
-        $this->registerArgument('file', 'TYPO3\CMS\Core\Resource\FileInterface', 'File', true);
+        $this->registerArgument('file', FileInterface::class, 'File', true);
     }
 
     /**
@@ -63,7 +64,7 @@ class FileTitleViewHelper extends AbstractViewHelper
             $file = $file->getOriginalResource();
         }
 
-        if (!$file instanceof \TYPO3\CMS\Core\Resource\FileInterface) {
+        if (!$file instanceof FileInterface) {
             return null;
         }
 

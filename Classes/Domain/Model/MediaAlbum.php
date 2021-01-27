@@ -25,22 +25,23 @@ namespace MiniFranske\FsMediaGallery\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Core\Resource\FileCollectionRepository;
+use MiniFranske\FsMediaGallery\Domain\Repository\MediaAlbumRepository;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Resource\FileInterface;
 use TYPO3\CMS\Core\Resource\FileReference;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Media album
  */
-class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class MediaAlbum extends AbstractEntity
 {
 
     /**
      * fileCollectionRepository
      *
      * @var \TYPO3\CMS\Core\Resource\FileCollectionRepository
-     * @inject
      */
     protected $fileCollectionRepository;
 
@@ -48,7 +49,6 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * mediaAlbumRepository
      *
      * @var \MiniFranske\FsMediaGallery\Domain\Repository\MediaAlbumRepository
-     * @inject
      */
     protected $mediaAlbumRepository;
 
@@ -111,7 +111,7 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * @var \MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum|NULL
-     * @lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $parentalbum;
 
@@ -126,14 +126,24 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Child albums
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\MiniFranske\FsMediaGallery\Domain\Model\MediaAlbum>
-     * @lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected $albumCache;
+    public $albumCache;
 
     /**
-     * @var DateTime
+     * @var \DateTime
      */
     protected $datetime;
+
+    public function injectFileCollectionRepository(FileCollectionRepository $fileCollectionRepository): void
+    {
+        $this->fileCollectionRepository = $fileCollectionRepository;
+    }
+
+    public function injectMediaAlbumRepository(MediaAlbumRepository $mediaAlbumRepository): void
+    {
+        $this->mediaAlbumRepository = $mediaAlbumRepository;
+    }
 
     /**
      * Set allowedMimeTypes
@@ -382,7 +392,7 @@ class MediaAlbum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getAssetsUids()
     {
-        GeneralUtility::deprecationLog('MediaAlbum::getAssetsUid is deprecated and will be removed with next major version 2.*. Use getAssets() as this method can not handle static file collections');
+        trigger_error('MediaAlbum::getAssetsUid is deprecated and will be removed with next major version 2.*. Use getAssets() as this method can not handle static file collections', E_USER_DEPRECATED);
         $assetsUids = [];
         foreach ($assets = $this->getAssets() as $asset) {
             /** @var $asset FileInterface */

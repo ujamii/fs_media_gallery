@@ -25,6 +25,8 @@ namespace MiniFranske\FsMediaGallery\ViewHelpers\Widget;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use MiniFranske\FsMediaGallery\ViewHelpers\Widget\Controller\PaginateController;
+
 /**
  * Class PaginateViewHelper
  */
@@ -41,7 +43,7 @@ class PaginateViewHelper extends AbstractWidgetViewHelper
      * @return void
      */
     public function injectController(
-        \MiniFranske\FsMediaGallery\ViewHelpers\Widget\Controller\PaginateController $controller
+        PaginateController $controller
     ) {
         $this->controller = $controller;
     }

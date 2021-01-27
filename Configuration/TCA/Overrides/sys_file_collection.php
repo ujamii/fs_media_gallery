@@ -73,11 +73,8 @@ $additionalColumns = [
             ],
             $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
         )
-    ]
-];
-
-if (version_compare(TYPO3_branch, '9.5', '>=')) {
-    $additionalColumns['slug'] = [
+    ],
+    'slug' => [
         'exclude' => true,
         'label' => 'LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_db.xlf:tx_fsmediagallery_domain_model_mediaalbum.slug',
         'config' => [
@@ -90,8 +87,8 @@ if (version_compare(TYPO3_branch, '9.5', '>=')) {
             'fallbackCharacter' => '-',
             'eval' => 'uniqueInPid',
         ],
-    ];
-}
+    ],
+];
 
 foreach ($GLOBALS['TCA']['sys_file_collection']['types'] as $type => $tmp) {
     $GLOBALS['TCA']['sys_file_collection']['types'][$type]['showitem'] .= ',--div--;LLL:EXT:fs_media_gallery/Resources/Private/Language/locallang_db.xlf:tx_fsmediagallery_domain_model_mediaalbum';
